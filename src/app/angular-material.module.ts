@@ -33,6 +33,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {RouterModule} from "@angular/router";
 
 const materialModules = [
   CdkTreeModule,
@@ -69,6 +70,7 @@ const materialModules = [
   MatTooltipModule,
   FormsModule,
   ReactiveFormsModule,
+  RouterModule,
 ];
 
 @NgModule({

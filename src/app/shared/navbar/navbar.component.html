@@ -1,0 +1,34 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
+          (click)="drawer.toggle()">
+    <mat-icon fontSet="material-icons-two-tone">menu</mat-icon>
+  </button>
+  <span>Motiva</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with logout icon" (click)="logOut()">
+    <mat-icon fontSet="material-icons-two-tone">logout</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-nav-list>
+      <a routerLink="" mat-list-item>
+        <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
+        Home</a>
+      <a routerLink="project" mat-list-item>
+        <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
+        Project</a>
+      <a routerLink="characterization" mat-list-item>
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        Caracterización</a>
+      <a routerLink="contact" mat-list-item>
+        <mat-icon fontSet="material-icons-two-tone">contact_phone</mat-icon>
+        Contact</a>
+    </mat-nav-list>
+  </mat-drawer>
+
+  <div class="example-sidenav-content">
+    <router-outlet></router-outlet>
+  </div>
+</mat-drawer-container>
