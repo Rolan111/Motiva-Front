@@ -34,6 +34,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
+import {HttpClientModule} from "@angular/common/http";
 
 const materialModules = [
   CdkTreeModule,
@@ -71,6 +72,7 @@ const materialModules = [
   FormsModule,
   ReactiveFormsModule,
   RouterModule,
+  HttpClientModule,
 ];
 
 @NgModule({
