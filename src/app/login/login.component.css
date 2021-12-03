@@ -1,4 +1,11 @@
 .example-card {
-  max-width: 250px;
+  max-width: 210px;
+  height: 300px;
   background: #435166;
+}
+
+/deep/ .mat-form-field-appearance-fill .mat-form-field-flex {
+  background-color: white;
+  margin-top: 20px;
+  width: 180px;
 }
