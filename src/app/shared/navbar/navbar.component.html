@@ -5,7 +5,8 @@
   </button>
   <span>Motiva</span>
   <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon" aria-label="Example icon-button with logout icon" (click)="logOut()">
+  <button mat-icon-button class="example-icon" aria-label="Example icon-button with logout icon" (click)="logOut()"
+          routerLink="/login">
     <mat-icon fontSet="material-icons-two-tone">logout</mat-icon>
   </button>
 </mat-toolbar>
@@ -13,18 +14,18 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a routerLink="" mat-list-item>
+      <a routerLink="dashboard" mat-list-item>
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
-        Home</a>
-      <a routerLink="project" mat-list-item>
+        &nbsp;&nbsp;Home</a>
+      <a routerLink="dashboard" mat-list-item>
         <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
-        Project</a>
-      <a routerLink="characterization" mat-list-item>
+        &nbsp;&nbsp;Project</a>
+      <a routerLink="dashboard" mat-list-item>
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-        Caracterización</a>
-      <a routerLink="contact" mat-list-item>
+        &nbsp;&nbsp;Caracterización</a>
+      <a routerLink="dashboard" mat-list-item>
         <mat-icon fontSet="material-icons-two-tone">contact_phone</mat-icon>
-        Contact</a>
+        &nbsp;&nbsp;Contact</a>
     </mat-nav-list>
   </mat-drawer>
 
