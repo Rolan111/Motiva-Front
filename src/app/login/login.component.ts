@@ -1,29 +1,71 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  // @ts-ignore
   formLogin: FormGroup;
+  hide: boolean = true;
 
   constructor(
-    fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private _snackBar: MatSnackBar,
+    private router: Router
   ) {
-    this.formLogin = fb.group({
-      userName: [null, [Validators.required]],
-      password: [null, [Validators.required]],
-    });
     this.getAllUsers()
   }
+
+  ngOnInit( ): void {
+    this.loginForm();
+  }
+
+  loginForm() {
+    this.formLogin = this.formBuilder.group({
+      userId: [null, [Validators.required, Validators.maxLength(12)]],
+      password: [null, [Validators.required]],
+    });
+  }
+
 
   getAllUsers() {
     this.loginService.findAllUsers().subscribe(response =>
       console.log(response)
     )
+  }
+
+
+  logIn(data: FormGroup) {
+    console.log(data.value)
+    if ((data.value.userId == null || data.value.password == null) ||(data.value.userId === "" || data.value.password === "")) {
+      this.openSnackBar("Los campos usuario y contraseña deben de estar llenos", "error");
+      return
+    }
+    this.router.navigateByUrl('/navbar');
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2000,
+      horizontalPosition: "center",
+      verticalPosition: "top"
+    });
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.formLogin.controls[controlName];
+    if (!control) {
+      return false;
+    }
+
+    const result = control.hasError(validationType) && (control.dirty || control.touched);
+    return result;
   }
 }
