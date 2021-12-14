@@ -4,8 +4,8 @@
     <mat-card-content>
       <form class="example-form" [formGroup]="formLogin">
         <mat-form-field class="example-full" appearance="fill" >
-          <mat-label>Usuario</mat-label>
-          <input type="text" matInput formControlName="username" placeholder="Usuario">
+          <mat-label>Número Documento</mat-label>
+          <input type="text" matInput formControlName="username" placeholder="Usuario" maxlength="12" minlength="7" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
           <mat-error *ngIf="isControlHasError('username', 'required')">
             <strong>Campo requerido</strong>
           </mat-error>

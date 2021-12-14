@@ -20,7 +20,7 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     FlexLayoutModule,
     LoginModule,
     SharedModule,
-    DashboardModule,
+    DashboardModule
   ],
   providers: [],
   bootstrap: [AppComponent],

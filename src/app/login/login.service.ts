@@ -17,7 +17,6 @@ export class LoginService {
   login(loginForm: LoginModel): Observable<any> {
     const path = mainUrl + 'auth';
     const headers = this.getHeader();
-    console.log('service', loginForm)
     return this.http.post<any>(path, loginForm, {headers});
   }
 
