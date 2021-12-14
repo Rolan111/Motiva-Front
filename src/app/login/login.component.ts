@@ -20,35 +20,30 @@ export class LoginComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
-    this.getAllUsers()
   }
 
-  ngOnInit( ): void {
+  ngOnInit(): void {
     this.loginForm();
   }
 
   loginForm() {
     this.formLogin = this.formBuilder.group({
-      userId: [null, [Validators.required, Validators.maxLength(12)]],
+      username: [null, [Validators.required, Validators.maxLength(12)]],
       password: [null, [Validators.required]],
     });
   }
 
-
-  getAllUsers() {
-    this.loginService.findAllUsers().subscribe(response =>
-      console.log(response)
-    )
-  }
-
-
-  logIn(data: FormGroup) {
+  login(data: FormGroup) {
     console.log(data.value)
-    if ((data.value.userId == null || data.value.password == null) ||(data.value.userId === "" || data.value.password === "")) {
+    if ((data.value.userId != null && data.value.password != null) || (data.value.userId != "" || data.value.password != "")) {
+      this.loginService.login(data.value).subscribe(response => {
+        console.log(response)
+        if (response.username != null)
+          this.router.navigateByUrl('/navbar');
+      })
+    } else {
       this.openSnackBar("Los campos usuario y contraseña deben de estar llenos", "error");
-      return
     }
-    this.router.navigateByUrl('/navbar');
   }
 
   openSnackBar(message: string, action: string) {
@@ -65,7 +60,6 @@ export class LoginComponent implements OnInit {
       return false;
     }
 
-    const result = control.hasError(validationType) && (control.dirty || control.touched);
-    return result;
+    return control.hasError(validationType) && (control.dirty || control.touched);
   }
 }

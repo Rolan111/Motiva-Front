@@ -1,10 +1,8 @@
-export class UserModel {
-  userId: string;
+export class LoginModel {
   username: string;
   password: string;
 
-  constructor(userId: string, username: string, password: string) {
-    this.userId = userId;
+  constructor(username: string, password: string) {
     this.username = username;
     this.password = password;
   }

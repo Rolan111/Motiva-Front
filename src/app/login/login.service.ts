@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {DataResponse} from "../util/data-response";
+import {LoginModel} from "./login.model";
 
 const mainUrl = environment.url;
 
@@ -14,10 +14,11 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  findAllUsers(): Observable<DataResponse> {
-    const path = mainUrl + 'api/users';
+  login(loginForm: LoginModel): Observable<any> {
+    const path = mainUrl + 'auth';
     const headers = this.getHeader();
-    return this.http.get<DataResponse>(path, {headers});
+    console.log('service', loginForm)
+    return this.http.post<any>(path, loginForm, {headers});
   }
 
   getHeader() {
@@ -26,7 +27,6 @@ export class LoginService {
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
-      'Authorization': 'Bearer szdp79a2kz4wh4frjzuqu4sz6qeth8m3',
     });
   }
 }
