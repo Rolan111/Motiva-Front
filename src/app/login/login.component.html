@@ -1,30 +1,51 @@
-<div class="content" >
-  <mat-card class="example-card">
-    <mat-card-title-group class="mat-card-title">Login</mat-card-title-group>
-    <mat-card-content>
-      <form class="example-form" [formGroup]="formLogin">
-        <mat-form-field class="example-full" appearance="fill" >
-          <mat-label>Número Documento</mat-label>
-          <input type="text" matInput formControlName="username" placeholder="Usuario" maxlength="12" minlength="7" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-          <mat-error *ngIf="isControlHasError('username', 'required')">
-            <strong>Campo requerido</strong>
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="fill" class="example-full">
-          <mat-label>Contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña" formControlName="password">
-          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                  [attr.aria-pressed]="hide">
-            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-          </button>
-          <mat-error *ngIf="isControlHasError('password', 'required')">
-            <strong>Campo requerido</strong>
-          </mat-error>
-        </mat-form-field>
-      </form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="accent" class="mat-card-button" (click)="login(formLogin)">Ingresar</button>
-    </mat-card-actions>
-  </mat-card>
+<div class="content">
+  <div class="content-logos-column">
+   <table class="table-content-img">
+      <th scope="col">
+          <div class="img-log-1"></div>
+      </th>
+      <th scope="col">
+          <div class="img-log-2"></div>
+      </th>
+      <th scope="col">
+        <div class="img-log-3"></div>
+      </th>
+      <th  scope="col">
+        <div class="img-log-4"></div>
+      </th>
+    </table>
+  </div>
+  <div class="content-card">
+    <mat-card class="example-card">
+      <mat-card-title class="mat-card-header">
+        <div class="example-header-image"></div>
+      </mat-card-title>
+      <mat-card-content>
+        <form class="example-form" [formGroup]="formLogin">
+          <mat-form-field class="example-full" appearance="fill">
+            <mat-label>Número Documento</mat-label>
+            <input type="text" matInput formControlName="username" placeholder="Usuario" maxlength="12" minlength="7"
+                   oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            <mat-error *ngIf="isControlHasError('username', 'required')">
+              <strong>Campo requerido</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill" class="example-full">
+            <mat-label>Contraseña</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña" formControlName="password">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error *ngIf="isControlHasError('password', 'required')">
+              <strong>Campo requerido</strong>
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="content-btn">
+        <button mat-raised-button class="mat-card-button" (click)="login(formLogin)">Ingresar</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>

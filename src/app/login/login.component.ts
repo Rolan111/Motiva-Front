@@ -34,17 +34,25 @@ export class LoginComponent implements OnInit {
   }
 
   login(data: FormGroup) {
-    if ((data.value.username == null && data.value.password == null) || (data.value.username == "" && data.value.password == ""))
+    if ((data.value.username == null && data.value.password == null) || (data.value.username == "" && data.value.password == "")) {
       this.openSnackBar("Los campos usuario y contraseña deben estar llenos", "alert");
-    if (data.value.username == null || data.value.username == "")
-      this.openSnackBar("El campo número de documento no puede estar vacío", "alert");
-    if (data.value.password == null || data.value.password == "")
-      this.openSnackBar("El campo contraseña no puede estar vacío", "alert");
+      return;
+    }
+    if (data.value.username == null || data.value.username == "") {
+      this.openSnackBar("El campo número de documento no puede estar vacío", "Alert");
+      return;
+    }
+    if (data.value.password == null || data.value.password == "") {
+      this.openSnackBar("El campo contraseña no puede estar vacío", "Alert");
+      return;
+    }
 
-
-    this.loginService.login(data.value).subscribe(response => {
-      if (response.username != null)
+    this.loginService.logIn(data.value).subscribe(response => {
+      if (response.username != null) {
         this.router.navigateByUrl('/navbar');
+      }
+    }, error => {
+      this.openSnackBar("Usuario o Contraseña es incorrecta", "Alert");
     })
   }
 

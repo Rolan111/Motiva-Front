@@ -14,7 +14,7 @@ export class LoginService {
   constructor(private http: HttpClient) {
   }
 
-  login(loginForm: LoginModel): Observable<any> {
+  logIn(loginForm: LoginModel): Observable<any> {
     const path = mainUrl + 'auth';
     const headers = this.getHeader();
     return this.http.post<any>(path, loginForm, {headers});
