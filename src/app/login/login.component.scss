@@ -120,6 +120,14 @@ mat-card-title {
   background-repeat: no-repeat;
 }
 
+@media only screen and( max-height: 960px){
+  .content-card{
+    position: absolute;
+    top: 50%;
+    transform: translate(20%, 56px);
+  }
+}
+
 @media only screen and( max-height: 900px){
   .content-card{
     position: absolute;
@@ -128,4 +136,10 @@ mat-card-title {
   }
 }
 
-
+@media only screen and( max-height: 800px){
+  .content-card{
+    position: absolute;
+    top: 40%;
+    transform: translate(20%, 39px);
+  }
+}
