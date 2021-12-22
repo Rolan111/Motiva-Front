@@ -4,13 +4,16 @@ import {DashboardComponent} from './dashboard.component';
 import {AngularMaterialModule} from "../angular-material.module";
 
 @NgModule({
-  declarations: [
-    DashboardComponent
-  ],
-  imports: [
-    CommonModule,
-    AngularMaterialModule,
-  ]
+    declarations: [
+        DashboardComponent
+    ],
+    exports: [
+        DashboardComponent
+    ],
+    imports: [
+        CommonModule,
+        AngularMaterialModule,
+    ]
 })
 export class DashboardModule {
 }

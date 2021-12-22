@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -9,10 +9,12 @@ import {Router} from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
+
 export class LoginComponent implements OnInit {
   // @ts-ignore
   formLogin: FormGroup;
   hide: boolean = true;
+  userNameLogin: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -49,6 +51,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.logIn(data.value).subscribe(response => {
       if (response.username != null) {
+        this.userNameLogin = response.fullName;
         this.router.navigateByUrl('/navbar');
       }
     }, error => {
