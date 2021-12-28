@@ -1,8 +1,12 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {LoginService} from "./login.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {LoginInterface} from "./login.interface";
+import {LocalStorageKeyEnum} from "../enums/enum";
+import {LocalStorage} from "../storage/local-storage";
+import {conditionallyCreateMapObjectLiteral} from "@angular/compiler/src/render3/view/util";
 
 @Component({
   selector: 'app-login',
@@ -15,10 +19,12 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   hide: boolean = true;
   userNameLogin: string = '';
+  oLocalStorage = new LocalStorage();
 
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
+    private activateRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private router: Router
   ) {
@@ -49,14 +55,36 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.logIn(data.value).subscribe(response => {
-      if (response.username != null) {
-        this.userNameLogin = response.fullName;
+    console.log(data.value)
+    this.loginService.logIn(data.value).subscribe((response: LoginInterface) => {
+      if (response.fullName != null) {
+        this.setLocalStorage(response);
         this.router.navigateByUrl('/navbar');
       }
     }, error => {
+      if (error.status === 401 || error.statusText === "ok"){
+        this.openSnackBar("Error al iniciar session", "Alert");
+        return;
+      }
       this.openSnackBar("Usuario o Contraseña es incorrecta", "Alert");
     })
+  }
+
+  private setLocalStorage(user: LoginInterface) {
+    this.cleanLocalStorage();
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.userName, user.userName);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.fullName, user.fullName);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.token, user.token);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.rol, user.rol);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.type, user.type);
+  }
+
+  private cleanLocalStorage() {
+    this.oLocalStorage.removeItem(LocalStorageKeyEnum.rol);
+    this.oLocalStorage.removeItem(LocalStorageKeyEnum.userName);
+    this.oLocalStorage.removeItem(LocalStorageKeyEnum.fullName);
+    this.oLocalStorage.removeItem(LocalStorageKeyEnum.type);
+    this.oLocalStorage.removeItem(LocalStorageKeyEnum.token);
   }
 
   openSnackBar(message: string, action: string) {
@@ -75,4 +103,5 @@ export class LoginComponent implements OnInit {
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
+
 }
