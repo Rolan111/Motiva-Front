@@ -1,8 +1,9 @@
 export interface LoginInterface{
-  fullName:string,
-  rol:string,
+  name:string,
+  last_name:string,
+  job_profile:string,
   token:string,
   type:string,
-  userName:string
+  username:string
 }
 

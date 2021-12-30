@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
 
     console.log(data.value)
     this.loginService.logIn(data.value).subscribe((response: LoginInterface) => {
-      if (response.fullName != null) {
+      if (response.username != null) {
         this.setLocalStorage(response);
         this.router.navigateByUrl('/navbar');
       }
@@ -72,10 +72,10 @@ export class LoginComponent implements OnInit {
 
   private setLocalStorage(user: LoginInterface) {
     this.cleanLocalStorage();
-    this.oLocalStorage.setItem(LocalStorageKeyEnum.userName, user.userName);
-    this.oLocalStorage.setItem(LocalStorageKeyEnum.fullName, user.fullName);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.userName, user.username);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.fullName, user.name);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.token, user.token);
-    this.oLocalStorage.setItem(LocalStorageKeyEnum.rol, user.rol);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.rol, user.job_profile);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.type, user.type);
   }
 
