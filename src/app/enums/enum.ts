@@ -1,7 +1,8 @@
 export enum LocalStorageKeyEnum {
-  fullName= 'fullName',
+  name= 'name',
+  userName = 'userName',
+  lastName = 'lastName',
   rol="rolUser",
   token="token",
   type="type",
-  userName="userName"
 }
