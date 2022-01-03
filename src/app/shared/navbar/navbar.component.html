@@ -1,4 +1,4 @@
-<mat-toolbar color="accent">
+<mat-toolbar color="primary">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon"
           (click)="drawer.toggle()">
     <mat-icon fontSet="material-icons-two-tone">menu</mat-icon>
@@ -12,21 +12,24 @@
   </button>
 </mat-toolbar>
 
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container  class="example-container" autosize >
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a routerLink="dashboard" mat-list-item>
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuCoord">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Home</a>
-      <a routerLink="dashboard" mat-list-item>
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuCoordTeam">
         <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
-        &nbsp;&nbsp;Project</a>
-      <a routerLink="dashboard" mat-list-item>
+        &nbsp;&nbsp;Project</a >
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuSuperIntendent">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Caracterización</a>
-      <a routerLink="dashboard" mat-list-item>
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuPsychoLogist">
         <mat-icon fontSet="material-icons-two-tone">contact_phone</mat-icon>
         &nbsp;&nbsp;Contact</a>
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuSocialWorker">
+        <mat-icon fontSet="material-icons-two-tone orange600" >assignment</mat-icon>
+         &nbsp;Other Contact</a>
     </mat-nav-list>
   </mat-drawer>
 
