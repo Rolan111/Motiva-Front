@@ -15,9 +15,12 @@
 <mat-drawer-container  class="example-container" autosize >
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuCoord">
+      <a routerLink="dashboard" mat-list-item >
+        <mat-icon fontSet="material-icons-two-tone">dashboard</mat-icon>
+        &nbsp;&nbsp;Dashboard</a >
+      <a routerLink="quantitative" mat-list-item *ngIf="buttonMenuCoord ">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
-        &nbsp;&nbsp;Home</a>
+        &nbsp;&nbsp;Instrumento Cuantitativo</a>
       <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuCoordTeam">
         <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
         &nbsp;&nbsp;Project</a >

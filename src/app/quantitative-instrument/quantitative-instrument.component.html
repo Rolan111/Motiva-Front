@@ -1,0 +1,97 @@
+<mat-vertical-stepper #stepper>
+  <mat-step color="primary">
+    <ng-template matStepLabel>Información Personal</ng-template>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Beneficiario</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="personalInfo">
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Primer Nombre</mat-label>
+                <input matInput placeholder="First name" formControlName="firstName" required>
+              </mat-form-field>
+            </td>
+          <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Primer Apellido</mat-label>
+                <input matInput maxlength="30" formControlName="firstLastName" required>
+              </mat-form-field>
+          </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Segundo Nombre</mat-label>
+                <input matInput placeholder="First name" formControlName="secondName" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Segundo Apellido</mat-label>
+                <input matInput maxlength="30" formControlName="secondLastName" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field appearance="fill" class="inputClass">
+                <mat-label>Tipo de Documento</mat-label>
+                <mat-select [(ngModel)]="selectedValue" name="food" formControlName="typeIdentification" required>
+                  <mat-option *ngFor="let ident of identification" [value]="ident.value" >
+                    {{ident.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>No. Identificación</mat-label>
+                <input type="text" matInput placeholder="Identificación" maxlength="12" minlength="10"
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="1">
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Dirección</mat-label>
+                <input matInput formControlName="address" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>No. telefónico</mat-label>
+                <input type="text" matInput placeholder="Número telefóinico" maxlength="12" minlength="10"
+                       oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+      </form>
+      <button mat-button matStepperNext>Next</button>
+    </mat-card>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Fill out your name</ng-template>
+    <mat-card>
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Fill out your name</ng-template>
+        <mat-form-field class="inputClass">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+        <mat-form-field class="inputClass">
+          <mat-label>Name</mat-label>
+          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+        </mat-form-field>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperNext>Next</button>
+        <button mat-button matStepperPrevious>Back</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-step>
+</mat-vertical-stepper>

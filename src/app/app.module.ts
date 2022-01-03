@@ -8,6 +8,7 @@ import {LoginModule} from "./login/login.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
+import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import {DashboardModule} from "./dashboard/dashboard.module";
     FlexLayoutModule,
     LoginModule,
     SharedModule,
-    DashboardModule
+    DashboardModule,
+    QuantitativeInstrumentModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

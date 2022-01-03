@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component} from '@angular/core';
 import {LocalStorageKeyEnum} from "../../enums/enum";
 import {LocalStorage} from "../../storage/local-storage";
 
@@ -36,6 +36,7 @@ export class NavbarComponent {
   }
 
   private typeRole(rol: any) {
+     console.log(rol)
     switch (rol){
       case "COORD_GENERAL":
         this.buttonMenuCoord = true;
