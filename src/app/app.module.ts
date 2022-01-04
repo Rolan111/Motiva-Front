@@ -9,6 +9,8 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
+import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
+
 
 @NgModule({
   declarations: [
@@ -22,8 +24,8 @@ import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitati
     LoginModule,
     SharedModule,
     DashboardModule,
-    QuantitativeInstrumentModule
-
+    QuantitativeInstrumentModule,
+    RepComAgentModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
