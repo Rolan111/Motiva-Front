@@ -6,7 +6,7 @@
 @include mat-core();
 // Define a custom typography config
 $custom-typography: mat-typography-config(
-  $font-family: 'Lato sans-serif',
+  $font-family: 'Lato, sans-serif',
   $headline: mat-typography-level(32px, 48px, 700),
   $body-1: mat-typography-level(16px, 24px, 500)
 );
