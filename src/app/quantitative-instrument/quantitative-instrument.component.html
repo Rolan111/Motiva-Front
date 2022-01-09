@@ -5,7 +5,6 @@
       <mat-card-header>
         <mat-card-title>Beneficiario</mat-card-title>
       </mat-card-header>
-
       <form [formGroup]="personalInfo">
         <table class="example-full-width">
           <tr>
@@ -15,14 +14,6 @@
                 <input matInput placeholder="First name" formControlName="firstName" required>
               </mat-form-field>
             </td>
-          <td>
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Primer Apellido</mat-label>
-                <input matInput maxlength="30" formControlName="firstLastName" required>
-              </mat-form-field>
-          </td>
-          </tr>
-          <tr>
             <td>
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Segundo Nombre</mat-label>
@@ -31,17 +22,23 @@
             </td>
             <td>
               <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Segundo Apellido</mat-label>
-                <input matInput maxlength="30" formControlName="secondLastName" required>
+                <mat-label>Primer Apellido</mat-label>
+                <input matInput maxlength="30" formControlName="firstLastName" required>
               </mat-form-field>
             </td>
           </tr>
           <tr>
             <td>
+              <mat-form-field class="inputClass" appearance="fill">
+                <mat-label>Segundo Apellido</mat-label>
+                <input matInput maxlength="30" formControlName="secondLastName" required>
+              </mat-form-field>
+            </td>
+            <td>
               <mat-form-field appearance="fill" class="inputClass">
                 <mat-label>Tipo de Documento</mat-label>
                 <mat-select [(ngModel)]="selectedValue" name="food" formControlName="typeIdentification" required>
-                  <mat-option *ngFor="let ident of identification" [value]="ident.value" >
+                  <mat-option *ngFor="let ident of identification" [value]="ident.value">
                     {{ident.viewValue}}
                   </mat-option>
                 </mat-select>
@@ -76,18 +73,111 @@
     </mat-card>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Fill out your name</ng-template>
+    <ng-template matStepLabel>Factores sociodemográficos</ng-template>
     <mat-card>
       <form [formGroup]="firstFormGroup">
-        <ng-template matStepLabel>Fill out your name</ng-template>
-        <mat-form-field class="inputClass">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
-        <mat-form-field class="inputClass">
-          <mat-label>Name</mat-label>
-          <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
-        </mat-form-field>
+        <table class="example-full-width">
+          <tr>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Edad</mat-label>
+                <input matInput placeholder="Edad" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Sexo</mat-label>
+                <input matInput placeholder="Sexo" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Reconocimiento étnico</mat-label>
+                <input matInput placeholder="Reconocimiento étnico" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Estado civil</mat-label>
+                <input matInput placeholder="Estado civil" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Zona de residencia</mat-label>
+                <input matInput placeholder="Zona de residencia" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Municipio de residencia</mat-label>
+                <input matInput placeholder="Municipio de residencia" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>No. Personas con las que convive</mat-label>
+                <input matInput placeholder="No. Personas con las que convive" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Tipo de vivienda</mat-label>
+                <input matInput placeholder="Tipo de vivienda" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Acceso a servicios</mat-label>
+                <input matInput placeholder="Acceso a servicios" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Escolaridad</mat-label>
+                <input matInput placeholder="Escolaridad" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Ocupación</mat-label>
+                <input matInput placeholder="Ocupación" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Modalida de trabajo</mat-label>
+                <input matInput placeholder="Modalida de trabajo" required>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Percepción de seguridad social en salud</mat-label>
+                <input matInput placeholder="Percepción de seguridad social en salud" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Número de hijos</mat-label>
+                <input matInput placeholder="Número de hijos" required>
+              </mat-form-field>
+            </td>
+            <td>
+              <mat-form-field class="inputClass">
+                <mat-label>Personas a cargo</mat-label>
+                <input matInput placeholder="Personas a cargo" required>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
       </form>
       <mat-card-actions>
         <button mat-button matStepperNext>Next</button>
