@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-interface documentsTypes {
+import {QuantitativeInstrumentService} from "./quantitative-instrument.service";
+
+interface DocumentsTypes {
   value: string;
   viewValue: string;
 }
@@ -10,13 +12,17 @@ interface documentsTypes {
   templateUrl: './quantitative-instrument.component.html',
   styleUrls: ['./quantitative-instrument.component.scss']
 })
-export class QuantitativeInstrumentComponent implements OnInit{
+export class QuantitativeInstrumentComponent implements OnInit {
   firstFormGroup!: FormGroup;
   personalInfo!: FormGroup;
   selectedValue: string = "";
 
-  constructor(private _formBuilder: FormBuilder) {}
-  identification: documentsTypes[] = [
+  constructor(
+    private _formBuilder: FormBuilder,
+    private quanInstService: QuantitativeInstrumentService) {
+  }
+
+  identification: DocumentsTypes[] = [
     {value: 'CC', viewValue: 'Cedula Ciudadanía'},
     {value: 'CE', viewValue: 'Cedula Extranjería'},
     {value: 'NIP', viewValue: 'Número Identificación Personal'},
