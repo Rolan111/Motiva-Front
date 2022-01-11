@@ -1,101 +1,60 @@
-<mat-card style="text-align: center;">
+<mat-card>
   <mat-card-title>Reporte Actividades de Agentes Comunitarios</mat-card-title>
   <form action="#" method="post">
-    <table>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Nombre de la actividad</mat-label>
-            <input matInput placeholder="Nombre de la actividad">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Actividad #</mat-label>
-            <input type="text" matInput placeholder="Activity #">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Fecha</mat-label>
-            <input matInput [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Duración</mat-label>
-            <input matInput placeholder="Duración">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Lugar</mat-label>
-            <input matInput placeholder="Lugar">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Número de Asistentes</mat-label>
-            <input type="number" matInput placeholder="Número de Asistentes">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Objetivo de la actividad</mat-label>
-            <input matInput placeholder="Objetivo de la Actividad">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Recursos utilizados</mat-label>
-            <input matInput placeholder="Recursos Utilizados">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Metodología Utilizada</mat-label>
-            <input matInput placeholder="Metodología Utilizada">
-          </mat-form-field>
-        </td>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Descripción y Desarrollo de la Actividad</mat-label>
-            <input matInput placeholder="Descripción y Desarrollo de la Actividad">
-          </mat-form-field>
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Recursos Obtenidos</mat-label>
-            <input matInput placeholder="Recursos Obtenidos">
-          </mat-form-field>
-        </td>
-        <td>
-          <label for="evidencias">Evidencias</label>
-          <button type="button" mat-raised-button (click)="fileInput.click()">Cargar evidencia</button>
-          <input id="evidencias" hidden #fileInput type="file" id="file">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Profesional y/o Encargado de Ejecturar la Actividad</mat-label>
-            <input matInput placeholder="Profesional y/o Encargado de Ejecturar la Actividad">
-          </mat-form-field>
-        </td>
-      </tr>
-    </table>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Nombre de la actividad</mat-label>
+      <input matInput placeholder="Nombre de la actividad">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Actividad #</mat-label>
+      <input type="text" matInput placeholder="Activity #">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Fecha</mat-label>
+      <input matInput [matDatepicker]="picker">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Duración</mat-label>
+      <input matInput placeholder="Duración">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Lugar</mat-label>
+      <input matInput placeholder="Lugar">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Número de Asistentes</mat-label>
+      <input type="number" matInput placeholder="Número de Asistentes">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Objetivo de la actividad</mat-label>
+      <input matInput placeholder="Objetivo de la Actividad">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Recursos utilizados</mat-label>
+      <input matInput placeholder="Recursos Utilizados">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Metodología Utilizada</mat-label>
+      <input matInput placeholder="Metodología Utilizada">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Descripción y Desarrollo de la Actividad</mat-label>
+      <input matInput placeholder="Descripción y Desarrollo de la Actividad">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Recursos Obtenidos</mat-label>
+      <input matInput placeholder="Recursos Obtenidos">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Evidencias</mat-label>
+      <input matInput placeholder="Evidencias">
+    </mat-form-field>
+    <mat-form-field class="inputClass" appearance="fill">
+      <mat-label>Profesional y/o Encargado de Ejecturar la Actividad</mat-label>
+      <input matInput placeholder="Profesional y/o Encargado de Ejecturar la Actividad">
+    </mat-form-field>
   </form>
   <mat-card-actions>
     <button mat-raised-button color="primary">GUARDAR</button>
