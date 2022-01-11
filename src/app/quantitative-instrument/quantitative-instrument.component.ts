@@ -13,7 +13,7 @@ interface listTypes {
   styleUrls: ['./quantitative-instrument.component.scss']
 })
 export class QuantitativeInstrumentComponent implements OnInit {
-  firstFormGroup!: FormGroup;
+  comorbidityFormGroup!: FormGroup;
   secundaryInfo!: FormGroup;
   personalInfo!: FormGroup;
   selectedValue: string = "";
@@ -25,12 +25,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
   occupationValue: string = "";
   workModeValue: string = "";
   socialSecurityValue: string = "";
+  hadCovid: any;
+  deadFamilyCovid: any;
   isLinear = false;
 
   constructor(
     private _formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService) {
-    console.log(this.occupationValue)
   }
 
   identification: listTypes[] = [
@@ -116,6 +117,71 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '50', viewValue: 'Mejoró'}
   ];
 
+  comorbilityList: listTypes[] = [
+    {value: '66', viewValue: 'Hipertensión'},
+    {value: '67', viewValue: 'Asma'},
+    {value: '68', viewValue: 'EPOC'},
+    {value: '69', viewValue: 'Diabetes'},
+    {value: '70', viewValue: 'Enfermedades del corazón'},
+    {value: '71', viewValue: 'Enfermedades del riñon'},
+    {value: '72', viewValue: 'Obesidad o sobrepeso'},
+    {value: '73', viewValue: 'Usa medicamentos'},
+    {value: '74', viewValue: 'VIH'},
+    {value: '75', viewValue: 'Hipo-Hipertironismo'},
+    {value: '76', viewValue: 'Cáncer'},
+  ];
+
+  affectationCovidList: listTypes[] = [
+    {value: '77', viewValue: 'Leve'},
+    {value: '78', viewValue: 'Moderada'},
+    {value: '79', viewValue: 'Severa/Hospitalización'}
+  ];
+
+  aftermathList: listTypes[] = [
+    {value: '81', viewValue: 'Físico'},
+    {value: '82', viewValue: 'Psicológico'},
+    {value: '83', viewValue: 'Familiar'},
+    {value: '84', viewValue: 'Laboral'},
+    {value: '85', viewValue: 'Educativo'},
+    {value: '86', viewValue: 'Relación de pareja'},
+    {value: '0', viewValue: 'Todos los anterioles'},
+  ];
+
+  deadFamilyList: listTypes[] = [
+    {value: '87', viewValue: 'Tristeza Profunda'},
+    {value: '88', viewValue: 'Culpabilidad'},
+    {value: '89', viewValue: 'Confusión'},
+    {value: '90', viewValue: 'Preocuoación excesiva'},
+    {value: '91', viewValue: 'Resentimiento'},
+    {value: '92', viewValue: 'Problemas de sueño'},
+    {value: '0', viewValue: 'Todas las anteriores'},
+  ];
+
+  workCovidList: listTypes[] = [
+    {value: '93', viewValue: 'Aumento en la carga laboral'},
+    {value: '104', viewValue: 'Conflictos con los compañeros'},
+    {value: '94', viewValue: 'Desmotivación laboral'},
+    {value: '95', viewValue: 'Reducción de salario'},
+    {value: '0', viewValue: 'Todas las anteriores'},
+  ];
+
+  studentList: listTypes[] = [
+    {value: '96', viewValue: 'Aumento carga académica'},
+    {value: '97', viewValue: 'Desmotivación'},
+    {value: '98', viewValue: 'Falta de tiempo libre'},
+    {value: '99', viewValue: 'Dificultades de entendimiento'},
+    {value: '100', viewValue: 'Abandono de estudios'},
+    {value: '0', viewValue: 'Todas las anteriores'},
+  ];
+
+
+  vaccinationPostureList: listTypes[] = [
+    {value: '101', viewValue: 'A favor'},
+    {value: '102', viewValue: 'En contra'},
+    {value: '103', viewValue: 'Indiferente'},
+  ];
+
+
   ngOnInit(): void {
     this.secundaryInfo = this._formBuilder.group({
       age: ['', Validators.required],
@@ -143,6 +209,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       typeIdentification: ['', Validators.required],
       address: ['', Validators.required],
       cellphone: ['', Validators.required],
+    });
+    this.comorbidityFormGroup = this._formBuilder.group({
+      disorder:['']
     });
   }
 }
