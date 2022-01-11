@@ -11,7 +11,15 @@
 }
 .advancedForm {
   width: 850px;
-  font-size: 14px;
-  text-align: center;
-  font-family: Roboto, Helvetica Neue, sans-serif;
 }
+
+.example-radio-group {
+  display: inline-block;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
