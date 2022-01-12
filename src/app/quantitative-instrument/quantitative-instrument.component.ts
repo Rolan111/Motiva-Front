@@ -25,8 +25,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
   occupationValue: string = "";
   workModeValue: string = "";
   socialSecurityValue: string = "";
-  hadCovid: any;
-  deadFamilyCovid: any;
+  hadCovid: number = 1;
+  deadFamilyCovid: number = 1;
+  armedConflict: number = 1;
+  diomesticViolence: number = 1;
+  mentalHealth: number = 1;
+  vaccinationPosture: any;
+  quinto: any;
+  citiesValue: any;
+
   isLinear = false;
 
   constructor(
@@ -181,6 +188,82 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '103', viewValue: 'Indiferente'},
   ];
 
+  questionsMentalHealtList: listTypes[] = [
+    {value: '41', viewValue: 'Se ha sentido triste o infeliz'},
+    {value: '42', viewValue: 'Ha dormido menos de lo habitual'},
+    {
+      value: '43',
+      viewValue: 'Le han afectado eventos inesperados en su vida o en la vida de las personas con las que se relaciona'
+    },
+    {
+      value: '44',
+      viewValue: 'Ha perdido el control y la estabilidad debido a problemas y cambios importantes en su vida'
+    },
+    {value: '45', viewValue: 'Ha perdido el interes en otras actividades o personas'},
+    {value: '46', viewValue: 'Se ha sentido optimista y motivado(a) a pesar de sus fracasos'},
+    {value: '47', viewValue: 'No ha podido concentrarse tan bien como habitualmente'},
+    {value: '48', viewValue: 'Ha incrementado en consumo de alcohol u otras sustancias psicoactivas'},
+    {value: '49', viewValue: 'Se ha criticado y culpado a mi mismo por todo lo malo que ha sucedido'},
+    {value: '50', viewValue: 'Se ha sentido inquieto, tenso o agitado'},
+    {value: '51', viewValue: 'Ha estado mas irritable de lo habitual'},
+    {value: '52', viewValue: 'Ha sentido miedo y desesperanza respecto a su futuro'},
+    {value: '53', viewValue: 'Todo el tiempo ha pensado en su salud y le ha preocupado adquirir una enfermedad'},
+    {value: '54', viewValue: 'Se ha sentido mas cansado o fatigado de lo habitual'},
+    {value: '55', viewValue: 'No ha experimentado placer por las cosas que solia disfrutar'},
+    {value: '56', viewValue: 'Ha perdido el interes sexual'},
+    {value: '57', viewValue: 'Se ha sentido culpable respecto de las cosas que hizo o debió hacer'},
+    {value: '58', viewValue: 'Ha tenido pensamientos o deseos de matarse'},
+    {
+      value: '59',
+      viewValue: '¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del virus'
+    },
+
+  ];
+
+  citiesList: listTypes[] = [
+    {value: '19001	', viewValue: '	POPAYAN'},
+    {value: '19022	', viewValue: '	ALMAGUER'},
+    {value: '19050	', viewValue: '	ARGELIA'},
+    {value: '19075	', viewValue: '	BALBOA'},
+    {value: '19100	', viewValue: '	BOLIVAR'},
+    {value: '19110	', viewValue: '	BUENOS AIRES'},
+    {value: '19130	', viewValue: '	CAJIBIO'},
+    {value: '19137	', viewValue: '	CALDONO'},
+    {value: '19142	', viewValue: '	CALOTO'},
+    {value: '19212	', viewValue: '	CORINTO'},
+    {value: '19256	', viewValue: '	EL TAMBO'},
+    {value: '19290	', viewValue: '	FLORENCIA'},
+    {value: '19300	', viewValue: '	GUACHENE'},
+    {value: '19318	', viewValue: '	GUAPI'},
+    {value: '19355	', viewValue: '	INZA'},
+    {value: '19364	', viewValue: '	JAMBALO'},
+    {value: '19392	', viewValue: '	LA SIERRA'},
+    {value: '19397	', viewValue: '	LA VEGA'},
+    {value: '19418	', viewValue: '	LOPEZ'},
+    {value: '19450	', viewValue: '	MERCADERES'},
+    {value: '19455	', viewValue: '	MIRANDA'},
+    {value: '19473	', viewValue: '	MORALES'},
+    {value: '19513	', viewValue: '	PADILLA'},
+    {value: '19517	', viewValue: '	PAEZ'},
+    {value: '19533	', viewValue: '	PIAMONTE'},
+    {value: '19548	', viewValue: '	PIENDAMO'},
+    {value: '19573	', viewValue: '	PUERTO TEJADA'},
+    {value: '19532	', viewValue: '	PATIA'},
+    {value: '19585	', viewValue: '	PURACE'},
+    {value: '19622	', viewValue: '	ROSAS'},
+    {value: '19693	', viewValue: '	SAN SEBASTIAN'},
+    {value: '19698	', viewValue: '	SANTANDER DE QUILICHAO'},
+    {value: '19701	', viewValue: '	SANTA ROSA'},
+    {value: '19743	', viewValue: '	SILVIA'},
+    {value: '19760	', viewValue: '	SOTARA'},
+    {value: '19780	', viewValue: '	SUAREZ'},
+    {value: '19785	', viewValue: '	SUCRE'},
+    {value: '19807	', viewValue: '	TIMBIO'},
+    {value: '19809	', viewValue: '	TIMBIQUI'},
+    {value: '19821	', viewValue: '	TORIBIO'},
+    {value: '19824	', viewValue: '	TOTORO'},
+    {value: '19845	', viewValue: '	VILLA RICA'}
+  ];
 
   ngOnInit(): void {
     this.secundaryInfo = this._formBuilder.group({
@@ -211,7 +294,28 @@ export class QuantitativeInstrumentComponent implements OnInit {
       cellphone: ['', Validators.required],
     });
     this.comorbidityFormGroup = this._formBuilder.group({
-      disorder:['']
+      disorder: ['']
     });
+    this.quinto = this._formBuilder.group({});
+
   }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.personalInfo.controls[controlName];
+    if (!control)
+      return false;
+
+
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
+    const control = this.secundaryInfo.controls[controlName];
+    if (!control)
+      return false;
+
+
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+
+
 }
