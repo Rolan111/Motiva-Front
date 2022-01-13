@@ -101,7 +101,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Genero</mat-label>
+              <mat-label>Sexo</mat-label>
               <mat-select [(ngModel)]="genderValue" formControlName="gender" required>
                 <mat-option *ngFor="let gender of genderList" [value]="gender.value">
                   {{gender.viewValue}}
@@ -163,7 +163,8 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass">
               <mat-label>No. Personas con las que convive</mat-label>
-              <input matInput placeholder="No. Personas con las que convive" formControlName="personCoexist" required>
+              <input matInput placeholder="No. Personas con las que convive" formControlName="personCoexist" maxlength="2"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
               <mat-error *ngIf="isControlHasErrorSecundary('personCoexist', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -223,8 +224,8 @@
           </mat-grid-tile>
           <mat-grid-tile *ngIf=" occupationValue=== 'emp' ">
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Ocupación</mat-label>
-              <mat-select [(ngModel)]="workModeValue" formControlName="workMode" required>
+              <mat-label>Modalidad de trabajo</mat-label>
+              <mat-select [(ngModel)]="workModeValue" formControlName="workMode" >
                 <mat-option *ngFor="let workMode of workModeList" [value]="workMode.value">
                   {{workMode.viewValue}}
                 </mat-option>

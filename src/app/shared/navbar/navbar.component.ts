@@ -36,7 +36,6 @@ export class NavbarComponent {
   }
 
   private typeRole(rol: any) {
-     console.log(rol)
     switch (rol){
       case "COORD_GENERAL":
         this.buttonMenuCoord = true;
