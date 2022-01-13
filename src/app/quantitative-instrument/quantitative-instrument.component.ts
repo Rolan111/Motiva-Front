@@ -296,7 +296,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       disorder: ['']
     });
     this.quinto = this._formBuilder.group({});
-
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
@@ -315,6 +314,4 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
-
-
 }

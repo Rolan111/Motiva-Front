@@ -10,6 +10,8 @@ import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
 import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
+import {QuantitativeInstrumentChildrenModule}
+  from "./quantitative-instrument-children/quantitative-instrument-children.module";
 
 
 @NgModule({
@@ -25,6 +27,7 @@ import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
     SharedModule,
     DashboardModule,
     QuantitativeInstrumentModule,
+    QuantitativeInstrumentChildrenModule,
     RepComAgentModule,
   ],
   providers: [],
