@@ -1,12 +1,13 @@
 @import "../../assets/colors";
-
-.content {
+.content{
   height: 100%;
   background-image: url("/assets/images/bg.jpg");
+  background-position: center center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:cover;
   display: flex;
   position: relative;
-  background-size: cover;
 }
 
 .content-card{
@@ -86,40 +87,6 @@ mat-card-title {
 .table-content-img{
   margin: auto;
   width: 90%;
-}
-
-.img-log-1{
-  background-image: url("/assets/images/mesa_de_trabajo.png");
-  width: 100%;
-  height: 72px;
-  margin: 0 auto ;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.img-log-2{
-  background-image: url("/assets/images/logos-indeportes.ico");
-  width: 100%;
-  height: 72px;
-  margin: 0 auto ;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-
-.img-log-3{
-  background-image: url("/assets/images/ucc.ico");
-  width: 100%;
-  height: 72px;
-  margin: 0 auto ;
-  background-size: contain;
-  background-repeat: no-repeat;
-}
-.img-log-4{
-  background-image: url("/assets/images/log_color.ico");
-  width: 100%;
-  height: 72px;
-  margin: 0 auto ;
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 @media only screen and( max-width: 1440px){

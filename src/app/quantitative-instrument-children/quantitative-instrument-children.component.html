@@ -1,0 +1,87 @@
+<mat-vertical-stepper [linear]="isLinear" class="mat-stepper-vertical">
+  <mat-step [stepControl]="personalInfo" color="primary">
+    <ng-template matStepLabel>Información Personal</ng-template>
+    <mat-card class="advancedForm">
+      <mat-card-header>
+        <mat-card-title>Beneficiario</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="personalInfo">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Primer Nombre</mat-label>
+              <input matInput placeholder="First name" formControlName="firstName" required>
+              <mat-error *ngIf="isControlHasError('firstName', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Segundo Nombre</mat-label>
+              <input matInput placeholder="First name" formControlName="secondName">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Primer Apellido</mat-label>
+              <input matInput maxlength="30" formControlName="firstLastName" required>
+              <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Segundo Apellido</mat-label>
+              <input matInput maxlength="30" formControlName="secondLastName">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Tipo de Documento</mat-label>
+              <mat-select [(ngModel)]="selectedValue" formControlName="typeIdentification" required>
+                <mat-option *ngFor="let ident of identification" [value]="ident.value">
+                  {{ident.viewValue}}
+                </mat-option>
+                <mat-error *ngIf="isControlHasError('typeIdentification', 'required')">
+                  <strong>Campo requerido</strong>
+                </mat-error>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>No. Identificación</mat-label>
+              <input type="text" matInput placeholder="Identificación" maxlength="12" minlength="8"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
+              <mat-error *ngIf="isControlHasError('identification', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Dirección</mat-label>
+              <input matInput formControlName="address" required>
+              <mat-error *ngIf="isControlHasError('address', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>No. telefónico</mat-label>
+              <input type="text" matInput placeholder="Número telefóinico" maxlength="12" minlength="8"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
+              <mat-error *ngIf="isControlHasError('cellphone', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <button mat-button matStepperNext>Siguiente</button>
+    </mat-card>
+  </mat-step>
+</mat-vertical-stepper>
