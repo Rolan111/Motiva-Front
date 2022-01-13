@@ -34,7 +34,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   quinto: any;
   citiesValue: any;
 
-  isLinear = false;
+  isLinear = true;
 
   constructor(
     private _formBuilder: FormBuilder,
@@ -271,7 +271,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       gender: ['', Validators.required],
       ethnicity: ['', Validators.required],
       civilStatus: ['', Validators.required],
-      residentialArea: ['', Validators.required],
       municipalityResidence: ['', Validators.required],
       accessServicies: ['', Validators.required],
       numberChildrens: ['', Validators.required],
@@ -281,7 +280,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       scholarship: ['', Validators.required],
       dependents: ['', Validators.required],
       occupation: ['', Validators.required],
-      workMode: ['', Validators.required],
+      workMode: [''],
     });
     this.personalInfo = this._formBuilder.group({
       firstName: ['', Validators.required],
