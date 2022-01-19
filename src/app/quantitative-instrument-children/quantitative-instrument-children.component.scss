@@ -12,3 +12,15 @@
 .advancedForm {
   width: 850px;
 }
+
+.example-radio-group {
+  width: 100%;
+  display: inline-block;
+  flex-direction: column;
+  margin-left: 12px;
+  padding-right: 30%;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
