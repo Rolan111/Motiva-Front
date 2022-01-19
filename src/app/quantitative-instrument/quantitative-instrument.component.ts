@@ -181,7 +181,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-
   vaccinationPostureList: listTypes[] = [
     {value: '101', viewValue: 'A favor'},
     {value: '102', viewValue: 'En contra'},
