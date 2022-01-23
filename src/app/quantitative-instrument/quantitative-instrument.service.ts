@@ -4,6 +4,8 @@ import {environment} from "../../environments/environment";
 import {QuantitativeInstrumentModel} from "./quantitativeInstrument.model";
 import {Observable} from "rxjs";
 import {DataResponse} from "../util/data-response";
+import {LocalStorage} from "../storage/local-storage";
+import {LocalStorageKeyEnum} from "../enums/enum";
 
 const mainUrl = environment.url;
 
@@ -11,6 +13,7 @@ const mainUrl = environment.url;
   providedIn: 'root'
 })
 export class QuantitativeInstrumentService {
+  oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {
   }
@@ -18,6 +21,7 @@ export class QuantitativeInstrumentService {
   findAll(): Observable<any> {
     const path = mainUrl + 'api/quantitative-instruments';
     const headers = this.getHeader();
+    console.log(headers)
     return this.http.get<any>(path, {headers});
   }
 
@@ -41,6 +45,7 @@ export class QuantitativeInstrumentService {
 
   getHeader() {
     return new HttpHeaders({
+      'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),
       'Content-Type': 'application/json',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Headers': 'Content-Type',
