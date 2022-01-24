@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {QuantitativeInstrumentService} from "./quantitative-instrument.service";
+import {AnswerModel} from "./answer.model";
 
-interface listTypes {
+interface ListTypes {
   value: string;
   viewValue: string;
 }
@@ -37,11 +38,11 @@ export class QuantitativeInstrumentComponent implements OnInit {
   isLinear = true;
 
   constructor(
-    private _formBuilder: FormBuilder,
+    private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService) {
   }
 
-  identification: listTypes[] = [
+  identification: ListTypes[] = [
     {value: 'CC', viewValue: 'Cedula Ciudadanía'},
     {value: 'CE', viewValue: 'Cedula Extranjería'},
     {value: 'NIP', viewValue: 'Número Identificación Personal'},
@@ -50,13 +51,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'PAP', viewValue: 'Pasaporte'},
   ];
 
-  genderList: listTypes[] = [
+  genderList: ListTypes[] = [
     {value: 'M', viewValue: 'Hombre'},
     {value: 'F', viewValue: 'Mujer'},
-    {value: 'O', viewValue: 'Indeterminado'}
+    {value: 'I', viewValue: 'Indeterminado'}
   ];
 
-  ethnicityList: listTypes[] = [
+  ethnicityList: ListTypes[] = [
     {value: 'ind', viewValue: 'Indigena'},
     {value: 'afro', viewValue: 'Afrodescendiente, Afrocolombiano'},
     {value: 'git', viewValue: 'Gitano/Rrom'},
@@ -65,7 +66,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'nin', viewValue: 'Ninguno'}
   ]
 
-  civilStatusList: listTypes[] = [
+  civilStatusList: ListTypes[] = [
     {value: 'sol', viewValue: 'Soltero (a)'},
     {value: 'unL', viewValue: 'Unión libre'},
     {value: 'div', viewValue: 'Divorciado (a)'},
@@ -83,7 +84,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     'Telefonía fijo o móvil'
   ];
 
-  typeDwellingList: listTypes[] = [
+  typeDwellingList: ListTypes[] = [
     {value: 'cas', viewValue: 'Casa'},
     {value: 'apt', viewValue: 'Apartamento'},
     {value: 'cua', viewValue: 'Tipo cuarto (s) en inquilinato'},
@@ -91,7 +92,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'otr', viewValue: 'otro'},
   ];
 
-  scholarshipList: listTypes[] = [
+  scholarshipList: ListTypes[] = [
     {value: 'pre', viewValue: 'Preescolar'},
     {value: 'pri', viewValue: 'Básica primaria'},
     {value: 'sec', viewValue: 'Básica secundaria'},
@@ -102,7 +103,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'nin', viewValue: 'Ninguno'},
   ];
 
-  occupationList: listTypes[] = [
+  occupationList: ListTypes[] = [
     {value: 'emp', viewValue: 'Empleado'},
     {value: 'ind', viewValue: 'Independiente'},
     {value: 'des', viewValue: 'Desempleado'},
@@ -112,19 +113,19 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'cas', viewValue: 'Ama de casa '},
   ];
 
-  workModeList: listTypes[] = [
+  workModeList: ListTypes[] = [
     {value: '3', viewValue: 'Presencial'},
     {value: '4', viewValue: 'Virtual'},
     {value: '5', viewValue: 'Semipresencial'}
   ];
 
-  socialSecurityList: listTypes[] = [
+  socialSecurityList: ListTypes[] = [
     {value: '48', viewValue: 'Empeoró'},
     {value: '49', viewValue: 'Quedó igual'},
     {value: '50', viewValue: 'Mejoró'}
   ];
 
-  comorbilityList: listTypes[] = [
+  comorbilityList: ListTypes[] = [
     {value: '66', viewValue: 'Hipertensión'},
     {value: '67', viewValue: 'Asma'},
     {value: '68', viewValue: 'EPOC'},
@@ -138,13 +139,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '76', viewValue: 'Cáncer'},
   ];
 
-  affectationCovidList: listTypes[] = [
+  affectationCovidList: ListTypes[] = [
     {value: '77', viewValue: 'Leve'},
     {value: '78', viewValue: 'Moderada'},
     {value: '79', viewValue: 'Severa/Hospitalización'}
   ];
 
-  aftermathList: listTypes[] = [
+  aftermathList: ListTypes[] = [
     {value: '81', viewValue: 'Físico'},
     {value: '82', viewValue: 'Psicológico'},
     {value: '83', viewValue: 'Familiar'},
@@ -154,7 +155,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '0', viewValue: 'Todos los anterioles'},
   ];
 
-  deadFamilyList: listTypes[] = [
+  deadFamilyList: ListTypes[] = [
     {value: '87', viewValue: 'Tristeza Profunda'},
     {value: '88', viewValue: 'Culpabilidad'},
     {value: '89', viewValue: 'Confusión'},
@@ -164,7 +165,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-  workCovidList: listTypes[] = [
+  workCovidList: ListTypes[] = [
     {value: '93', viewValue: 'Aumento en la carga laboral'},
     {value: '104', viewValue: 'Conflictos con los compañeros'},
     {value: '94', viewValue: 'Desmotivación laboral'},
@@ -172,7 +173,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-  studentList: listTypes[] = [
+  studentList: ListTypes[] = [
     {value: '96', viewValue: 'Aumento carga académica'},
     {value: '97', viewValue: 'Desmotivación'},
     {value: '98', viewValue: 'Falta de tiempo libre'},
@@ -181,13 +182,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-  vaccinationPostureList: listTypes[] = [
+  vaccinationPostureList: ListTypes[] = [
     {value: '101', viewValue: 'A favor'},
     {value: '102', viewValue: 'En contra'},
     {value: '103', viewValue: 'Indiferente'},
   ];
 
-  questionsMentalHealtList: listTypes[] = [
+  questionsMentalHealtList: ListTypes[] = [
     {value: '41', viewValue: 'Se ha sentido triste o infeliz'},
     {value: '42', viewValue: 'Ha dormido menos de lo habitual'},
     {
@@ -216,10 +217,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       value: '59',
       viewValue: '¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del virus'
     },
-
   ];
 
-  citiesList: listTypes[] = [
+  citiesList: ListTypes[] = [
     {value: '19001	', viewValue: '	POPAYAN'},
     {value: '19022	', viewValue: '	ALMAGUER'},
     {value: '19050	', viewValue: '	ARGELIA'},
@@ -265,7 +265,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.secundaryInfo = this._formBuilder.group({
+    this.secundaryInfo = this.formBuilder.group({
       age: ['', Validators.required],
       gender: ['', Validators.required],
       ethnicity: ['', Validators.required],
@@ -281,7 +281,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       occupation: ['', Validators.required],
       workMode: [''],
     });
-    this.personalInfo = this._formBuilder.group({
+    this.personalInfo = this.formBuilder.group({
       firstName: ['', Validators.required],
       firstLastName: ['', Validators.required],
       secondName: [''],
@@ -291,10 +291,31 @@ export class QuantitativeInstrumentComponent implements OnInit {
       address: ['', Validators.required],
       cellphone: ['', Validators.required],
     });
-    this.comorbidityFormGroup = this._formBuilder.group({
+    this.comorbidityFormGroup = this.formBuilder.group({
       disorder: ['']
     });
-    this.quinto = this._formBuilder.group({});
+    this.quinto = this.formBuilder.group({});
+
+    this.quanInstService.findAllQuestion().subscribe(response => {
+      console.log(response)
+    })
+  }
+
+  saveAnswer(answerForm: FormGroup) {
+    let answer: AnswerModel;
+
+    const data = {
+      idAnswer: answerForm.value,
+      idQuestion: answerForm.value,
+      idOptionAnswer: answerForm.value,
+      openAnswer: answerForm.value,
+      idPoll: answerForm.value,
+    }
+
+    answer = data as unknown as AnswerModel;
+    this.quanInstService.create(answer).subscribe(response => {
+      console.log(response.data)
+    })
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
@@ -302,14 +323,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     if (!control)
       return false;
 
-
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
+
   isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
     const control = this.secundaryInfo.controls[controlName];
     if (!control)
       return false;
-
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }

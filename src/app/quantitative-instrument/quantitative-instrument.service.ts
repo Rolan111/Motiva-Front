@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {QuantitativeInstrumentModel} from "./quantitativeInstrument.model";
+import {QuantitativeInstrumentModel} from "./quantitative-instrument.model";
 import {Observable} from "rxjs";
 import {DataResponse} from "../util/data-response";
 import {LocalStorage} from "../storage/local-storage";
 import {LocalStorageKeyEnum} from "../enums/enum";
+import {AnswerModel} from "./answer.model";
 
 const mainUrl = environment.url;
 
@@ -21,11 +22,10 @@ export class QuantitativeInstrumentService {
   findAll(): Observable<any> {
     const path = mainUrl + 'api/quantitative-instruments';
     const headers = this.getHeader();
-    console.log(headers)
     return this.http.get<any>(path, {headers});
   }
 
-  create(quantitativeInstrumentForm: QuantitativeInstrumentModel): Observable<DataResponse> {
+  create(quantitativeInstrumentForm: AnswerModel): Observable<DataResponse> {
     const path = mainUrl + 'api/quantitative-instrument-create';
     const headers = this.getHeader();
     return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
@@ -41,6 +41,12 @@ export class QuantitativeInstrumentService {
     const path = mainUrl + 'api/quantitative-instrument-delete'
     const headers = this.getHeader();
     return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
+  }
+
+  findAllQuestion(): Observable<any> {
+    const path = mainUrl + 'api/quantitative-instrument-questions';
+    const headers = this.getHeader();
+    return this.http.get<any>(path, {headers});
   }
 
   getHeader() {
