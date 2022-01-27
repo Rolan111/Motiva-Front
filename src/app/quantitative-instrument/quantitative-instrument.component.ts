@@ -297,23 +297,47 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.quinto = this.formBuilder.group({});
 
     this.quanInstService.findAllQuestion().subscribe(response => {
-      console.log(response)
+      console.log('question', response)
+    })
+
+    this.quanInstService.findAll().subscribe(response => {
+      console.log('answer', response.data)
     })
   }
 
   saveAnswer(answerForm: FormGroup) {
-    let answer: AnswerModel;
+    let answerList: Array<AnswerModel> = [];
 
-    const data = {
+    let answer1: AnswerModel = {
       idAnswer: 1,
       idQuestion: 2,
-      idOptionAnswer: null,
+      idOptionAnswer: 0,
       openAnswer: answerForm.value.firstName,
       idPoll: 1,
-    }
+    };
 
-    answer = data as unknown as AnswerModel;
-    this.quanInstService.create(answer).subscribe(response => {
+    let answer2: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.firstLastName,
+      idPoll: 1,
+    };
+
+    let answer3: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    answerList.push(answer1)
+    answerList.push(answer2)
+    answerList.push(answer3)
+    console.log(answerList)
+
+    this.quanInstService.create(answerList).subscribe(response => {
       console.log(response.data)
     })
   }
