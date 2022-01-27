@@ -81,7 +81,7 @@
           </mat-grid-tile>
         </mat-grid-list>
       </form>
-      <button mat-button matStepperNext>Siguiente</button>
+      <button mat-button matStepperNext (click)="saveAnswer(personalInfo)">Siguiente</button>
     </mat-card>
   </mat-step>
   <mat-step [stepControl]="secundaryInfo">

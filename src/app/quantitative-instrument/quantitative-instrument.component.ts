@@ -305,11 +305,11 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer: AnswerModel;
 
     const data = {
-      idAnswer: answerForm.value,
-      idQuestion: answerForm.value,
-      idOptionAnswer: answerForm.value,
-      openAnswer: answerForm.value,
-      idPoll: answerForm.value,
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: null,
+      openAnswer: answerForm.value.firstName,
+      idPoll: 1,
     }
 
     answer = data as unknown as AnswerModel;
