@@ -25,7 +25,7 @@ export class QuantitativeInstrumentService {
     return this.http.get<any>(path, {headers});
   }
 
-  create(quantitativeInstrumentForm: AnswerModel): Observable<DataResponse> {
+  create(quantitativeInstrumentForm: Array<AnswerModel>): Observable<DataResponse> {
     const path = mainUrl + 'api/quantitative-instrument-create';
     const headers = this.getHeader();
     return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
