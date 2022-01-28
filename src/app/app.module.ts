@@ -10,13 +10,16 @@ import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
 import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
-import {QuantitativeInstrumentChildrenModule}
-  from "./quantitative-instrument-children/quantitative-instrument-children.module";
-
+import {QuantitativeInstrumentChildrenModule} from "./quantitative-instrument-children/quantitative-instrument-children.module";
+import {HttpClientModule} from "@angular/common/http";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatCardModule} from "@angular/material/card";
+import {AngularMaterialModule} from "./angular-material.module";
+import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +32,11 @@ import {QuantitativeInstrumentChildrenModule}
     QuantitativeInstrumentModule,
     QuantitativeInstrumentChildrenModule,
     RepComAgentModule,
+    TrackingSheetModule,
+    HttpClientModule,
+    MatFormFieldModule,
+    MatCardModule,
+    AngularMaterialModule
   ],
   providers: [],
   bootstrap: [AppComponent],
