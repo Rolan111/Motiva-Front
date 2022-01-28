@@ -320,11 +320,525 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idAnswer: 1,
       idQuestion: 2,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.firstLastName,
+      openAnswer: answerForm.value.secondName,
       idPoll: 1,
     };
 
     let answer3: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.firstLastName,
+      idPoll: 1,
+    };
+
+    let answer4: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.secondLastName,
+      idPoll: 1,
+    };
+
+    let answer5: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.typeIdentification,
+      idPoll: 1,
+    };
+
+    let answer6: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer7: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.address,
+      idPoll: 1,
+    };
+
+    let answer8: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.cellphone,
+      idPoll: 1,
+    };
+
+    let answer9: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.age,
+      idPoll: 1,
+    };
+
+    let answer10: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.gender,
+      idPoll: 1,
+    };
+
+    let answer11: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.ethnicity,
+      idPoll: 1,
+    };
+
+    let answer12: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.civilStatus,
+      idPoll: 1,
+    };
+
+    //Pendiente Zona de Residencia
+    let answer13: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.zonaresidencia,
+      idPoll: 1,
+    };
+
+    let answer14: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.municipalityResidence,
+      idPoll: 1,
+    };
+
+    let answer15: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.accessServicies,
+      idPoll: 1,
+    };
+
+    let answer16: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.numberChildrens,
+      idPoll: 1,
+    };
+
+    let answer17: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.socialSecurity,
+      idPoll: 1,
+    };
+
+    let answer18: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.personCoexist,
+      idPoll: 1,
+    };
+
+    let answer19: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.typeDwelling,
+      idPoll: 1,
+    };
+
+    let answer20: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.scholarship,
+      idPoll: 1,
+    };
+
+    let answer21: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.dependents,
+      idPoll: 1,
+    };
+
+    let answer22: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.occupation,
+      idPoll: 1,
+    };
+
+    let answer23: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.workMode,
+      idPoll: 1,
+    };
+
+    let answer24: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer25: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer26: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer27: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer28: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer29: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer30: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer31: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer32: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer33: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer34: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer35: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer36: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer37: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer38: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer39: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer40: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer41: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer42: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer43: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer44: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer45: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer46: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer47: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+
+    let answer48: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer49: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer50: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer51: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer52: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer53: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer54: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer55: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer56: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer57: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer58: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer59: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer60: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer61: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer62: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer63: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer64: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer65: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer66: AnswerModel = {
+      idAnswer: 1,
+      idQuestion: 2,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.identification,
+      idPoll: 1,
+    };
+
+    let answer67: AnswerModel = {
       idAnswer: 1,
       idQuestion: 2,
       idOptionAnswer: 0,
@@ -335,6 +849,70 @@ export class QuantitativeInstrumentComponent implements OnInit {
     answerList.push(answer1)
     answerList.push(answer2)
     answerList.push(answer3)
+    answerList.push(answer4)
+    answerList.push(answer5)
+    answerList.push(answer6)
+    answerList.push(answer7)
+    answerList.push(answer8)
+    answerList.push(answer9)
+    answerList.push(answer10)
+    answerList.push(answer11)
+    answerList.push(answer12)
+    answerList.push(answer13)
+    answerList.push(answer14)
+    answerList.push(answer15)
+    answerList.push(answer16)
+    answerList.push(answer17)
+    answerList.push(answer18)
+    answerList.push(answer19)
+    answerList.push(answer20)
+    answerList.push(answer21)
+    answerList.push(answer22)
+    answerList.push(answer23)
+    answerList.push(answer24)
+    answerList.push(answer25)
+    answerList.push(answer26)
+    answerList.push(answer27)
+    answerList.push(answer28)
+    answerList.push(answer29)
+    answerList.push(answer30)
+    answerList.push(answer31)
+    answerList.push(answer32)
+    answerList.push(answer33)
+    answerList.push(answer34)
+    answerList.push(answer35)
+    answerList.push(answer36)
+    answerList.push(answer37)
+    answerList.push(answer38)
+    answerList.push(answer39)
+    answerList.push(answer40)
+    answerList.push(answer41)
+    answerList.push(answer42)
+    answerList.push(answer43)
+    answerList.push(answer44)
+    answerList.push(answer45)
+    answerList.push(answer46)
+    answerList.push(answer47)
+    answerList.push(answer48)
+    answerList.push(answer49)
+    answerList.push(answer50)
+    answerList.push(answer51)
+    answerList.push(answer52)
+    answerList.push(answer53)
+    answerList.push(answer54)
+    answerList.push(answer55)
+    answerList.push(answer56)
+    answerList.push(answer57)
+    answerList.push(answer58)
+    answerList.push(answer59)
+    answerList.push(answer60)
+    answerList.push(answer61)
+    answerList.push(answer62)
+    answerList.push(answer63)
+    answerList.push(answer64)
+    answerList.push(answer65)
+    answerList.push(answer66)
+    answerList.push(answer67)
     console.log(answerList)
 
     this.quanInstService.create(answerList).subscribe(response => {
