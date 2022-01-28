@@ -5,8 +5,8 @@ import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
 import {QuantitativeInstrumentComponent} from "./quantitative-instrument/quantitative-instrument.component";
 import {RepComAgentComponent} from "./rep-com-agent/rep-com-agent.component";
-import {QuantitativeInstrumentChildrenComponent
-} from "./quantitative-instrument-children/quantitative-instrument-children.component";
+import {QuantitativeInstrumentChildrenComponent} from "./quantitative-instrument-children/quantitative-instrument-children.component";
+import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -19,6 +19,7 @@ const routes: Routes = [
       {path: 'quantitative', component: QuantitativeInstrumentComponent},
       {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent},
       {path: 'community-agents', component: RepComAgentComponent},
+      {path: 'tracking-sheet', component: TrackingSheetComponent}
     ]
   },
 ];
