@@ -13,16 +13,16 @@ export class TrackingSheetService {
   constructor(private http: HttpClient) {
   }
 
-  public get(url: string) {
-    return this.http.get(url, {
+  public get() {
+    return this.http.get('http://localhost:5000/api/tracking-sheets', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
     });
   }
 
-  public post(url: string, body: any) {
-    return this.http.post(url, body, {
+  public post(body: any) {
+    return this.http.post('http://localhost:5000/api/tracking-sheet-create', body, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })

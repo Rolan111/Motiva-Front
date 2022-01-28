@@ -22,12 +22,12 @@ export class TrackingSheetComponent implements OnInit {
     this.form = this.formBuilder.group({
       names: ['', Validators.required],
       lastnames: ['', Validators.required],
-      identificationType: ['', Validators.required],
-      nIdentification: ['', Validators.required],
-      typeRoute: ['', Validators.required],
-      referredEntity: ['', Validators.required],
-      attentionStatus: ['', Validators.required],
-      recommendationsSuggestions: ['', Validators.required]
+      identification_type: ['', Validators.required],
+      n_identification: ['', Validators.required],
+      type_route: ['', Validators.required],
+      referred_entity: ['', Validators.required],
+      attention_status: ['', Validators.required],
+      recommendations_suggestions: ['', Validators.required]
     })
   }
 
@@ -36,26 +36,24 @@ export class TrackingSheetComponent implements OnInit {
   }
 
   public loadData() {
-    this.TrackingSheetService.get('http://localhost:5000/api/tracking-sheets').subscribe(respuesta => {
-      console.log('Recibiendo datos de tracking-service !');
-      console.log(respuesta)
+    this.TrackingSheetService.get().subscribe(respuesta => {
     })
   }
 
   public sendData() {
-    this.TrackingSheetService.post('http://localhost:5000/api/tracking-sheet-create',
+    this.TrackingSheetService.post(
       {
         names: this.form.value.names,
         lastnames: this.form.value.lastnames,
-        identificationType: this.form.value.identificationType,
-        nIdentification: this.form.value.nIdentification,
-        typeRoute: this.form.value.typeRoute,
-        referredEntity: this.form.value.referredEntity,
-        attentionStatus: this.form.value.attentionStatus,
-        recommendationsSuggestions: this.form.value.recommendationsSuggestions
+        identification_type: this.form.value.identification_type,
+        n_identification: this.form.value.n_identification,
+        type_route: this.form.value.type_route,
+        referred_entity: this.form.value.referred_entity,
+        attention_status: this.form.value.attention_status,
+        recommendations_suggestions: this.form.value.recommendations_suggestions
 
       }).subscribe(respuesta => {
-      console.log('Registro CARGADO a tracking-sheet !');
+
     })
   }
 
