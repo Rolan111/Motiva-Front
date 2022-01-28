@@ -15,92 +15,91 @@ export class RepComAgentComponent implements OnInit {
 
   constructor(private route: ActivatedRoute, private RepComAgentService: RepComAgentService, private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
-      activityName: ['', Validators.required],
-      activityNumber: ['', Validators.required],
+      activity_name: ['', Validators.required],
+      activity_number: ['', Validators.required],
       date: ['', Validators.required],
       duration: ['', Validators.required],
       place: ['', Validators.required],
-      numberAttendees: ['', Validators.required],
-      activityObjectives: ['', Validators.required],
-      resourcesUsed: ['', Validators.required],
-      methodologyUsed: ['', Validators.required],
-      activityDescriptionDevelopment: ['', Validators.required],
-      resourcesObtained: ['', Validators.required],
-      evidence: ['', Validators.required], //AGREGAR EVIDENCE AL BACKEND
-      activityProfessionalincharge: ['', Validators.required]
+      number_attendees: ['', Validators.required],
+      activity_objectives: ['', Validators.required],
+      resources_used: ['', Validators.required],
+      methodology_used: ['', Validators.required],
+      activity_description_development: ['', Validators.required],
+      resources_obtained: ['', Validators.required],
+      evidence: ['', Validators.required],
+      activity_professional_incharge: ['', Validators.required]
 
     })
   }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((paramMap: any) => { //para capturar ID desde la url en el navegador
+    this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
       this.loadData();
     })
   }
 
   public loadData() {
-    this.RepComAgentService.get('http://localhost:5000/api/rep-com-agents').subscribe(respuesta => {
-      console.log('Recibiendo datos de rep-com-agent !');
-      console.log(respuesta)
+    this.RepComAgentService.get().subscribe(respuesta => {
+
     })
   }
 
 
   public loadDataById(id: string) {
-    this.RepComAgentService.get(`http://localhost:3000/rep-com-agent/${id}`)
+    this.RepComAgentService.getById(id)
       .subscribe(respuesta => {
         this.respuesta = respuesta;
       })
   }
 
   public sendData() {
-    this.RepComAgentService.post('http://localhost:5000/api/rep-com-agent-create',
+    this.RepComAgentService.post(
       {
-        activityName: this.form.value.activityName,
-        activityNumber: this.form.value.activityNumber,
+        activity_name: this.form.value.activity_name,
+        activity_number: this.form.value.activity_number,
         date: this.form.value.date,
         duration: this.form.value.duration,
         place: this.form.value.place,
-        numberAttendees: this.form.value.numberAttendees,
-        activityObjectives: this.form.value.activityObjectives,
-        resourcesUsed: this.form.value.resourcesUsed,
-        methodologyUsed: this.form.value.methodologyUsed,
-        activityDescriptionDevelopment: this.form.value.activityDescriptionDevelopment,
-        resourcesObtained: this.form.value.resourcesObtained,
+        number_attendees: this.form.value.number_attendees,
+        activity_objectives: this.form.value.activity_objectives,
+        resources_used: this.form.value.resources_used,
+        methodology_used: this.form.value.methodology_used,
+        activity_description_development: this.form.value.activity_description_development,
+        resources_obtained: this.form.value.resources_obtained,
         evidence: this.form.value.evidence,
-        activityProfessionalincharge: this.form.value.activityProfessionalincharge,
+        activity_professional_incharge: this.form.value.activity_professional_incharge,
 
       }).subscribe(respuesta => {
-      console.log('Registro CARGADO a rep-com-agent !');
+
     })
   }
 
   updateData() {
-    this.RepComAgentService.update('http://localhost:3000/rep-com-agent/1',
+    this.RepComAgentService.update(
       {
-        activityName: "nombre 1",
-        activityNumber: "Numero 2",
+        activity_name: "nombre 1",
+        activity_number: "Numero 2",
         date: "fecha nueva",
         duration: "duracion 1",
         place: "lugar 1",
-        numberAttendees: "Numero asistentes 1",
-        activityObjectives: "Objetivos de actividad 1",
-        resourcesUsed: "Recursos usados 1",
-        methodologyUsed: "Metodologia usada 1",
-        activityDescriptionDevelopment: "Descripción 1",
-        resourcesObtained: "Recursos obtenidos 1",
+        number_attendees: "Numero asistentes 1",
+        activity_objectives: "Objetivos de actividad 1",
+        resources_used: "Recursos usados 1",
+        methodology_used: "Metodologia usada 1",
+        activity_description_development: "Descripción 1",
+        resources_obtained: "Recursos obtenidos 1",
         evidence: "Evidencias 1",
-        activityProfessionalincharge: "Profesional a carga 1",
+        activity_professional_incharge: "Profesional a carga 1",
 
       }).subscribe(respuesta => {
-      console.log('Registro ACTUALIZADO a rep-com-agent !');
+
     })
   }
 
   deleteData() {
-    this.RepComAgentService.delete('http://localhost:3000/rep-com-agent/5').subscribe(respuesta => {
-      console.log('Registro ELIMINADO en rep-com-agent !');
+    this.RepComAgentService.delete().subscribe(respuesta => {
+
     })
   }
 

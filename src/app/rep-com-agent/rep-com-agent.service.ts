@@ -11,27 +11,36 @@ export class RepComAgentService {
   constructor(private http: HttpClient) {
   }
 
-  public get(url: string) {
-    return this.http.get(url, {
+
+  public get() {
+    return this.http.get('http://localhost:5000/api/rep-com-agents', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
     });
   }
 
-  public post(url: string, body: any) {
-    return this.http.post(url, body, {
+  public getById(id: string) {
+    return this.http.get(`http://localhost:5000/api/rep-com-agents/${id}`, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
     });
   }
 
-  public update(url: string, body: any) {
-    return this.http.put(url, body);
+  public post(body: any) {
+    return this.http.post('http://localhost:5000/api/rep-com-agent-create', body, {
+      headers: new HttpHeaders({
+        'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
+      })
+    });
   }
 
-  public delete(url: string) {
-    return this.http.delete(url);
+  public update(body: any) {
+    return this.http.put('http://localhost:3000/rep-com-agent/1', body);
+  }
+
+  public delete() {
+    return this.http.delete('http://localhost:3000/rep-com-agent/5');
   }
 }
