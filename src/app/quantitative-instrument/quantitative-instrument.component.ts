@@ -17,6 +17,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   comorbidityFormGroup!: FormGroup;
   secundaryInfo!: FormGroup;
   personalInfo!: FormGroup;
+  factors!: FormGroup;
   selectedValue: string = "";
   genderValue: string = "";
   ethnicityValue: string = "";
@@ -34,8 +35,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
   vaccinationPosture: any;
   quinto: any;
   citiesValue: any;
+  answerList: Array<AnswerModel> = [];
 
-  isLinear = true;
+  isLinear = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -294,6 +296,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.comorbidityFormGroup = this.formBuilder.group({
       disorder: ['']
     });
+
+    this.factors = this.formBuilder.group({});
+
     this.quinto = this.formBuilder.group({});
 
     this.quanInstService.findAllQuestion().subscribe(response => {
@@ -305,9 +310,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
-  saveAnswer(answerForm: FormGroup) {
-    let answerList: Array<AnswerModel> = [];
-
+  saveAnswerPersonalInfo(answerForm: FormGroup) {
     let answer1: AnswerModel = {
       idAnswer: 1,
       idQuestion: 2,
@@ -317,61 +320,72 @@ export class QuantitativeInstrumentComponent implements OnInit {
     };
 
     let answer2: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 2,
+      idQuestion: 1,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.secondName,
       idPoll: 1,
     };
 
     let answer3: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 3,
+      idQuestion: 3,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.firstLastName,
       idPoll: 1,
     };
 
     let answer4: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 4,
+      idQuestion: 1,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.secondLastName,
       idPoll: 1,
     };
 
     let answer5: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 5,
+      idQuestion: 4,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.typeIdentification,
       idPoll: 1,
     };
 
     let answer6: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 6,
+      idQuestion: 1,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.identification,
       idPoll: 1,
     };
 
     let answer7: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 7,
+      idQuestion: 1,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.address,
       idPoll: 1,
     };
 
     let answer8: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: 8,
+      idQuestion: 8,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.cellphone,
       idPoll: 1,
     };
 
+    this.answerList.push(answer1)
+    this.answerList.push(answer2)
+    this.answerList.push(answer3)
+    this.answerList.push(answer4)
+    this.answerList.push(answer5)
+    this.answerList.push(answer6)
+    this.answerList.push(answer7)
+    this.answerList.push(answer8)
+  }
+
+  saveAnswerSecundaryInfo(answerForm: FormGroup) {
     let answer9: AnswerModel = {
       idAnswer: 1,
       idQuestion: 2,
@@ -493,6 +507,24 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: 1,
     };
 
+    this.answerList.push(answer9)
+    this.answerList.push(answer10)
+    this.answerList.push(answer11)
+    this.answerList.push(answer12)
+    this.answerList.push(answer13)
+    this.answerList.push(answer14)
+    this.answerList.push(answer15)
+    this.answerList.push(answer16)
+    this.answerList.push(answer17)
+    this.answerList.push(answer18)
+    this.answerList.push(answer19)
+    this.answerList.push(answer20)
+    this.answerList.push(answer21)
+    this.answerList.push(answer22)
+    this.answerList.push(answer23)
+  }
+
+  saveAnswerComorbidity(answerForm: FormGroup) {
     let answer24: AnswerModel = {
       idAnswer: 1,
       idQuestion: 2,
@@ -846,76 +878,56 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: 1,
     };
 
-    answerList.push(answer1)
-    answerList.push(answer2)
-    answerList.push(answer3)
-    answerList.push(answer4)
-    answerList.push(answer5)
-    answerList.push(answer6)
-    answerList.push(answer7)
-    answerList.push(answer8)
-    answerList.push(answer9)
-    answerList.push(answer10)
-    answerList.push(answer11)
-    answerList.push(answer12)
-    answerList.push(answer13)
-    answerList.push(answer14)
-    answerList.push(answer15)
-    answerList.push(answer16)
-    answerList.push(answer17)
-    answerList.push(answer18)
-    answerList.push(answer19)
-    answerList.push(answer20)
-    answerList.push(answer21)
-    answerList.push(answer22)
-    answerList.push(answer23)
-    answerList.push(answer24)
-    answerList.push(answer25)
-    answerList.push(answer26)
-    answerList.push(answer27)
-    answerList.push(answer28)
-    answerList.push(answer29)
-    answerList.push(answer30)
-    answerList.push(answer31)
-    answerList.push(answer32)
-    answerList.push(answer33)
-    answerList.push(answer34)
-    answerList.push(answer35)
-    answerList.push(answer36)
-    answerList.push(answer37)
-    answerList.push(answer38)
-    answerList.push(answer39)
-    answerList.push(answer40)
-    answerList.push(answer41)
-    answerList.push(answer42)
-    answerList.push(answer43)
-    answerList.push(answer44)
-    answerList.push(answer45)
-    answerList.push(answer46)
-    answerList.push(answer47)
-    answerList.push(answer48)
-    answerList.push(answer49)
-    answerList.push(answer50)
-    answerList.push(answer51)
-    answerList.push(answer52)
-    answerList.push(answer53)
-    answerList.push(answer54)
-    answerList.push(answer55)
-    answerList.push(answer56)
-    answerList.push(answer57)
-    answerList.push(answer58)
-    answerList.push(answer59)
-    answerList.push(answer60)
-    answerList.push(answer61)
-    answerList.push(answer62)
-    answerList.push(answer63)
-    answerList.push(answer64)
-    answerList.push(answer65)
-    answerList.push(answer66)
-    answerList.push(answer67)
-    console.log(answerList)
+    this.answerList.push(answer24)
+    this.answerList.push(answer25)
+    this.answerList.push(answer26)
+    this.answerList.push(answer27)
+    this.answerList.push(answer28)
+    this.answerList.push(answer29)
+    this.answerList.push(answer30)
+    this.answerList.push(answer31)
+    this.answerList.push(answer32)
+    this.answerList.push(answer33)
+    this.answerList.push(answer34)
+    this.answerList.push(answer35)
+    this.answerList.push(answer36)
+    this.answerList.push(answer37)
+    this.answerList.push(answer38)
+    this.answerList.push(answer39)
+    this.answerList.push(answer40)
+    this.answerList.push(answer41)
+    this.answerList.push(answer42)
+    this.answerList.push(answer43)
+    this.answerList.push(answer44)
+    this.answerList.push(answer45)
+    this.answerList.push(answer46)
+    this.answerList.push(answer47)
+    this.answerList.push(answer48)
+    this.answerList.push(answer49)
+    this.answerList.push(answer50)
+    this.answerList.push(answer51)
+    this.answerList.push(answer52)
+    this.answerList.push(answer53)
+    this.answerList.push(answer54)
+    this.answerList.push(answer55)
+    this.answerList.push(answer56)
+    this.answerList.push(answer57)
+    this.answerList.push(answer58)
+    this.answerList.push(answer59)
+    this.answerList.push(answer60)
+    this.answerList.push(answer61)
+    this.answerList.push(answer62)
+    this.answerList.push(answer63)
+    this.answerList.push(answer64)
+    this.answerList.push(answer65)
+    this.answerList.push(answer66)
+    this.answerList.push(answer67)
+  }
 
-    this.quanInstService.create(answerList).subscribe(response => {
+  saveAnswer() {
+    console.log(this.answerList)
+
+    this.quanInstService.create(this.answerList).subscribe(response => {
       console.log(response.data)
     })
   }
