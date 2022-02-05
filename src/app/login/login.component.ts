@@ -14,8 +14,7 @@ import {LocalStorage} from "../storage/local-storage";
 })
 
 export class LoginComponent implements OnInit {
-  // @ts-ignore
-  formLogin: FormGroup;
+  formLogin!: FormGroup;
   hide: boolean = true;
   userNameLogin: string = '';
   oLocalStorage = new LocalStorage();

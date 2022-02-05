@@ -103,9 +103,9 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Sexo</mat-label>
-              <mat-select [(ngModel)]="genderValue" formControlName="gender" required>
-                <mat-option *ngFor="let gender of genderList" [value]="gender.value">
-                  {{gender.viewValue}}
+              <mat-select [(ngModel)]="sexValue" formControlName="gender" required>
+                <mat-option *ngFor="let sex of sexList" [value]="sex.value">
+                  {{sex.viewValue}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="isControlHasErrorSecundary('gender', 'required')">

@@ -8,7 +8,8 @@ import {LocalStorage} from "../../storage/local-storage";
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  fullName: string = "";
+  fullName: string = '';
+  rol: string = '';
   oLocalStorage = new LocalStorage();
   buttonMenuCoord = false;
   buttonMenuCoordTeam = false;
@@ -21,6 +22,7 @@ export class NavbarComponent {
     this.fullName = this.oLocalStorage.getItem(LocalStorageKeyEnum.name) + " " + this.oLocalStorage.getItem(LocalStorageKeyEnum.lastName);
     this.typeRole(this.oLocalStorage.getItem(LocalStorageKeyEnum.rol));
   }
+
   logOut() {
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.rol);
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.lastName);
@@ -36,20 +38,21 @@ export class NavbarComponent {
   }
 
   private typeRole(rol: any) {
-    switch (rol){
-      case "COORD_GENERAL":
+    switch (rol) {
+      case 'SUPERVISOR':
+        this.rol = 'Supervisor';
         this.buttonMenuCoord = true;
         break;
-      case "COORD_TEAM":
-        this.buttonMenuCoordTeam = true;
-        break;
-      case "SUPERINTENDENT":
+      case 'USER':
+        this.rol = 'Invitado';
         this.buttonMenuSuperIntendent = true;
         break;
-      case "PSYCHOLOGIST":
+      case 'P_CAMPO':
+        this.rol = 'Psicólogo de campo';
         this.buttonMenuPsychoLogist = true;
         break;
-      case "SOCIAL_WORKER":
+      case 'AGENTE':
+        this.rol = 'Agente comunitario';
         this.buttonMenuSocialWorker = true;
         break;
     }
