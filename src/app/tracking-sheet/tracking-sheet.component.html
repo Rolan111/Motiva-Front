@@ -1,92 +1,70 @@
 <mat-card>
-
   <mat-card-title>Ficha de seguimiento</mat-card-title>
-  <!-- los nombres de formControlName deben estar mapeados en el .ts   -->
-  <form [formGroup]="form" (ngSubmit)="sendData()">
-
+  <form [formGroup]="form">
     <mat-grid-list cols="2" rowHeight="70px">
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Nombres</mat-label>
           <input formControlName="names" matInput placeholder="Nombres">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Apellidos</mat-label>
           <input formControlName="lastnames" type="text" matInput placeholder="Apellidos">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field appearance="fill">
           <mat-label>Tipo de identificación</mat-label>
-          <mat-select formControlName="identification_type">
-            <mat-option *ngFor="let identificationType of identificationTypes" [value]="identificationType.value">
+          <mat-select formControlName="identificationType">
+            <mat-option *ngFor="let identificationType of identificationType" [value]="identificationType.value">
               {{identificationType.viewValue}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-
-
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>No. Identificación</mat-label>
-          <input formControlName="n_identification" type="number" matInput placeholder="No. Identificación">
+          <input formControlName="identification" type="number" matInput placeholder="No. Identificación">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="2" [rowspan]="1">
         <b>Seguimiento de ruta</b>
       </mat-grid-tile>
-
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Tipo de ruta que activó:</mat-label>
-          <input formControlName="type_route" matInput placeholder="Tipo de ruta que activó: ">
+          <input formControlName="typeRoute" matInput placeholder="Tipo de ruta que activó: ">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Entidad remitida</mat-label>
-          <input formControlName="referred_entity" matInput placeholder="Entidad remitida">
+          <input formControlName="referredEntity" matInput placeholder="Entidad remitida">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Estado de la atención en entidad a la que se remitió:</mat-label>
-          <input formControlName="attention_status" matInput
+          <input formControlName="attentionStatus" matInput
                  placeholder="Estado de la atención en entidad a la que se remitió">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Recomendaciones, sugerencias y cierre de proceso:</mat-label>
-          <input formControlName="recommendations_suggestions" matInput
+          <input formControlName="recommendations" matInput
                  placeholder="Recomendaciones, sugerencias y cierre de proceso">
         </mat-form-field>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <button type="submit" mat-raised-button color="primary">GUARDAR</button>
+        <button type="submit" mat-raised-button color="primary" (click)="saveForm(form)">GUARDAR</button>
       </mat-grid-tile>
-
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <button mat-button>CANCELAR</button>
       </mat-grid-tile>
-
-
     </mat-grid-list>
-
-
   </form>
-
 </mat-card>

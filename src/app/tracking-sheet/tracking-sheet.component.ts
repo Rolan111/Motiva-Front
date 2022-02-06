@@ -1,61 +1,57 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {TrackingSheetService} from "./tracking-sheet.service";
+import {TrackingSheetModel} from "./tracking-sheet.model";
 
 @Component({
   selector: 'app-tracking-sheet',
   templateUrl: './tracking-sheet.component.html',
   styleUrls: ['./tracking-sheet.component.scss']
 })
-export class TrackingSheetComponent implements OnInit {
-
-  //Tipos de identificación para cargar al formulario
-  identificationTypes: any[] = [
-    {value: 'cc', viewValue: 'C.C'},
-    {value: 'ti', viewValue: 'T.I'},
-  ];
-
+export class TrackingSheetComponent {
   form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private TrackingSheetService: TrackingSheetService, private formBuilder: FormBuilder) {
+  identificationType: any[] = [
+    {value: 'CC', viewValue: 'Cedula Ciudadanía'},
+    {value: 'CE', viewValue: 'Cedula Extranjería'},
+    {value: 'NIP', viewValue: 'Número Identificación Personal'},
+    {value: 'NIT', viewValue: 'Número Identificación Tributaría'},
+    {value: 'TI', viewValue: 'Tarjeta Identidad'},
+    {value: 'PAP', viewValue: 'Pasaporte'},
+  ];
+
+  constructor(
+    private route: ActivatedRoute,
+    private trackingSheetService: TrackingSheetService,
+    private formBuilder: FormBuilder)
+  {
     this.form = this.formBuilder.group({
       names: ['', Validators.required],
       lastnames: ['', Validators.required],
-      identification_type: ['', Validators.required],
-      n_identification: ['', Validators.required],
-      type_route: ['', Validators.required],
-      referred_entity: ['', Validators.required],
-      attention_status: ['', Validators.required],
-      recommendations_suggestions: ['', Validators.required]
+      identificationType: ['', Validators.required],
+      identification: ['', Validators.required],
+      typeRoute: ['', Validators.required],
+      referredEntity: ['', Validators.required],
+      attentionStatus: ['', Validators.required],
+      recommendations: ['', Validators.required]
     })
   }
 
-  ngOnInit(): void {
-    this.loadData()
-  }
+  public saveForm(form: FormGroup) {
+    let trackingSheetModel: TrackingSheetModel = {
+      names: form.value.names,
+      lastnames: form.value.lastnames,
+      identificationType: form.value.identificationType,
+      identification: form.value.identification,
+      typeRoute: form.value.typeRoute,
+      referredEntity: form.value.referredEntity,
+      attentionStatus: form.value.attentionStatus,
+      recommendations: form.value.recommendations
+    };
 
-  public loadData() {
-    this.TrackingSheetService.get().subscribe(respuesta => {
+    this.trackingSheetService.create(trackingSheetModel).subscribe(response => {
+      console.log(response.data)
     })
   }
-
-  public sendData() {
-    this.TrackingSheetService.post(
-      {
-        names: this.form.value.names,
-        lastnames: this.form.value.lastnames,
-        identification_type: this.form.value.identification_type,
-        n_identification: this.form.value.n_identification,
-        type_route: this.form.value.type_route,
-        referred_entity: this.form.value.referred_entity,
-        attention_status: this.form.value.attention_status,
-        recommendations_suggestions: this.form.value.recommendations_suggestions
-
-      }).subscribe(respuesta => {
-
-    })
-  }
-
-
 }
