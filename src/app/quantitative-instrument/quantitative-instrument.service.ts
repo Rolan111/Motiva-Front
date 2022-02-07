@@ -49,6 +49,12 @@ export class QuantitativeInstrumentService {
     return this.http.get<any>(path, {headers});
   }
 
+  getLastSequence(): Observable<any> {
+    const path = mainUrl + 'api/quantitative-last-sequences';
+    const headers = this.getHeader();
+    return this.http.get<any>(path, {headers});
+  }
+
   getHeader() {
     return new HttpHeaders({
       'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),
