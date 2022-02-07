@@ -35,7 +35,7 @@ export class RepComAgentComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
-      this.loadData();
+      // this.loadData();
     })
   }
 
