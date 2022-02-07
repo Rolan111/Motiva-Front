@@ -2,6 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {LocalStorage} from "../storage/local-storage";
 import {LocalStorageKeyEnum} from "../enums/enum";
+import {environment} from "../../environments/environment";
+
+const mainUrl = environment.url;
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +16,7 @@ export class RepComAgentService {
 
 
   public get() {
-    return this.http.get('http://localhost:5000/api/rep-com-agents', {
+    return this.http.get(mainUrl + 'api/rep-com-agents', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
@@ -29,7 +32,7 @@ export class RepComAgentService {
   }
 
   public post(body: any) {
-    return this.http.post('http://localhost:5000/api/rep-com-agent-create', body, {
+    return this.http.post(mainUrl + 'api/rep-com-agent-create', body, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
