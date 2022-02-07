@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuantitativeInstrumentService} from "./quantitative-instrument.service";
 import {AnswerModel} from "./answer.model";
 
@@ -14,30 +14,26 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument.component.scss']
 })
 export class QuantitativeInstrumentComponent implements OnInit {
-  comorbidityFormGroup!: FormGroup;
-  secundaryInfo!: FormGroup;
   personalInfo!: FormGroup;
+  secundaryInfo!: FormGroup;
+  comorbidityInfo!: FormGroup;
   factors!: FormGroup;
-  selectedValue: string = "";
-  sexValue: string = "";
-  ethnicityValue: string = "";
-  civilStatusValue: string = "";
-  typeDwellingValue: string = "";
-  scholarshipValue: string = "";
-  occupationValue: string = "";
-  workModeValue: string = "";
-  socialSecurityValue: string = "";
-  hadCovid: number = 1;
-  deadFamilyCovid: number = 1;
-  armedConflict: number = 1;
-  diomesticViolence: number = 1;
-  mentalHealth: number = 1;
-  vaccinationPosture: any;
-  quinto: any;
+  mentalHealthNeeds!: FormGroup;
+  selectedValue: string = '';
+  sexValue: string = '';
+  ethnicityValue: string = '';
+  civilStatusValue: string = '';
+  typeHomeValue: string = '';
+  educationLevelValue: string = '';
+  occupationValue: string = '';
+  workOStudyModeValue: string = '';
+  socialSecurityValue: string = '';
   citiesValue: any;
   answerList: Array<AnswerModel> = [];
   idAnswer: number = 0;
   idPoll: number = 0;
+  service: Array<number>[] = [];
+  zoneResidence: string = '';
 
   isLinear = false;
 
@@ -64,60 +60,63 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ethnicityList: ListTypes[] = [
     {value: '20', viewValue: 'Indigena'},
     {value: '21', viewValue: 'Afrodescendiente, Afrocolombiano'},
-    {value: '22', viewValue: 'Gitano/Gypsy'},
+    {value: '22', viewValue: 'Gitano/Rrom'},
     {value: '23', viewValue: 'Palenquero'},
     {value: '24', viewValue: 'Raizal'},
     {value: '25', viewValue: 'Ninguno'}
   ]
 
   civilStatusList: ListTypes[] = [
-    {value: 'sol', viewValue: 'Soltero (a)'},
-    {value: 'unL', viewValue: 'Unión libre'},
-    {value: 'div', viewValue: 'Divorciado (a)'},
-    {value: 'cas', viewValue: 'Casado (a)'},
-    {value: 'viu', viewValue: 'Viudo (a)'},
+    {value: '26', viewValue: 'Soltero (a)'},
+    {value: '27', viewValue: 'Unión libre'},
+    {value: '28', viewValue: 'Divorciado (a)'},
+    {value: '29', viewValue: 'Casado (a)'},
+    {value: '30', viewValue: 'Viudo (a)'},
   ];
 
-  accessServiciesList: string[] = [
-    'Acueducto',
-    'Alcantarillado',
-    'Electricidad',
-    'Gas',
-    'Internet fijo o móvil',
-    'Televisión',
-    'Telefonía fijo o móvil'
+  accessServiciesList: ListTypes[] = [
+    {value: '59', viewValue: 'Acueducto'},
+    {value: '60', viewValue: 'Alcantarillado'},
+    {value: '61', viewValue: 'Electricidad'},
+    {value: '62', viewValue: 'Gas'},
+    {value: '63', viewValue: 'Internet fijo o móvil'},
+    {value: '64', viewValue: 'Televisión'},
+    {value: '65', viewValue: 'Telefonía fijo o móvil'},
   ];
 
-  typeDwellingList: ListTypes[] = [
-    {value: 'cas', viewValue: 'Casa'},
-    {value: 'apt', viewValue: 'Apartamento'},
-    {value: 'cua', viewValue: 'Tipo cuarto (s) en inquilinato'},
-    {value: 'est', viewValue: 'Tipo cuartos (s) en otra estructura'},
-    {value: 'otr', viewValue: 'otro'},
+  typeHomeList: ListTypes[] = [
+    {value: '53', viewValue: 'Casa'},
+    {value: '54', viewValue: 'Apartamento'},
+    {value: '55', viewValue: 'Tipo cuarto (s) en inquilinato'},
+    {value: '56', viewValue: 'Tipo cuartos (s) en otra estructura'},
+    {value: '57', viewValue: 'Vivienda tradicional indígena o étnica'},
+    {value: '58', viewValue: 'otro'},
   ];
 
-  scholarshipList: ListTypes[] = [
-    {value: 'pre', viewValue: 'Preescolar'},
-    {value: 'pri', viewValue: 'Básica primaria'},
-    {value: 'sec', viewValue: 'Básica secundaria'},
-    {value: 'med', viewValue: 'Educación media'},
-    {value: 'tec', viewValue: 'Técnico/tecnólogo'},
-    {value: 'uni', viewValue: 'Universitario'},
-    {value: 'pos', viewValue: 'Posgrado'},
-    {value: 'nin', viewValue: 'Ninguno'},
+  educationLevelList: ListTypes[] = [
+    {value: '31', viewValue: 'Preescolar'},
+    {value: '32', viewValue: 'Básica primaria'},
+    {value: '33', viewValue: 'Básica secundaria'},
+    {value: '34', viewValue: 'Educación media'},
+    {value: '35', viewValue: 'Técnico/tecnólogo'},
+    {value: '36', viewValue: 'Universitario'},
+    {value: '37', viewValue: 'Posgrado'},
+    {value: '38', viewValue: 'Estudio independiente en casa'},
+    {value: '39', viewValue: 'No estudia'},
+    {value: '40', viewValue: 'Ninguno'},
   ];
 
   occupationList: ListTypes[] = [
-    {value: 'emp', viewValue: 'Empleado'},
-    {value: 'ind', viewValue: 'Independiente'},
-    {value: 'des', viewValue: 'Desempleado'},
-    {value: 'desPan', viewValue: 'Desempleado a raíz de la pandemia'},
-    {value: 'pen', viewValue: 'Pensionado'},
-    {value: 'est', viewValue: 'Estudiante'},
-    {value: 'cas', viewValue: 'Ama de casa '},
+    {value: '41', viewValue: 'Empleado'},
+    {value: '42', viewValue: 'Independiente'},
+    {value: '43', viewValue: 'Desempleado'},
+    {value: '44', viewValue: 'Desempleado a raíz de la pandemia'},
+    {value: '45', viewValue: 'Pensionado'},
+    {value: '46', viewValue: 'Estudiante'},
+    {value: '47', viewValue: 'Ama de casa '},
   ];
 
-  workModeList: ListTypes[] = [
+  workOStudyModeList: ListTypes[] = [
     {value: '3', viewValue: 'Presencial'},
     {value: '4', viewValue: 'Virtual'},
     {value: '5', viewValue: 'Semipresencial'}
@@ -156,7 +155,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '84', viewValue: 'Laboral'},
     {value: '85', viewValue: 'Educativo'},
     {value: '86', viewValue: 'Relación de pareja'},
-    {value: '0', viewValue: 'Todos los anterioles'},
   ];
 
   deadFamilyList: ListTypes[] = [
@@ -166,24 +164,21 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '90', viewValue: 'Preocuoación excesiva'},
     {value: '91', viewValue: 'Resentimiento'},
     {value: '92', viewValue: 'Problemas de sueño'},
-    {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-  workCovidList: ListTypes[] = [
-    {value: '93', viewValue: 'Aumento en la carga laboral'},
-    {value: '104', viewValue: 'Conflictos con los compañeros'},
+  workSituationList: ListTypes[] = [
+    {value: '93', viewValue: 'Aumento de carga laboral'},
+    {value: '16', viewValue: 'Conflictos con los compañeros'},
     {value: '94', viewValue: 'Desmotivación laboral'},
     {value: '95', viewValue: 'Reducción de salario'},
-    {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
-  studentList: ListTypes[] = [
+  academySituationList: ListTypes[] = [
     {value: '96', viewValue: 'Aumento carga académica'},
     {value: '97', viewValue: 'Desmotivación'},
     {value: '98', viewValue: 'Falta de tiempo libre'},
     {value: '99', viewValue: 'Dificultades de entendimiento'},
     {value: '100', viewValue: 'Abandono de estudios'},
-    {value: '0', viewValue: 'Todas las anteriores'},
   ];
 
   vaccinationPostureList: ListTypes[] = [
@@ -214,7 +209,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '53', viewValue: 'Todo el tiempo ha pensado en su salud y le ha preocupado adquirir una enfermedad'},
     {value: '54', viewValue: 'Se ha sentido mas cansado o fatigado de lo habitual'},
     {value: '55', viewValue: 'No ha experimentado placer por las cosas que solia disfrutar'},
-    {value: '56', viewValue: 'Ha perdido el interes sexual'},
+    {value: '56', viewValue: 'Ha perdido interes en el sexo'},
     {value: '57', viewValue: 'Se ha sentido culpable respecto de las cosas que hizo o debió hacer'},
     {value: '58', viewValue: 'Ha tenido pensamientos o deseos de matarse'},
     {
@@ -224,67 +219,51 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ];
 
   citiesList: ListTypes[] = [
-    {value: '19001	', viewValue: '	POPAYAN'},
-    {value: '19022	', viewValue: '	ALMAGUER'},
-    {value: '19050	', viewValue: '	ARGELIA'},
-    {value: '19075	', viewValue: '	BALBOA'},
-    {value: '19100	', viewValue: '	BOLIVAR'},
-    {value: '19110	', viewValue: '	BUENOS AIRES'},
-    {value: '19130	', viewValue: '	CAJIBIO'},
-    {value: '19137	', viewValue: '	CALDONO'},
-    {value: '19142	', viewValue: '	CALOTO'},
-    {value: '19212	', viewValue: '	CORINTO'},
-    {value: '19256	', viewValue: '	EL TAMBO'},
-    {value: '19290	', viewValue: '	FLORENCIA'},
-    {value: '19300	', viewValue: '	GUACHENE'},
-    {value: '19318	', viewValue: '	GUAPI'},
-    {value: '19355	', viewValue: '	INZA'},
-    {value: '19364	', viewValue: '	JAMBALO'},
-    {value: '19392	', viewValue: '	LA SIERRA'},
-    {value: '19397	', viewValue: '	LA VEGA'},
-    {value: '19418	', viewValue: '	LOPEZ'},
-    {value: '19450	', viewValue: '	MERCADERES'},
-    {value: '19455	', viewValue: '	MIRANDA'},
-    {value: '19473	', viewValue: '	MORALES'},
-    {value: '19513	', viewValue: '	PADILLA'},
-    {value: '19517	', viewValue: '	PAEZ'},
-    {value: '19533	', viewValue: '	PIAMONTE'},
-    {value: '19548	', viewValue: '	PIENDAMO'},
-    {value: '19573	', viewValue: '	PUERTO TEJADA'},
-    {value: '19532	', viewValue: '	PATIA'},
-    {value: '19585	', viewValue: '	PURACE'},
-    {value: '19622	', viewValue: '	ROSAS'},
-    {value: '19693	', viewValue: '	SAN SEBASTIAN'},
-    {value: '19698	', viewValue: '	SANTANDER DE QUILICHAO'},
-    {value: '19701	', viewValue: '	SANTA ROSA'},
-    {value: '19743	', viewValue: '	SILVIA'},
-    {value: '19760	', viewValue: '	SOTARA'},
-    {value: '19780	', viewValue: '	SUAREZ'},
-    {value: '19785	', viewValue: '	SUCRE'},
-    {value: '19807	', viewValue: '	TIMBIO'},
-    {value: '19809	', viewValue: '	TIMBIQUI'},
-    {value: '19821	', viewValue: '	TORIBIO'},
-    {value: '19824	', viewValue: '	TOTORO'},
-    {value: '19845	', viewValue: '	VILLA RICA'}
+    {value: '19001', viewValue: 'POPAYAN'},
+    {value: '19022', viewValue: 'ALMAGUER'},
+    {value: '19050', viewValue: 'ARGELIA'},
+    {value: '19075', viewValue: 'BALBOA'},
+    {value: '19100', viewValue: 'BOLIVAR'},
+    {value: '19110', viewValue: 'BUENOS AIRES'},
+    {value: '19130', viewValue: 'CAJIBIO'},
+    {value: '19137', viewValue: 'CALDONO'},
+    {value: '19142', viewValue: 'CALOTO'},
+    {value: '19212', viewValue: 'CORINTO'},
+    {value: '19256', viewValue: 'EL TAMBO'},
+    {value: '19290', viewValue: 'FLORENCIA'},
+    {value: '19300', viewValue: 'GUACHENE'},
+    {value: '19318', viewValue: 'GUAPI'},
+    {value: '19355', viewValue: 'INZA'},
+    {value: '19364', viewValue: 'JAMBALO'},
+    {value: '19392', viewValue: 'LA SIERRA'},
+    {value: '19397', viewValue: 'LA VEGA'},
+    {value: '19418', viewValue: 'LOPEZ'},
+    {value: '19450', viewValue: 'MERCADERES'},
+    {value: '19455', viewValue: 'MIRANDA'},
+    {value: '19473', viewValue: 'MORALES'},
+    {value: '19513', viewValue: 'PADILLA'},
+    {value: '19517', viewValue: 'PAEZ'},
+    {value: '19533', viewValue: 'PIAMONTE'},
+    {value: '19548', viewValue: 'PIENDAMO'},
+    {value: '19573', viewValue: 'PUERTO TEJADA'},
+    {value: '19532', viewValue: 'PATIA'},
+    {value: '19585', viewValue: 'PURACE'},
+    {value: '19622', viewValue: 'ROSAS'},
+    {value: '19693', viewValue: 'SAN SEBASTIAN'},
+    {value: '19698', viewValue: 'SANTANDER DE QUILICHAO'},
+    {value: '19701', viewValue: 'SANTA ROSA'},
+    {value: '19743', viewValue: 'SILVIA'},
+    {value: '19760', viewValue: 'SOTARA'},
+    {value: '19780', viewValue: 'SUAREZ'},
+    {value: '19785', viewValue: 'SUCRE'},
+    {value: '19807', viewValue: 'TIMBIO'},
+    {value: '19809', viewValue: 'TIMBIQUI'},
+    {value: '19821', viewValue: 'TORIBIO'},
+    {value: '19824', viewValue: 'TOTORO'},
+    {value: '19845', viewValue: 'VILLA RICA'}
   ];
 
   ngOnInit(): void {
-    this.secundaryInfo = this.formBuilder.group({
-      age: ['', Validators.required],
-      gender: ['', Validators.required],
-      ethnicity: ['', Validators.required],
-      civilStatus: ['', Validators.required],
-      municipalityResidence: ['', Validators.required],
-      accessServicies: ['', Validators.required],
-      numberChildrens: ['', Validators.required],
-      socialSecurity: ['', Validators.required],
-      personCoexist: ['', Validators.required],
-      typeDwelling: ['', Validators.required],
-      scholarship: ['', Validators.required],
-      dependents: ['', Validators.required],
-      occupation: ['', Validators.required],
-      workMode: [''],
-    });
     this.personalInfo = this.formBuilder.group({
       firstName: ['', Validators.required],
       firstLastName: ['', Validators.required],
@@ -295,13 +274,49 @@ export class QuantitativeInstrumentComponent implements OnInit {
       address: ['', Validators.required],
       cellphone: ['', Validators.required],
     });
-    this.comorbidityFormGroup = this.formBuilder.group({
-      disorder: ['']
+
+    this.secundaryInfo = this.formBuilder.group({
+      age: ['', Validators.required],
+      sex: ['', Validators.required],
+      ethnicity: ['', Validators.required],
+      civilStatus: ['', Validators.required],
+      municipalityResidence: ['', Validators.required],
+      accessServicies: ['', Validators.required],
+      numberChildren: ['', Validators.required],
+      socialSecurity: ['', Validators.required],
+      personCoexist: ['', Validators.required],
+      typeHome: ['', Validators.required],
+      educationLevel: ['', Validators.required],
+      dependents: ['', Validators.required],
+      occupation: ['', Validators.required],
+      workOStudyMode: [''],
+      zoneResidence: [''],
     });
 
-    this.factors = this.formBuilder.group({});
+    this.comorbidityInfo = this.formBuilder.group({
+      comorbilities: this.formBuilder.array([]),
+      anyDiagnostic: [''],
+      illnessHistory: [''],
+      disability: [''],
+    })
 
-    this.quinto = this.formBuilder.group({});
+    this.factors = this.formBuilder.group({
+      hadCovid: [''],
+      affectationCovid: [''],
+      aftermath: [''],
+      deadFamilyCovid: [''],
+      deadFamily: [''],
+      workSituation: [''],
+      studentSituation: [''],
+      conflictVictim: [''],
+      diomesticViolence: [''],
+      mentalHealth: [''],
+      vaccinationPosture: [''],
+    });
+
+    this.mentalHealthNeeds = this.formBuilder.group({
+      mentalHealt: ['']
+    });
 
     this.quanInstService.findAllQuestion().subscribe(response => {
       console.log('question', response)
@@ -319,6 +334,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.firstName,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer2: AnswerModel = {
@@ -327,6 +343,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.secondName,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer3: AnswerModel = {
@@ -335,6 +352,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.firstLastName,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer4: AnswerModel = {
@@ -343,6 +361,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.secondLastName,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer5: AnswerModel = {
@@ -351,6 +370,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.typeIdentification,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer6: AnswerModel = {
@@ -359,6 +379,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.identification,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer7: AnswerModel = {
@@ -367,6 +388,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.address,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer8: AnswerModel = {
@@ -375,6 +397,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.cellphone,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     this.answerList.push(answer1)
@@ -394,6 +417,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: answerForm.value.age,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer10: AnswerModel = {
@@ -402,6 +426,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: answerForm.value.sex,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer11: AnswerModel = {
@@ -410,103 +435,124 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: answerForm.value.ethnicity,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer12: AnswerModel = {
       idAnswer: this.idAnswer + 12,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.civilStatus,
+      idQuestion: 11,
+      idOptionAnswer: answerForm.value.civilStatus,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
-    //Pendiente Zona de Residencia
     let answer13: AnswerModel = {
       idAnswer: this.idAnswer + 13,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.zonaresidencia,
+      idQuestion: 19,
+      idOptionAnswer: +this.zoneResidence,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer14: AnswerModel = {
       idAnswer: this.idAnswer + 14,
-      idQuestion: 2,
+      idQuestion: 18,
       idOptionAnswer: 0,
       openAnswer: answerForm.value.municipalityResidence,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer15: AnswerModel = {
       idAnswer: this.idAnswer + 15,
-      idQuestion: 2,
+      idQuestion: 12,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.accessServicies,
+      openAnswer: answerForm.value.personCoexist,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer16: AnswerModel = {
       idAnswer: this.idAnswer + 16,
-      idQuestion: 2,
+      idQuestion: 20,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.numberChildrens,
+      openAnswer: answerForm.value.typeHome,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer17: AnswerModel = {
       idAnswer: this.idAnswer + 17,
-      idQuestion: 2,
+      idQuestion: 21,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.socialSecurity,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: this.service,
     };
 
     let answer18: AnswerModel = {
       idAnswer: this.idAnswer + 18,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.personCoexist,
+      idQuestion: 13,
+      idOptionAnswer: answerForm.value.educationLevel,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer19: AnswerModel = {
       idAnswer: this.idAnswer + 19,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.typeDwelling,
+      idQuestion: 14,
+      idOptionAnswer: answerForm.value.occupation,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer20: AnswerModel = {
       idAnswer: this.idAnswer + 20,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.scholarship,
+      idQuestion: 15,
+      idOptionAnswer: answerForm.value.workOStudyMode,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer21: AnswerModel = {
       idAnswer: this.idAnswer + 21,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.dependents,
+      idQuestion: 16,
+      idOptionAnswer: answerForm.value.workOStudyMode,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer22: AnswerModel = {
       idAnswer: this.idAnswer + 22,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.occupation,
+      idQuestion: 17,
+      idOptionAnswer: answerForm.value.occupation,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer23: AnswerModel = {
       idAnswer: this.idAnswer + 23,
-      idQuestion: 2,
+      idQuestion: 22,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.workMode,
+      openAnswer: answerForm.value.numberChildren,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer24: AnswerModel = {
+      idAnswer: this.idAnswer + 24,
+      idQuestion: 23,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.dependents,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     this.answerList.push(answer9)
@@ -524,367 +570,154 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer21)
     this.answerList.push(answer22)
     this.answerList.push(answer23)
+    this.answerList.push(answer24)
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
-    let answer24: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
     let answer25: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: this.idAnswer + 25,
+      idQuestion: 24,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
+      multipleAnswer: answerForm.value.comorbilities,
     };
 
     let answer26: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: this.idAnswer + 26,
+      idQuestion: 25,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
+      openAnswer: answerForm.value.anyDiagnostic,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer27: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: this.idAnswer + 27,
+      idQuestion: 27,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
+      openAnswer: answerForm.value.illnessHistory ? "SI" : "NO",
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
     let answer28: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
+      idAnswer: this.idAnswer + 28,
+      idQuestion: 28,
       idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
+      openAnswer: answerForm.value.disability,
       idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
     };
 
-    let answer29: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer30: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer31: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer32: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer33: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer34: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer35: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer36: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer37: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer38: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer39: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer40: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer41: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer42: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer43: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer44: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer45: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer46: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer47: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-
-    let answer48: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer49: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer50: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer51: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer52: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer53: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: 1,
-    };
-
-    let answer54: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer55: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer56: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer57: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer58: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer59: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer60: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer61: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer62: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer63: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer64: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer65: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer66: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer67: AnswerModel = {
-      idAnswer: 1,
-      idQuestion: 2,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
-    };
-
-    this.answerList.push(answer24)
     this.answerList.push(answer25)
     this.answerList.push(answer26)
     this.answerList.push(answer27)
     this.answerList.push(answer28)
+  }
+
+  saveAnswerFactor(answerForm: FormGroup) {
+    console.log(answerForm.value)
+
+    let answer29: AnswerModel = {
+      idAnswer: this.idAnswer + 29,
+      idQuestion: 30,
+      idOptionAnswer: answerForm.value.hadCovid,
+      openAnswer: '',
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer30: AnswerModel = {
+      idAnswer: this.idAnswer + 30,
+      idQuestion: 31,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.affectationCovid,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer31: AnswerModel = {
+      idAnswer: this.idAnswer + 31,
+      idQuestion: 32,
+      idOptionAnswer: 0,
+      openAnswer: '',
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: answerForm.value.aftermath,
+    };
+
+    let answer32: AnswerModel = {
+      idAnswer: this.idAnswer + 32,
+      idQuestion: 33,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.deadFamilyCovid,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer33: AnswerModel = {
+      idAnswer: this.idAnswer + 33,
+      idQuestion: 34,
+      idOptionAnswer: 0,
+      openAnswer: '',
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: answerForm.value.deadFamily,
+    };
+
+    let answer34: AnswerModel = {
+      idAnswer: this.idAnswer + 34,
+      idQuestion: 35,
+      idOptionAnswer: 0,
+      openAnswer: '',
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: answerForm.value.workSituation,
+    };
+
+    let answer35: AnswerModel = {
+      idAnswer: this.idAnswer + 35,
+      idQuestion: 36,
+      idOptionAnswer: 0,
+      openAnswer: '',
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: answerForm.value.studentSituation,
+    };
+
+    let answer36: AnswerModel = {
+      idAnswer: this.idAnswer + 36,
+      idQuestion: 37,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.conflictVictim,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer37: AnswerModel = {
+      idAnswer: this.idAnswer + 37,
+      idQuestion: 38,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.diomesticViolence,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer38: AnswerModel = {
+      idAnswer: this.idAnswer + 38,
+      idQuestion: 39,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.mentalHealth,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
+    let answer39: AnswerModel = {
+      idAnswer: this.idAnswer + 39,
+      idQuestion: 40,
+      idOptionAnswer: 0,
+      openAnswer: answerForm.value.vaccinationPosture,
+      idPoll: this.idAnswer + 1,
+      multipleAnswer: [],
+    };
+
     this.answerList.push(answer29)
     this.answerList.push(answer30)
     this.answerList.push(answer31)
@@ -896,38 +729,24 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer37)
     this.answerList.push(answer38)
     this.answerList.push(answer39)
-    this.answerList.push(answer40)
-    this.answerList.push(answer41)
-    this.answerList.push(answer42)
-    this.answerList.push(answer43)
-    this.answerList.push(answer44)
-    this.answerList.push(answer45)
-    this.answerList.push(answer46)
-    this.answerList.push(answer47)
-    this.answerList.push(answer48)
-    this.answerList.push(answer49)
-    this.answerList.push(answer50)
-    this.answerList.push(answer51)
-    this.answerList.push(answer52)
-    this.answerList.push(answer53)
-    this.answerList.push(answer54)
-    this.answerList.push(answer55)
-    this.answerList.push(answer56)
-    this.answerList.push(answer57)
-    this.answerList.push(answer58)
-    this.answerList.push(answer59)
-    this.answerList.push(answer60)
-    this.answerList.push(answer61)
-    this.answerList.push(answer62)
-    this.answerList.push(answer63)
-    this.answerList.push(answer64)
-    this.answerList.push(answer65)
-    this.answerList.push(answer66)
-    this.answerList.push(answer67)
   }
 
-  saveAnswer() {
-    console.log(this.answerList)
+  saveMentalHealthNeeds(answerForm: FormGroup) {
+    console.log('1',answerForm.value)
+    for (let i = 1; i < this.questionsMentalHealtList.length + 1; i++) {
+      let answer40: AnswerModel = {
+        idAnswer: this.idAnswer + 39 + i,
+        idQuestion: 40 + i,
+        idOptionAnswer: answerForm.value.mentalHealt,
+        openAnswer: '',
+        idPoll: this.idAnswer + 1,
+        multipleAnswer: [],
+      };
+
+      this.answerList.push(answer40)
+    }
+
+    console.log('2',this.answerList)
 
     this.quanInstService.create(this.answerList).subscribe(response => {
       console.log(response.data)
@@ -948,5 +767,24 @@ export class QuantitativeInstrumentComponent implements OnInit {
       return false;
 
     return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+
+  isControlHasErrorComorbidity(controlName: string, validationType: string): boolean {
+    const control = this.comorbidityInfo.controls[controlName];
+    if (!control)
+      return false;
+
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+
+  onCheckboxChange(event: any) {
+    const comorbilities = <FormArray>this.comorbidityInfo.get('comorbilities') as FormArray;
+
+    if (event.checked) {
+      comorbilities.push(new FormControl(event.source.value))
+    } else {
+      const i = comorbilities.controls.findIndex(x => x.value === event.source.value);
+      comorbilities.removeAt(i);
+    }
   }
 }

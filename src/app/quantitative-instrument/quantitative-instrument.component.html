@@ -103,12 +103,12 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Sexo</mat-label>
-              <mat-select [(ngModel)]="sexValue" formControlName="gender" required>
+              <mat-select [(ngModel)]="sexValue" formControlName="sex" required>
                 <mat-option *ngFor="let sex of sexList" [value]="sex.value">
                   {{sex.viewValue}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('gender', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('sex', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -142,10 +142,14 @@
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>Zona de residencia</label>
-              <mat-radio-group class="example-radio-group" aria-label="Zona de residencia">
-                <mat-radio-button class="example-radio-button" value="1">Rural</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="2">Urbano</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="zoneResidence"
+                               aria-label="Zona de residencia" [(ngModel)]="zoneResidence">
+                <mat-radio-button class="example-radio-button" value="51">Rural</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="52">Urbano</mat-radio-button>
               </mat-radio-group>
+              <mat-error *ngIf="isControlHasErrorSecundary('zoneResidence', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </div>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -175,12 +179,12 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Tipo de vivienda</mat-label>
-              <mat-select [(ngModel)]="typeDwellingValue" formControlName="typeDwelling" required>
-                <mat-option *ngFor="let typeDwelling of typeDwellingList" [value]="typeDwelling.value">
-                  {{typeDwelling.viewValue}}
+              <mat-select [(ngModel)]="typeHomeValue" formControlName="typeHome" required>
+                <mat-option *ngFor="let typeHome of typeHomeList" [value]="typeHome.value">
+                  {{typeHome.viewValue}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('typeDwelling', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('typeHome', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -188,9 +192,9 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Acceso a servicios</mat-label>
-              <mat-select formControlName="accessServicies" multiple required>
-                <mat-option *ngFor="let servicies of accessServiciesList" [value]="servicies">
-                  {{servicies}}
+              <mat-select formControlName="accessServicies" [(ngModel)]="service" multiple required>
+                <mat-option *ngFor="let servicies of accessServiciesList" [value]="servicies.value">
+                  {{servicies.viewValue}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="isControlHasErrorSecundary('accessServicies', 'required')">
@@ -201,12 +205,12 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Escolaridad</mat-label>
-              <mat-select [(ngModel)]="scholarshipValue" formControlName="scholarship" required>
-                <mat-option *ngFor="let scholarship of scholarshipList" [value]="scholarship.value">
-                  {{scholarship.viewValue}}
+              <mat-select [(ngModel)]="educationLevelValue" formControlName="educationLevel" required>
+                <mat-option *ngFor="let educationLevel of educationLevelList" [value]="educationLevel.value">
+                  {{educationLevel.viewValue}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('scholarship', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('educationLevel', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -224,15 +228,28 @@
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile *ngIf=" occupationValue=== 'emp' ">
+          <mat-grid-tile *ngIf="occupationValue === '41' || occupationValue === '42'">
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Modalidad de trabajo</mat-label>
-              <mat-select [(ngModel)]="workModeValue" formControlName="workMode">
-                <mat-option *ngFor="let workMode of workModeList" [value]="workMode.value">
+              <mat-select [(ngModel)]="workOStudyModeValue" formControlName="workOStudyMode">
+                <mat-option *ngFor="let workMode of workOStudyModeList" [value]="workMode.value">
                   {{workMode.viewValue}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('workMode', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('workOStudyMode', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile *ngIf="occupationValue === '46'">
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Modalidad de estudio</mat-label>
+              <mat-select [(ngModel)]="workOStudyModeValue" formControlName="workOStudyMode">
+                <mat-option *ngFor="let studyMode of workOStudyModeList" [value]="studyMode.value">
+                  {{studyMode.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('workOStudyMode', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -253,9 +270,9 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass">
               <mat-label>Número de hijos</mat-label>
-              <input matInput placeholder="Número de hijos" formControlName="numberChildrens" maxlength="2"
+              <input matInput placeholder="Número de hijos" formControlName="numberChildren" maxlength="2"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
-              <mat-error *ngIf="isControlHasErrorSecundary('numberChildrens', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('numberChildren', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -282,11 +299,11 @@
   <mat-step>
     <ng-template matStepLabel>Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
     <mat-card class="advancedForm">
-      <form [formGroup]="comorbidityFormGroup">
+      <form [formGroup]="comorbidityInfo">
         <mat-grid-list cols="3" rowHeight="80px">
-          <mat-grid-tile *ngFor="let comorbilities of comorbilityList">
+          <mat-grid-tile *ngFor="let comorbilities of comorbilityList; let i = index">
             <div class="checkboxGrid">
-              <mat-checkbox>
+              <mat-checkbox (change)="onCheckboxChange($event)" [value]="comorbilities.value">
                 {{comorbilities.viewValue}}
               </mat-checkbox>
             </div>
@@ -294,14 +311,17 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass">
               <mat-label>Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-              <input matInput formControlName="disorder">
+              <input matInput formControlName="anyDiagnostic">
+              <mat-error *ngIf="isControlHasErrorComorbidity('anyDiagnostic', 'required')">-->
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
         <mat-grid-list cols="2" rowHeight="80px">
           <mat-grid-tile>
             <div class="checkboxGrid">
-              <mat-checkbox>
+              <mat-checkbox formControlName="illnessHistory">
                 Antecendentes de enfermedad mental en su familia
               </mat-checkbox>
             </div>
@@ -310,7 +330,7 @@
             <div class="checkboxGrid">
               <mat-form-field style="width: 100%">
                 <mat-label>Discapacidad física o mental</mat-label>
-                <input matInput formControlName="disorder">
+                <input matInput formControlName="disability">
               </mat-form-field>
             </div>
           </mat-grid-tile>
@@ -318,7 +338,7 @@
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="saveAnswerComorbidity(comorbidityFormGroup)">Siguiente</button>
+        <button mat-button matStepperNext (click)="saveAnswerComorbidity(comorbidityInfo)">Siguiente</button>
       </mat-card-actions>
     </mat-card>
   </mat-step>
@@ -331,117 +351,126 @@
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>Ha sido diagnosticado con Covid-19</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="hadCovid">
-                <mat-radio-button class="example-radio-button" [value]="0">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" [value]="1">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="hadCovid">
+                <mat-radio-button class="example-radio-button" value="1">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="2">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
+
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
+            <mat-form-field appearance="standard" class="inputClass"> <!--DEPENDE ARRIBA-->
               <mat-label>Qué tan grave fue su afectación debido al Covid-19?</mat-label>
-              <mat-select [disabled]="hadCovid===1">
+              <mat-select formControlName="affectationCovid">
                 <mat-option *ngFor="let affectationCovid of affectationCovidList" [value]="affectationCovid.value">
                   {{affectationCovid.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>¿Padeció o padece secielas en alguno de los siguientes ámbitos?</mat-label>
-              <mat-select multiple>
+              <mat-select formControlName="aftermath" multiple>
                 <mat-option *ngFor="let aftermath of aftermathList" [value]="aftermath.value">
                   {{aftermath.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>¿Padeció el fallecimiento de amigos, familiares u otras personas cercabas de su entorno a raíz del
                 Covid-19?</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="deadFamilyCovid">
-                <mat-radio-button class="example-radio-button" [value]="0">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" [value]="1">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid">
+                <mat-radio-button class="example-radio-button" value="SI">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="NO">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de usus amigos ,
                 familiares u otras personas cercanas de su entorno por Covid-19?
               </mat-label>
-              <mat-select [disabled]="deadFamilyCovid === 1">
+              <mat-select formControlName="deadFamily" multiple> <!--DEPENDE ARRIBA-->
                 <mat-option *ngFor="let deadFamily of deadFamilyList" [value]="deadFamily.value">
                   {{deadFamily.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>¿Experimentó alguna de las siguientes situaciones en su trabajo como resultado de la pandemia
-                por
-                Covid-19?
+                por Covid-19?
               </mat-label>
-              <mat-select>
-                <mat-option *ngFor="let workCovid of workCovidList" [value]="workCovid.value">
+              <mat-select formControlName="workSituation" multiple>
+                <mat-option *ngFor="let workCovid of workSituationList" [value]="workCovid.value">
                   {{workCovid.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>¿Experimentó alguna de las siguientes situaciones en el colegio o universidad como resultado de
                 la pandemia por Covid-19?
               </mat-label>
-              <mat-select>
-                <mat-option *ngFor="let student of studentList" [value]="student.value">
-                  {{student.viewValue}}
+              <mat-select formControlName="studentSituation" multiple>
+                <mat-option *ngFor="let studentSituation of academySituationList" [value]="studentSituation.value">
+                  {{studentSituation.viewValue}}
                 </mat-option>
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>¿Ha sido víctima del conflicto armado?</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="armedConflict">
-                <mat-radio-button class="example-radio-button" [value]="0">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" [value]="1">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="conflictVictim">
+                <mat-radio-button class="example-radio-button" value="SI">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="NO">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
+
         <mat-grid-list cols="1" rowHeight="100">
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>¿Ha experimentado episodios de violencia intrafamiliar o de pareja a nivel físico, verbal o
                 psicológico durante la pandemia por Covid-19?</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="diomesticViolence">
-                <mat-radio-button class="example-radio-button" [value]="0">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" [value]="1">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="diomesticViolence">
+                <mat-radio-button class="example-radio-button" value="SI">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="NO">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
+
         <mat-grid-list cols="1" rowHeight="100">
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%;">
               <label>¿Asistió a servicios en salud mental durante la pandemia?</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="mentalHealth">
-                <mat-radio-button class="example-radio-button" [value]="0">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" [value]="1">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="mentalHealth">
+                <mat-radio-button class="example-radio-button" value="SI">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="NO">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
+
         <mat-grid-list cols="1" rowHeight="100">
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%;">
               <label>¿Su postura con respecto a la vacunación contra el Covid-19 es?</label>
-              <mat-radio-group class="example-radio-group" [(ngModel)]="vaccinationPosture">
+              <mat-radio-group class="example-radio-group" formControlName="vaccinationPosture">
                 <mat-radio-button class="example-radio-button" *ngFor="let vaccinationPosture of vaccinationPostureList"
                                   [value]="vaccinationPosture.value">{{vaccinationPosture.viewValue}}</mat-radio-button>
               </mat-radio-group>
@@ -450,7 +479,7 @@
         </mat-grid-list>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext (click)="saveAnswerComorbidity(factors)">Siguiente</button>
+          <button mat-button matStepperNext (click)="saveAnswerFactor(factors)">Siguiente</button>
         </mat-card-actions>
       </form>
     </mat-card>
@@ -459,27 +488,29 @@
   <mat-step>
     <ng-template matStepLabel>Necesidades en salud mental asociadas al Covid-19</ng-template>
     <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">
-      <mat-card-header>
-        <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>
-      </mat-card-header>
-      <mat-grid-list cols="1" rowHeight="100px">
-        <mat-grid-tile *ngFor="let questionsMentalHealt of questionsMentalHealtList">
-          <div class="example-radio-group" style="width: 100%">
-            <label>{{questionsMentalHealt.viewValue}}</label>
-            <br>
-            <mat-radio-group class="example-radio-group">
-              <mat-radio-button class="example-radio-button" [value]="0">Mucho</mat-radio-button>
-              <mat-radio-button class="example-radio-button" [value]="1">Algo</mat-radio-button>
-              <mat-radio-button class="example-radio-button" [value]="2">Poco</mat-radio-button>
-              <mat-radio-button class="example-radio-button" [value]="3">Nunca/Nada</mat-radio-button>
-            </mat-radio-group>
-          </div>
-        </mat-grid-tile>
-      </mat-grid-list>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="saveAnswer()">Enviar</button>
-      </mat-card-actions>
+      <form [formGroup]="mentalHealthNeeds">
+        <mat-card-header>
+          <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>
+        </mat-card-header>
+        <mat-grid-list cols="1" rowHeight="100px">
+          <mat-grid-tile *ngFor="let questionsMentalHealt of questionsMentalHealtList">
+            <div class="example-radio-group" style="width: 100%">
+              <label>{{questionsMentalHealt.viewValue}}</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="mentalHealt">
+                <mat-radio-button class="example-radio-button" value="6">Mucho</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="7">Algo</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="8">Poco</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="9">Nunca/Nada</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-card-actions>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext (click)="saveMentalHealthNeeds(mentalHealthNeeds)">Enviar</button>
+        </mat-card-actions>
+      </form>
     </mat-card>
   </mat-step>
 </mat-vertical-stepper>
