@@ -39,7 +39,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private quanInstService: QuantitativeInstrumentService) {
+    private quanInstService: QuantitativeInstrumentService)
+  {
+
   }
 
   identification: ListTypes[] = [
@@ -324,6 +326,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.findAll().subscribe(response => {
       console.log('answer', response.data)
+    })
+
+    this.quanInstService.getLastSequence().subscribe(reponse => {
+      console.log(reponse.data)
+      this.idAnswer = reponse.data.idAnswer;
+      this.idPoll = reponse.data.idPoll;
+
+      console.log('answer',this.idAnswer)
+      console.log('poll',this.idPoll)
     })
   }
 
