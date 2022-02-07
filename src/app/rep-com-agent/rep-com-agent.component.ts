@@ -13,21 +13,25 @@ export class RepComAgentComponent implements OnInit {
   form: FormGroup;
   public respuesta: any = [];
 
-  constructor(private route: ActivatedRoute, private RepComAgentService: RepComAgentService, private formBuilder: FormBuilder) {
+  constructor(
+    private route: ActivatedRoute,
+    private RepComAgentService: RepComAgentService,
+    private formBuilder: FormBuilder) {
+
     this.form = this.formBuilder.group({
-      activity_name: ['', Validators.required],
-      activity_number: ['', Validators.required],
+      activityName: ['', Validators.required],
+      activityNumber: ['', Validators.required],
       date: ['', Validators.required],
       duration: ['', Validators.required],
       place: ['', Validators.required],
-      number_attendees: ['', Validators.required],
-      activity_objectives: ['', Validators.required],
-      resources_used: ['', Validators.required],
-      methodology_used: ['', Validators.required],
-      activity_description_development: ['', Validators.required],
-      resources_obtained: ['', Validators.required],
+      numberAttendees: ['', Validators.required],
+      activityObjectives: ['', Validators.required],
+      resourcesUsed: ['', Validators.required],
+      methodologyUsed: ['', Validators.required],
+      activityDescriptionDevelopment: ['', Validators.required],
+      resourcesObtained: ['', Validators.required],
       evidence: ['', Validators.required],
-      activity_professional_incharge: ['', Validators.required]
+      activityProfessionalIncharge: ['', Validators.required]
 
     })
   }
@@ -56,19 +60,19 @@ export class RepComAgentComponent implements OnInit {
   public sendData() {
     this.RepComAgentService.post(
       {
-        activity_name: this.form.value.activity_name,
-        activity_number: this.form.value.activity_number,
+        activityName: this.form.value.activityName,
+        activityNumber: this.form.value.activityNumber,
         date: this.form.value.date,
         duration: this.form.value.duration,
         place: this.form.value.place,
-        number_attendees: this.form.value.number_attendees,
-        activity_objectives: this.form.value.activity_objectives,
-        resources_used: this.form.value.resources_used,
-        methodology_used: this.form.value.methodology_used,
-        activity_description_development: this.form.value.activity_description_development,
-        resources_obtained: this.form.value.resources_obtained,
+        numberAttendees: this.form.value.numberAttendees,
+        activityObjectives: this.form.value.activityObjectives,
+        resourcesUsed: this.form.value.resourcesUsed,
+        methodologyUsed: this.form.value.methodologyUsed,
+        activityDescriptionDevelopment: this.form.value.activityDescriptionDevelopment,
+        resourcesObtained: this.form.value.resourcesObtained,
         evidence: this.form.value.evidence,
-        activity_professional_incharge: this.form.value.activity_professional_incharge,
+        activityProfessionalIncharge: this.form.value.activityProfessionalIncharge,
 
       }).subscribe(respuesta => {
 
@@ -78,19 +82,19 @@ export class RepComAgentComponent implements OnInit {
   updateData() {
     this.RepComAgentService.update(
       {
-        activity_name: "nombre 1",
-        activity_number: "Numero 2",
+        activityName: "nombre 1",
+        activityNumber: "Numero 2",
         date: "fecha nueva",
         duration: "duracion 1",
         place: "lugar 1",
-        number_attendees: "Numero asistentes 1",
-        activity_objectives: "Objetivos de actividad 1",
-        resources_used: "Recursos usados 1",
-        methodology_used: "Metodologia usada 1",
-        activity_description_development: "Descripción 1",
-        resources_obtained: "Recursos obtenidos 1",
+        numberAttendees: "Numero asistentes 1",
+        activityObjectives: "Objetivos de actividad 1",
+        resourcesUsed: "Recursos usados 1",
+        methodologyUsed: "Metodologia usada 1",
+        activityDescriptionDevelopment: "Descripción 1",
+        resourcesObtained: "Recursos obtenidos 1",
         evidence: "Evidencias 1",
-        activity_professional_incharge: "Profesional a carga 1",
+        activityProfessionalIncharge: "Profesional a carga 1",
 
       }).subscribe(respuesta => {
 
