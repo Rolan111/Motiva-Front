@@ -339,73 +339,65 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer1: AnswerModel = {
       idAnswer: this.idAnswer + 1,
       idQuestion: 2,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer2: AnswerModel = {
       idAnswer: this.idAnswer + 2,
       idQuestion: 1,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer3: AnswerModel = {
       idAnswer: this.idAnswer + 3,
       idQuestion: 3,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer4: AnswerModel = {
       idAnswer: this.idAnswer + 4,
       idQuestion: 1,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer5: AnswerModel = {
       idAnswer: this.idAnswer + 5,
       idQuestion: 4,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.typeIdentification,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer6: AnswerModel = {
       idAnswer: this.idAnswer + 6,
       idQuestion: 5,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer7: AnswerModel = {
       idAnswer: this.idAnswer + 7,
       idQuestion: 1,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.address,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer8: AnswerModel = {
       idAnswer: this.idAnswer + 8,
       idQuestion: 8,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     this.answerList.push(answer1)
@@ -423,145 +415,129 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer9: AnswerModel = {
       idAnswer: this.idAnswer + 9,
       idQuestion: 9,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.age,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer10: AnswerModel = {
       idAnswer: this.idAnswer + 10,
       idQuestion: 7,
-      idOptionAnswer: answerForm.value.sex,
+      idOptionAnswers: answerForm.value.sex,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer11: AnswerModel = {
       idAnswer: this.idAnswer + 11,
       idQuestion: 10,
-      idOptionAnswer: answerForm.value.ethnicity,
+      idOptionAnswers: answerForm.value.ethnicity,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer12: AnswerModel = {
       idAnswer: this.idAnswer + 12,
       idQuestion: 11,
-      idOptionAnswer: answerForm.value.civilStatus,
+      idOptionAnswers: answerForm.value.civilStatus,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer13: AnswerModel = {
       idAnswer: this.idAnswer + 13,
       idQuestion: 19,
-      idOptionAnswer: answerForm.value.zoneResidence,
+      idOptionAnswers: answerForm.value.zoneResidence,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer14: AnswerModel = {
       idAnswer: this.idAnswer + 14,
       idQuestion: 18,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.municipalityResidence,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer15: AnswerModel = {
       idAnswer: this.idAnswer + 15,
       idQuestion: 12,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.personCoexist,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer16: AnswerModel = {
       idAnswer: this.idAnswer + 16,
       idQuestion: 20,
-      idOptionAnswer: answerForm.value.typeHome,
+      idOptionAnswers: answerForm.value.typeHome,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer17: AnswerModel = {
       idAnswer: this.idAnswer + 17,
       idQuestion: 21,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.accessServicies,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.accessServicies,
     };
 
     let answer18: AnswerModel = {
       idAnswer: this.idAnswer + 18,
       idQuestion: 13,
-      idOptionAnswer: answerForm.value.educationLevel,
+      idOptionAnswers: answerForm.value.educationLevel,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer19: AnswerModel = {
       idAnswer: this.idAnswer + 19,
       idQuestion: 14,
-      idOptionAnswer: answerForm.value.occupation,
+      idOptionAnswers: answerForm.value.occupation,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer20: AnswerModel = {
       idAnswer: this.idAnswer + 20,
       idQuestion: 15,
-      idOptionAnswer: answerForm.value.workOStudyMode,
+      idOptionAnswers: answerForm.value.workOStudyMode,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer21: AnswerModel = {
       idAnswer: this.idAnswer + 21,
       idQuestion: 16,
-      idOptionAnswer: answerForm.value.workOStudyMode,
+      idOptionAnswers: answerForm.value.workOStudyMode,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer22: AnswerModel = {
       idAnswer: this.idAnswer + 22,
       idQuestion: 17,
-      idOptionAnswer: answerForm.value.occupation,
+      idOptionAnswers: answerForm.value.occupation,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer23: AnswerModel = {
       idAnswer: this.idAnswer + 23,
       idQuestion: 22,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.numberChildren,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer24: AnswerModel = {
       idAnswer: this.idAnswer + 24,
       idQuestion: 23,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.dependents,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     this.answerList.push(answer9)
@@ -586,37 +562,33 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer25: AnswerModel = {
       idAnswer: this.idAnswer + 25,
       idQuestion: 24,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.comorbilities,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.comorbilities,
     };
 
     let answer26: AnswerModel = {
       idAnswer: this.idAnswer + 26,
       idQuestion: 25,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.anyDiagnostic,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer27: AnswerModel = {
       idAnswer: this.idAnswer + 27,
       idQuestion: 27,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.illnessHistory ? "SI" : "NO",
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer28: AnswerModel = {
       idAnswer: this.idAnswer + 28,
       idQuestion: 28,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.disability,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     this.answerList.push(answer25)
@@ -631,100 +603,89 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer29: AnswerModel = {
       idAnswer: this.idAnswer + 29,
       idQuestion: 30,
-      idOptionAnswer: answerForm.value.hadCovid,
+      idOptionAnswers: answerForm.value.hadCovid,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer30: AnswerModel = {
       idAnswer: this.idAnswer + 30,
       idQuestion: 31,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.affectationCovid,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer31: AnswerModel = {
       idAnswer: this.idAnswer + 31,
       idQuestion: 32,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.aftermath,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.aftermath,
     };
 
     let answer32: AnswerModel = {
       idAnswer: this.idAnswer + 32,
       idQuestion: 33,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.deadFamilyCovid,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer33: AnswerModel = {
       idAnswer: this.idAnswer + 33,
       idQuestion: 34,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.deadFamily,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.deadFamily,
     };
 
     let answer34: AnswerModel = {
       idAnswer: this.idAnswer + 34,
       idQuestion: 35,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.workSituation,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.workSituation,
     };
 
     let answer35: AnswerModel = {
       idAnswer: this.idAnswer + 35,
       idQuestion: 36,
-      idOptionAnswer: 0,
+      idOptionAnswers: answerForm.value.studentSituation,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: answerForm.value.studentSituation,
     };
 
     let answer36: AnswerModel = {
       idAnswer: this.idAnswer + 36,
       idQuestion: 37,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.conflictVictim,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer37: AnswerModel = {
       idAnswer: this.idAnswer + 37,
       idQuestion: 38,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.diomesticViolence,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer38: AnswerModel = {
       idAnswer: this.idAnswer + 38,
       idQuestion: 39,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.mentalHealth,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     let answer39: AnswerModel = {
       idAnswer: this.idAnswer + 39,
       idQuestion: 40,
-      idOptionAnswer: 0,
+      idOptionAnswers: [],
       openAnswer: answerForm.value.vaccinationPosture,
       idPoll: this.idAnswer + 1,
-      multipleAnswer: [],
     };
 
     this.answerList.push(answer29)
@@ -746,10 +707,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       let answer40: AnswerModel = {
         idAnswer: this.idAnswer + 39 + i,
         idQuestion: 40 + i,
-        idOptionAnswer: answerForm.value.mentalHealt,
+        idOptionAnswers: [answerForm.value.mentalHealt],
         openAnswer: '',
         idPoll: this.idAnswer + 1,
-        multipleAnswer: [],
       };
 
       this.answerList.push(answer40)
