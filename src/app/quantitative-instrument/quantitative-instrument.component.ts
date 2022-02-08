@@ -19,21 +19,11 @@ export class QuantitativeInstrumentComponent implements OnInit {
   comorbidityInfo!: FormGroup;
   factors!: FormGroup;
   mentalHealthNeeds!: FormGroup;
-  selectedValue: string = '';
-  sexValue: string = '';
-  ethnicityValue: string = '';
-  civilStatusValue: string = '';
-  typeHomeValue: string = '';
-  educationLevelValue: string = '';
   occupationValue: string = '';
   workOStudyModeValue: string = '';
-  socialSecurityValue: string = '';
-  citiesValue: any;
   answerList: Array<AnswerModel> = [];
   idAnswer: number = 0;
   idPoll: number = 0;
-  service: Array<number>[] = [];
-  zoneResidence: string = '';
 
   isLinear = false;
 
@@ -265,6 +255,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '19845', viewValue: 'VILLA RICA'}
   ];
 
+  commonAnswerList: ListTypes[] = [
+    {value: '6', viewValue: 'Mucho'},
+    {value: '7', viewValue: 'Algo'},
+    {value: '8', viewValue: 'Poco'},
+    {value: '9', viewValue: 'Nunca/Nada'},
+  ]
+
   ngOnInit(): void {
     this.personalInfo = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -422,6 +419,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   }
 
   saveAnswerSecundaryInfo(answerForm: FormGroup) {
+    console.log('secun', answerForm.value)
     let answer9: AnswerModel = {
       idAnswer: this.idAnswer + 9,
       idQuestion: 9,
@@ -461,7 +459,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer13: AnswerModel = {
       idAnswer: this.idAnswer + 13,
       idQuestion: 19,
-      idOptionAnswer: +this.zoneResidence,
+      idOptionAnswer: answerForm.value.zoneResidence,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
       multipleAnswer: [],
@@ -488,8 +486,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer16: AnswerModel = {
       idAnswer: this.idAnswer + 16,
       idQuestion: 20,
-      idOptionAnswer: 0,
-      openAnswer: answerForm.value.typeHome,
+      idOptionAnswer: answerForm.value.typeHome,
+      openAnswer: '',
       idPoll: this.idAnswer + 1,
       multipleAnswer: [],
     };
@@ -500,7 +498,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idOptionAnswer: 0,
       openAnswer: '',
       idPoll: this.idAnswer + 1,
-      multipleAnswer: this.service,
+      multipleAnswer: answerForm.value.accessServicies,
     };
 
     let answer18: AnswerModel = {
