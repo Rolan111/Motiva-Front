@@ -43,8 +43,8 @@ export class QuantitativeInstrumentService {
     return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
   }
 
-  findAllQuestion(): Observable<any> {
-    const path = mainUrl + 'api/quantitative-instrument-questions';
+  findAllQuestion(type: string): Observable<any> {
+    const path = mainUrl + `api/questions?type=${type}`;
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
   }
