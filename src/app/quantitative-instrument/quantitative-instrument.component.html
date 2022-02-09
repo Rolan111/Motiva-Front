@@ -493,12 +493,174 @@
           <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>
         </mat-card-header>
         <mat-grid-list cols="1" rowHeight="100px">
-          <mat-grid-tile *ngFor="let questionsMentalHealt of questionsMentalHealtList">
+          <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>{{questionsMentalHealt.viewValue}}</label>
+              <label>Se ha sentido triste o infeliz</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="mentalHealt" *ngFor="let commonAnswer of commonAnswerList">
-                <mat-radio-button class="example-radio-button" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="one">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha dormido menos de lo habitual</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="two">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Le han afectado eventos inesperados en su vida o en la vida de las personas con las que se relaciona</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="three">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha perdido el control y la estabilidad debido a problemas y cambios importantes en su vida</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="four">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha perdido el interes en otras actividades o personas</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="five">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Se ha sentido optimista y motivado(a) a pesar de sus fracasos</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="six">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>No ha podido concentrarse tan bien como habitualmente</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="seven">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha incrementado en consumo de alcohol u otras sustancias psicoactivas</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="eight">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Se ha criticado y culpado a mi mismo por todo lo malo que ha sucedido</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="nine">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Se ha sentido inquieto, tenso o agitado</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="ten">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha estado mas irritable de lo habitual</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="eleven">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha sentido miedo y desesperanza respecto a su futuro</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="twelve">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Todo el tiempo ha pensado en su salud y le ha preocupado adquirir una enfermedad</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="thirteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Se ha sentido mas cansado o fatigado de lo habitual</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="fourteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>No ha experimentado placer por las cosas que solia disfrutar</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="fifteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha perdido interes en el sexo</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="sixteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Se ha sentido culpable respecto de las cosas que hizo o debió hacer</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="seventeen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>Ha tenido pensamientos o deseos de matarse</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="eighteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del virus</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="nineteen">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of commonAnswerList" [value]="commonAnswer.value">{{commonAnswer.viewValue}}</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
