@@ -1,23 +1,22 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {ForumComponent} from "./forum.component";
+import {CareRoutesComponent} from "./care-routes.component";
 import {AngularMaterialModule} from "../angular-material.module";
-import {ReportDescriptionComponent} from './report-description/report-description.component';
+import {ShowImagesComponent} from './show-images/show-images.component';
 
 
 @NgModule({
   declarations: [
-    ForumComponent,
-    ReportDescriptionComponent
+    CareRoutesComponent,
+    ShowImagesComponent
   ],
   exports: [
-    ForumComponent,
-    ReportDescriptionComponent
+    CareRoutesComponent,
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
   ]
 })
-export class ForumModule {
+export class CareRoutesModule {
 }

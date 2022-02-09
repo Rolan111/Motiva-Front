@@ -36,6 +36,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MatDialogModule} from "@angular/material/dialog";
 
 const materialModules = [
   CdkTreeModule,
@@ -75,7 +77,9 @@ const materialModules = [
   RouterModule,
   HttpClientModule,
   MatNativeDateModule,
+  BrowserAnimationsModule,
   ToastrModule.forRoot(),
+  MatDialogModule,
 ];
 
 @NgModule({
