@@ -35,6 +35,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {HttpClientModule} from "@angular/common/http";
+import {ToastrModule} from "ngx-toastr";
 
 const materialModules = [
   CdkTreeModule,
@@ -74,6 +75,7 @@ const materialModules = [
   RouterModule,
   HttpClientModule,
   MatNativeDateModule,
+  ToastrModule.forRoot(),
 ];
 
 @NgModule({

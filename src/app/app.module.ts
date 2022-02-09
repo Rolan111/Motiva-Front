@@ -9,11 +9,12 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
-import {QuantitativeInstrumentChildrenModule} from "./quantitative-instrument-children/quantitative-instrument-children.module";
+import {
+  QuantitativeInstrumentChildrenModule
+} from "./quantitative-instrument-children/quantitative-instrument-children.module";
 import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
 import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
 import {ForumModule} from "./forum/forum.module";
-import {ToastrModule} from 'ngx-toastr';
 
 
 @NgModule({
@@ -33,7 +34,6 @@ import {ToastrModule} from 'ngx-toastr';
     RepComAgentModule,
     TrackingSheetModule,
     ForumModule,
-    ToastrModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent],
