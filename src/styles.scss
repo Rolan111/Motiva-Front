@@ -2,6 +2,7 @@
 
 @import '~@angular/material/theming';
 @import "assets/colors";
+@import '~ngx-toastr/toastr';
 
 @include mat-core();
 // Define a custom typography config

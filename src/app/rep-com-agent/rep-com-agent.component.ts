@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RepComAgentService} from "./rep-com-agent.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-rep-com-agent',
@@ -11,12 +12,14 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class RepComAgentComponent implements OnInit {
 
   form: FormGroup;
+  submited = false;
   public respuesta: any = [];
 
   constructor(
     private route: ActivatedRoute,
     private RepComAgentService: RepComAgentService,
-    private formBuilder: FormBuilder) {
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService) {
 
     this.form = this.formBuilder.group({
       activityName: ['', Validators.required],
@@ -47,6 +50,16 @@ export class RepComAgentComponent implements OnInit {
     this.RepComAgentService.get().subscribe(respuesta => {
 
     })
+  }
+
+  public probandoReactivos() {
+
+    this.submited = true;
+    if (this.form.invalid) { //no deja pasar si no es valido
+      return;
+    }
+    this.toastr.success('El reporte de agente comunitario ha sido cargado!', 'Registro exitoso');
+    console.log(this.form);
   }
 
 

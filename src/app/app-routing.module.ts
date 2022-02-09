@@ -7,6 +7,8 @@ import {QuantitativeInstrumentComponent} from "./quantitative-instrument/quantit
 import {RepComAgentComponent} from "./rep-com-agent/rep-com-agent.component";
 import {QuantitativeInstrumentChildrenComponent} from "./quantitative-instrument-children/quantitative-instrument-children.component";
 import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component";
+import {ForumComponent} from "./forum/forum.component";
+import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -19,7 +21,9 @@ const routes: Routes = [
       {path: 'quantitative', component: QuantitativeInstrumentComponent},
       {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent},
       {path: 'community-agents', component: RepComAgentComponent},
-      {path: 'tracking-sheet', component: TrackingSheetComponent}
+      {path: 'tracking-sheet', component: TrackingSheetComponent},
+      {path: 'forum', component: ForumComponent},
+      {path: 'forum/report-description', component: ReportDescriptionComponent}
     ]
   },
 ];
