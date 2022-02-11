@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   hide: boolean = true;
   userNameLogin: string = '';
   oLocalStorage = new LocalStorage();
+  loginResponse!: LoginInterface;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -59,12 +60,22 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/navbar');
       }
     }, error => {
-      if (error.status === 401 || error.statusText === "ok"){
+      if (error.status === 401 || error.statusText === "ok") {
         this.openSnackBar("Error al iniciar session", "Alert");
         return;
       }
       this.openSnackBar("Usuario o Contraseña es incorrecta", "Alert");
     })
+  }
+
+  logInMock(dataForm: any) {
+    this.loginService.attemptAuthMock(dataForm).subscribe(
+      data => {
+        this.loginResponse = data.data;
+        this.setLocalStorage(this.loginResponse);
+        this.router.navigateByUrl('/navbar');
+      }
+    );
   }
 
   private setLocalStorage(user: LoginInterface) {
