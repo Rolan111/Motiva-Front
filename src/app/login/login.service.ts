@@ -5,7 +5,6 @@ import {Observable, of} from "rxjs";
 import {LoginModel} from "./login.model";
 import {DataResponse} from "../util/data-response";
 import {LoginResponse} from "./login-response";
-import {LoginInterface} from "./login.interface";
 
 const mainUrl = environment.url;
 
