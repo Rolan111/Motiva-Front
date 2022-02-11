@@ -60,15 +60,27 @@ export class NavbarComponent {
         break;
       case 'USER':
         this.rol = 'Invitado';
-        this.buttonMenuDashBoard = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
       case 'P_CAMPO':
         this.rol = 'Psicólogo de campo';
         this.buttonMenuDashBoard = true;
+        this.buttonMenuTrakingSheet = true;
+        this.buttonMenuQuantitiveChildren = true;
+        this.buttonMenuQuantitive = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
       case 'AGENTE':
         this.rol = 'Agente comunitario';
         this.buttonMenuDashBoard = true;
+
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
     }
   }
