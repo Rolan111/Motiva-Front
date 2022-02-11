@@ -11,12 +11,15 @@ export class NavbarComponent {
   fullName: string = '';
   rol: string = '';
   oLocalStorage = new LocalStorage();
-  buttonMenuCoord = false;
-  buttonMenuCoordTeam = false;
-  buttonMenuSuperIntendent = false;
-  buttonMenuPsychoLogist = false;
-  buttonMenuSocialWorker = false;
-
+  buttonMenuDashBoard: boolean = false;
+  buttonMenuQuantitive: boolean = false;
+  buttonMenuQuantitiveChildren: boolean = false;
+  buttonMenuSettings: boolean = false;
+  buttonMenuCommunityAgents: boolean = false;
+  buttonMenuForum: boolean = false;
+  buttonMenuTrakingSheet: boolean = false;
+  buttonMenuContact: boolean = false;
+  buttonMenuAssignment: boolean = true;
 
   constructor() {
     this.fullName = this.oLocalStorage.getItem(LocalStorageKeyEnum.name) + " " + this.oLocalStorage.getItem(LocalStorageKeyEnum.lastName);
@@ -30,30 +33,54 @@ export class NavbarComponent {
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.type);
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.token);
 
-    this.buttonMenuCoord = false;
-    this.buttonMenuCoordTeam = false;
-    this.buttonMenuSuperIntendent = false;
-    this.buttonMenuPsychoLogist = false;
-    this.buttonMenuSocialWorker = false;
+    this.buttonMenuQuantitiveChildren = false;
+    this.buttonMenuCommunityAgents = false;
+    this.buttonMenuTrakingSheet = false;
+    this.buttonMenuQuantitive = false;
+    this.buttonMenuAssignment = false;
+    this.buttonMenuDashBoard = false;
+    this.buttonMenuSettings = false;
+    this.buttonMenuContact = false;
+    this.buttonMenuForum = false;
   }
 
   private typeRole(rol: any) {
     switch (rol) {
       case 'SUPERVISOR':
         this.rol = 'Supervisor';
-        this.buttonMenuCoord = true;
+        this.buttonMenuQuantitiveChildren = true;
+        this.buttonMenuCommunityAgents = true;
+        this.buttonMenuTrakingSheet = true;
+        this.buttonMenuAssignment = true;
+        this.buttonMenuQuantitive = true;
+        this.buttonMenuDashBoard = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
       case 'USER':
         this.rol = 'Invitado';
-        this.buttonMenuSuperIntendent = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
       case 'P_CAMPO':
         this.rol = 'Psicólogo de campo';
-        this.buttonMenuPsychoLogist = true;
+        this.buttonMenuDashBoard = true;
+        this.buttonMenuTrakingSheet = true;
+        this.buttonMenuQuantitiveChildren = true;
+        this.buttonMenuQuantitive = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
       case 'AGENTE':
         this.rol = 'Agente comunitario';
-        this.buttonMenuSocialWorker = true;
+        this.buttonMenuDashBoard = true;
+        this.buttonMenuCommunityAgents = true;
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+        this.buttonMenuForum = true;
         break;
     }
   }

@@ -13,60 +13,44 @@
     <mat-icon fontSet="material-icons-two-tone">logout</mat-icon>
   </button>
 </mat-toolbar>
-<mat-drawer-container  class="example-container" autosize>
+<mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
-      <a routerLink="dashboard" mat-list-item >
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuDashBoard">
         <mat-icon fontSet="material-icons-two-tone">dashboard</mat-icon>
         &nbsp;&nbsp;Dashboard</a>
-      <a routerLink="quantitative" mat-list-item>
+      <a routerLink="quantitative" mat-list-item *ngIf="buttonMenuQuantitive">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Instrumento Cuantitativo</a>
-      <a routerLink="quantitative-children" mat-list-item>
+      <a routerLink="quantitative-children" mat-list-item *ngIf="buttonMenuQuantitiveChildren">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Instrumento Cuantitativo niñ@s</a>
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuCoordTeam">
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuSettings">
         <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
         &nbsp;&nbsp;Project</a>
-
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Redes de apoyo en salud mental
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a routerLink="community-agents" mat-list-item>
-            <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-            &nbsp;&nbsp;Agentes Comunitarios</a>
-          <a routerLink="forum" mat-list-item>
-            <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-            &nbsp;&nbsp;Foro</a>
-          <a routerLink="care-routes" mat-list-item>
-            <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-            &nbsp;&nbsp;Rutas de atención</a>
-
-        </mat-expansion-panel>
-      </mat-accordion>
-
-      <mat-accordion>
-        <mat-expansion-panel>
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Seguimiento a usuarios
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <a routerLink="tracking-sheet" mat-list-item>
-            <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-            &nbsp;&nbsp;Ficha de seguimiento</a>
-        </mat-expansion-panel>
-      </mat-accordion>
+      <mat-divider></mat-divider>
+      <mat-panel-title>
+        Redes de apoyo en salud mental
+      </mat-panel-title>
+      <a routerLink="community-agents" mat-list-item *ngIf="buttonMenuCommunityAgents">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Agentes Comunitarios</a>
+      <a routerLink="forum" mat-list-item *ngIf="buttonMenuForum">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Foro</a>
+      <mat-divider></mat-divider>
+      <mat-panel-title>
+        Seguimiento a usuarios
+      </mat-panel-title>
+      <a routerLink="tracking-sheet" mat-list-item *ngIf="buttonMenuTrakingSheet">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Ficha de seguimiento</a>
 
 
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuPsychoLogist">
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuContact">
         <mat-icon fontSet="material-icons-two-tone">contact_phone</mat-icon>
         &nbsp;&nbsp;Contact</a>
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuSocialWorker">
+      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuAssignment">
         <mat-icon fontSet="material-icons-two-tone orange600">assignment</mat-icon>
         &nbsp;Other Contact</a>
     </mat-nav-list>
