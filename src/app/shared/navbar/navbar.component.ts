@@ -77,7 +77,7 @@ export class NavbarComponent {
       case 'AGENTE':
         this.rol = 'Agente comunitario';
         this.buttonMenuDashBoard = true;
-
+        this.buttonMenuCommunityAgents = true;
         this.buttonMenuSettings = true;
         this.buttonMenuContact = true;
         this.buttonMenuForum = true;
