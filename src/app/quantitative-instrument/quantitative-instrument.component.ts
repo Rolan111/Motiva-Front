@@ -334,7 +334,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       nineteen: [''],
     });
 
-    this.quanInstService.findAllQuestion("ADULT").subscribe(response => {
+    this.quanInstService.findAllQuestions("ADULT").subscribe(response => {
       console.log('question', response)
     })
 
@@ -892,7 +892,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer57)
     this.answerList.push(answer58)
 
-    this.quanInstService.create(this.answerList).subscribe(response => {
+    this.quanInstService.createAnswer(this.answerList).subscribe(response => {
       console.log(response.data)
     })
   }

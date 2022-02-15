@@ -38,6 +38,9 @@
       <a routerLink="forum" mat-list-item *ngIf="buttonMenuForum">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Foro</a>
+      <a routerLink="care-routes" mat-list-item *ngIf="buttonMenuForum">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Rutas de atención</a>
       <mat-divider></mat-divider>
       <mat-panel-title>
         Seguimiento a usuarios
@@ -45,14 +48,6 @@
       <a routerLink="tracking-sheet" mat-list-item *ngIf="buttonMenuTrakingSheet">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Ficha de seguimiento</a>
-
-
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuContact">
-        <mat-icon fontSet="material-icons-two-tone">contact_phone</mat-icon>
-        &nbsp;&nbsp;Contact</a>
-      <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuAssignment">
-        <mat-icon fontSet="material-icons-two-tone orange600">assignment</mat-icon>
-        &nbsp;Other Contact</a>
     </mat-nav-list>
   </mat-drawer>
 
