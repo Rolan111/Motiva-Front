@@ -1,4 +1,4 @@
-  export class QuestionModel {
+export class QuestionModel {
   id_question: number;
   description: string;
   id_father: number;

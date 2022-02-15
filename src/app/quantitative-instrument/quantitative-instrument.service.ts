@@ -20,37 +20,31 @@ export class QuantitativeInstrumentService {
   }
 
   findAll(): Observable<any> {
-    const path = mainUrl + 'api/quantitative-instruments';
+    const path = mainUrl + 'api/answers';
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
   }
 
-  create(quantitativeInstrumentForm: Array<AnswerModel>): Observable<DataResponse> {
-    const path = mainUrl + 'api/quantitative-instrument-create';
+  createAnswer(quantitativeInstrumentForm: Array<AnswerModel>): Observable<DataResponse> {
+    const path = mainUrl + 'api/answer';
     const headers = this.getHeader();
     return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
   }
 
-  update(quantitativeInstrumentForm: QuantitativeInstrumentModel): Observable<DataResponse> {
-    const path = mainUrl + 'api/quantitative-instrument-update';
-    const headers = this.getHeader();
-    return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
-  }
-
-  delete(quantitativeInstrumentForm: QuantitativeInstrumentModel): Observable<DataResponse> {
-    const path = mainUrl + 'api/quantitative-instrument-delete'
-    const headers = this.getHeader();
-    return this.http.post<DataResponse>(path, quantitativeInstrumentForm, {headers});
-  }
-
-  findAllQuestion(type: string): Observable<any> {
+  findAllQuestions(type: string): Observable<any> {
     const path = mainUrl + `api/questions?type=${type}`;
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
   }
 
   getLastSequence(): Observable<any> {
-    const path = mainUrl + 'api/quantitative-last-sequences';
+    const path = mainUrl + 'api/last-sequences';
+    const headers = this.getHeader();
+    return this.http.get<any>(path, {headers});
+  }
+
+  getAnswersByIdPoll(idPoll: number): Observable<any> {
+    const path = mainUrl + `api/answers-by-poll?idPoll=${idPoll}`;
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
   }
