@@ -14,6 +14,7 @@ import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
 import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
 import {ForumModule} from "./forum/forum.module";
 import {CareRoutesModule} from "./care-routes/care-routes.module";
+import {CareSheetModule} from "./care-sheet/care-sheet.module";
 
 
 @NgModule({
@@ -34,6 +35,7 @@ import {CareRoutesModule} from "./care-routes/care-routes.module";
     TrackingSheetModule,
     ForumModule,
     CareRoutesModule,
+    CareSheetModule
   ],
   providers: [],
   bootstrap: [AppComponent],
