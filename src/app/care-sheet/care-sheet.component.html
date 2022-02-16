@@ -1,0 +1,77 @@
+<mat-card>
+  <mat-card-title>Historia clínica psicosocial</mat-card-title>
+
+  <form [formGroup]="form">
+
+    <mat-grid-list cols="2" rowHeight="70px">
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Cidudad - Municipio</mat-label>
+          <input formControlName="names" matInput placeholder="Nombres">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Departamento</mat-label>
+          <input formControlName="lastnames" type="text" matInput placeholder="Apellidos">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Fecha de evaluación</mat-label>
+          <input matInput [matDatepicker]="picker">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field appearance="fill">
+          <mat-label>Sexo</mat-label>
+          <mat-select formControlName="identificationType">
+            <mat-option *ngFor="let sexoType of sexo" [value]="sexoType.value">
+              {{sexoType.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Nombre del paciente</mat-label>
+          <input formControlName="typeRoute" matInput placeholder="Tipo de ruta que activó: ">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Apellido del paciente</mat-label>
+          <input formControlName="referredEntity" matInput placeholder="Entidad remitida">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>No. de identificación</mat-label>
+          <input type="number" formControlName="attentionStatus" matInput
+                 placeholder="Estado de la atención en entidad a la que se remitió">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Fecha de nacimiento</mat-label>
+          <input matInput [matDatepicker]="picker2">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button type="submit" mat-raised-button color="primary" (click)="saveForm(form)">GUARDAR</button>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-button>CANCELAR</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</mat-card>

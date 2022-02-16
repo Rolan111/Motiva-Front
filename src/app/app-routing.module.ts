@@ -10,6 +10,7 @@ import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component"
 import {ForumComponent} from "./forum/forum.component";
 import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
 import {CareRoutesComponent} from "./care-routes/care-routes.component";
+import {CareSheetComponent} from "./care-sheet/care-sheet.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -25,7 +26,8 @@ const routes: Routes = [
       {path: 'tracking-sheet', component: TrackingSheetComponent},
       {path: 'forum', component: ForumComponent},
       {path: 'forum/report-description', component: ReportDescriptionComponent},
-      {path: 'care-routes', component: CareRoutesComponent}
+      {path: 'care-routes', component: CareRoutesComponent},
+      {path: 'care-sheet', component: CareSheetComponent}
     ]
   },
 ];

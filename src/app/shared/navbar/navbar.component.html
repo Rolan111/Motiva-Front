@@ -16,6 +16,9 @@
 <mat-drawer-container class="example-container" autosize>
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <mat-nav-list>
+      <mat-panel-title>
+        Caracterización de usuarios
+      </mat-panel-title>
       <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuDashBoard">
         <mat-icon fontSet="material-icons-two-tone">dashboard</mat-icon>
         &nbsp;&nbsp;Dashboard</a>
@@ -25,6 +28,9 @@
       <a routerLink="quantitative-children" mat-list-item *ngIf="buttonMenuQuantitiveChildren">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Instrumento Cuantitativo niñ@s</a>
+      <a routerLink="care-sheet" mat-list-item *ngIf="buttonMenuTrakingSheet">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Ficha de atención</a>
       <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuSettings">
         <mat-icon fontSet="material-icons-two-tone">settings</mat-icon>
         &nbsp;&nbsp;Project</a>
@@ -48,6 +54,8 @@
       <a routerLink="tracking-sheet" mat-list-item *ngIf="buttonMenuTrakingSheet">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Ficha de seguimiento</a>
+      <mat-divider></mat-divider>
+
     </mat-nav-list>
   </mat-drawer>
 
