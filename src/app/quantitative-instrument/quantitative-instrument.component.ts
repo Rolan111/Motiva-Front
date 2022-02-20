@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuantitativeInstrumentService} from "./quantitative-instrument.service";
 import {AnswerModel} from "./answer.model";
+import {Question} from "./question.model";
+import {OptionAnswer} from "./option-answer.model";
 
 interface ListTypes {
   value: string;
@@ -19,20 +21,44 @@ export class QuantitativeInstrumentComponent implements OnInit {
   comorbidityInfo!: FormGroup;
   factors!: FormGroup;
   mentalHealthNeeds!: FormGroup;
-  occupationValue: string = '';
-  workOStudyModeValue: string = '';
+  occupationValue: number = 0;
   answerList: Array<AnswerModel> = [];
   idAnswer: number = 0;
   idPoll: number = 0;
-  hadCovid: string = '';
-  deadFamilyCovid: string = '';
-
+  questions: Array<Question> = [];
+  hadCovid: number = 0;
+  deadFamilyCovid: number = 0;
   isLinear = false;
+  question2: Question[] = []
+  question3: Question[] = []
+  question4: Question[] = []
+  question5: Question[] = []
+  question8: Question[] = []
+  question9: Question[] = []
+  question10: Question[] = []
+  question11: Question[] = []
+  question12: Question[] = []
+  question13: Question[] = []
+  question16: Question[] = []
+  question18: Question[] = []
+  question19: Question[] = []
+  optionAnswerDtoList2: Array<OptionAnswer> = [];
+  optionAnswerDtoList3: Array<OptionAnswer> = [];
+  optionAnswerDtoList4: Array<OptionAnswer> = [];
+  optionAnswerDtoList5: Array<OptionAnswer> = [];
+  optionAnswerDtoList8: Array<OptionAnswer> = [];
+  optionAnswerDtoList9: Array<OptionAnswer> = [];
+  optionAnswerDtoList10: Array<OptionAnswer> = [];
+  optionAnswerDtoList11: Array<OptionAnswer> = [];
+  optionAnswerDtoList12: Array<OptionAnswer> = [];
+  optionAnswerDtoList13: Array<OptionAnswer> = [];
+  optionAnswerDtoList16: Array<OptionAnswer> = [];
+  optionAnswerDtoList18: Array<OptionAnswer> = [];
+  optionAnswerDtoList19: Array<OptionAnswer> = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService) {
-
   }
 
   identification: ListTypes[] = [
@@ -42,142 +68,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'NIT', viewValue: 'Número Identificación Tributaría'},
     {value: 'TI', viewValue: 'Tarjeta Identidad'},
     {value: 'PAP', viewValue: 'Pasaporte'},
-  ];
-
-  sexList: ListTypes[] = [
-    {value: '17', viewValue: 'Hombre'},
-    {value: '18', viewValue: 'Mujer'},
-    {value: '19', viewValue: 'Indeterminado'}
-  ];
-
-  ethnicityList: ListTypes[] = [
-    {value: '20', viewValue: 'Indigena'},
-    {value: '21', viewValue: 'Afrodescendiente, Afrocolombiano'},
-    {value: '22', viewValue: 'Gitano/Rrom'},
-    {value: '23', viewValue: 'Palenquero'},
-    {value: '24', viewValue: 'Raizal'},
-    {value: '25', viewValue: 'Ninguno'}
-  ]
-
-  civilStatusList: ListTypes[] = [
-    {value: '26', viewValue: 'Soltero (a)'},
-    {value: '27', viewValue: 'Unión libre'},
-    {value: '28', viewValue: 'Divorciado (a)'},
-    {value: '29', viewValue: 'Casado (a)'},
-    {value: '30', viewValue: 'Viudo (a)'},
-  ];
-
-  accessServiciesList: ListTypes[] = [
-    {value: '59', viewValue: 'Acueducto'},
-    {value: '60', viewValue: 'Alcantarillado'},
-    {value: '61', viewValue: 'Electricidad'},
-    {value: '62', viewValue: 'Gas'},
-    {value: '63', viewValue: 'Internet fijo o móvil'},
-    {value: '64', viewValue: 'Televisión'},
-    {value: '65', viewValue: 'Telefonía fijo o móvil'},
-  ];
-
-  typeHomeList: ListTypes[] = [
-    {value: '53', viewValue: 'Casa'},
-    {value: '54', viewValue: 'Apartamento'},
-    {value: '55', viewValue: 'Tipo cuarto (s) en inquilinato'},
-    {value: '56', viewValue: 'Tipo cuartos (s) en otra estructura'},
-    {value: '57', viewValue: 'Vivienda tradicional indígena o étnica'},
-    {value: '58', viewValue: 'otro'},
-  ];
-
-  educationLevelList: ListTypes[] = [
-    {value: '31', viewValue: 'Preescolar'},
-    {value: '32', viewValue: 'Básica primaria'},
-    {value: '33', viewValue: 'Básica secundaria'},
-    {value: '34', viewValue: 'Educación media'},
-    {value: '35', viewValue: 'Técnico/tecnólogo'},
-    {value: '36', viewValue: 'Universitario'},
-    {value: '37', viewValue: 'Posgrado'},
-    {value: '38', viewValue: 'Estudio independiente en casa'},
-    {value: '39', viewValue: 'No estudia'},
-    {value: '40', viewValue: 'Ninguno'},
-  ];
-
-  occupationList: ListTypes[] = [
-    {value: '41', viewValue: 'Empleado'},
-    {value: '42', viewValue: 'Independiente'},
-    {value: '43', viewValue: 'Desempleado'},
-    {value: '44', viewValue: 'Desempleado a raíz de la pandemia'},
-    {value: '45', viewValue: 'Pensionado'},
-    {value: '46', viewValue: 'Estudiante'},
-    {value: '47', viewValue: 'Ama de casa '},
-  ];
-
-  workOStudyModeList: ListTypes[] = [
-    {value: '3', viewValue: 'Presencial'},
-    {value: '4', viewValue: 'Virtual'},
-    {value: '5', viewValue: 'Semipresencial'}
-  ];
-
-  socialSecurityList: ListTypes[] = [
-    {value: '48', viewValue: 'Empeoró'},
-    {value: '49', viewValue: 'Quedó igual'},
-    {value: '50', viewValue: 'Mejoró'}
-  ];
-
-  comorbilityList: ListTypes[] = [
-    {value: '66', viewValue: 'Hipertensión'},
-    {value: '67', viewValue: 'Asma'},
-    {value: '68', viewValue: 'EPOC'},
-    {value: '69', viewValue: 'Diabetes'},
-    {value: '70', viewValue: 'Enfermedades del corazón'},
-    {value: '71', viewValue: 'Enfermedades del riñon'},
-    {value: '72', viewValue: 'Obesidad o sobrepeso'},
-    {value: '73', viewValue: 'Usa medicamentos'},
-    {value: '74', viewValue: 'VIH'},
-    {value: '75', viewValue: 'Hipo-Hipertironismo'},
-    {value: '76', viewValue: 'Cáncer'},
-  ];
-
-  affectationCovidList: ListTypes[] = [
-    {value: '77', viewValue: 'Leve'},
-    {value: '78', viewValue: 'Moderada'},
-    {value: '79', viewValue: 'Severa/Hospitalización'}
-  ];
-
-  aftermathList: ListTypes[] = [
-    {value: '81', viewValue: 'Físico'},
-    {value: '82', viewValue: 'Psicológico'},
-    {value: '83', viewValue: 'Familiar'},
-    {value: '84', viewValue: 'Laboral'},
-    {value: '85', viewValue: 'Educativo'},
-    {value: '86', viewValue: 'Relación de pareja'},
-  ];
-
-  deadFamilyList: ListTypes[] = [
-    {value: '87', viewValue: 'Tristeza Profunda'},
-    {value: '88', viewValue: 'Culpabilidad'},
-    {value: '89', viewValue: 'Confusión'},
-    {value: '90', viewValue: 'Preocuoación excesiva'},
-    {value: '91', viewValue: 'Resentimiento'},
-    {value: '92', viewValue: 'Problemas de sueño'},
-  ];
-
-  workSituationList: ListTypes[] = [
-    {value: '93', viewValue: 'Aumento de carga laboral'},
-    {value: '16', viewValue: 'Conflictos con los compañeros'},
-    {value: '94', viewValue: 'Desmotivación laboral'},
-    {value: '95', viewValue: 'Reducción de salario'},
-  ];
-
-  academySituationList: ListTypes[] = [
-    {value: '96', viewValue: 'Aumento carga académica'},
-    {value: '97', viewValue: 'Desmotivación'},
-    {value: '98', viewValue: 'Falta de tiempo libre'},
-    {value: '99', viewValue: 'Dificultades de entendimiento'},
-    {value: '100', viewValue: 'Abandono de estudios'},
-  ];
-
-  vaccinationPostureList: ListTypes[] = [
-    {value: '101', viewValue: 'A favor'},
-    {value: '102', viewValue: 'En contra'},
-    {value: '103', viewValue: 'Indiferente'},
   ];
 
   questionsMentalHealtList: ListTypes[] = [
@@ -256,13 +146,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: '19845', viewValue: 'VILLA RICA'}
   ];
 
-  commonAnswerList: ListTypes[] = [
-    {value: '6', viewValue: 'Mucho'},
-    {value: '7', viewValue: 'Algo'},
-    {value: '8', viewValue: 'Poco'},
-    {value: '9', viewValue: 'Nunca/Nada'},
-  ]
-
   ngOnInit(): void {
     this.personalInfo = this.formBuilder.group({
       firstName: ['', Validators.required],
@@ -336,9 +219,14 @@ export class QuantitativeInstrumentComponent implements OnInit {
       nineteen: [''],
     });
 
-    // this.quanInstService.findAllQuestions("ADULT").subscribe(response => {
-    //   console.log('question', response)
-    // })
+    this.quanInstService.findAllQuestions("ADULT").subscribe(response => {
+      console.log('question', response)
+      this.questions = response.data;
+
+      console.log('question list', this.questions)
+
+      this.selectQuestion16(16);
+    })
 
     // this.quanInstService.findAll().subscribe(response => {
     //   console.log('answer', response.data)
@@ -348,10 +236,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       console.log(reponse.data)
       this.idAnswer = reponse.data.idAnswer;
       this.idPoll = reponse.data.idPoll;
-
-      console.log('answer', this.idAnswer)
-      console.log('poll', this.idPoll)
     })
+
+    console.log('question list', this.questions.values())
   }
 
   saveAnswerPersonalInfo(answerForm: FormGroup) {
@@ -360,8 +247,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 2,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer2: AnswerModel = {
@@ -369,8 +255,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer3: AnswerModel = {
@@ -378,8 +263,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 3,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer4: AnswerModel = {
@@ -387,8 +271,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer5: AnswerModel = {
@@ -396,8 +279,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 4,
       idOptionAnswers: [],
       openAnswer: answerForm.value.typeIdentification,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer6: AnswerModel = {
@@ -405,8 +287,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 5,
       idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer7: AnswerModel = {
@@ -414,8 +295,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.address,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer8: AnswerModel = {
@@ -423,8 +303,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 8,
       idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     this.answerList.push(answer1)
@@ -443,8 +322,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 9,
       idOptionAnswers: [],
       openAnswer: answerForm.value.age,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer10: AnswerModel = {
@@ -452,8 +330,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 7,
       idOptionAnswers: [answerForm.value.sex],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer11: AnswerModel = {
@@ -461,8 +338,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 10,
       idOptionAnswers: [answerForm.value.ethnicity],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer12: AnswerModel = {
@@ -470,8 +346,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 11,
       idOptionAnswers: [answerForm.value.civilStatus],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer13: AnswerModel = {
@@ -479,8 +354,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 19,
       idOptionAnswers: [answerForm.value.zoneResidence],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer14: AnswerModel = {
@@ -488,8 +362,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 18,
       idOptionAnswers: [],
       openAnswer: answerForm.value.municipalityResidence,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer15: AnswerModel = {
@@ -497,8 +370,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 12,
       idOptionAnswers: [],
       openAnswer: answerForm.value.personCoexist,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer16: AnswerModel = {
@@ -506,8 +378,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 20,
       idOptionAnswers: [answerForm.value.typeHome],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer17: AnswerModel = {
@@ -515,8 +386,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 21,
       idOptionAnswers: answerForm.value.accessServicies,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer18: AnswerModel = {
@@ -524,8 +394,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 13,
       idOptionAnswers: [answerForm.value.educationLevel],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer19: AnswerModel = {
@@ -533,8 +402,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 14,
       idOptionAnswers: [answerForm.value.occupation],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer20: AnswerModel = {
@@ -542,8 +410,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 15,
       idOptionAnswers: [answerForm.value.workOStudyMode],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer21: AnswerModel = {
@@ -551,8 +418,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 16,
       idOptionAnswers: [answerForm.value.workOStudyMode],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer22: AnswerModel = {
@@ -560,8 +426,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 17,
       idOptionAnswers: [answerForm.value.occupation],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer23: AnswerModel = {
@@ -569,8 +434,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 22,
       idOptionAnswers: [],
       openAnswer: answerForm.value.numberChildren,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer24: AnswerModel = {
@@ -578,11 +442,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 23,
       idOptionAnswers: [],
       openAnswer: answerForm.value.dependents,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
-    console.log('list',this.answerList)
+    console.log('hdkjshdkja',this.answerList)
 
     this.answerList.push(answer9)
     this.answerList.push(answer10)
@@ -596,7 +459,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer18)
     this.answerList.push(answer19)
     this.answerList.push(answer20)
-    // this.answerList.push(answer21)
+    this.answerList.push(answer21)
     this.answerList.push(answer22)
     this.answerList.push(answer23)
     this.answerList.push(answer24)
@@ -608,8 +471,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 24,
       idOptionAnswers: answerForm.value.comorbilities,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer26: AnswerModel = {
@@ -617,8 +479,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 25,
       idOptionAnswers: [],
       openAnswer: answerForm.value.anyDiagnostic,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer27: AnswerModel = {
@@ -626,8 +487,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 27,
       idOptionAnswers: [],
       openAnswer: answerForm.value.illnessHistory ? "SI" : "NO",
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer28: AnswerModel = {
@@ -635,8 +495,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 28,
       idOptionAnswers: [],
       openAnswer: answerForm.value.disability,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     this.answerList.push(answer25)
@@ -653,8 +512,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 30,
       idOptionAnswers: [answerForm.value.hadCovid],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer30: AnswerModel = {
@@ -662,8 +520,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 31,
       idOptionAnswers: [],
       openAnswer: answerForm.value.affectationCovid,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer31: AnswerModel = {
@@ -671,8 +528,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 32,
       idOptionAnswers: answerForm.value.aftermath,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer32: AnswerModel = {
@@ -680,8 +536,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 33,
       idOptionAnswers: [],
       openAnswer: answerForm.value.deadFamilyCovid,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer33: AnswerModel = {
@@ -689,8 +544,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 34,
       idOptionAnswers: answerForm.value.deadFamily,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer34: AnswerModel = {
@@ -698,8 +552,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 35,
       idOptionAnswers: answerForm.value.workSituation,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer35: AnswerModel = {
@@ -707,8 +560,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 36,
       idOptionAnswers: answerForm.value.studentSituation,
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer36: AnswerModel = {
@@ -716,8 +568,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 37,
       idOptionAnswers: [],
       openAnswer: answerForm.value.conflictVictim,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer37: AnswerModel = {
@@ -725,8 +576,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 38,
       idOptionAnswers: [],
       openAnswer: answerForm.value.diomesticViolence,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer38: AnswerModel = {
@@ -734,8 +584,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 39,
       idOptionAnswers: [],
       openAnswer: answerForm.value.mentalHealth,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer39: AnswerModel = {
@@ -743,8 +592,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 40,
       idOptionAnswers: [],
       openAnswer: answerForm.value.vaccinationPosture,
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     this.answerList.push(answer29)
@@ -766,8 +614,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 41,
       idOptionAnswers: [answerForm.value.one],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer41: AnswerModel = {
@@ -775,8 +622,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 42,
       idOptionAnswers: [answerForm.value.two],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer42: AnswerModel = {
@@ -784,8 +630,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 43,
       idOptionAnswers: [answerForm.value.three],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer43: AnswerModel = {
@@ -793,8 +638,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 44,
       idOptionAnswers: [answerForm.value.four],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer44: AnswerModel = {
@@ -802,8 +646,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 45,
       idOptionAnswers: [answerForm.value.five],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer45: AnswerModel = {
@@ -811,8 +654,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 46,
       idOptionAnswers: [answerForm.value.six],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer46: AnswerModel = {
@@ -820,8 +662,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 47,
       idOptionAnswers: [answerForm.value.seven],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer47: AnswerModel = {
@@ -829,8 +670,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 47,
       idOptionAnswers: [answerForm.value.eight],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer48: AnswerModel = {
@@ -838,8 +678,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 49,
       idOptionAnswers: [answerForm.value.nine],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer49: AnswerModel = {
@@ -847,8 +686,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 50,
       idOptionAnswers: [answerForm.value.ten],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer50: AnswerModel = {
@@ -856,8 +694,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 51,
       idOptionAnswers: [answerForm.value.eleven],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer51: AnswerModel = {
@@ -865,8 +702,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 52,
       idOptionAnswers: [answerForm.value.twelve],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer52: AnswerModel = {
@@ -874,8 +710,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 53,
       idOptionAnswers: [answerForm.value.thirteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer53: AnswerModel = {
@@ -883,8 +718,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 54,
       idOptionAnswers: [answerForm.value.fourteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer54: AnswerModel = {
@@ -892,8 +726,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 55,
       idOptionAnswers: [answerForm.value.fifteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer55: AnswerModel = {
@@ -901,8 +734,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 56,
       idOptionAnswers: [answerForm.value.sixteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer56: AnswerModel = {
@@ -910,8 +742,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 57,
       idOptionAnswers: [answerForm.value.seventeen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer57: AnswerModel = {
@@ -919,8 +750,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 58,
       idOptionAnswers: [answerForm.value.eighteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     let answer58: AnswerModel = {
@@ -928,8 +758,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idQuestion: 59,
       idOptionAnswers: [answerForm.value.nineteen],
       openAnswer: '',
-      idPoll: this.idPoll,
-      type: 'ADULT'
+      idPoll: this.idAnswer + 1,
     };
 
     this.answerList.push(answer40)
@@ -955,6 +784,71 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.quanInstService.createAnswer(this.answerList).subscribe(response => {
       console.log(response.data)
     })
+  }
+
+  selectQuestion2(idQuestion: number){
+    this.question2 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question2.forEach(item => this.optionAnswerDtoList2 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion3(idQuestion: number) {
+    this.question3 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question3.forEach(item => this.optionAnswerDtoList3 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion4(idQuestion: number) {
+    this.question4 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question4.forEach(item => this.optionAnswerDtoList4 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion5(idQuestion: number) {
+    this.question5 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question5.forEach(item => this.optionAnswerDtoList5 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion8(idQuestion: number) {
+    this.question8 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question8.forEach(item => this.optionAnswerDtoList8 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion9(idQuestion: number) {
+    this.question9 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question9.forEach(item => this.optionAnswerDtoList9 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion10(idQuestion: number) {
+    this.question10= this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question10.forEach(item => this.optionAnswerDtoList10 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion11(idQuestion: number) {
+    this.question11 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question11.forEach(item => this.optionAnswerDtoList11 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion12(idQuestion: number) {
+    this.question12 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question12.forEach(item => this.optionAnswerDtoList12 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion13(idQuestion: number) {
+    this.question13 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question13.forEach(item => this.optionAnswerDtoList13 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion16(idQuestion: number) {
+    this.question16 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question16.forEach(item => this.optionAnswerDtoList16 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion18(idQuestion: number) {
+    this.question18 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question18.forEach(item => this.optionAnswerDtoList18 = item.optionAnswerDtoList);
+  }
+
+  selectQuestion19(idQuestion: number) {
+    this.question19 = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.question19.forEach(item => this.optionAnswerDtoList19 = item.optionAnswerDtoList);
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {

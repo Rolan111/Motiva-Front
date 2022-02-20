@@ -1,17 +1,33 @@
-export class QuestionModel {
-  id_question: number;
-  description: string;
-  id_father: number;
-  id_question_type: number;
-  order: number;
-  type: string;
+import {OptionAnswer} from "./option-answer.model";
 
-  constructor(id_question: number, description: string, id_father: number, id_question_type: number, order: number, type: string) {
-    this.id_question = id_question;
+export class Question {
+  createdAt: Date;
+  createdBy: number;
+  description: string;
+  id: string;
+  idFather: number;
+  idQuestion: number;
+  optionAnswerDtoList: Array<OptionAnswer>;
+  order: number;
+  questionaryType: string;
+  status: string;
+  type: string;
+  updatedAt: Date;
+  updatedBy: number;
+
+  constructor(createdAt: Date, createdBy: number, description: string, id: string, idFather: number, idQuestion: number, optionAnswerDtoList: Array<OptionAnswer>, order: number, questionaryType: string, status: string, type: string, updatedAt: Date, updatedBy: number) {
+    this.createdAt = createdAt;
+    this.createdBy = createdBy;
     this.description = description;
-    this.id_father = id_father;
-    this.id_question_type = id_question_type;
+    this.id = id;
+    this.idFather = idFather;
+    this.idQuestion = idQuestion;
+    this.optionAnswerDtoList = optionAnswerDtoList;
     this.order = order;
+    this.questionaryType = questionaryType;
+    this.status = status;
     this.type = type;
+    this.updatedAt = updatedAt;
+    this.updatedBy = updatedBy;
   }
 }
