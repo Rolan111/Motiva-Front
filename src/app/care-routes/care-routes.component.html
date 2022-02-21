@@ -9,21 +9,14 @@
 
   <mat-grid-list cols="2" rowHeight="220px">
 
-    <mat-grid-tile colspan="1">
-      <img (click)="openDialog2()" src="./assets/images/care-routes/telephone-routes/1.jpg" width="98%" height="215px">
+
+    <mat-grid-tile *ngFor="let urllImages of urlImages" colspan="1">
+      <img (click)="openDialog2(urllImages.url)" [src]="urllImages.url" width="98%" height="215px">
     </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      <img (click)="openDialog2()" src="./assets/images/care-routes/telephone-routes/2.jpg" width="98%" height="215px">
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      <img (click)="openDialog2()" src="./assets/images/care-routes/telephone-routes/3.jpg" width="98%" height="215px">
-    </mat-grid-tile>
-    <mat-grid-tile colspan="1">
-      <img (click)="openDialog2()" src="./assets/images/care-routes/telephone-routes/4.jpg" width="98%" height="215px">
-    </mat-grid-tile>
+
   </mat-grid-list>
   <br>
-  <img (click)="openDialog2()" src="./assets/images/care-routes/telephone-routes/5.jpg" width="100%">
+  <img src="./assets/images/care-routes/telephone-routes/5.jpg" width="100%">
 
 
 </mat-card>
