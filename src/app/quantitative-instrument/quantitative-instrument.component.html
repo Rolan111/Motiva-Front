@@ -241,19 +241,6 @@
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile *ngIf="occupationValue === '46'">
-            <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Modalidad de estudio</mat-label>
-              <mat-select [(ngModel)]="workOStudyModeValue" formControlName="workOStudyMode">
-                <mat-option *ngFor="let studyMode of workOStudyModeList" [value]="studyMode.value">
-                  {{studyMode.viewValue}}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('workOStudyMode', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Percepción de seguridad social en salud</mat-label>
@@ -351,7 +338,7 @@
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>Ha sido diagnosticado con Covid-19</label>
-              <mat-radio-group class="example-radio-group" formControlName="hadCovid">
+              <mat-radio-group class="example-radio-group" formControlName="hadCovid" [(ngModel)]="hadCovid">
                 <mat-radio-button class="example-radio-button" value="1">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="2">No</mat-radio-button>
               </mat-radio-group>
@@ -359,9 +346,9 @@
           </mat-grid-tile>
 
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass"> <!--DEPENDE ARRIBA-->
+            <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Qué tan grave fue su afectación debido al Covid-19?</mat-label>
-              <mat-select formControlName="affectationCovid">
+              <mat-select formControlName="affectationCovid" [disabled]="hadCovid !== '1'">
                 <mat-option *ngFor="let affectationCovid of affectationCovidList" [value]="affectationCovid.value">
                   {{affectationCovid.viewValue}}
                 </mat-option>
@@ -384,7 +371,7 @@
             <div class="example-radio-group">
               <label>¿Padeció el fallecimiento de amigos, familiares u otras personas cercabas de su entorno a raíz del
                 Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid">
+              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid" [(ngModel)]="deadFamilyCovid">
                 <mat-radio-button class="example-radio-button" value="SI">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="NO">No</mat-radio-button>
               </mat-radio-group>
@@ -396,7 +383,7 @@
               <mat-label>¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de usus amigos ,
                 familiares u otras personas cercanas de su entorno por Covid-19?
               </mat-label>
-              <mat-select formControlName="deadFamily" multiple> <!--DEPENDE ARRIBA-->
+              <mat-select formControlName="deadFamily" [disabled]="deadFamilyCovid !== 'SI'" multiple> <!--DEPENDE ARRIBA-->
                 <mat-option *ngFor="let deadFamily of deadFamilyList" [value]="deadFamily.value">
                   {{deadFamily.viewValue}}
                 </mat-option>
