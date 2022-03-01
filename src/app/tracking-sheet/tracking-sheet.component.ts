@@ -25,6 +25,7 @@ export class TrackingSheetComponent {
     private route: ActivatedRoute,
     private trackingSheetService: TrackingSheetService,
     private formBuilder: FormBuilder)
+
   {
     this.form = this.formBuilder.group({
       names: ['', Validators.required],
@@ -48,7 +49,7 @@ export class TrackingSheetComponent {
       referredEntity: form.value.referredEntity,
       attentionStatus: form.value.attentionStatus,
       recommendations: form.value.recommendations
-    };
+    }
 
     this.trackingSheetService.create(trackingSheetModel).subscribe(response => {
       console.log(response.data)
