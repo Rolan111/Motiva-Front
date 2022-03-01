@@ -3,6 +3,7 @@ import {RepComAgentService} from "./rep-com-agent.service";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from 'ngx-toastr';
+import {RepComAgentModel} from "./rep-com-agent.model";
 
 @Component({
   selector: 'app-rep-com-agent',
@@ -42,13 +43,11 @@ export class RepComAgentComponent implements OnInit {
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
-      // this.loadData();
     })
   }
 
   public loadData() {
     this.RepComAgentService.get().subscribe(respuesta => {
-
     })
   }
 
@@ -70,25 +69,24 @@ export class RepComAgentComponent implements OnInit {
       })
   }
 
-  public sendData() {
-    this.RepComAgentService.post(
-      {
-        activityName: this.form.value.activityName,
-        activityNumber: this.form.value.activityNumber,
-        date: this.form.value.date,
-        duration: this.form.value.duration,
-        place: this.form.value.place,
-        numberAttendees: this.form.value.numberAttendees,
-        activityObjectives: this.form.value.activityObjectives,
-        resourcesUsed: this.form.value.resourcesUsed,
-        methodologyUsed: this.form.value.methodologyUsed,
-        activityDescriptionDevelopment: this.form.value.activityDescriptionDevelopment,
-        resourcesObtained: this.form.value.resourcesObtained,
-        evidence: this.form.value.evidence,
-        activityProfessionalIncharge: this.form.value.activityProfessionalIncharge,
-
-      }).subscribe(respuesta => {
-
+  public saveForm(form: FormGroup) {
+    let repComAgentModel: RepComAgentModel = {
+      activityName: form.value.activityName,
+      activityNumber: form.value.activityNumber,
+      date: form.value.date,
+      duration: form.value.duration,
+      place: form.value.place,
+      numberAttendees: form.value.numberAttendees,
+      activityObjectives: form.value.activityObjectives,
+      resourcesUsed: form.value.resourcesUsed,
+      methodologyUsed: form.value.methodologyUsed,
+      activityDescriptionDevelopment: form.value.activityDescriptionDevelopment,
+      resourcesObtained: form.value.resourcesObtained,
+      evidence: form.value.evidence,
+      activityProfessionalIncharge: form.value.activityProfessionalIncharge,
+    }
+    this.RepComAgentService.create(repComAgentModel).subscribe(response => {
+      console.log(response.data)
     })
   }
 

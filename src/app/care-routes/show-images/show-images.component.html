@@ -1,9 +1,9 @@
 <p>Hola hola</p>
 <div>
+  <!-- <img *ngFor="let getImg of obteniendoImages" [src]="getImg?.data" class="show"> -->
+  <img [src]="obteniendoImages" class="show">
 
-  <img *ngFor="let obteniendoImagess of obteniendoImages" [src]="obteniendoImagess" class="show">
-  <script>
-
-  </script>
 </div>
+
+DATA: {{obteniendoImages | json }}
 

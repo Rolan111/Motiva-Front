@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {ForumService} from "./forum.service";
 
 
 @Component({
@@ -8,12 +9,21 @@ import {Component, OnInit} from '@angular/core';
 })
 export class ForumComponent implements OnInit {
 
-  longText = `Este es un breve resumen o nota del post.`;
+  public cards: any = []
 
-  constructor() {
+  constructor(private forumServicee: ForumService) {
   }
 
   ngOnInit(): void {
+    this.cargarData()
+  }
+
+  public cargarData() {
+    this.forumServicee.getAll().subscribe((respuesta: any) => {
+      //const {trayendo} = respuesta;
+      console.log(respuesta.data)
+      this.cards = respuesta.data;
+    })
   }
 
 }

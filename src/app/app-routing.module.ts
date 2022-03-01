@@ -26,7 +26,8 @@ const routes: Routes = [
       {path: 'community-agents', component: RepComAgentComponent},
       {path: 'tracking-sheet', component: TrackingSheetComponent},
       {path: 'forum', component: ForumComponent},
-      {path: 'forum/report-description', component: ReportDescriptionComponent},
+      //{path: 'forum/report-description/:variable', component: ReportDescriptionComponent},
+      {path: 'forum/report-description/:variable', component: ReportDescriptionComponent},
       {path: 'care-routes', component: CareRoutesComponent},
       {path: 'care-sheet', component: CareSheetComponent},
       {path: 'show-images', component: ShowImagesComponent}
