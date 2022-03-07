@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {LocalStorageKeyEnum, RolesEnum} from "../../enums/enum";
 import {LocalStorage} from "../../storage/local-storage";
+import {MatDialog, MatDialogRef} from "@angular/material/dialog";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-navbar',
@@ -21,9 +23,17 @@ export class NavbarComponent {
   buttonMenuContact: boolean = false;
   buttonMenuAssignment: boolean = true;
 
-  constructor() {
+  constructor(
+    public dialog: MatDialog
+  ) {
     this.fullName = this.oLocalStorage.getItem(LocalStorageKeyEnum.name) + " " + this.oLocalStorage.getItem(LocalStorageKeyEnum.lastName);
     this.typeRole(this.oLocalStorage.getItem(LocalStorageKeyEnum.rol));
+  }
+
+  openDialog(): void {
+    this.dialog.open(SelectQuantitativeInstrumentDialog, {
+      width: '350px',
+    });
   }
 
   logOut() {
@@ -83,5 +93,33 @@ export class NavbarComponent {
         this.buttonMenuForum = true;
         break;
     }
+  }
+}
+
+@Component({
+  selector: 'select-quantitative-instrument-dialog',
+  template:  `
+    <div mat-dialog-content style="text-align: -webkit-center">
+      <p>Seleccione el tipo de instrumento cuantitativo que desea aplicar:</p>
+    </div>
+    <div mat-dialog-actions style="place-content: center">
+      <button mat-button (click)="childrenClick()">Niño</button>
+      <button mat-button (click)="adultClick()">Adulto</button>
+    </div>`,
+})
+export class SelectQuantitativeInstrumentDialog {
+  constructor(
+    private router: Router,
+  public dialogRef: MatDialogRef<SelectQuantitativeInstrumentDialog>,
+  ) {}
+
+  adultClick(): void {
+    this.router.navigateByUrl('navbar/quantitative')
+    this.dialogRef.close();
+  }
+
+  childrenClick(): void {
+    this.router.navigateByUrl('navbar/quantitative-children')
+    this.dialogRef.close();
   }
 }

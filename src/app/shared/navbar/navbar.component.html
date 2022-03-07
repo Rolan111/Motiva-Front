@@ -22,7 +22,7 @@
       <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuDashBoard">
         <mat-icon fontSet="material-icons-two-tone">dashboard</mat-icon>
         &nbsp;&nbsp;Dashboard</a>
-      <a routerLink="quantitative" mat-list-item *ngIf="buttonMenuQuantitive">
+      <a (click)="openDialog()" mat-list-item *ngIf="buttonMenuQuantitive">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Instrumento Cuantitativo</a>
       <a routerLink="quantitative-children" mat-list-item *ngIf="buttonMenuQuantitiveChildren">
