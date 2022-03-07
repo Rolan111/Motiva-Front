@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LocalStorageKeyEnum} from "../../enums/enum";
+import {LocalStorageKeyEnum, RolesEnum} from "../../enums/enum";
 import {LocalStorage} from "../../storage/local-storage";
 
 @Component({
@@ -46,7 +46,7 @@ export class NavbarComponent {
 
   private typeRole(rol: any) {
     switch (rol) {
-      case 'SUPERVISOR':
+      case RolesEnum.SUPERVISOR:
         this.rol = 'Supervisor';
         this.buttonMenuQuantitiveChildren = true;
         this.buttonMenuCommunityAgents = true;
@@ -58,13 +58,13 @@ export class NavbarComponent {
         this.buttonMenuContact = true;
         this.buttonMenuForum = true;
         break;
-      case 'USER':
+      case RolesEnum.USER:
         this.rol = 'Invitado';
         this.buttonMenuSettings = true;
         this.buttonMenuContact = true;
         this.buttonMenuForum = true;
         break;
-      case 'P_CAMPO':
+      case RolesEnum.P_CAMPO:
         this.rol = 'Psicólogo de campo';
         this.buttonMenuDashBoard = true;
         this.buttonMenuTrakingSheet = true;
@@ -74,7 +74,7 @@ export class NavbarComponent {
         this.buttonMenuContact = true;
         this.buttonMenuForum = true;
         break;
-      case 'AGENTE':
+      case RolesEnum.AGENTE:
         this.rol = 'Agente comunitario';
         this.buttonMenuDashBoard = true;
         this.buttonMenuCommunityAgents = true;
