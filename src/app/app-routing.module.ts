@@ -10,8 +10,7 @@ import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component"
 import {ForumComponent} from "./forum/forum.component";
 import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
 import {CareRoutesComponent} from "./care-routes/care-routes.component";
-import {CareSheetComponent} from "./care-sheet/care-sheet.component";
-
+import {AuthGuard} from "./guards/auth.guard";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -20,16 +19,14 @@ const routes: Routes = [
     path: 'navbar', component: NavbarComponent,
     children: [
       {path: '', pathMatch: 'full', redirectTo: 'dashboard'},
-      {path: 'dashboard', component: DashboardComponent},
-      {path: 'quantitative', component: QuantitativeInstrumentComponent},
-      {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent},
-      {path: 'community-agents', component: RepComAgentComponent},
-      {path: 'tracking-sheet', component: TrackingSheetComponent},
-      {path: 'forum', component: ForumComponent},
-      //{path: 'forum/report-description/:variable', component: ReportDescriptionComponent},
-      {path: 'forum/report-description/:variable', component: ReportDescriptionComponent},
-      {path: 'care-routes', component: CareRoutesComponent},
-      {path: 'care-sheet', component: CareSheetComponent},
+      {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
+      {path: 'quantitative', component: QuantitativeInstrumentComponent, canActivate: [AuthGuard]},
+      {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent, canActivate: [AuthGuard]},
+      {path: 'community-agents', component: RepComAgentComponent, canActivate: [AuthGuard]},
+      {path: 'tracking-sheet', component: TrackingSheetComponent, canActivate: [AuthGuard]},
+      {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
+      {path: 'forum/report-description', component: ReportDescriptionComponent, canActivate: [AuthGuard]},
+      {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]}
     ]
   },
 ];
