@@ -1,23 +1,14 @@
-<mat-card>
+<mat-card class="cardss">
   <mat-card-title>Rutas de atención en salud mental</mat-card-title>
   <br>
-
-  <img src="./assets/images/care-routes/Mapa.png" alt="Photo of a Shiba Inu" width="100%">
+  <img src="./assets/images/care-routes/Mapa.png" width="100%">
 
   <br>
   <h1>Elige una ruta de atención</h1>
 
-  <mat-grid-list cols="2" rowHeight="220px">
-
-
-    <mat-grid-tile *ngFor="let urllImages of urlImages" colspan="1">
-      <img (click)="openDialog2(urllImages.url)" [src]="urllImages.url" width="98%" height="215px">
-    </mat-grid-tile>
-
-  </mat-grid-list>
+  <div class="container">
+    <app-gallery></app-gallery>
+  </div>
   <br>
   <img src="./assets/images/care-routes/telephone-routes/5.jpg" width="100%">
-
-
 </mat-card>
-

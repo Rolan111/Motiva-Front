@@ -11,7 +11,7 @@ import {ForumComponent} from "./forum/forum.component";
 import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
 import {CareRoutesComponent} from "./care-routes/care-routes.component";
 import {CareSheetComponent} from "./care-sheet/care-sheet.component";
-import {ShowImagesComponent} from "./care-routes/show-images/show-images.component";
+
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -30,7 +30,6 @@ const routes: Routes = [
       {path: 'forum/report-description/:variable', component: ReportDescriptionComponent},
       {path: 'care-routes', component: CareRoutesComponent},
       {path: 'care-sheet', component: CareSheetComponent},
-      {path: 'show-images', component: ShowImagesComponent}
     ]
   },
 ];
