@@ -29,32 +29,56 @@ export class QuantitativeInstrumentComponent implements OnInit {
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
   isLinear = false;
-  question2: Question[] = []
-  question3: Question[] = []
-  question4: Question[] = []
-  question5: Question[] = []
-  question8: Question[] = []
-  question9: Question[] = []
-  question10: Question[] = []
-  question11: Question[] = []
-  question12: Question[] = []
-  question13: Question[] = []
-  question16: Question[] = []
-  question18: Question[] = []
-  question19: Question[] = []
-  optionAnswerDtoList2: Array<OptionAnswer> = [];
-  optionAnswerDtoList3: Array<OptionAnswer> = [];
-  optionAnswerDtoList4: Array<OptionAnswer> = [];
+  sexQuestion: Question[] = [];
+  ethnicityQuestion: Question[] = [];
+  civilStatus: Question[] = [];
+  question5: Question[] = [];
+  typeHome: Question[] = [];
+  accessServicies: Question[] = [];
+  educationLevel: Question[] = [];
+  occupation: Question[] = [];
+  workMode: Question[] = [];
+  socialSecurity: Question[] = [];
+  comorbilities: Question[] = [];
+  affectationCovid: Question[] = [];
+  aftermath: Question[] = [];
+  mentalHealthNeedsQuestions: Question[] = [];
+
+  sexList: Array<OptionAnswer> = [];
+  ethnicityList: Array<OptionAnswer> = [];
+  civilStatusList: Array<OptionAnswer> = [];
   optionAnswerDtoList5: Array<OptionAnswer> = [];
-  optionAnswerDtoList8: Array<OptionAnswer> = [];
-  optionAnswerDtoList9: Array<OptionAnswer> = [];
-  optionAnswerDtoList10: Array<OptionAnswer> = [];
-  optionAnswerDtoList11: Array<OptionAnswer> = [];
-  optionAnswerDtoList12: Array<OptionAnswer> = [];
-  optionAnswerDtoList13: Array<OptionAnswer> = [];
-  optionAnswerDtoList16: Array<OptionAnswer> = [];
-  optionAnswerDtoList18: Array<OptionAnswer> = [];
-  optionAnswerDtoList19: Array<OptionAnswer> = [];
+  typeHomeList: Array<OptionAnswer> = [];
+  accessServiciesList: Array<OptionAnswer> = [];
+  educationLevelList: Array<OptionAnswer> = [];
+  occupationList: Array<OptionAnswer> = [];
+  workModeList: Array<OptionAnswer> = [];
+  socialSecurityList: Array<OptionAnswer> = [];
+  comorbilitiesList: Array<OptionAnswer> = [];
+  affectationCovidList: Array<OptionAnswer> = [];
+  aftermathList: Array<OptionAnswer> = [];
+  deadFamilyList: Array<OptionAnswer> = [];
+  workSituationList: Array<OptionAnswer> = [];
+  studentSituationList: Array<OptionAnswer> = [];
+  oneList: Array<OptionAnswer> = [];
+  twoList: Array<OptionAnswer> = [];
+  threeList: Array<OptionAnswer> = [];
+  fourList: Array<OptionAnswer> = [];
+  fiveList: Array<OptionAnswer> = [];
+  sixList: Array<OptionAnswer> = [];
+  sevenList: Array<OptionAnswer> = [];
+  eightList: Array<OptionAnswer> = [];
+  nineList: Array<OptionAnswer> = [];
+  tenList: Array<OptionAnswer> = [];
+  elevenList: Array<OptionAnswer> = [];
+  twelveList: Array<OptionAnswer> = [];
+  thirteenList: Array<OptionAnswer> = [];
+  fourteenList: Array<OptionAnswer> = [];
+  fifteenList: Array<OptionAnswer> = [];
+  sixteenList: Array<OptionAnswer> = [];
+  seventeenList: Array<OptionAnswer> = [];
+  eighteenList: Array<OptionAnswer> = [];
+  nineteenList: Array<OptionAnswer> = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -66,7 +90,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'CE', viewValue: 'Cedula Extranjería'},
     {value: 'NIP', viewValue: 'Número Identificación Personal'},
     {value: 'NIT', viewValue: 'Número Identificación Tributaría'},
-    {value: 'TI', viewValue: 'Tarjeta Identidad'},
     {value: 'PAP', viewValue: 'Pasaporte'},
   ];
 
@@ -147,6 +170,24 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    this.formQuantitative();
+
+    this.quanInstService.findAllQuestions('ADULT').subscribe(response => {
+      this.questions = response.data;
+      console.log(this.questions)
+    })
+
+    // this.quanInstService.findAll().subscribe(response => {
+    //   console.log('answer', response.data)
+    // })
+
+    this.quanInstService.getLastSequence().subscribe(reponse => {
+      this.idAnswer = reponse.data.idAnswer;
+      this.idPoll = reponse.data.idPoll;
+    })
+  }
+
+  private formQuantitative() {
     this.personalInfo = this.formBuilder.group({
       firstName: ['', Validators.required],
       firstLastName: ['', Validators.required],
@@ -172,7 +213,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       educationLevel: ['', Validators.required],
       dependents: ['', Validators.required],
       occupation: ['', Validators.required],
-      workOStudyMode: [''],
+      workMode: [''],
       zoneResidence: [''],
     });
 
@@ -218,27 +259,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       eighteen: [''],
       nineteen: [''],
     });
-
-    this.quanInstService.findAllQuestions("ADULT").subscribe(response => {
-      console.log('question', response)
-      this.questions = response.data;
-
-      console.log('question list', this.questions)
-
-      this.selectQuestion16(16);
-    })
-
-    // this.quanInstService.findAll().subscribe(response => {
-    //   console.log('answer', response.data)
-    // })
-
-    this.quanInstService.getLastSequence().subscribe(reponse => {
-      console.log(reponse.data)
-      this.idAnswer = reponse.data.idAnswer;
-      this.idPoll = reponse.data.idPoll;
-    })
-
-    console.log('question list', this.questions.values())
   }
 
   saveAnswerPersonalInfo(answerForm: FormGroup) {
@@ -445,8 +465,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    console.log('hdkjshdkja',this.answerList)
-
     this.answerList.push(answer9)
     this.answerList.push(answer10)
     this.answerList.push(answer11)
@@ -463,6 +481,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer22)
     this.answerList.push(answer23)
     this.answerList.push(answer24)
+
+    this.selectComorbilities(16);
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
@@ -486,7 +506,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idAnswer: this.idAnswer + 27,
       idQuestion: 27,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.illnessHistory ? "SI" : "NO",
+      openAnswer: answerForm.value.illnessHistory ? 'SI' : 'NO',
       idPoll: this.idAnswer + 1,
     };
 
@@ -606,6 +626,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer37)
     this.answerList.push(answer38)
     this.answerList.push(answer39)
+
+    let idQuestions: Array<number> = [2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819];
+    this.selectMentalHealthNeeds(idQuestions)
   }
 
   saveMentalHealthNeeds(answerForm: FormGroup) {
@@ -786,19 +809,19 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
-  selectQuestion2(idQuestion: number){
-    this.question2 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question2.forEach(item => this.optionAnswerDtoList2 = item.optionAnswerDtoList);
+  selectSex(idQuestion: number) {
+    this.sexQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.sexQuestion.forEach(item => this.sexList = item.optionAnswerDtoList);
   }
 
-  selectQuestion3(idQuestion: number) {
-    this.question3 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question3.forEach(item => this.optionAnswerDtoList3 = item.optionAnswerDtoList);
+  selectEthnicity(idQuestion: number) {
+    this.ethnicityQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.ethnicityQuestion.forEach(item => this.ethnicityList = item.optionAnswerDtoList);
   }
 
-  selectQuestion4(idQuestion: number) {
-    this.question4 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question4.forEach(item => this.optionAnswerDtoList4 = item.optionAnswerDtoList);
+  selectCivilStatus(idQuestion: number) {
+    this.civilStatus = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.civilStatus.forEach(item => this.civilStatusList = item.optionAnswerDtoList);
   }
 
   selectQuestion5(idQuestion: number) {
@@ -806,49 +829,147 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.question5.forEach(item => this.optionAnswerDtoList5 = item.optionAnswerDtoList);
   }
 
-  selectQuestion8(idQuestion: number) {
-    this.question8 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question8.forEach(item => this.optionAnswerDtoList8 = item.optionAnswerDtoList);
+  selectTypeHome(idQuestion: number) {
+    this.typeHome = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.typeHome.forEach(item => this.typeHomeList = item.optionAnswerDtoList);
   }
 
-  selectQuestion9(idQuestion: number) {
-    this.question9 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question9.forEach(item => this.optionAnswerDtoList9 = item.optionAnswerDtoList);
+  selectAccessServicies(idQuestion: number) {
+    this.accessServicies = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.accessServicies.forEach(item => this.accessServiciesList = item.optionAnswerDtoList);
   }
 
-  selectQuestion10(idQuestion: number) {
-    this.question10= this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question10.forEach(item => this.optionAnswerDtoList10 = item.optionAnswerDtoList);
+  selectEducationLevel(idQuestion: number) {
+    this.educationLevel = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.educationLevel.forEach(item => this.educationLevelList = item.optionAnswerDtoList);
   }
 
-  selectQuestion11(idQuestion: number) {
-    this.question11 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question11.forEach(item => this.optionAnswerDtoList11 = item.optionAnswerDtoList);
+  selectOccupation(idQuestion: number) {
+    this.occupation = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.occupation.forEach(item => this.occupationList = item.optionAnswerDtoList);
   }
 
-  selectQuestion12(idQuestion: number) {
-    this.question12 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question12.forEach(item => this.optionAnswerDtoList12 = item.optionAnswerDtoList);
+  selectWorkMode(idQuestion: number) {
+    this.workMode = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.workMode.forEach(item => this.workModeList = item.optionAnswerDtoList);
   }
 
-  selectQuestion13(idQuestion: number) {
-    this.question13 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question13.forEach(item => this.optionAnswerDtoList13 = item.optionAnswerDtoList);
+  selectSocialSecurity(idQuestion: number) {
+    this.socialSecurity = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.socialSecurity.forEach(item => this.socialSecurityList = item.optionAnswerDtoList);
   }
 
-  selectQuestion16(idQuestion: number) {
-    this.question16 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question16.forEach(item => this.optionAnswerDtoList16 = item.optionAnswerDtoList);
+  selectComorbilities(idQuestion: number) {
+    this.comorbilities = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.comorbilities.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
   }
 
-  selectQuestion18(idQuestion: number) {
-    this.question18 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question18.forEach(item => this.optionAnswerDtoList18 = item.optionAnswerDtoList);
+  selectAffectationCovid(idQuestion: number) {
+    this.affectationCovid = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.affectationCovid.forEach(item => this.affectationCovidList = item.optionAnswerDtoList);
   }
 
-  selectQuestion19(idQuestion: number) {
-    this.question19 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question19.forEach(item => this.optionAnswerDtoList19 = item.optionAnswerDtoList);
+  selectAftermath(idQuestion: number) {
+    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.aftermath.forEach(item => this.aftermathList = item.optionAnswerDtoList);
+  }
+
+  selectDeadFamily(idQuestion: number) {
+    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.aftermath.forEach(item => this.deadFamilyList = item.optionAnswerDtoList);
+  }
+
+  selectWorkSituation(idQuestion: number) {
+    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.aftermath.forEach(item => this.workSituationList = item.optionAnswerDtoList);
+  }
+
+  selectStudentSituation(idQuestion: number) {
+    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+    this.aftermath.forEach(item => this.studentSituationList = item.optionAnswerDtoList);
+  }
+
+  selectMentalHealthNeeds(idQuestions: Array<number>) {
+    idQuestions.forEach(idQuestion => {
+      switch (idQuestion) {
+        case 2801:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.oneList = item.optionAnswerDtoList);
+          break;
+        case 2802:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.twoList = item.optionAnswerDtoList);
+          break;
+        case 2803:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.threeList = item.optionAnswerDtoList);
+          break;
+        case 2804:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.fourList = item.optionAnswerDtoList);
+          break;
+        case 2805:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.fiveList = item.optionAnswerDtoList);
+          break;
+        case 2806:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.sixList = item.optionAnswerDtoList);
+          break;
+        case 2807:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.sevenList = item.optionAnswerDtoList);
+          break;
+        case 2808:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.eightList = item.optionAnswerDtoList);
+          break;
+        case 2809:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.nineList = item.optionAnswerDtoList);
+          break;
+        case 2810:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.tenList = item.optionAnswerDtoList);
+          break;
+        case 2811:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.elevenList = item.optionAnswerDtoList);
+          break;
+        case 2812:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.twelveList = item.optionAnswerDtoList);
+          break;
+        case 2813:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.thirteenList = item.optionAnswerDtoList);
+          break;
+        case 2814:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.fourteenList = item.optionAnswerDtoList);
+          break;
+        case 2815:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.fifteenList = item.optionAnswerDtoList);
+          break;
+        case 2816:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.sixteenList = item.optionAnswerDtoList);
+          break;
+        case 2817:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.seventeenList = item.optionAnswerDtoList);
+          break;
+        case 2818:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.eighteenList = item.optionAnswerDtoList);
+          break;
+        case 2819:
+          this.mentalHealthNeedsQuestions = this.questions.filter(x => x.idQuestion === idQuestion);
+          this.mentalHealthNeedsQuestions.forEach(item => this.nineteenList = item.optionAnswerDtoList);
+          break;
+      }
+    })
   }
 
   isControlHasError(controlName: string, validationType: string): boolean {
