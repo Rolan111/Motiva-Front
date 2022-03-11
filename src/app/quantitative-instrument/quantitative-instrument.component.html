@@ -103,7 +103,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Sexo</mat-label>
-              <mat-select formControlName="sex" (click)="selectSex(2)" required>
+              <mat-select formControlName="sex" (click)="selectQuestion(2)" required>
                 <mat-option *ngFor="let item of sexList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -116,7 +116,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Reconocimiento étnico</mat-label>
-              <mat-select formControlName="ethnicity" (click)="selectEthnicity(3)" required>
+              <mat-select formControlName="ethnicity" (click)="selectQuestion(3)" required>
                 <mat-option *ngFor="let item of ethnicityList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -129,7 +129,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Estado civil</mat-label>
-              <mat-select formControlName="civilStatus" (click)="selectCivilStatus(4)" required>
+              <mat-select formControlName="civilStatus" (click)="selectQuestion(4)" required>
                 <mat-option *ngFor="let item of civilStatusList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -179,7 +179,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Tipo de vivienda</mat-label>
-              <mat-select formControlName="typeHome" (click)="selectTypeHome(8)" required>
+              <mat-select formControlName="typeHome" (click)="selectQuestion(8)" required>
                 <mat-option *ngFor="let item of typeHomeList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -192,7 +192,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Acceso a servicios</mat-label>
-              <mat-select formControlName="accessServicies" (click)="selectAccessServicies(9)" multiple required>
+              <mat-select formControlName="accessServicies" (click)="selectQuestion(9)" multiple required>
                 <mat-option *ngFor="let item of accessServiciesList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -205,7 +205,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Escolaridad</mat-label>
-              <mat-select formControlName="educationLevel" (click)="selectEducationLevel(10)" required>
+              <mat-select formControlName="educationLevel" (click)="selectQuestion(10)" required>
                 <mat-option *ngFor="let item of educationLevelList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -218,7 +218,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Ocupación</mat-label>
-              <mat-select [(ngModel)]="occupationValue" formControlName="occupation" (click)="selectOccupation(11)"
+              <mat-select [(ngModel)]="occupationValue" formControlName="occupation" (click)="selectQuestion(11)"
                           required>
                 <mat-option *ngFor="let item of occupationList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -232,12 +232,12 @@
           <mat-grid-tile *ngIf="occupationValue == 38">
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Modalidad de trabajo</mat-label>
-              <mat-select formControlName="workMode" (click)="selectWorkMode(12)">
+              <mat-select formControlName="workMode" (click)="selectQuestion(12)">
                 <mat-option *ngFor="let item of workModeList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('workOStudyMode', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('workMode', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -245,7 +245,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Percepción de seguridad social en salud</mat-label>
-              <mat-select formControlName="socialSecurity" (click)="selectSocialSecurity(13)" required>
+              <mat-select formControlName="socialSecurity" (click)="selectQuestion(13)" required>
                 <mat-option *ngFor="let item of socialSecurityList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -349,7 +349,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass" *ngIf="hadCovid == 65">
               <mat-label>Qué tan grave fue su afectación debido al Covid-19?</mat-label>
-              <mat-select formControlName="affectationCovid" (click)="selectAffectationCovid(18)">
+              <mat-select formControlName="affectationCovid" (click)="selectQuestion(18)">
                 <mat-option *ngFor="let item of affectationCovidList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -360,7 +360,7 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>¿Padeció o padece secuelas en alguno de los siguientes ámbitos?</mat-label>
-              <mat-select formControlName="aftermath" multiple (click)="selectAftermath(19)">
+              <mat-select formControlName="aftermath" multiple (click)="selectQuestion(19)">
                 <mat-option *ngFor="let item of aftermathList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -385,7 +385,7 @@
               <mat-label>¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de usus amigos ,
                 familiares u otras personas cercanas de su entorno por Covid-19?
               </mat-label>
-              <mat-select formControlName="deadFamily" multiple (click)="selectDeadFamily(21)">
+              <mat-select formControlName="deadFamily" multiple (click)="selectQuestion(21)">
                 <mat-option *ngFor="let item of deadFamilyList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -398,7 +398,7 @@
               <mat-label>¿Experimentó alguna de las siguientes situaciones en su trabajo como resultado de la pandemia
                 por Covid-19?
               </mat-label>
-              <mat-select formControlName="workSituation" multiple (click)="selectWorkSituation(22)">
+              <mat-select formControlName="workSituation" multiple (click)="selectQuestion(22)">
                 <mat-option *ngFor="let item of workSituationList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -411,7 +411,7 @@
               <mat-label>¿Experimentó alguna de las siguientes situaciones en el colegio o universidad como resultado de
                 la pandemia por Covid-19?
               </mat-label>
-              <mat-select formControlName="studentSituation" multiple (click)="selectStudentSituation(23)">
+              <mat-select formControlName="studentSituation" multiple (click)="selectQuestion(23)">
                 <mat-option *ngFor="let item of studentSituationList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>

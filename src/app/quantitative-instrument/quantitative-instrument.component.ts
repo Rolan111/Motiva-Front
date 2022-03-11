@@ -47,7 +47,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
   sexList: Array<OptionAnswer> = [];
   ethnicityList: Array<OptionAnswer> = [];
   civilStatusList: Array<OptionAnswer> = [];
-  optionAnswerDtoList5: Array<OptionAnswer> = [];
   typeHomeList: Array<OptionAnswer> = [];
   accessServiciesList: Array<OptionAnswer> = [];
   educationLevelList: Array<OptionAnswer> = [];
@@ -227,10 +226,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.factors = this.formBuilder.group({
       hadCovid: [''],
       affectationCovid: [''],
-      aftermath: [''],
+      aftermath: ['', Validators.required],
       deadFamilyCovid: [''],
       deadFamily: [''],
-      workSituation: [''],
+      workSituation: ['', Validators.required],
       studentSituation: [''],
       conflictVictim: [''],
       diomesticViolence: [''],
@@ -482,7 +481,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer23)
     this.answerList.push(answer24)
 
-    this.selectComorbilities(16);
+    this.selectQuestion(16);
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
@@ -805,88 +804,73 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer58)
 
     this.quanInstService.createAnswer(this.answerList).subscribe(response => {
-      console.log(response.data)
+      console.log(response)
     })
   }
 
-  selectSex(idQuestion: number) {
-    this.sexQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.sexQuestion.forEach(item => this.sexList = item.optionAnswerDtoList);
-  }
-
-  selectEthnicity(idQuestion: number) {
-    this.ethnicityQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.ethnicityQuestion.forEach(item => this.ethnicityList = item.optionAnswerDtoList);
-  }
-
-  selectCivilStatus(idQuestion: number) {
-    this.civilStatus = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.civilStatus.forEach(item => this.civilStatusList = item.optionAnswerDtoList);
-  }
-
-  selectQuestion5(idQuestion: number) {
-    this.question5 = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.question5.forEach(item => this.optionAnswerDtoList5 = item.optionAnswerDtoList);
-  }
-
-  selectTypeHome(idQuestion: number) {
-    this.typeHome = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.typeHome.forEach(item => this.typeHomeList = item.optionAnswerDtoList);
-  }
-
-  selectAccessServicies(idQuestion: number) {
-    this.accessServicies = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.accessServicies.forEach(item => this.accessServiciesList = item.optionAnswerDtoList);
-  }
-
-  selectEducationLevel(idQuestion: number) {
-    this.educationLevel = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.educationLevel.forEach(item => this.educationLevelList = item.optionAnswerDtoList);
-  }
-
-  selectOccupation(idQuestion: number) {
-    this.occupation = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.occupation.forEach(item => this.occupationList = item.optionAnswerDtoList);
-  }
-
-  selectWorkMode(idQuestion: number) {
-    this.workMode = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.workMode.forEach(item => this.workModeList = item.optionAnswerDtoList);
-  }
-
-  selectSocialSecurity(idQuestion: number) {
-    this.socialSecurity = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.socialSecurity.forEach(item => this.socialSecurityList = item.optionAnswerDtoList);
-  }
-
-  selectComorbilities(idQuestion: number) {
-    this.comorbilities = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.comorbilities.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
-  }
-
-  selectAffectationCovid(idQuestion: number) {
-    this.affectationCovid = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.affectationCovid.forEach(item => this.affectationCovidList = item.optionAnswerDtoList);
-  }
-
-  selectAftermath(idQuestion: number) {
-    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.aftermath.forEach(item => this.aftermathList = item.optionAnswerDtoList);
-  }
-
-  selectDeadFamily(idQuestion: number) {
-    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.aftermath.forEach(item => this.deadFamilyList = item.optionAnswerDtoList);
-  }
-
-  selectWorkSituation(idQuestion: number) {
-    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.aftermath.forEach(item => this.workSituationList = item.optionAnswerDtoList);
-  }
-
-  selectStudentSituation(idQuestion: number) {
-    this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
-    this.aftermath.forEach(item => this.studentSituationList = item.optionAnswerDtoList);
+  selectQuestion(idQuestion: number) {
+    switch (idQuestion) {
+      case 2:
+        this.sexQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.sexQuestion.forEach(item => this.sexList = item.optionAnswerDtoList);
+        break;
+      case 3:
+        this.ethnicityQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.ethnicityQuestion.forEach(item => this.ethnicityList = item.optionAnswerDtoList);
+        break;
+      case 4:
+        this.civilStatus = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.civilStatus.forEach(item => this.civilStatusList = item.optionAnswerDtoList);
+        break;
+      case 8:
+        this.typeHome = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.typeHome.forEach(item => this.typeHomeList = item.optionAnswerDtoList);
+        break;
+      case 9:
+        this.accessServicies = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.accessServicies.forEach(item => this.accessServiciesList = item.optionAnswerDtoList);
+        break;
+      case 10:
+        this.educationLevel = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.educationLevel.forEach(item => this.educationLevelList = item.optionAnswerDtoList);
+        break;
+      case 11:
+        this.occupation = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.occupation.forEach(item => this.occupationList = item.optionAnswerDtoList);
+        break;
+      case 12:
+        this.workMode = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.workMode.forEach(item => this.workModeList = item.optionAnswerDtoList);
+        break;
+      case 13:
+        this.socialSecurity = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.socialSecurity.forEach(item => this.socialSecurityList = item.optionAnswerDtoList);
+        break;
+      case 16:
+        this.comorbilities = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.comorbilities.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
+        break;
+      case 18:
+        this.affectationCovid = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.affectationCovid.forEach(item => this.affectationCovidList = item.optionAnswerDtoList);
+        break;
+      case 19:
+        this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.aftermath.forEach(item => this.aftermathList = item.optionAnswerDtoList);
+        break;
+      case 21:
+        this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.aftermath.forEach(item => this.deadFamilyList = item.optionAnswerDtoList);
+        break;
+      case 22:
+        this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.aftermath.forEach(item => this.workSituationList = item.optionAnswerDtoList);
+        break;
+      case 23:
+        this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.aftermath.forEach(item => this.studentSituationList = item.optionAnswerDtoList);
+        break;
+    }
   }
 
   selectMentalHealthNeeds(idQuestions: Array<number>) {
