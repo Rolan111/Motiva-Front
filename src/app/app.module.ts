@@ -8,12 +8,11 @@ import {LoginModule} from "./login/login.module";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
-import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitative-instrument.module"
-import {QuantitativeInstrumentChildrenModule} from "./quantitative-instrument-children/quantitative-instrument-children.module";
 import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
 import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
 import {ForumModule} from "./forum/forum.module";
 import {CareRoutesModule} from "./care-routes/care-routes.module";
+import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
 
 
 @NgModule({
@@ -28,8 +27,7 @@ import {CareRoutesModule} from "./care-routes/care-routes.module";
     LoginModule,
     SharedModule,
     DashboardModule,
-    QuantitativeInstrumentModule,
-    QuantitativeInstrumentChildrenModule,
+    QuantitativeInstrumentsModule,
     RepComAgentModule,
     TrackingSheetModule,
     ForumModule,

@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {QuantitativeInstrumentService} from "./quantitative-instrument.service";
-import {AnswerModel} from "./answer.model";
-import {Question} from "./question.model";
-import {OptionAnswer} from "./option-answer.model";
+import {QuantitativeInstrumentService} from "../quantitative-instrument.service";
+import {AnswerModel} from "../answer.model";
+import {Question} from "../question.model";
+import {OptionAnswer} from "../option-answer.model";
 
 interface ListTypes {
   value: string;
@@ -92,37 +92,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     {value: 'PAP', viewValue: 'Pasaporte'},
   ];
 
-  questionsMentalHealtList: ListTypes[] = [
-    {value: '41', viewValue: 'Se ha sentido triste o infeliz'},
-    {value: '42', viewValue: 'Ha dormido menos de lo habitual'},
-    {
-      value: '43',
-      viewValue: 'Le han afectado eventos inesperados en su vida o en la vida de las personas con las que se relaciona'
-    },
-    {
-      value: '44',
-      viewValue: 'Ha perdido el control y la estabilidad debido a problemas y cambios importantes en su vida'
-    },
-    {value: '45', viewValue: 'Ha perdido el interes en otras actividades o personas'},
-    {value: '46', viewValue: 'Se ha sentido optimista y motivado(a) a pesar de sus fracasos'},
-    {value: '47', viewValue: 'No ha podido concentrarse tan bien como habitualmente'},
-    {value: '48', viewValue: 'Ha incrementado en consumo de alcohol u otras sustancias psicoactivas'},
-    {value: '49', viewValue: 'Se ha criticado y culpado a mi mismo por todo lo malo que ha sucedido'},
-    {value: '50', viewValue: 'Se ha sentido inquieto, tenso o agitado'},
-    {value: '51', viewValue: 'Ha estado mas irritable de lo habitual'},
-    {value: '52', viewValue: 'Ha sentido miedo y desesperanza respecto a su futuro'},
-    {value: '53', viewValue: 'Todo el tiempo ha pensado en su salud y le ha preocupado adquirir una enfermedad'},
-    {value: '54', viewValue: 'Se ha sentido mas cansado o fatigado de lo habitual'},
-    {value: '55', viewValue: 'No ha experimentado placer por las cosas que solia disfrutar'},
-    {value: '56', viewValue: 'Ha perdido interes en el sexo'},
-    {value: '57', viewValue: 'Se ha sentido culpable respecto de las cosas que hizo o debió hacer'},
-    {value: '58', viewValue: 'Ha tenido pensamientos o deseos de matarse'},
-    {
-      value: '59',
-      viewValue: '¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del virus'
-    },
-  ];
-
   citiesList: ListTypes[] = [
     {value: '19001', viewValue: 'POPAYAN'},
     {value: '19022', viewValue: 'ALMAGUER'},
@@ -180,9 +149,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
     //   console.log('answer', response.data)
     // })
 
-    this.quanInstService.getLastSequence().subscribe(reponse => {
-      this.idAnswer = reponse.data.idAnswer;
-      this.idPoll = reponse.data.idPoll;
+    this.quanInstService.getLastSequence().subscribe(response => {
+      this.idAnswer = response.data.idAnswer;
+      this.idPoll = response.data.idPoll;
     })
   }
 

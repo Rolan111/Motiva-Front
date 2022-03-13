@@ -3,9 +3,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {QuantitativeInstrumentComponent} from "./quantitative-instrument/quantitative-instrument.component";
+import {
+  QuantitativeInstrumentComponent
+} from "./quantitative-instruments/quantitative-instrument/quantitative-instrument.component";
 import {RepComAgentComponent} from "./rep-com-agent/rep-com-agent.component";
-import {QuantitativeInstrumentChildrenComponent} from "./quantitative-instrument-children/quantitative-instrument-children.component";
+import {
+  QuantitativeInstrumentChildrenComponent
+} from "./quantitative-instruments/quantitative-instrument-children/quantitative-instrument-children.component";
 import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component";
 import {ForumComponent} from "./forum/forum.component";
 import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
