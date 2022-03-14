@@ -129,10 +129,14 @@
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>Zona de residencia</label>
-              <mat-radio-group class="example-radio-group" aria-label="Zona de residencia">
-                <mat-radio-button class="example-radio-button" value="1">Rural</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="2">Urbano</mat-radio-button>
+              <mat-radio-group class="example-radio-group" aria-label="Zona de residencia"
+                               formControlName="zoneResidence">
+                <mat-radio-button class="example-radio-button" value="196">Rural</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="197">Urbano</mat-radio-button>
               </mat-radio-group>
+              <mat-error *ngIf="isControlHasErrorSecundary('zoneResidence', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </div>
           </mat-grid-tile>
           <mat-grid-tile>

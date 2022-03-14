@@ -4,6 +4,8 @@ import {QuantitativeInstrumentService} from "../quantitative-instrument.service"
 import {OptionAnswer} from "../option-answer.model";
 import {AnswerModel} from "../answer.model";
 import {Question} from "../question.model";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface listTypes {
   value: string;
@@ -103,15 +105,17 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private quanInstService: QuantitativeInstrumentService
-  ) { }
+    private quanInstService: QuantitativeInstrumentService,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+  ) {
+  }
 
   ngOnInit(): void {
     this.formQuantitative();
 
     this.quanInstService.findAllQuestions('CHILDREN').subscribe(response => {
       this.questions = response.data;
-      console.log('questions', this.questions)
     })
 
     this.quanInstService.getLastSequence().subscribe(response => {
@@ -136,15 +140,14 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       age: ['', Validators.required],
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
-      civilStatus: ['', Validators.required],
+      zoneResidence: ['', Validators.required],
       municipalityResidence: ['', Validators.required],
-      numberChildrens: ['', Validators.required],
-      socialSecurity: ['', Validators.required],
       personCoexist: ['', Validators.required],
       typeHome: ['', Validators.required],
       accessServicies: ['', Validators.required],
       educationLevel: ['', Validators.required],
-      studyMode: ['', Validators.required]
+      studyMode: ['', Validators.required],
+      socialSecurity: ['', Validators.required],
     });
 
     this.comorbidityInfo = this.formBuilder.group({
@@ -165,280 +168,246 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   saveAnswerPersonalInfo(answerForm: FormGroup) {
     let answer1: AnswerModel = {
-      idAnswer: this.idAnswer + 1,
+      idAnswer: this.idAnswer,
       idQuestion: 2,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer2: AnswerModel = {
-      idAnswer: this.idAnswer + 2,
+      idAnswer: this.idAnswer + 1,
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer3: AnswerModel = {
-      idAnswer: this.idAnswer + 3,
+      idAnswer: this.idAnswer + 2,
       idQuestion: 3,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer4: AnswerModel = {
-      idAnswer: this.idAnswer + 4,
+      idAnswer: this.idAnswer + 3,
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer5: AnswerModel = {
-      idAnswer: this.idAnswer + 5,
+      idAnswer: this.idAnswer + 4,
       idQuestion: 4,
       idOptionAnswers: [],
       openAnswer: answerForm.value.typeIdentification,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer6: AnswerModel = {
-      idAnswer: this.idAnswer + 6,
+      idAnswer: this.idAnswer + 5,
       idQuestion: 5,
       idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer7: AnswerModel = {
-      idAnswer: this.idAnswer + 7,
+      idAnswer: this.idAnswer + 6,
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.address,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer8: AnswerModel = {
-      idAnswer: this.idAnswer + 8,
+      idAnswer: this.idAnswer + 7,
       idQuestion: 8,
       idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
-    this.answerList.push(answer1)
-    this.answerList.push(answer2)
-    this.answerList.push(answer3)
-    this.answerList.push(answer4)
-    this.answerList.push(answer5)
-    this.answerList.push(answer6)
-    this.answerList.push(answer7)
-    this.answerList.push(answer8)
+    this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8);
   }
 
   saveAnswerSecundaryInfo(answerForm: FormGroup) {
     let answer9: AnswerModel = {
-      idAnswer: this.idAnswer + 9,
-      idQuestion: 9,
+      idAnswer: this.idAnswer + 8,
+      idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.age,
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer10: AnswerModel = {
-      idAnswer: this.idAnswer + 10,
-      idQuestion: 7,
+      idAnswer: this.idAnswer + 9,
+      idQuestion: 2,
       idOptionAnswers: [answerForm.value.sex],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer11: AnswerModel = {
-      idAnswer: this.idAnswer + 11,
-      idQuestion: 10,
+      idAnswer: this.idAnswer + 10,
+      idQuestion: 3,
       idOptionAnswers: [answerForm.value.ethnicity],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer12: AnswerModel = {
-      idAnswer: this.idAnswer + 12,
-      idQuestion: 11,
-      idOptionAnswers: [answerForm.value.civilStatus],
+      idAnswer: this.idAnswer + 11,
+      idQuestion: 4,
+      idOptionAnswers: [answerForm.value.zoneResidence],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer13: AnswerModel = {
-      idAnswer: this.idAnswer + 13,
-      idQuestion: 19,
-      idOptionAnswers: [answerForm.value.zoneResidence],
-      openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idAnswer: this.idAnswer + 12,
+      idQuestion: 5,
+      idOptionAnswers: [],
+      openAnswer: answerForm.value.municipalityResidence,
+      idPoll: this.idAnswer,
     };
 
     let answer14: AnswerModel = {
-      idAnswer: this.idAnswer + 14,
-      idQuestion: 18,
+      idAnswer: this.idAnswer + 13,
+      idQuestion: 6,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.municipalityResidence,
-      idPoll: this.idAnswer + 1,
+      openAnswer: answerForm.value.personCoexist,
+      idPoll: this.idAnswer,
     };
 
     let answer15: AnswerModel = {
-      idAnswer: this.idAnswer + 15,
-      idQuestion: 12,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.personCoexist,
-      idPoll: this.idAnswer + 1,
+      idAnswer: this.idAnswer + 14,
+      idQuestion: 7,
+      idOptionAnswers: [answerForm.value.typeHome],
+      openAnswer: '',
+      idPoll: this.idAnswer,
     };
 
     let answer16: AnswerModel = {
-      idAnswer: this.idAnswer + 16,
-      idQuestion: 20,
-      idOptionAnswers: [answerForm.value.typeHome],
+      idAnswer: this.idAnswer + 15,
+      idQuestion: 8,
+      idOptionAnswers: answerForm.value.accessServicies,
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer17: AnswerModel = {
-      idAnswer: this.idAnswer + 17,
-      idQuestion: 21,
-      idOptionAnswers: answerForm.value.accessServicies,
+      idAnswer: this.idAnswer + 16,
+      idQuestion: 9,
+      idOptionAnswers: [answerForm.value.educationLevel],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer18: AnswerModel = {
-      idAnswer: this.idAnswer + 18,
-      idQuestion: 13,
-      idOptionAnswers: [answerForm.value.educationLevel],
+      idAnswer: this.idAnswer + 17,
+      idQuestion: 10,
+      idOptionAnswers: [answerForm.value.studyMode],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
     let answer19: AnswerModel = {
-      idAnswer: this.idAnswer + 19,
-      idQuestion: 14,
-      idOptionAnswers: [answerForm.value.occupation],
+      idAnswer: this.idAnswer + 18,
+      idQuestion: 11,
+      idOptionAnswers: [answerForm.value.socialSecurity],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
-    let answer20: AnswerModel = {
-      idAnswer: this.idAnswer + 20,
-      idQuestion: 15,
-      idOptionAnswers: [answerForm.value.workOStudyMode],
-      openAnswer: '',
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer21: AnswerModel = {
-      idAnswer: this.idAnswer + 21,
-      idQuestion: 16,
-      idOptionAnswers: [answerForm.value.workOStudyMode],
-      openAnswer: '',
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer22: AnswerModel = {
-      idAnswer: this.idAnswer + 22,
-      idQuestion: 17,
-      idOptionAnswers: [answerForm.value.occupation],
-      openAnswer: '',
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer23: AnswerModel = {
-      idAnswer: this.idAnswer + 23,
-      idQuestion: 22,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.numberChildren,
-      idPoll: this.idAnswer + 1,
-    };
-
-    let answer24: AnswerModel = {
-      idAnswer: this.idAnswer + 24,
-      idQuestion: 23,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.dependents,
-      idPoll: this.idAnswer + 1,
-    };
-
-    this.answerList.push(answer9)
-    this.answerList.push(answer10)
-    this.answerList.push(answer11)
-    this.answerList.push(answer12)
-    this.answerList.push(answer13)
-    this.answerList.push(answer14)
-    this.answerList.push(answer15)
-    this.answerList.push(answer16)
-    this.answerList.push(answer17)
-    this.answerList.push(answer18)
-    this.answerList.push(answer19)
-    this.answerList.push(answer20)
-    this.answerList.push(answer21)
-    this.answerList.push(answer22)
-    this.answerList.push(answer23)
-    this.answerList.push(answer24)
+    this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17,
+      answer18, answer19);
 
     this.selectQuestion(12);
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
-    let answer25: AnswerModel = {
-      idAnswer: this.idAnswer + 25,
-      idQuestion: 24,
+    let answer20: AnswerModel = {
+      idAnswer: this.idAnswer + 19,
+      idQuestion: 12,
       idOptionAnswers: answerForm.value.comorbilities,
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
 
-    let answer26: AnswerModel = {
-      idAnswer: this.idAnswer + 26,
-      idQuestion: 25,
+    let answer21: AnswerModel = {
+      idAnswer: this.idAnswer + 20,
+      idQuestion: 0,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.anyDiagnostic,
-      idPoll: this.idAnswer + 1,
+      openAnswer: '',
+      idPoll: this.idAnswer,
     };
 
-    let answer27: AnswerModel = {
-      idAnswer: this.idAnswer + 27,
-      idQuestion: 27,
+    let answer22: AnswerModel = {
+      idAnswer: this.idAnswer + 21,
+      idQuestion: 0,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.illnessHistory ? 'SI' : 'NO',
-      idPoll: this.idAnswer + 1,
+      openAnswer: '',
+      idPoll: this.idAnswer,
     };
 
-    let answer28: AnswerModel = {
-      idAnswer: this.idAnswer + 28,
-      idQuestion: 28,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.disability,
-      idPoll: this.idAnswer + 1,
-    };
-
-    this.answerList.push(answer25)
-    this.answerList.push(answer26)
-    this.answerList.push(answer27)
-    this.answerList.push(answer28)
+    this.answerList.push(answer20, answer21, answer22);
 
     let idQuestions: Array<number> = [13, 14, 15, 16, 17];
     this.selectFactors(idQuestions);
   }
 
   saveAnswerFactor(answerForm: FormGroup) {
-    console.log(answerForm.value)
-
-    let answer29: AnswerModel = {
-      idAnswer: this.idAnswer + 29,
-      idQuestion: 30,
-      idOptionAnswers: [answerForm.value.hadCovid],
+    let answer23: AnswerModel = {
+      idAnswer: this.idAnswer + 22,
+      idQuestion: 13,
+      idOptionAnswers: [answerForm.value.one],
       openAnswer: '',
-      idPoll: this.idAnswer + 1,
+      idPoll: this.idAnswer,
     };
+
+    let answer24: AnswerModel = {
+      idAnswer: this.idAnswer + 23,
+      idQuestion: 14,
+      idOptionAnswers: [answerForm.value.two],
+      openAnswer: '',
+      idPoll: this.idAnswer,
+    };
+
+    let answer25: AnswerModel = {
+      idAnswer: this.idAnswer + 24,
+      idQuestion: 15,
+      idOptionAnswers: [answerForm.value.three],
+      openAnswer: '',
+      idPoll: this.idAnswer,
+    };
+
+    let answer26: AnswerModel = {
+      idAnswer: this.idAnswer + 25,
+      idQuestion: 16,
+      idOptionAnswers: [answerForm.value.four],
+      openAnswer: '',
+      idPoll: this.idAnswer,
+    };
+
+    let answer27: AnswerModel = {
+      idAnswer: this.idAnswer + 26,
+      idQuestion: 17,
+      idOptionAnswers: [answerForm.value.five],
+      openAnswer: '',
+      idPoll: this.idAnswer,
+    };
+
+    this.answerList.push(answer23, answer24, answer25, answer26, answer27);
+    this.quanInstService.createAnswer(this.answerList).subscribe(response => {
+      this.openSnackBar('Se guardó correctamente el formulario', 'Alert');
+      this.router.navigateByUrl('/navbar');
+    }, error => {
+      this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+    });
   }
 
   selectQuestion(idQuestion: number) {
@@ -530,5 +499,13 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       const i = comorbilities.controls.findIndex(x => x.value === event.source.value);
       comorbilities.removeAt(i);
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 }
