@@ -7,7 +7,7 @@ import {Question} from "../question.model";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
-interface listTypes {
+interface ListTypes {
   value: string;
   viewValue: string;
 }
@@ -53,12 +53,12 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   fourList: Array<OptionAnswer> = [];
   fiveList: Array<OptionAnswer> = [];
 
-  identification: listTypes[] = [
+  identification: ListTypes[] = [
     {value: 'RC', viewValue: 'Registro Civil'},
     {value: 'TI', viewValue: 'Tarjeta Identidad'},
   ];
 
-  citiesList: listTypes[] = [
+  citiesList: ListTypes[] = [
     {value: '19001	', viewValue: '	POPAYAN'},
     {value: '19022	', viewValue: '	ALMAGUER'},
     {value: '19050	', viewValue: '	ARGELIA'},
@@ -402,11 +402,13 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     };
 
     this.answerList.push(answer23, answer24, answer25, answer26, answer27);
-    this.quanInstService.createAnswer(this.answerList).subscribe(response => {
-      this.openSnackBar('Se guardó correctamente el formulario', 'Alert');
-      this.router.navigateByUrl('/navbar');
-    }, error => {
-      this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+    this.quanInstService.createAnswer(this.answerList).subscribe({
+      next: (response) => {
+        this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
+        this.router.navigateByUrl('/navbar')
+      }, error: () => {
+        this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+      }
     });
   }
 
