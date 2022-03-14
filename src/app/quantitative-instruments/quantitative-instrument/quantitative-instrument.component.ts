@@ -4,6 +4,8 @@ import {QuantitativeInstrumentService} from "../quantitative-instrument.service"
 import {AnswerModel} from "../answer.model";
 import {Question} from "../question.model";
 import {OptionAnswer} from "../option-answer.model";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface ListTypes {
   value: string;
@@ -81,7 +83,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private quanInstService: QuantitativeInstrumentService) {
+    private quanInstService: QuantitativeInstrumentService,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+  ) {
   }
 
   identification: ListTypes[] = [
@@ -144,10 +149,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       this.questions = response.data;
       console.log(this.questions)
     })
-
-    // this.quanInstService.findAll().subscribe(response => {
-    //   console.log('answer', response.data)
-    // })
 
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
@@ -294,14 +295,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    this.answerList.push(answer1)
-    this.answerList.push(answer2)
-    this.answerList.push(answer3)
-    this.answerList.push(answer4)
-    this.answerList.push(answer5)
-    this.answerList.push(answer6)
-    this.answerList.push(answer7)
-    this.answerList.push(answer8)
+    this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8)
   }
 
   saveAnswerSecundaryInfo(answerForm: FormGroup) {
@@ -433,23 +427,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    this.answerList.push(answer9)
-    this.answerList.push(answer10)
-    this.answerList.push(answer11)
-    this.answerList.push(answer12)
-    this.answerList.push(answer13)
-    this.answerList.push(answer14)
-    this.answerList.push(answer15)
-    this.answerList.push(answer16)
-    this.answerList.push(answer17)
-    this.answerList.push(answer18)
-    this.answerList.push(answer19)
-    this.answerList.push(answer20)
-    this.answerList.push(answer21)
-    this.answerList.push(answer22)
-    this.answerList.push(answer23)
-    this.answerList.push(answer24)
-
+    this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17, answer18,
+      answer19, answer20, answer21, answer22, answer23, answer24)
     this.selectQuestion(16);
   }
 
@@ -486,15 +465,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    this.answerList.push(answer25)
-    this.answerList.push(answer26)
-    this.answerList.push(answer27)
-    this.answerList.push(answer28)
+    this.answerList.push(answer25, answer26, answer27, answer28)
   }
 
   saveAnswerFactor(answerForm: FormGroup) {
-    console.log(answerForm.value)
-
     let answer29: AnswerModel = {
       idAnswer: this.idAnswer + 29,
       idQuestion: 30,
@@ -583,17 +557,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    this.answerList.push(answer29)
-    this.answerList.push(answer30)
-    this.answerList.push(answer31)
-    this.answerList.push(answer32)
-    this.answerList.push(answer33)
-    this.answerList.push(answer34)
-    this.answerList.push(answer35)
-    this.answerList.push(answer36)
-    this.answerList.push(answer37)
-    this.answerList.push(answer38)
-    this.answerList.push(answer39)
+    this.answerList.push(answer29, answer30, answer31, answer32, answer33, answer34, answer35, answer36, answer37, answer38, answer39)
 
     let idQuestions: Array<number> = [2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819];
     this.selectMentalHealthNeeds(idQuestions)
@@ -752,29 +716,14 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idAnswer + 1,
     };
 
-    this.answerList.push(answer40)
-    this.answerList.push(answer41)
-    this.answerList.push(answer42)
-    this.answerList.push(answer43)
-    this.answerList.push(answer44)
-    this.answerList.push(answer45)
-    this.answerList.push(answer46)
-    this.answerList.push(answer47)
-    this.answerList.push(answer48)
-    this.answerList.push(answer49)
-    this.answerList.push(answer50)
-    this.answerList.push(answer51)
-    this.answerList.push(answer52)
-    this.answerList.push(answer53)
-    this.answerList.push(answer54)
-    this.answerList.push(answer55)
-    this.answerList.push(answer56)
-    this.answerList.push(answer57)
-    this.answerList.push(answer58)
-
+    this.answerList.push(answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
+      answer50, answer51, answer52, answer53, answer54, answer55, answer56, answer57, answer58)
     this.quanInstService.createAnswer(this.answerList).subscribe(response => {
-      console.log(response)
-    })
+      this.openSnackBar('Se guardó correctamente el formulario', 'Alert');
+      this.router.navigateByUrl('/navbar');
+    }, error => {
+      this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+    });
   }
 
   selectQuestion(idQuestion: number) {
@@ -958,5 +907,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
       const i = comorbilities.controls.findIndex(x => x.value === event.source.value);
       comorbilities.removeAt(i);
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 3000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 }
