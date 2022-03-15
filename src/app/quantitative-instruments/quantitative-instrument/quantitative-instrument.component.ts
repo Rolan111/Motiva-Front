@@ -92,6 +92,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   identification: ListTypes[] = [
     {value: 'CC', viewValue: 'Cedula Ciudadanía'},
     {value: 'CE', viewValue: 'Cedula Extranjería'},
+    {value: 'TI', viewValue: 'Tarjeta Identidad'},
     {value: 'NIP', viewValue: 'Número Identificación Personal'},
     {value: 'NIT', viewValue: 'Número Identificación Tributaría'},
     {value: 'PAP', viewValue: 'Pasaporte'},
@@ -766,9 +767,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
       answer50, answer51, answer52, answer53, answer54, answer55, answer56, answer57, answer58)
     this.quanInstService.createAnswer(this.answerList).subscribe({
-      next: (response) => {
+      next: () => {
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert');
-        this.router.navigateByUrl('/navbar');
+        this.answerList = [];
+        window.location.reload();
       }, error: () => {
         this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
       }
