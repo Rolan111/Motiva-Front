@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RepComAgentService} from "./rep-com-agent.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from 'ngx-toastr';
 import {RepComAgentModel} from "./rep-com-agent.model";
@@ -18,6 +18,7 @@ export class RepComAgentComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private RepComAgentService: RepComAgentService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService) {
@@ -58,7 +59,8 @@ export class RepComAgentComponent implements OnInit {
       return;
     }
     this.toastr.success('El reporte de agente comunitario ha sido cargado!', 'Registro exitoso');
-    console.log(this.form);
+    //console.log(this.form);
+    this.router.navigate(['navbar/forum'])
   }
 
 
@@ -87,6 +89,7 @@ export class RepComAgentComponent implements OnInit {
     }
     this.RepComAgentService.create(repComAgentModel).subscribe(response => {
       console.log(response.data)
+      this.probandoReactivos()
     })
   }
 
