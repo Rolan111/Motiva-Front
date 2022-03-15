@@ -152,9 +152,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.comorbidityInfo = this.formBuilder.group({
       comorbilities: this.formBuilder.array([]),
-      anyDiagnostic: [''],
-      illnessHistory: [''],
-      disability: [''],
+      disorderDisease: [''],
+      physicalMental: [''],
     })
 
     this.factors = this.formBuilder.group({
@@ -173,6 +172,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer2: AnswerModel = {
@@ -181,6 +181,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer3: AnswerModel = {
@@ -189,6 +190,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer4: AnswerModel = {
@@ -197,6 +199,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer5: AnswerModel = {
@@ -205,6 +208,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.typeIdentification,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer6: AnswerModel = {
@@ -213,6 +217,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer7: AnswerModel = {
@@ -221,6 +226,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.address,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer8: AnswerModel = {
@@ -229,6 +235,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8);
@@ -241,6 +248,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.age,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer10: AnswerModel = {
@@ -249,6 +257,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.sex],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer11: AnswerModel = {
@@ -257,6 +266,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.ethnicity],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer12: AnswerModel = {
@@ -265,6 +275,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.zoneResidence],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer13: AnswerModel = {
@@ -273,6 +284,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.municipalityResidence,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer14: AnswerModel = {
@@ -281,6 +293,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [],
       openAnswer: answerForm.value.personCoexist,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer15: AnswerModel = {
@@ -289,6 +302,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.typeHome],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer16: AnswerModel = {
@@ -297,6 +311,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: answerForm.value.accessServicies,
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer17: AnswerModel = {
@@ -305,6 +320,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.educationLevel],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer18: AnswerModel = {
@@ -313,6 +329,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.studyMode],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer19: AnswerModel = {
@@ -321,6 +338,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: [answerForm.value.socialSecurity],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17,
@@ -336,22 +354,25 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idOptionAnswers: answerForm.value.comorbilities,
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer21: AnswerModel = {
-      idAnswer: this.idAnswer + 20,
-      idQuestion: 0,
+      idAnswer: this.idAnswer + 19,
+      idQuestion: 12,
       idOptionAnswers: [],
-      openAnswer: '',
+      openAnswer: answerForm.value.disorderDisease,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer22: AnswerModel = {
-      idAnswer: this.idAnswer + 21,
-      idQuestion: 0,
+      idAnswer: this.idAnswer + 19,
+      idQuestion: 12,
       idOptionAnswers: [],
-      openAnswer: '',
+      openAnswer: answerForm.value.physicalMental,
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     this.answerList.push(answer20, answer21, answer22);
@@ -362,46 +383,52 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   saveAnswerFactor(answerForm: FormGroup) {
     let answer23: AnswerModel = {
-      idAnswer: this.idAnswer + 22,
+      idAnswer: this.idAnswer + 20,
       idQuestion: 13,
       idOptionAnswers: [answerForm.value.one],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer24: AnswerModel = {
-      idAnswer: this.idAnswer + 23,
+      idAnswer: this.idAnswer + 21,
       idQuestion: 14,
       idOptionAnswers: [answerForm.value.two],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer25: AnswerModel = {
-      idAnswer: this.idAnswer + 24,
+      idAnswer: this.idAnswer + 22,
       idQuestion: 15,
       idOptionAnswers: [answerForm.value.three],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer26: AnswerModel = {
-      idAnswer: this.idAnswer + 25,
+      idAnswer: this.idAnswer + 23,
       idQuestion: 16,
       idOptionAnswers: [answerForm.value.four],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     let answer27: AnswerModel = {
-      idAnswer: this.idAnswer + 26,
+      idAnswer: this.idAnswer + 24,
       idQuestion: 17,
       idOptionAnswers: [answerForm.value.five],
       openAnswer: '',
       idPoll: this.idAnswer,
+      type: 'CHILDREN',
     };
 
     this.answerList.push(answer23, answer24, answer25, answer26, answer27);
+    console.log('lista res', this.answerList)
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: (response) => {
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
