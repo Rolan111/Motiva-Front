@@ -100,11 +100,12 @@ export class NavbarComponent {
   selector: 'select-quantitative-instrument-dialog',
   template:  `
     <div mat-dialog-content style="text-align: -webkit-center">
-      <p>Seleccione el tipo de instrumento cuantitativo que desea aplicar:</p>
+      <p>Seleccione el tipo de instrumento cuantitativo que desea aplicar, niños iguales o menores de 13 años, adultos
+        igual o mayores a 14 años.</p>
     </div>
     <div mat-dialog-actions style="place-content: center">
-      <button mat-button (click)="childrenClick()">Niño</button>
-      <button mat-button (click)="adultClick()">Adulto</button>
+      <button mat-button (click)="childrenClick()">Niños</button>
+      <button mat-button (click)="adultClick()">Adultos</button>
     </div>`,
 })
 export class SelectQuantitativeInstrumentDialog {
