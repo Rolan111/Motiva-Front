@@ -24,3 +24,25 @@
 .example-radio-button {
   margin: 5px;
 }
+
+.checkboxGrid{
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-content: center !important;
+  width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff4f3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}

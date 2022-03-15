@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {environment} from "../../environments/environment";
-import {QuantitativeInstrumentModel} from "./quantitative-instrument.model";
 import {Observable} from "rxjs";
 import {DataResponse} from "../util/data-response";
 import {LocalStorage} from "../storage/local-storage";

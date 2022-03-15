@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
 
   login(data: FormGroup) {
     if ((data.value.username == null && data.value.password == null) || (data.value.username == "" && data.value.password == "")) {
-      this.openSnackBar("Los campos usuario y contraseña deben estar llenos", "alert");
+      this.openSnackBar("Debe ingresar datos de usuario y contraseña", "alert");
       return;
     }
     if (data.value.username == null || data.value.username == "") {
@@ -61,10 +61,10 @@ export class LoginComponent implements OnInit {
       }
     }, error => {
       if (error.status === 401 || error.statusText === "ok") {
-        this.openSnackBar("Error al iniciar session", "Alert");
+        this.openSnackBar("Usuario o Contraseña incorrecta", "Alert");
         return;
       }
-      this.openSnackBar("Usuario o Contraseña es incorrecta", "Alert");
+      this.openSnackBar("Error al iniciar session", "Alert");
     })
   }
 
@@ -112,5 +112,4 @@ export class LoginComponent implements OnInit {
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
-
 }

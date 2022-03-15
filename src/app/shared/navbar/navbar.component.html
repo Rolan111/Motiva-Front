@@ -22,12 +22,9 @@
       <a routerLink="dashboard" mat-list-item *ngIf="buttonMenuDashBoard">
         <mat-icon fontSet="material-icons-two-tone">dashboard</mat-icon>
         &nbsp;&nbsp;Dashboard</a>
-      <a routerLink="quantitative" mat-list-item *ngIf="buttonMenuQuantitive">
+      <a (click)="openDialog()" mat-list-item *ngIf="buttonMenuQuantitive">
         <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
         &nbsp;&nbsp;Instrumento Cuantitativo</a>
-      <a routerLink="quantitative-children" mat-list-item *ngIf="buttonMenuQuantitiveChildren">
-        <mat-icon fontSet="material-icons-two-tone">home</mat-icon>
-        &nbsp;&nbsp;Instrumento Cuantitativo niñ@s</a>
       <a routerLink="care-sheet" mat-list-item *ngIf="buttonMenuTrakingSheet">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Ficha de atención</a>
@@ -55,7 +52,6 @@
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Ficha de seguimiento</a>
       <mat-divider></mat-divider>
-
     </mat-nav-list>
   </mat-drawer>
 

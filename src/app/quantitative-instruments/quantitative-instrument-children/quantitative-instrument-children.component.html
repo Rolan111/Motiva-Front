@@ -1,0 +1,355 @@
+<mat-vertical-stepper [linear]="isLinear" class="mat-stepper-vertical">
+  <mat-step [stepControl]="personalInfo" color="primary">
+    <ng-template matStepLabel>Información Personal</ng-template>
+    <mat-card class="advancedForm">
+      <mat-card-header>
+        <mat-card-title>Beneficiario</mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="personalInfo">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Primer Nombre</mat-label>
+              <input matInput formControlName="firstName" required>
+              <mat-error *ngIf="isControlHasError('firstName', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Segundo Nombre</mat-label>
+              <input matInput formControlName="secondName">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Primer Apellido</mat-label>
+              <input matInput maxlength="30" formControlName="firstLastName" required>
+              <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Segundo Apellido</mat-label>
+              <input matInput maxlength="30" formControlName="secondLastName">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Tipo de Documento</mat-label>
+              <mat-select formControlName="typeIdentification" required>
+                <mat-option *ngFor="let ident of identification" [value]="ident.value">
+                  {{ident.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasError('typeIdentification', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>No. Identificación</mat-label>
+              <input type="text" matInput maxlength="12" minlength="8"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
+              <mat-error *ngIf="isControlHasError('identification', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Dirección</mat-label>
+              <input matInput formControlName="address" required>
+              <mat-error *ngIf="isControlHasError('address', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>No. telefónico</mat-label>
+              <input type="text" matInput maxlength="12" minlength="8"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
+              <mat-error *ngIf="isControlHasError('cellphone', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <button mat-button matStepperNext (click)="saveAnswerPersonalInfo(personalInfo)">Siguiente</button>
+    </mat-card>
+  </mat-step>
+
+  <mat-step [stepControl]="secundaryInfo">
+    <ng-template matStepLabel>Factores sociodemográficos</ng-template>
+    <mat-card class="advancedForm">
+      <form [formGroup]="secundaryInfo">
+        <mat-grid-list cols="3" rowHeight="80px">
+          <mat-grid-tile>
+            <mat-form-field class="inputClass">
+              <mat-label>Edad</mat-label>
+              <input matInput formControlName="age" maxlength="3"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+              <mat-error *ngIf="isControlHasErrorSecundary('age', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Sexo</mat-label>
+              <mat-select formControlName="sex" (click)="selectQuestion(2)" required>
+                <mat-option *ngFor="let item of sexList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('sex', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Reconocimiento étnico</mat-label>
+              <mat-select formControlName="ethnicity" (click)="selectQuestion(3)" required>
+                <mat-option *ngFor="let item of ethnicityList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('ethnicity', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group">
+              <label>Zona de residencia</label>
+              <mat-radio-group class="example-radio-group" aria-label="Zona de residencia"
+                               formControlName="zoneResidence">
+                <mat-radio-button class="example-radio-button" value="196">Rural</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="197">Urbano</mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="isControlHasErrorSecundary('zoneResidence', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Municipio de residencia</mat-label>
+              <mat-select formControlName="municipalityResidence" required>
+                <mat-option *ngFor="let city of citiesList" [value]="city.value">
+                  {{city.viewValue}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('municipalityResidence', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field class="inputClass">
+              <mat-label>No. Personas con las que convive</mat-label>
+              <input matInput formControlName="personCoexist"
+                     maxlength="2"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
+              <mat-error *ngIf="isControlHasErrorSecundary('personCoexist', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Tipo de vivienda</mat-label>
+              <mat-select formControlName="typeHome" (click)="selectQuestion(7)" required>
+                <mat-option *ngFor="let item of typeHomeList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('typeHome', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Acceso a servicios</mat-label>
+              <mat-select formControlName="accessServicies" (click)="selectQuestion(8)" multiple required>
+                <mat-option *ngFor="let item of accessServiciesList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('accessServicies', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Escolaridad</mat-label>
+              <mat-select formControlName="educationLevel" (click)="selectQuestion(9)" required>
+                <mat-option *ngFor="let item of educationLevelList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+                <mat-error *ngIf="isControlHasErrorSecundary('educationLevel', 'required')">
+                  <strong>Campo requerido</strong>
+                </mat-error>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Modalidad de estudio:</mat-label>
+              <mat-select formControlName="studyMode" (click)="selectQuestion(10)" required>
+                <mat-option *ngFor="let item of studyModeList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('socialSecurity', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="standard" class="inputClass">
+              <mat-label>Percepción de seguridad social en salud</mat-label>
+              <mat-select formControlName="socialSecurity" (click)="selectQuestion(11)" required>
+                <mat-option *ngFor="let item of socialSecurityList" [value]="item.idOptionAnswer">
+                  {{item.description}}
+                </mat-option>
+              </mat-select>
+              <mat-error *ngIf="isControlHasErrorSecundary('socialSecurity', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext (click)="saveAnswerSecundaryInfo(secundaryInfo)">Siguiente</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
+    <mat-card class="advancedForm">
+      <form [formGroup]="comorbidityInfo">
+        <mat-grid-list cols="3" rowHeight="80px">
+          <mat-grid-tile *ngFor="let comorbilities of comorbilitiesList; let i = index">
+            <div class="checkboxGrid">
+              <mat-checkbox (change)="onCheckboxChange($event)" [value]="comorbilities.idOptionAnswer.toString()">
+                {{comorbilities.description}}
+              </mat-checkbox>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-grid-list cols="1" rowHeight="80px">
+          <mat-grid-tile>
+            <div style="width: 100%;">
+              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
+                <mat-label>12. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
+                <input matInput formControlName="disorderDisease">
+                <mat-error *ngIf="isControlHasError('disorderDisease', 'required')">
+                  <strong>Campo requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div style="width: 100%;">
+              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
+                <mat-label>13. Discapacidad física o mental</mat-label>
+                <input matInput formControlName="physicalMental">
+                <mat-error *ngIf="isControlHasError('physicalMental', 'required')">
+                  <strong>Campo requerido</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext (click)="saveAnswerComorbidity(comorbidityInfo)">Siguiente</button>
+      </mat-card-actions>
+    </mat-card>
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Factores contextuales asociados al Covid-19</ng-template>
+    <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">
+      <form [formGroup]="factors">
+        <mat-card-header>
+          <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>
+        </mat-card-header>
+        <mat-grid-list cols="1" rowHeight="100px">
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del
+                virus?</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="one">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of oneList"
+                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste estudiando en casa el tiempo que no pudiste salir a causa del virus?</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="two">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twoList"
+                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste al no poder relacionarte con tus amigos como antes, el tiempo que estuviste en
+                casa sin poder salir a causa del virus?</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="three">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of threeList"
+                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste al cumplir con tus deberes y tareas el tiempo que estuviste en casa sin poder
+                salir a causa del virus?</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="four">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fourList"
+                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <div class="example-radio-group" style="width: 100%">
+              <label>¿Cómo te sentiste realizando tus pasatiempos, mientras estuviste en casa sin poder salir a causa
+                del virus?</label>
+              <br>
+              <mat-radio-group class="example-radio-group" formControlName="five">
+                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fiveList"
+                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </mat-grid-tile>
+        </mat-grid-list>
+        <mat-card-actions>
+          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperNext (click)="saveAnswerFactor(factors)">Enviar</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+  </mat-step>
+</mat-vertical-stepper>
