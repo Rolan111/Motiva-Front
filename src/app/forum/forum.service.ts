@@ -18,7 +18,6 @@ export class ForumService {
 
   public getAll() {
     return this.http.get(mainUrl + 'api/rep-com-agents', {
-      //return this.http.get('http://localhost:3000/' + 'forum/', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
@@ -27,7 +26,6 @@ export class ForumService {
 
   public get(id: any) {
     return this.http.get(mainUrl + 'api/rep-com-agent/' + id, {
-      //return this.http.get('http://localhost:3000/' + 'forum/' + id, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
@@ -36,7 +34,6 @@ export class ForumService {
 
   public getComments(id: any) {
     return this.http.get(mainUrl + 'api/rep-com-agent-forum-comments/' + id, {
-      //return this.http.get('http://localhost:3000/' + 'forum/' + id, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
@@ -45,7 +42,6 @@ export class ForumService {
 
   public postComments(id: any, body: any) {
     return this.http.post(mainUrl + 'api/rep-com-agent-comments-create/' + id, body, {
-      //return this.http.get('http://localhost:3000/' + 'forum/' + id, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
