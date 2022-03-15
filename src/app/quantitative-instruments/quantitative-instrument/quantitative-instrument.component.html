@@ -296,6 +296,30 @@
               </mat-checkbox>
             </div>
           </mat-grid-tile>
+          <mat-grid-list cols="1" rowHeight="80px">
+            <mat-grid-tile>
+              <div style="width: 100%;">
+                <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
+                  <mat-label>13. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
+                  <input matInput formControlName="disorderDisease">
+                  <mat-error *ngIf="isControlHasError('disorderDisease', 'required')">
+                    <strong>Campo requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <div style="width: 100%;">
+                <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
+                  <mat-label>14. Discapacidad física o mental</mat-label>
+                  <input matInput formControlName="physicalMental">
+                  <mat-error *ngIf="isControlHasError('physicalMental', 'required')">
+                    <strong>Campo requerido</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </mat-grid-tile>
+          </mat-grid-list>
           <!--          <mat-grid-tile>-->
           <!--            <mat-form-field class="inputClass">-->
           <!--              <mat-label>Diagnosticado con algún trastorno o enfermedad mental</mat-label>-->
