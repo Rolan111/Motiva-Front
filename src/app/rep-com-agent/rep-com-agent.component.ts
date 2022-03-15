@@ -59,16 +59,7 @@ export class RepComAgentComponent implements OnInit {
       return;
     }
     this.toastr.success('El reporte de agente comunitario ha sido cargado!', 'Registro exitoso');
-    //console.log(this.form);
     this.router.navigate(['navbar/forum'])
-  }
-
-
-  public loadDataById(id: string) {
-    this.RepComAgentService.getById(id)
-      .subscribe(respuesta => {
-        this.respuesta = respuesta;
-      })
   }
 
   public saveForm(form: FormGroup) {
@@ -90,34 +81,6 @@ export class RepComAgentComponent implements OnInit {
     this.RepComAgentService.create(repComAgentModel).subscribe(response => {
       console.log(response.data)
       this.probandoReactivos()
-    })
-  }
-
-  updateData() {
-    this.RepComAgentService.update(
-      {
-        activityName: "nombre 1",
-        activityNumber: "Numero 2",
-        date: "fecha nueva",
-        duration: "duracion 1",
-        place: "lugar 1",
-        numberAttendees: "Numero asistentes 1",
-        activityObjectives: "Objetivos de actividad 1",
-        resourcesUsed: "Recursos usados 1",
-        methodologyUsed: "Metodologia usada 1",
-        activityDescriptionDevelopment: "Descripción 1",
-        resourcesObtained: "Recursos obtenidos 1",
-        evidence: "Evidencias 1",
-        activityProfessionalIncharge: "Profesional a carga 1",
-
-      }).subscribe(respuesta => {
-
-    })
-  }
-
-  deleteData() {
-    this.RepComAgentService.delete().subscribe(respuesta => {
-
     })
   }
 
