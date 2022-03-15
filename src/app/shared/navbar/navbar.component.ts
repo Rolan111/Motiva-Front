@@ -32,7 +32,7 @@ export class NavbarComponent {
 
   openDialog(): void {
     this.dialog.open(SelectQuantitativeInstrumentDialog, {
-      width: '350px',
+      width: '550px',
     });
   }
 

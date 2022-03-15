@@ -429,9 +429,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.answerList.push(answer23, answer24, answer25, answer26, answer27);
     this.quanInstService.createAnswer(this.answerList).subscribe({
-      next: (response) => {
+      next: () => {
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
-        this.router.navigateByUrl('/navbar')
+        this.answerList = [];
+        window.location.reload();
       }, error: () => {
         this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
       }
