@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface ListTypes {
-  value: string;
   viewValue: string;
 }
 
@@ -28,15 +27,17 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   idAnswer: number = 0;
   idPoll: number = 0;
 
+  typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
   ethnicityQuestion: Question[] = [];
-  typeHome: Question[] = [];
-  accessServicies: Question[] = [];
-  educationLevel: Question[] = [];
-  studyMode: Question[] = [];
-  socialSecurity: Question[] = [];
-  comorbilities: Question[] = [];
+  typeHomeQuestion: Question[] = [];
+  accessServiciesQuestion: Question[] = [];
+  educationLevelQuestion: Question[] = [];
+  studyModeQuestion: Question[] = [];
+  socialSecurityQuestion: Question[] = [];
+  comorbilitiesQuestion: Question[] = [];
 
+  typeIdentificationList: Array<OptionAnswer> = [];
   sexList: Array<OptionAnswer> = [];
   ethnicityList: Array<OptionAnswer> = [];
   typeHomeList: Array<OptionAnswer> = [];
@@ -53,54 +54,49 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   fourList: Array<OptionAnswer> = [];
   fiveList: Array<OptionAnswer> = [];
 
-  identification: ListTypes[] = [
-    {value: 'RC', viewValue: 'Registro Civil'},
-    {value: 'TI', viewValue: 'Tarjeta Identidad'},
-  ];
-
   citiesList: ListTypes[] = [
-    {value: '19001	', viewValue: '	POPAYAN'},
-    {value: '19022	', viewValue: '	ALMAGUER'},
-    {value: '19050	', viewValue: '	ARGELIA'},
-    {value: '19075	', viewValue: '	BALBOA'},
-    {value: '19100	', viewValue: '	BOLIVAR'},
-    {value: '19110	', viewValue: '	BUENOS AIRES'},
-    {value: '19130	', viewValue: '	CAJIBIO'},
-    {value: '19137	', viewValue: '	CALDONO'},
-    {value: '19142	', viewValue: '	CALOTO'},
-    {value: '19212	', viewValue: '	CORINTO'},
-    {value: '19256	', viewValue: '	EL TAMBO'},
-    {value: '19290	', viewValue: '	FLORENCIA'},
-    {value: '19300	', viewValue: '	GUACHENE'},
-    {value: '19318	', viewValue: '	GUAPI'},
-    {value: '19355	', viewValue: '	INZA'},
-    {value: '19364	', viewValue: '	JAMBALO'},
-    {value: '19392	', viewValue: '	LA SIERRA'},
-    {value: '19397	', viewValue: '	LA VEGA'},
-    {value: '19418	', viewValue: '	LOPEZ'},
-    {value: '19450	', viewValue: '	MERCADERES'},
-    {value: '19455	', viewValue: '	MIRANDA'},
-    {value: '19473	', viewValue: '	MORALES'},
-    {value: '19513	', viewValue: '	PADILLA'},
-    {value: '19517	', viewValue: '	PAEZ'},
-    {value: '19533	', viewValue: '	PIAMONTE'},
-    {value: '19548	', viewValue: '	PIENDAMO'},
-    {value: '19573	', viewValue: '	PUERTO TEJADA'},
-    {value: '19532	', viewValue: '	PATIA'},
-    {value: '19585	', viewValue: '	PURACE'},
-    {value: '19622	', viewValue: '	ROSAS'},
-    {value: '19693	', viewValue: '	SAN SEBASTIAN'},
-    {value: '19698	', viewValue: '	SANTANDER DE QUILICHAO'},
-    {value: '19701	', viewValue: '	SANTA ROSA'},
-    {value: '19743	', viewValue: '	SILVIA'},
-    {value: '19760	', viewValue: '	SOTARA'},
-    {value: '19780	', viewValue: '	SUAREZ'},
-    {value: '19785	', viewValue: '	SUCRE'},
-    {value: '19807	', viewValue: '	TIMBIO'},
-    {value: '19809	', viewValue: '	TIMBIQUI'},
-    {value: '19821	', viewValue: '	TORIBIO'},
-    {value: '19824	', viewValue: '	TOTORO'},
-    {value: '19845	', viewValue: '	VILLA RICA'}
+    {viewValue: 'POPAYAN'},
+    {viewValue: 'ALMAGUER'},
+    {viewValue: 'ARGELIA'},
+    {viewValue: 'BALBOA'},
+    {viewValue: 'BOLIVAR'},
+    {viewValue: 'BUENOS AIRES'},
+    {viewValue: 'CAJIBIO'},
+    {viewValue: 'CALDONO'},
+    {viewValue: 'CALOTO'},
+    {viewValue: 'CORINTO'},
+    {viewValue: 'EL TAMBO'},
+    {viewValue: 'FLORENCIA'},
+    {viewValue: 'GUACHENE'},
+    {viewValue: 'GUAPI'},
+    {viewValue: 'INZA'},
+    {viewValue: 'JAMBALO'},
+    {viewValue: 'LA SIERRA'},
+    {viewValue: 'LA VEGA'},
+    {viewValue: 'LOPEZ'},
+    {viewValue: 'MERCADERES'},
+    {viewValue: 'MIRANDA'},
+    {viewValue: 'MORALES'},
+    {viewValue: 'PADILLA'},
+    {viewValue: 'PAEZ'},
+    {viewValue: 'PIAMONTE'},
+    {viewValue: 'PIENDAMO'},
+    {viewValue: 'PUERTO TEJADA'},
+    {viewValue: 'PATIA'},
+    {viewValue: 'PURACE'},
+    {viewValue: 'ROSAS'},
+    {viewValue: 'SAN SEBASTIAN'},
+    {viewValue: 'SANTANDER DE QUILICHAO'},
+    {viewValue: 'SANTA ROSA'},
+    {viewValue: 'SILVIA'},
+    {viewValue: 'SOTARA'},
+    {viewValue: 'SUAREZ'},
+    {viewValue: 'SUCRE'},
+    {viewValue: 'TIMBIO'},
+    {viewValue: 'TIMBIQUI'},
+    {viewValue: 'TORIBIO'},
+    {viewValue: 'TOTORO'},
+    {viewValue: 'VILLA RICA'}
   ];
 
   constructor(
@@ -168,7 +164,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   saveAnswerPersonalInfo(answerForm: FormGroup) {
     let answer1: AnswerModel = {
       idAnswer: this.idAnswer,
-      idQuestion: 2,
+      idQuestion: 200,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
       idPoll: this.idAnswer,
@@ -177,7 +173,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer2: AnswerModel = {
       idAnswer: this.idAnswer + 1,
-      idQuestion: 1,
+      idQuestion: 201,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
       idPoll: this.idAnswer,
@@ -186,7 +182,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer3: AnswerModel = {
       idAnswer: this.idAnswer + 2,
-      idQuestion: 3,
+      idQuestion: 202,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
       idPoll: this.idAnswer,
@@ -195,7 +191,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer4: AnswerModel = {
       idAnswer: this.idAnswer + 3,
-      idQuestion: 1,
+      idQuestion: 203,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
       idPoll: this.idAnswer,
@@ -204,16 +200,16 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer5: AnswerModel = {
       idAnswer: this.idAnswer + 4,
-      idQuestion: 4,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.typeIdentification,
+      idQuestion: 204,
+      idOptionAnswers: [answerForm.value.typeIdentification],
+      openAnswer: '',
       idPoll: this.idAnswer,
       type: 'CHILDREN',
     };
 
     let answer6: AnswerModel = {
       idAnswer: this.idAnswer + 5,
-      idQuestion: 5,
+      idQuestion: 205,
       idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
       idPoll: this.idAnswer,
@@ -222,7 +218,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer7: AnswerModel = {
       idAnswer: this.idAnswer + 6,
-      idQuestion: 1,
+      idQuestion: 206,
       idOptionAnswers: [],
       openAnswer: answerForm.value.address,
       idPoll: this.idAnswer,
@@ -231,7 +227,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     let answer8: AnswerModel = {
       idAnswer: this.idAnswer + 7,
-      idQuestion: 8,
+      idQuestion: 207,
       idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
       idPoll: this.idAnswer,
@@ -450,28 +446,32 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         this.ethnicityQuestion.forEach(item => this.ethnicityList = item.optionAnswerDtoList);
         break;
       case 7:
-        this.typeHome = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.typeHome.forEach(item => this.typeHomeList = item.optionAnswerDtoList);
+        this.typeHomeQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.typeHomeQuestion.forEach(item => this.typeHomeList = item.optionAnswerDtoList);
         break;
       case 8:
-        this.accessServicies = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.accessServicies.forEach(item => this.accessServiciesList = item.optionAnswerDtoList);
+        this.accessServiciesQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.accessServiciesQuestion.forEach(item => this.accessServiciesList = item.optionAnswerDtoList);
         break;
       case 9:
-        this.educationLevel = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.educationLevel.forEach(item => this.educationLevelList = item.optionAnswerDtoList);
+        this.educationLevelQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.educationLevelQuestion.forEach(item => this.educationLevelList = item.optionAnswerDtoList);
         break;
       case 10:
-        this.studyMode = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.studyMode.forEach(item => this.studyModeList = item.optionAnswerDtoList);
+        this.studyModeQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.studyModeQuestion.forEach(item => this.studyModeList = item.optionAnswerDtoList);
         break;
       case 11:
-        this.socialSecurity = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.socialSecurity.forEach(item => this.socialSecurityList = item.optionAnswerDtoList);
+        this.socialSecurityQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.socialSecurityQuestion.forEach(item => this.socialSecurityList = item.optionAnswerDtoList);
         break;
       case 12:
-        this.comorbilities = this.questions.filter(x => x.idQuestion === idQuestion);
-        this.comorbilities.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
+        this.comorbilitiesQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.comorbilitiesQuestion.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
+        break;
+      case 204:
+        this.typeIdentificationQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.typeIdentificationQuestion.forEach(item => this.typeIdentificationList = item.optionAnswerDtoList);
         break;
     }
   }
@@ -532,7 +532,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });

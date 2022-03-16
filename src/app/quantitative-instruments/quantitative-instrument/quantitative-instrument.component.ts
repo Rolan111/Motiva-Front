@@ -8,7 +8,6 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface ListTypes {
-  value: string;
   viewValue: string;
 }
 
@@ -31,6 +30,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
   isLinear = false;
+
+  typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
   ethnicityQuestion: Question[] = [];
   civilStatus: Question[] = [];
@@ -46,6 +47,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   aftermath: Question[] = [];
   mentalHealthNeedsQuestions: Question[] = [];
 
+  typeIdentificationList: Array<OptionAnswer> = [];
   sexList: Array<OptionAnswer> = [];
   ethnicityList: Array<OptionAnswer> = [];
   civilStatusList: Array<OptionAnswer> = [];
@@ -89,58 +91,49 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ) {
   }
 
-  identification: ListTypes[] = [
-    {value: 'CC', viewValue: 'Cedula Ciudadanía'},
-    {value: 'CE', viewValue: 'Cedula Extranjería'},
-    {value: 'TI', viewValue: 'Tarjeta Identidad'},
-    {value: 'NIP', viewValue: 'Número Identificación Personal'},
-    {value: 'NIT', viewValue: 'Número Identificación Tributaría'},
-    {value: 'PAP', viewValue: 'Pasaporte'},
-  ];
-
   citiesList: ListTypes[] = [
-    {value: '19001', viewValue: 'POPAYAN'},
-    {value: '19022', viewValue: 'ALMAGUER'},
-    {value: '19050', viewValue: 'ARGELIA'},
-    {value: '19075', viewValue: 'BALBOA'},
-    {value: '19100', viewValue: 'BOLIVAR'},
-    {value: '19110', viewValue: 'BUENOS AIRES'},
-    {value: '19130', viewValue: 'CAJIBIO'},
-    {value: '19137', viewValue: 'CALDONO'},
-    {value: '19142', viewValue: 'CALOTO'},
-    {value: '19212', viewValue: 'CORINTO'},
-    {value: '19256', viewValue: 'EL TAMBO'},
-    {value: '19290', viewValue: 'FLORENCIA'},
-    {value: '19300', viewValue: 'GUACHENE'},
-    {value: '19318', viewValue: 'GUAPI'},
-    {value: '19355', viewValue: 'INZA'},
-    {value: '19364', viewValue: 'JAMBALO'},
-    {value: '19392', viewValue: 'LA SIERRA'},
-    {value: '19397', viewValue: 'LA VEGA'},
-    {value: '19418', viewValue: 'LOPEZ'},
-    {value: '19450', viewValue: 'MERCADERES'},
-    {value: '19455', viewValue: 'MIRANDA'},
-    {value: '19473', viewValue: 'MORALES'},
-    {value: '19513', viewValue: 'PADILLA'},
-    {value: '19517', viewValue: 'PAEZ'},
-    {value: '19533', viewValue: 'PIAMONTE'},
-    {value: '19548', viewValue: 'PIENDAMO'},
-    {value: '19573', viewValue: 'PUERTO TEJADA'},
-    {value: '19532', viewValue: 'PATIA'},
-    {value: '19585', viewValue: 'PURACE'},
-    {value: '19622', viewValue: 'ROSAS'},
-    {value: '19693', viewValue: 'SAN SEBASTIAN'},
-    {value: '19698', viewValue: 'SANTANDER DE QUILICHAO'},
-    {value: '19701', viewValue: 'SANTA ROSA'},
-    {value: '19743', viewValue: 'SILVIA'},
-    {value: '19760', viewValue: 'SOTARA'},
-    {value: '19780', viewValue: 'SUAREZ'},
-    {value: '19785', viewValue: 'SUCRE'},
-    {value: '19807', viewValue: 'TIMBIO'},
-    {value: '19809', viewValue: 'TIMBIQUI'},
-    {value: '19821', viewValue: 'TORIBIO'},
-    {value: '19824', viewValue: 'TOTORO'},
-    {value: '19845', viewValue: 'VILLA RICA'}
+    {viewValue: 'POPAYAN'},
+    {viewValue: 'ALMAGUER'},
+    {viewValue: 'ARGELIA'},
+    {viewValue: 'BALBOA'},
+    {viewValue: 'BOLIVAR'},
+    {viewValue: 'BUENOS AIRES'},
+    {viewValue: 'CAJIBIO'},
+    {viewValue: 'CALDONO'},
+    {viewValue: 'CALOTO'},
+    {viewValue: 'CORINTO'},
+    {viewValue: 'EL TAMBO'},
+    {viewValue: 'FLORENCIA'},
+    {viewValue: 'GUACHENE'},
+    {viewValue: 'GUAPI'},
+    {viewValue: 'INZA'},
+    {viewValue: 'JAMBALO'},
+    {viewValue: 'LA SIERRA'},
+    {viewValue: 'LA VEGA'},
+    {viewValue: 'LOPEZ'},
+    {viewValue: 'MERCADERES'},
+    {viewValue: 'MIRANDA'},
+    {viewValue: 'MORALES'},
+    {viewValue: 'PADILLA'},
+    {viewValue: 'PAEZ'},
+    {viewValue: 'PIAMONTE'},
+    {viewValue: 'PIENDAMO'},
+    {viewValue: 'PUERTO TEJADA'},
+    {viewValue: 'PATIA'},
+    {viewValue: 'PURACE'},
+    {viewValue: 'ROSAS'},
+    {viewValue: 'SAN SEBASTIAN'},
+    {viewValue: 'SANTANDER DE QUILICHAO'},
+    {viewValue: 'SANTA ROSA'},
+    {viewValue: 'SILVIA'},
+    {viewValue: 'SOTARA'},
+    {viewValue: 'SUAREZ'},
+    {viewValue: 'SUCRE'},
+    {viewValue: 'TIMBIO'},
+    {viewValue: 'TIMBIQUI'},
+    {viewValue: 'TORIBIO'},
+    {viewValue: 'TOTORO'},
+    {viewValue: 'VILLA RICA'}
   ];
 
   ngOnInit(): void {
@@ -269,8 +262,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer5: AnswerModel = {
       idAnswer: this.idAnswer + 4,
       idQuestion: 204,
-      idOptionAnswers: [],
-      openAnswer: answerForm.value.typeIdentification,
+      idOptionAnswers: [answerForm.value.typeIdentification],
+      openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
     };
@@ -830,6 +823,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
         this.aftermath = this.questions.filter(x => x.idQuestion === idQuestion);
         this.aftermath.forEach(item => this.studentSituationList = item.optionAnswerDtoList);
         break;
+      case 204:
+        this.typeIdentificationQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
+        this.typeIdentificationQuestion.forEach(item => this.typeIdentificationList = item.optionAnswerDtoList);
+        break;
     }
   }
 
@@ -953,7 +950,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
-      duration: 3000,
+      duration: 5000,
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
