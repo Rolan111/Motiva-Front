@@ -41,9 +41,9 @@
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Tipo de Documento</mat-label>
-              <mat-select formControlName="typeIdentification" required>
-                <mat-option *ngFor="let ident of identification" [value]="ident.value">
-                  {{ident.viewValue}}
+              <mat-select formControlName="typeIdentification" (click)="selectQuestion(204)" required>
+                <mat-option *ngFor="let item of typeIdentificationList" [value]="item.idOptionAnswer">
+                  {{item.description}}
                 </mat-option>
               </mat-select>
               <mat-error *ngIf="isControlHasError('typeIdentification', 'required')">
@@ -144,7 +144,7 @@
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Municipio de residencia</mat-label>
               <mat-select formControlName="municipalityResidence" required>
-                <mat-option *ngFor="let city of citiesList" [value]="city.value">
+                <mat-option *ngFor="let city of citiesList" [value]="city.viewValue">
                   {{city.viewValue}}
                 </mat-option>
               </mat-select>
