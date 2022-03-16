@@ -157,7 +157,7 @@
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>Municipio de residencia</mat-label>
               <mat-select formControlName="municipalityResidence" required>
-                <mat-option *ngFor="let city of citiesList" [value]="city.value">
+                <mat-option *ngFor="let city of citiesList" [value]="city.viewValue">
                   {{city.viewValue}}
                 </mat-option>
               </mat-select>
