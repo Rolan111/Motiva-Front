@@ -112,6 +112,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.quanInstService.findAllQuestions('CHILDREN').subscribe(response => {
       this.questions = response.data;
+      console.log('questions', this.questions)
     })
 
     this.quanInstService.getLastSequence().subscribe(response => {
@@ -339,8 +340,6 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17,
       answer18, answer19);
-
-    this.selectQuestion(12);
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
@@ -372,9 +371,6 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     };
 
     this.answerList.push(answer20, answer21, answer22);
-
-    let idQuestions: Array<number> = [13, 14, 15, 16, 17];
-    this.selectFactors(idQuestions);
   }
 
   saveAnswerFactor(answerForm: FormGroup) {
@@ -424,6 +420,23 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     };
 
     this.answerList.push(answer23, answer24, answer25, answer26, answer27);
+  }
+
+  sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
+    answerFormList.forEach(answerForm => {
+      if (answerForm.value.firstName)
+        this.saveAnswerPersonalInfo(answerForm);
+
+      if (answerForm.value.sex)
+        this.saveAnswerSecundaryInfo(answerForm);
+
+      if (answerForm.value.comorbilities)
+        this.saveAnswerComorbidity(answerForm);
+
+      if (answerForm.value.one)
+        this.saveAnswerFactor(answerForm);
+    });
+
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
@@ -469,7 +482,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         this.comorbilitiesQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
         this.comorbilitiesQuestion.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
         break;
-      case 204:
+      case 208:
         this.typeIdentificationQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
         this.typeIdentificationQuestion.forEach(item => this.typeIdentificationList = item.optionAnswerDtoList);
         break;
