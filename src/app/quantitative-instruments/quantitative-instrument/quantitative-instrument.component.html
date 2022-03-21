@@ -82,7 +82,7 @@
           </mat-grid-tile>
         </mat-grid-list>
       </form>
-      <button mat-button matStepperNext (click)="saveAnswerPersonalInfo(personalInfo)">Siguiente</button>
+      <button mat-button matStepperNext>Siguiente</button>
     </mat-card>
   </mat-step>
 
@@ -280,7 +280,7 @@
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="saveAnswerSecundaryInfo(secundaryInfo)">Siguiente</button>
+        <button mat-button matStepperNext (click)="selectQuestion(16)">Siguiente</button>
       </mat-card-actions>
     </mat-card>
   </mat-step>
@@ -325,7 +325,7 @@
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="saveAnswerComorbidity(comorbidityInfo)">Siguiente</button>
+        <button mat-button matStepperNext>Siguiente</button>
       </mat-card-actions>
     </mat-card>
   </mat-step>
@@ -468,7 +468,9 @@
         </mat-grid-list>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext (click)="saveAnswerFactor(factors)">Siguiente</button>
+          <button mat-button matStepperNext (click)="selectMentalHealthNeeds([2801, 2802, 2803, 2804, 2805,
+          2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819])">Siguiente
+          </button>
         </mat-card-actions>
       </form>
     </mat-card>
@@ -665,8 +667,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del
-                virus</label>
+              <label>Ha experimentado soledad</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="nineteen">
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of nineteenList"
@@ -677,7 +678,9 @@
         </mat-grid-list>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext (click)="saveMentalHealthNeeds(mentalHealthNeeds)">Enviar</button>
+          <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, secundaryInfo,
+          comorbidityInfo, factors, mentalHealthNeeds])">Enviar
+          </button>
         </mat-card-actions>
       </form>
     </mat-card>
