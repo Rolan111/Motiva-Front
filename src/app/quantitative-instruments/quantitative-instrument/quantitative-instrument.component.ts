@@ -436,7 +436,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17, answer18,
       answer19, answer20, answer21, answer22, answer23)
-    this.selectQuestion(16);
   }
 
   saveAnswerComorbidity(answerForm: FormGroup) {
@@ -570,10 +569,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       type: 'ADULT',
     };
 
-    this.answerList.push(answer29, answer30, answer31, answer32, answer33, answer34, answer35, answer36, answer37)
-
-    let idQuestions: Array<number> = [2801, 2802, 2803, 2804, 2805, 2806, 2807, 2808, 2809, 2810, 2811, 2812, 2813, 2814, 2815, 2816, 2817, 2818, 2819];
-    this.selectMentalHealthNeeds(idQuestions)
+    this.answerList.push(answer27, answer28, answer29, answer30, answer31, answer32, answer33, answer34, answer35, answer36, answer37)
   }
 
   saveMentalHealthNeeds(answerForm: FormGroup) {
@@ -748,8 +744,28 @@ export class QuantitativeInstrumentComponent implements OnInit {
       type: 'ADULT',
     };
 
-    this.answerList.push(answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
+    this.answerList.push(answer38, answer39, answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
       answer50, answer51, answer52, answer53, answer54, answer55, answer56)
+  }
+
+  sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
+    answerFormList.forEach(answerForm => {
+      if (answerForm.value.firstName)
+        this.saveAnswerPersonalInfo(answerForm);
+
+      if (answerForm.value.sex)
+        this.saveAnswerSecundaryInfo(answerForm);
+
+      if (answerForm.value.comorbilities)
+        this.saveAnswerComorbidity(answerForm);
+
+      if (answerForm.value.hadCovid)
+        this.saveMentalHealthNeeds(answerForm);
+
+      if (answerForm.value.one)
+        this.saveAnswerFactor(answerForm);
+    });
+
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert');
