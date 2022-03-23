@@ -6,6 +6,7 @@ import {DataResponse} from "../util/data-response";
 import {LocalStorage} from "../storage/local-storage";
 import {LocalStorageKeyEnum} from "../enums/enum";
 import {AnswerModel} from "./answer.model";
+import {PollModel} from "./poll.model";
 
 const mainUrl = environment.url;
 
@@ -40,6 +41,12 @@ export class QuantitativeInstrumentService {
     const path = mainUrl + 'api/last-sequences';
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
+  }
+
+  createPoll(poll: PollModel): Observable<DataResponse> {
+    const path = mainUrl + 'api/poll';
+    const headers = this.getHeader();
+    return this.http.post<DataResponse>(path, poll, {headers});
   }
 
   getAnswersByIdPoll(idPoll: number): Observable<any> {

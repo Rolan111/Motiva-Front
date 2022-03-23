@@ -6,6 +6,7 @@ import {AnswerModel} from "../answer.model";
 import {Question} from "../question.model";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {PollModel} from "../poll.model";
 
 interface ListTypes {
   viewValue: string;
@@ -436,8 +437,16 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         this.saveAnswerFactor(answerForm);
     });
 
+    let poll: PollModel = {
+      approvalDoc: "/document",
+      evidence: "evidence",
+      idCity: 1,
+      type: "CHILDREN",
+    };
+
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
+        this.quanInstService.createPoll(poll);
         this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
         this.answerList = [];
         window.location.reload();
