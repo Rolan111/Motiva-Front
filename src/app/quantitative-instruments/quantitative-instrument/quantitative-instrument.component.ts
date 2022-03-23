@@ -29,7 +29,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
   questions: Array<Question> = [];
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
-  isLinear = false;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -176,7 +175,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       dependents: ['', Validators.required],
       occupation: ['', Validators.required],
       workMode: [''],
-      zoneResidence: [''],
+      zoneResidence: ['', Validators.required],
     });
 
     this.comorbidityInfo = this.formBuilder.group({
