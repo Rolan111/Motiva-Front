@@ -17,7 +17,6 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument-children.component.scss']
 })
 export class QuantitativeInstrumentChildrenComponent implements OnInit {
-  isLinear = false;
   personalInfo!: FormGroup;
   secundaryInfo!: FormGroup;
   comorbidityInfo!: FormGroup;

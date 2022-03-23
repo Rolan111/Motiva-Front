@@ -1,5 +1,5 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
-<mat-vertical-stepper [linear]="isLinear" class="mat-stepper-vertical">
+<mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
   <mat-step [stepControl]="personalInfo" color="primary">
     <ng-template matStepLabel>Información Personal</ng-template>
     <mat-card class="advancedForm">
@@ -144,7 +144,7 @@
             <div class="example-radio-group">
               <label>Zona de residencia</label>
               <mat-radio-group class="example-radio-group" formControlName="zoneResidence"
-                               aria-label="Zona de residencia">
+                               aria-label="Zona de residencia" required>
                 <mat-radio-button class="example-radio-button" value="15">Rural</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="16">Urbano</mat-radio-button>
               </mat-radio-group>
