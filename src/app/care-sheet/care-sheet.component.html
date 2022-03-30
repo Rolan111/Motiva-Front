@@ -1,3 +1,4 @@
+
 <mat-card class="mat-card1">
   <mat-card class="mat-card2">
     <mat-card-title>Historia clínica psicosocial</mat-card-title>
@@ -8,7 +9,7 @@
         <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Datos personales básicos:
+              <b>Datos personales básicos:</b>
             </mat-panel-title>
             <mat-panel-description>
               Type your name and age
@@ -17,12 +18,14 @@
           </mat-expansion-panel-header>
 
           <mat-grid-list cols="2" rowHeight="70px">
+
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Cidudad - Municipio</mat-label>
                 <input formControlName="city" matInput placeholder="Cidudad-Municipio">
               </mat-form-field>
             </mat-grid-tile>
+
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Departamento</mat-label>
@@ -40,13 +43,9 @@
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field appearance="fill">
+              <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Sexo</mat-label>
-                <mat-select formControlName="sex">
-                  <mat-option *ngFor="let sexoType of sexo" [value]="sexoType.value">
-                    {{sexoType.viewValue}}
-                  </mat-option>
-                </mat-select>
+                <input formControlName="sex" type="text" matInput placeholder="Sexo">
               </mat-form-field>
             </mat-grid-tile>
 
@@ -73,8 +72,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Edad</mat-label>
-                <input type="number" formControlName="age" matInput
-                       placeholder="Edad">
+                <input type="number" formControlName="age" matInput placeholder="Edad">
               </mat-form-field>
             </mat-grid-tile>
 
@@ -98,7 +96,7 @@
         <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Procedencia
+              <b>Procedencia</b>
             </mat-panel-title>
             <mat-panel-description>
               Type the country name
@@ -113,12 +111,7 @@
                 <input formControlName="ethnicity" matInput placeholder="Etnia">
               </mat-form-field>
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Raza</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Raza">
-              </mat-form-field>
-            </mat-grid-tile>
+
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Religión</mat-label>
@@ -181,7 +174,7 @@
         <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Consulta
+              <b>Consulta</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -193,13 +186,13 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Motivo de consulta</mat-label>
-                <input formControlName="ethnicity" matInput placeholder="Motivo de consulta">
+                <input formControlName="reasonConsultation" matInput placeholder="Motivo de consulta">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Enfermedad actual</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Enfermedad actual">
+                <input formControlName="currentIllness" type="text" matInput placeholder="Enfermedad actual">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
@@ -216,7 +209,7 @@
         <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Antecedentes personales
+              <b>Antecedentes personales</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -241,13 +234,13 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observaciones</mat-label>
-                    <input formControlName="ethnicity" matInput placeholder="Observaciones">
+                    <input formControlName="AP_APS_Observations" matInput placeholder="Observaciones">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Diagnósticos</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Diagnósticos">
+                    <input formControlName="AP_APS_Diagnostics" type="text" matInput placeholder="Diagnósticos">
                   </mat-form-field>
                 </mat-grid-tile>
 
@@ -259,19 +252,19 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Medicamento</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Medicamento">
+                    <input formControlName="AP_APS_Medicine" type="text" matInput placeholder="Medicamento">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Dosis</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Dosis">
+                    <input formControlName="AP_APS_Dose" type="text" matInput placeholder="Dosis">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Tiempo</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Tiempo">
+                    <input formControlName="AP_APS_Time" type="text" matInput placeholder="Tiempo">
                   </mat-form-field>
                 </mat-grid-tile>
 
@@ -298,13 +291,13 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observaciones</mat-label>
-                    <input formControlName="ethnicity" matInput placeholder="Observaciones">
+                    <input formControlName="AP_AM_Observations" matInput placeholder="Observaciones">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Diagnósticos</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Diagnósticos">
+                    <input formControlName="AP_AM_Diagnostics" type="text" matInput placeholder="Diagnósticos">
                   </mat-form-field>
                 </mat-grid-tile>
 
@@ -316,19 +309,19 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Medicamento</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Medicamento">
+                    <input formControlName="AP_AM_Medicine" type="text" matInput placeholder="Medicamento">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Dosis</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Dosis">
+                    <input formControlName="AP_AM_Dose" type="text" matInput placeholder="Dosis">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Tiempo</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Tiempo">
+                    <input formControlName="AP_AM_Time" type="text" matInput placeholder="Tiempo">
                   </mat-form-field>
                 </mat-grid-tile>
 
@@ -354,7 +347,7 @@
                 <mat-grid-tile [colspan]="2" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observaciones</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Observaciones">
+                    <input formControlName="AP_AQ_Observations" type="text" matInput placeholder="Observaciones">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -378,25 +371,29 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Situación laboral</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Situación laboral">
+                    <input formControlName="AP_AR_employmentSituation" type="text" matInput
+                           placeholder="Situación laboral">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Situaciones interpersonales</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Situaciones interpersonales">
+                    <input formControlName="AP_AR_Relationships" type="text" matInput
+                           placeholder="Situaciones interpersonales">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Relaciones sociales</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Relaciones sociales">
+                    <input formControlName="AP_AR_socialRelationships" type="text" matInput
+                           placeholder="Relaciones sociales">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Situaciones familiares</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Situaciones familiares">
+                    <input formControlName="AP_AR_familyRelationships" type="text" matInput
+                           placeholder="Situaciones familiares">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -415,7 +412,7 @@
         <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Antecedentes familiares
+              <b>Antecedentes familiares</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -440,7 +437,7 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observaciones</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Observaciones">
+                    <input formControlName="AF_APS_Observations" type="text" matInput placeholder="Observaciones">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -466,7 +463,7 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observaciones</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Observaciones">
+                    <input formControlName="AF_AM_Observations" type="text" matInput placeholder="Observaciones">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -485,7 +482,7 @@
         <mat-expansion-panel [expanded]="step === 5" (opened)="setStep(5)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Estado mental
+              <b>Estado mental</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -509,19 +506,19 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Tiempo</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Tiempo">
+                    <input formControlName="EM_Time" type="text" matInput placeholder="Tiempo">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Lugar</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Lugar">
+                    <input formControlName="EM_Place" type="text" matInput placeholder="Lugar">
                   </mat-form-field>
                 </mat-grid-tile>
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Persona</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Persona">
+                    <input formControlName="EM_Person" type="text" matInput placeholder="Persona">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -546,7 +543,7 @@
                 <mat-grid-tile [colspan]="1" [rowspan]="1">
                   <mat-form-field class="inputClass" appearance="fill">
                     <mat-label>Observación</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Observación">
+                    <input formControlName="EM_Observations" type="text" matInput placeholder="Observación">
                   </mat-form-field>
                 </mat-grid-tile>
               </mat-grid-list>
@@ -565,7 +562,7 @@
         <mat-expansion-panel [expanded]="step === 6" (opened)="setStep(6)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Evaluación psicosocial integral en salud
+              <b>Evaluación psicosocial integral en salud</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -577,25 +574,28 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Problema en salud:</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Problema en salud ">
+                <input formControlName="EPIS_healthProblems" type="text" matInput placeholder="Problema en salud ">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Sistema de creencias en salud:</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Sistema de creencias en salud">
+                <input formControlName="EPIS_healthBeliefSystem" type="text" matInput
+                       placeholder="Sistema de creencias en salud">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Afrontamiento de la enfermedad:</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Afrontamiento de la enfermedad">
+                <input formControlName="EPIS_copingWithIllness" type="text" matInput
+                       placeholder="Afrontamiento de la enfermedad">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Impresión diagnóstica: (según código CIE10):</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Impresión diagnóstica">
+                <input formControlName="EPIS_diagnosticImpression" type="text" matInput
+                       placeholder="Impresión diagnóstica">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
@@ -614,57 +614,47 @@
               </mat-expansion-panel-header>
 
               <mat-grid-list cols="2" rowHeight="70px">
-                <mat-grid-tile [colspan]="2" [rowspan]="1">
-                  <p>Promoción de la salud</p>
-                  <br>
-                  <mat-form-field class="inputClass" appearance="fill">
-                    <mat-label>Especifique - Promoción de la salud</mat-label>
-                    <input formControlName="race" type="text" matInput placeholder="Promoción de la salud">
-                  </mat-form-field>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="2">
-                  <p>Prevención de la enfermedad</p>
-                  <section class="example-section">
+                <mat-grid-tile [colspan]="2" [rowspan]="3">
+                  <mat-radio-group formControlName="nivelIntervencionElegida">
                     <ul>
-                      <li>
-                        <mat-checkbox class="example-margin">Primario</mat-checkbox>
-                      </li>
-                      <li>
-                        <mat-checkbox class="example-margin">Secundario</mat-checkbox>
-                      </li>
-                      <li>
-                        <mat-checkbox class="example-margin">Terciario</mat-checkbox>
-                      </li>
-                      <li>
-                        <mat-checkbox class="example-margin">Cuaternario</mat-checkbox>
+                      <li *ngFor="let nivelIntervencion of nivelIntervencionModeloBiopsicosocial">
+                        <mat-radio-button class="example-radio-button" [value]="nivelIntervencion">
+                          {{nivelIntervencion}}
+                        </mat-radio-button>
                       </li>
                     </ul>
-                  </section>
-                </mat-grid-tile>
 
+                  </mat-radio-group>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="2">
+
+                  <div *ngIf="form.value.nivelIntervencionElegida == 'Promoción de la salud'">
+                    Especifique: Promoción de la salud
+                    <mat-form-field class="inputClass" appearance="fill">
+                      <mat-label>Especifique - Promoción de la salud</mat-label>
+                      <input formControlName="especifique_promocionSalud" type="text" matInput
+                             placeholder="Promoción de la salud">
+                    </mat-form-field>
+                  </div>
+
+                  <div *ngIf="form.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
+                    Especifique: Prevención de la enfermedad
+                    <mat-radio-group formControlName="seleccione_prevencionEnfermedad">
+                      <br>
+                      <mat-radio-button value="Primario">Primario</mat-radio-button>
+                      <br>
+                      <mat-radio-button value="Secundario">Secundario</mat-radio-button>
+                      <br>
+                      <mat-radio-button value="Terciario">Terciario</mat-radio-button>
+                      <br>
+                      <mat-radio-button value="Cuaternario">Cuaternario</mat-radio-button>
+                      <br>
+                    </mat-radio-group>
+                  </div>
+
+                </mat-grid-tile>
               </mat-grid-list>
 
-              <section class="example-section">
-                <ul>
-                  <li>
-                    <mat-checkbox class="example-margin">Adherencia al tratamiento</mat-checkbox>
-                  </li>
-                  <li>
-                    <mat-checkbox class="example-margin">Afrontamiento de la enfermedad</mat-checkbox>
-                  </li>
-                  <li>
-                    <mat-checkbox class="example-margin">Psicooncología</mat-checkbox>
-                  </li>
-                  <li>
-                    <mat-checkbox class="example-margin">Manejo del dolor</mat-checkbox>
-                  </li>
-                  <li>
-                    <mat-checkbox class="example-margin">Intervención en enfermedades crónicas transmisibles y no
-                      transmisibles
-                    </mat-checkbox>
-                  </li>
-                </ul>
-              </section>
 
             </mat-expansion-panel>
           </mat-accordion>
@@ -680,7 +670,7 @@
         <mat-expansion-panel [expanded]="step === 7" (opened)="setStep(7)" hideToggle>
           <mat-expansion-panel-header>
             <mat-panel-title>
-              Profesional Responsable
+              <b>Profesional Responsable</b>
             </mat-panel-title>
             <mat-panel-description>
               Inform the date you wish to travel
@@ -692,26 +682,26 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Nombre</mat-label>
-                <input formControlName="ethnicity" matInput placeholder="Nombre">
+                <input formControlName="professionalName" matInput placeholder="Nombre">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>TP:</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="TP">
+                <input formControlName="TP" type="text" matInput placeholder="TP">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="2" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Profesión:</mat-label>
-                <input formControlName="race" type="text" matInput placeholder="Profesión">
+                <input formControlName="Profession" type="text" matInput placeholder="Profesión">
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
 
           <mat-action-row>
             <button mat-button color="warn" (click)="prevStep()">Previous</button>
-            <button mat-button color="primary" (click)="nextStep()">End</button>
+            <button mat-button color="primary" (click)="saveForm()">End/Send</button>
           </mat-action-row>
         </mat-expansion-panel>
 
@@ -721,3 +711,5 @@
     </form>
   </mat-card>
 </mat-card>
+
+

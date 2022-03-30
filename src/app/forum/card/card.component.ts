@@ -8,7 +8,7 @@ import {ShowDetailService} from "../show-detail.service";
 })
 export class CardComponent implements OnInit {
 
-  @Input() recibiendoData: any;
+  @Input() recibiendoData: any = [];
 
   constructor(private showDetailssService: ShowDetailService) {
   }

@@ -12,6 +12,7 @@ export class ForumComponent implements OnInit {
   public cards: any = []
 
   constructor(private forumServicee: ForumService) {
+
   }
 
   ngOnInit(): void {
@@ -23,7 +24,10 @@ export class ForumComponent implements OnInit {
       //const {trayendo} = respuesta;
       console.log(respuesta.data)
       this.cards = respuesta.data;
-    })
+    });
+    /*for (let clave of this.cards){
+      console.log('hola',clave);
+    }*/
   }
 
 }
