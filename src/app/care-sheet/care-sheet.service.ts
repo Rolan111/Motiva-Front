@@ -43,7 +43,8 @@ export class CareSheetService {
 
   public create2(body: any) {
     const headers = this.getHeader();
-    return this.http.post('http://localhost:5000/api/care-sheet-answer-psychosocial-create', body, {headers});
+    const path = mainUrl + 'api/care-sheet-answer-psychosocial-create';
+    return this.http.post(path, body, {headers});
   }
 
   getHeader() {
