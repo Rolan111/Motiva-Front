@@ -13,7 +13,8 @@ import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
 import {ForumModule} from "./forum/forum.module";
 import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
-
+import {CareSheetModule} from "./care-sheet/care-sheet.module";
+import {AlertsModule} from "./alerts/alerts.module";
 
 @NgModule({
   declarations: [
@@ -32,6 +33,9 @@ import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantita
     TrackingSheetModule,
     ForumModule,
     CareRoutesModule,
+    CareSheetModule,
+    AlertsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

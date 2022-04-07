@@ -20,6 +20,7 @@ export class NavbarComponent {
   buttonMenuCommunityAgents: boolean = false;
   buttonMenuForum: boolean = false;
   buttonMenuTrakingSheet: boolean = false;
+  buttonMenuAlerts: boolean = false;
   buttonMenuContact: boolean = false;
   buttonMenuAssignment: boolean = true;
 
@@ -46,6 +47,7 @@ export class NavbarComponent {
     this.buttonMenuQuantitiveChildren = false;
     this.buttonMenuCommunityAgents = false;
     this.buttonMenuTrakingSheet = false;
+    this.buttonMenuAlerts = false;
     this.buttonMenuQuantitive = false;
     this.buttonMenuAssignment = false;
     this.buttonMenuDashBoard = false;
@@ -61,6 +63,7 @@ export class NavbarComponent {
         this.buttonMenuQuantitiveChildren = true;
         this.buttonMenuCommunityAgents = true;
         this.buttonMenuTrakingSheet = true;
+        this.buttonMenuAlerts = true;
         this.buttonMenuAssignment = true;
         this.buttonMenuQuantitive = true;
         this.buttonMenuDashBoard = true;
@@ -78,6 +81,7 @@ export class NavbarComponent {
         this.rol = 'Psicólogo de campo';
         this.buttonMenuDashBoard = true;
         this.buttonMenuTrakingSheet = true;
+        this.buttonMenuAlerts = true;
         this.buttonMenuQuantitiveChildren = true;
         this.buttonMenuQuantitive = true;
         this.buttonMenuSettings = true;
