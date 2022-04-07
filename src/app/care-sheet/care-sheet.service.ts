@@ -19,8 +19,8 @@ export class CareSheetService {
   constructor(private http: HttpClient) {
   }
 
-  public getPruebas() {
-    return this.http.get(mainUrl + 'api/care-sheet-pruebas', {
+  public getInstrumentAnswers() {
+    return this.http.get(mainUrl + 'api/care-sheet-instrument-answers', {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })
@@ -28,7 +28,7 @@ export class CareSheetService {
   }
 
   public getOpcionesRespuestas(id: any) {
-    return this.http.get(mainUrl + 'api/care-sheet-opciones-respuestas/' + id, {
+    return this.http.get(mainUrl + 'api/care-sheet-options-answers/' + id, {
       headers: new HttpHeaders({
         'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
       })

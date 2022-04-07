@@ -111,17 +111,17 @@ export class CareSheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.careSheetService.getPruebas().subscribe(respuesta => {
-        this.listaValidandoCareSheet = respuesta;
-        this.listaValidandoCareSheet.forEach((recorriendoArray: any) => {
-          this.form.get('capturaIdPoll')?.setValue(recorriendoArray.id_poll);
-          if (recorriendoArray.id_question == 5) {
-            this.form.get('city')?.setValue(recorriendoArray.open_answer);
-          }
+    this.careSheetService.getInstrumentAnswers().subscribe(respuesta => {
+      this.listaValidandoCareSheet = respuesta;
+      this.listaValidandoCareSheet.forEach((recorriendoArray: any) => {
+        this.form.get('capturaIdPoll')?.setValue(recorriendoArray.id_poll);
+        if (recorriendoArray.id_question == 5) {
+          this.form.get('city')?.setValue(recorriendoArray.open_answer);
+        }
 
-          if (recorriendoArray.id_question == 2) {
-            this.form.get('sex')?.setValue(recorriendoArray.open_answer);
-          }
+        if (recorriendoArray.id_question == 2) {
+          this.form.get('sex')?.setValue(recorriendoArray.open_answer);
+        }
 
           if (recorriendoArray.id_question == 1) {
             this.form.get('age')?.setValue(recorriendoArray.open_answer);
