@@ -8,11 +8,6 @@ export interface Alerts {
   fecha: string;
 }
 
-const listAlerts: Alerts[] = [
-  {profesional: 1, beneficiario: 'Hydrogen', municipio: 1.0079, fecha: 'H'}
-];
-
-//let alertando:any = [];
 
 @Component({
   selector: 'app-alerts',
