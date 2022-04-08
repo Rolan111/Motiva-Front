@@ -1,28 +1,28 @@
 <mat-card>
   <mat-card-title>Alertas Activadas</mat-card-title>
-  <table mat-table [dataSource]="alertando" class="mat-elevation-z8">
+  <table mat-table [dataSource]="arrayDeAlertasTabla" class="mat-elevation-z8">
 
-    <!-- ID -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> ID</th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-
-    <!-- id_alert -->
-    <ng-container matColumnDef="id_alert">
-      <th mat-header-cell *matHeaderCellDef> ID_Alert</th>
-      <td mat-cell *matCellDef="let element"> {{element.id_alert}} </td>
-    </ng-container>
-
-    <!-- id_poll -->
+    <!-- ID_Poll -->
     <ng-container matColumnDef="id_poll">
       <th mat-header-cell *matHeaderCellDef> ID_Poll</th>
       <td mat-cell *matCellDef="let element"> {{element.id_poll}} </td>
     </ng-container>
 
+    <!-- Profesional -->
+    <ng-container matColumnDef="professional">
+      <th mat-header-cell *matHeaderCellDef> Profesional</th>
+      <td mat-cell *matCellDef="let element"> {{element.professional}} </td>
+    </ng-container>
+
+    <!-- Beneficiario -->
+    <ng-container matColumnDef="beneficiary">
+      <th mat-header-cell *matHeaderCellDef> Beneficiario</th>
+      <td mat-cell *matCellDef="let element"> {{element.beneficiary}} </td>
+    </ng-container>
+
+
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-
 
 </mat-card>

@@ -16,10 +16,34 @@ export class AlertsService {
   constructor(private http: HttpClient) {
   }
 
-  public getAllAlerts() {
-    const path = mainUrl + 'api/alerts';
+  public getAlertSize() {
+    const path = mainUrl + 'api/alerts-size';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
+  }
+
+  public getAllAlerts() {
+    const path = mainUrl + 'api/alerts-pruebas';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+  public getPollById(id: any) {
+    const path = mainUrl + 'api/pollById/';
+    const headers = this.getHeader();
+    return this.http.get(path + id, {headers});
+  }
+
+  public getUserById(id: any) {
+    const path = mainUrl + 'api/userById/';
+    const headers = this.getHeader();
+    return this.http.get(path + id, {headers});
+  }
+
+  public getNameAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
+    const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
 
   getHeader() {
