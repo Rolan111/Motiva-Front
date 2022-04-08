@@ -20,19 +20,15 @@ export class CareSheetService {
   }
 
   public getInstrumentAnswers() {
-    return this.http.get(mainUrl + 'api/care-sheet-instrument-answers', {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
-      })
-    });
+    const path = mainUrl + 'api/care-sheet-instrument-answers';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
   }
 
   public getOpcionesRespuestas(id: any) {
-    return this.http.get(mainUrl + 'api/care-sheet-options-answers/' + id, {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
-      })
-    });
+    const path = mainUrl + 'api/care-sheet-options-answers/';
+    const headers = this.getHeader();
+    return this.http.get(path + id, {headers});
   }
 
   create(repComAgent: RepComAgentModel): Observable<DataResponse> {
