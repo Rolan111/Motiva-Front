@@ -40,8 +40,14 @@ export class AlertsService {
     return this.http.get(path + id, {headers});
   }
 
-  public getNameAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
+  public getAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
     const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll + '/' + id_question, {headers});
+  }
+
+  public getAnswerPsychosocialByIdPollIdQuestion(id_poll: any, id_question: any) {
+    const path = mainUrl + 'api/answer-psychosocial-ByIdPollAndIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_poll + '/' + id_question, {headers});
   }

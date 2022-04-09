@@ -6,6 +6,8 @@ export interface Alerts {
   id_poll: number;
   professional: number;
   beneficiary: string;
+  municipality: string;
+  date: string;
 }
 
 @Component({
@@ -20,7 +22,7 @@ export class AlertsComponent implements OnInit {
   procesamientoDeAlertas: Alerts[] = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary'];
+  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date'];
   dataSource = this.arrayDeAlertasTabla;
 
   constructor(private alertsService: AlertsService) {
@@ -51,22 +53,48 @@ export class AlertsComponent implements OnInit {
               extrayendoNameUser.forEach((recorriendoArray3: any) => {
                 //Aqui capturamos el NOMBRE DEL PROFESIONAL
                 //Ahora traermos el NOMBRE DEL BENEFICIARIO consultando la tabla Answer con el id_poll y el id_question
-                this.alertsService.getNameAnswerByPollAndIdQuestion(recorriendoArray.idPoll, 200).subscribe(data4 => {
+                this.alertsService.getAnswerByPollAndIdQuestion(recorriendoArray.idPoll, 200).subscribe(data4 => {
                   let extrayendoNameBeneficiario: any = data4;
                   extrayendoNameBeneficiario.forEach((recorriendoArray4: any) => {
-
-                    this.procesamientoDeAlertas.push({
-                      id_poll: recorriendoArray.idPoll,
-                      professional: recorriendoArray3.name,
-                      beneficiary: recorriendoArray4.openAnswer,
-                    })
-
-                    if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {
-                      of(this.procesamientoDeAlertas).subscribe(data6 => {
-                        this.arrayDeAlertasTabla = data6;
-                      })
+                    //Traemos el MUNICIPIO consultando en la ficha de atención
+                    //Pero primero verificamos si el cuestionario es ADULT o CHILD ya que la pregunta corresponde a numeros diferentes
+                    let preguntaTipoDeEncuesta: any;
+                    if (recorriendoArray2.type == 'ADULT') {
+                      preguntaTipoDeEncuesta = 6;
+                    } else {
+                      preguntaTipoDeEncuesta = 5;
                     }
 
+                    this.alertsService.getAnswerByPollAndIdQuestion(recorriendoArray.idPoll, preguntaTipoDeEncuesta).subscribe(data5 => {
+                      let extrayendoMunicipio: any = data5;
+                      extrayendoMunicipio.forEach((recorriendoArray5: any) => {
+                        //Traemos la FECHA de la coleccion ANSWER_PSYCHOSOCIAL 102
+                        this.alertsService.getAnswerPsychosocialByIdPollIdQuestion(recorriendoArray.idPoll, 102).subscribe(data6 => {
+                          let extrayendoFecha: any = data6;
+                          extrayendoFecha.forEach((recorriendoArray6: any) => {
+
+                            this.procesamientoDeAlertas.push({
+                              id_poll: recorriendoArray.idPoll,
+                              professional: recorriendoArray3.name,
+                              beneficiary: recorriendoArray4.openAnswer,
+                              municipality: recorriendoArray5.openAnswer,
+                              date: recorriendoArray6.open_answer
+                            })
+
+                            if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {
+                              of(this.procesamientoDeAlertas).subscribe(dataN => {
+                                this.arrayDeAlertasTabla = dataN;
+                              })
+                            }
+
+                          })
+                        })
+
+
+                      })
+
+
+                    })
 
                   })
 
