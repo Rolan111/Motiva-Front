@@ -151,7 +151,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   private formQuantitative() {
     this.personalInfo = this.formBuilder.group({
-      firstName: ['', Validators.required],
+      firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       firstLastName: ['', Validators.required],
       secondName: [''],
       secondLastName: [''],
