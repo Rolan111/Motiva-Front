@@ -10,8 +10,9 @@
         <mat-grid-list cols="2" rowHeight="85px">
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Primer Nombre</mat-label>
-              <input matInput placeholder="First name" formControlName="firstName" required>
+              <mat-label>Primer nombre</mat-label>
+              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               <mat-error *ngIf="isControlHasError('firstName', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -20,13 +21,14 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Segundo Nombre</mat-label>
-              <input matInput placeholder="First name" formControlName="secondName">
+              <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Primer Apellido</mat-label>
-              <input matInput maxlength="30" formControlName="firstLastName" required>
+              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required>
               <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -35,7 +37,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Segundo Apellido</mat-label>
-              <input matInput maxlength="30" formControlName="secondLastName">
+              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -64,7 +66,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Dirección</mat-label>
-              <input matInput formControlName="address" required>
+              <input matInput placeholder="Dirección" maxlength="30" formControlName="address" required>
               <mat-error *ngIf="isControlHasError('address', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -73,7 +75,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>No. telefónico</mat-label>
-              <input type="text" matInput placeholder="Número telefóinico" maxlength="12" minlength="8"
+              <input type="text" matInput placeholder="Número telefóinico" maxlength="10" minlength="8"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
               <mat-error *ngIf="isControlHasError('cellphone', 'required')">
                 <strong>Campo requerido</strong>
@@ -303,7 +305,8 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput formControlName="disorderDisease">
+                <input matInput maxlength="150" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
                 <mat-error *ngIf="isControlHasError('disorderDisease', 'required')">
                   <strong>Campo requerido</strong>
                 </mat-error>
@@ -314,7 +317,8 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>14. Discapacidad física o mental</mat-label>
-                <input matInput formControlName="physicalMental">
+                <input matInput maxlength="150" placeholder="Discapacidad física o mental" formControlName="physicalMental"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
                 <mat-error *ngIf="isControlHasError('physicalMental', 'required')">
                   <strong>Campo requerido</strong>
                 </mat-error>
