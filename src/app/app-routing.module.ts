@@ -15,6 +15,8 @@ import {AuthGuard} from "./guards/auth.guard";
 import {AlertsComponent} from "./alerts/alerts.component";
 import {InstrumentReviewComponent} from "./alerts/instrument-review/instrument-review.component";
 import {CareRasmComponent} from "./care-rasm/care-rasm.component";
+import {InactiveAlertsComponent} from "./inactive-alerts/inactive-alerts.component";
+
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -35,6 +37,7 @@ const routes: Routes = [
       {path: 'alerts', component: AlertsComponent},
       {path: 'alerts/instrument-review', component: InstrumentReviewComponent},
       {path: 'care-rasm', component: CareRasmComponent},
+      {path: 'inactive-alerts', component: InactiveAlertsComponent},
     ]
   },
 ];
