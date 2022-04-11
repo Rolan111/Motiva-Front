@@ -15,12 +15,10 @@ import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
-import {InstrumentReviewComponent} from './alerts/instrument-review/instrument-review.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InstrumentReviewComponent,
   ],
   imports: [
     BrowserModule,
