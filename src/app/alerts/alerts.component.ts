@@ -22,7 +22,7 @@ export class AlertsComponent implements OnInit {
   procesamientoDeAlertas: Alerts[] = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date'];
+  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
   dataSource = this.arrayDeAlertasTabla;
 
   constructor(private alertsService: AlertsService) {
@@ -43,7 +43,7 @@ export class AlertsComponent implements OnInit {
       this.arrayDeAlertas = data;
       this.arrayDeAlertas.forEach((recorriendoArray: any) => {
         //Para traer el NOMBRE DEL PROFESIONAL consultamos en la tabla poll y nos traemos el id_user
-        this.alertsService.getPollById(recorriendoArray.idPoll).subscribe(data2 => { //para traer los idUser
+        this.alertsService.getPollById(recorriendoArray.idPoll).subscribe(data2 => { //para traer los idUser que tiene poll
           let extrayendoIdUser: any = data2;
           extrayendoIdUser.forEach((recorriendoArray2: any) => {
             //Ahora con el idUser consultamos la tabla user y traemos el nombre(name) del profesional
@@ -52,7 +52,7 @@ export class AlertsComponent implements OnInit {
               let extrayendoNameUser: any = data3;
               extrayendoNameUser.forEach((recorriendoArray3: any) => {
                 //Aqui capturamos el NOMBRE DEL PROFESIONAL
-                //Ahora traermos el NOMBRE DEL BENEFICIARIO consultando la tabla Answer con el id_poll y el id_question
+                //Ahora traermos el NOMBRE DEL BENEFICIARIO consultando la tabla ANSWER con el id_poll y el id_question
                 this.alertsService.getAnswerByPollAndIdQuestion(recorriendoArray.idPoll, 200).subscribe(data4 => {
                   let extrayendoNameBeneficiario: any = data4;
                   extrayendoNameBeneficiario.forEach((recorriendoArray4: any) => {
@@ -109,8 +109,9 @@ export class AlertsComponent implements OnInit {
 
     })
 
-
   }
 
-
+  review(id_poll: any) {
+    console.log('Entrando a revisar', id_poll)
+  }
 }

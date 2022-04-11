@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {ShowDetailService} from "../show-detail.service";
 import {ActivatedRoute} from "@angular/router";
 import {ForumService} from "../forum.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -23,26 +22,20 @@ export class ReportDescriptionComponent implements OnInit {
 
 
   constructor(
-    private showDetailssService: ShowDetailService,
     private forumServicee: ForumService,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
-      //name: ['', Validators.required],
-      //date: ['', Validators.required],
       comment: ['', Validators.required],
 
     })
   }
 
-  public descriptionDetail: any = []
-
   ngOnInit(): void {
     this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
       this.cargarReportes(params.variable)
-      //this.traerDataDelServicio()
       this.loadComments(params.variable)
       this.capturaUrl = params.variable
     })
@@ -51,13 +44,6 @@ export class ReportDescriptionComponent implements OnInit {
   cargarReportes(id: string) {
     this.forumServicee.get(`${id}`).subscribe(respuesta => {
       this.respuesta = respuesta;
-    })
-  }
-
-  traerDataDelServicio() {
-    this.showDetailssService.disparadorDeDetalles.subscribe(data => {
-      console.log('Recibiendo data en el DETALLE ...', data)
-      this.respuesta = data;
     })
   }
 

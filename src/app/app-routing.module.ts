@@ -13,6 +13,7 @@ import {CareRoutesComponent} from "./care-routes/care-routes.component";
 import {CareSheetComponent} from "./care-sheet/care-sheet.component";
 import {AuthGuard} from "./guards/auth.guard";
 import {AlertsComponent} from "./alerts/alerts.component";
+import {InstrumentReviewComponent} from "./alerts/instrument-review/instrument-review.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -31,6 +32,7 @@ const routes: Routes = [
       {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]},
       {path: 'care-sheet', component: CareSheetComponent},
       {path: 'alerts', component: AlertsComponent},
+      {path: 'alerts/instrument-review', component: InstrumentReviewComponent},
     ]
   },
 ];
