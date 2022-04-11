@@ -21,13 +21,9 @@ export class ForumComponent implements OnInit {
 
   public cargarData() {
     this.forumServicee.getAll().subscribe((respuesta: any) => {
-      //const {trayendo} = respuesta;
-      console.log(respuesta.data)
+      console.log('La data de forum es', respuesta.data)
       this.cards = respuesta.data;
     });
-    /*for (let clave of this.cards){
-      console.log('hola',clave);
-    }*/
   }
 
 }
