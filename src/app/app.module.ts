@@ -14,6 +14,7 @@ import {ForumModule} from "./forum/forum.module";
 import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
+import {AlertsModule} from "./alerts/alerts.module";
 
 @NgModule({
   declarations: [
@@ -32,7 +33,9 @@ import {CareSheetModule} from "./care-sheet/care-sheet.module";
     TrackingSheetModule,
     ForumModule,
     CareRoutesModule,
-    CareSheetModule
+    CareSheetModule,
+    AlertsModule
+
   ],
   providers: [],
   bootstrap: [AppComponent],

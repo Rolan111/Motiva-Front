@@ -17,11 +17,9 @@ export class ForumService {
   }
 
   public getAll() {
-    return this.http.get(mainUrl + 'api/rep-com-agents', {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
-      })
-    });
+    const path = mainUrl + 'api/rep-com-agents';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
   }
 
   public get(id: any) {
@@ -48,5 +46,14 @@ export class ForumService {
     });
   }
 
+  getHeader() {
+    return new HttpHeaders({
+      'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+    });
+  }
 
 }

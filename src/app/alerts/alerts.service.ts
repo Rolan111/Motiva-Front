@@ -1,46 +1,55 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LocalStorage} from "../storage/local-storage";
-import {LocalStorageKeyEnum} from "../enums/enum";
 import {environment} from "../../environments/environment";
-import {RepComAgentModel} from "../rep-com-agent/rep-com-agent.model";
-import {Observable} from "rxjs";
-import {DataResponse} from "../util/data-response";
+import {LocalStorageKeyEnum} from "../enums/enum";
 
 const mainUrl = environment.url;
 
 @Injectable({
   providedIn: 'root'
 })
-export class CareSheetService {
+export class AlertsService {
 
   oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {
   }
 
-  public getInstrumentAnswers() {
-    const path = mainUrl + 'api/care-sheet-instrument-answers';
+  public getAlertSize() {
+    const path = mainUrl + 'api/alerts-size';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
   }
 
-  public getOpcionesRespuestas(id: any) {
-    const path = mainUrl + 'api/care-sheet-options-answers/';
+  public getAllAlerts() {
+    const path = mainUrl + 'api/alerts-pruebas';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+  public getPollById(id: any) {
+    const path = mainUrl + 'api/pollById/';
     const headers = this.getHeader();
     return this.http.get(path + id, {headers});
   }
 
-  create(repComAgent: RepComAgentModel): Observable<DataResponse> {
-    const path = mainUrl + 'api/rep-com-agent-create';
+  public getUserById(id: any) {
+    const path = mainUrl + 'api/userById/';
     const headers = this.getHeader();
-    return this.http.post<DataResponse>(path, repComAgent, {headers});
+    return this.http.get(path + id, {headers});
   }
 
-  public create2(body: any) {
+  public getAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
+    const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
     const headers = this.getHeader();
-    const path = mainUrl + 'api/care-sheet-answer-psychosocial-create';
-    return this.http.post(path, body, {headers});
+    return this.http.get(path + id_poll + '/' + id_question, {headers});
+  }
+
+  public getAnswerPsychosocialByIdPollIdQuestion(id_poll: any, id_question: any) {
+    const path = mainUrl + 'api/answer-psychosocial-ByIdPollAndIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
 
   getHeader() {
@@ -52,4 +61,5 @@ export class CareSheetService {
       'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
     });
   }
+
 }

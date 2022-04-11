@@ -3,19 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from "./login/login.component";
 import {NavbarComponent} from "./shared/navbar/navbar.component";
 import {DashboardComponent} from "./dashboard/dashboard.component";
-import {
-  QuantitativeInstrumentComponent
-} from "./quantitative-instruments/quantitative-instrument/quantitative-instrument.component";
+import {QuantitativeInstrumentComponent} from "./quantitative-instruments/quantitative-instrument/quantitative-instrument.component";
 import {RepComAgentComponent} from "./rep-com-agent/rep-com-agent.component";
-import {
-  QuantitativeInstrumentChildrenComponent
-} from "./quantitative-instruments/quantitative-instrument-children/quantitative-instrument-children.component";
+import {QuantitativeInstrumentChildrenComponent} from "./quantitative-instruments/quantitative-instrument-children/quantitative-instrument-children.component";
 import {TrackingSheetComponent} from "./tracking-sheet/tracking-sheet.component";
 import {ForumComponent} from "./forum/forum.component";
 import {ReportDescriptionComponent} from "./forum/report-description/report-description.component";
 import {CareRoutesComponent} from "./care-routes/care-routes.component";
 import {CareSheetComponent} from "./care-sheet/care-sheet.component";
 import {AuthGuard} from "./guards/auth.guard";
+import {AlertsComponent} from "./alerts/alerts.component";
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'login'},
@@ -33,6 +30,7 @@ const routes: Routes = [
       {path: 'forum/report-description/:variable', component: ReportDescriptionComponent, canActivate: [AuthGuard]},
       {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]},
       {path: 'care-sheet', component: CareSheetComponent},
+      {path: 'alerts', component: AlertsComponent},
     ]
   },
 ];
