@@ -15,7 +15,7 @@ import {AuthGuard} from "./guards/auth.guard";
 import {AlertsComponent} from "./alerts/alerts.component";
 import {InstrumentReviewComponent} from "./alerts/instrument-review/instrument-review.component";
 import {CareRasmComponent} from "./care-rasm/care-rasm.component";
-import {InactiveAlertsComponent} from "./inactive-alerts/inactive-alerts.component";
+import {InactiveAlertsComponent} from "./alerts/inactive-alerts/inactive-alerts.component";
 
 
 const routes: Routes = [
@@ -35,7 +35,7 @@ const routes: Routes = [
       {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]},
       {path: 'care-sheet', component: CareSheetComponent},
       {path: 'alerts', component: AlertsComponent},
-      {path: 'alerts/instrument-review', component: InstrumentReviewComponent},
+      {path: 'alerts/instrument-review/:variable', component: InstrumentReviewComponent},
       {path: 'care-rasm', component: CareRasmComponent},
       {path: 'inactive-alerts', component: InactiveAlertsComponent},
     ]

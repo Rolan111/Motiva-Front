@@ -4,16 +4,19 @@ import {AlertsComponent} from "./alerts.component";
 import {AngularMaterialModule} from "../angular-material.module";
 import {HttpClientModule} from "@angular/common/http";
 import {InstrumentReviewComponent} from "./instrument-review/instrument-review.component";
+import {InactiveAlertsComponent} from "./inactive-alerts/inactive-alerts.component";
 
 
 @NgModule({
   declarations: [
     AlertsComponent,
-    InstrumentReviewComponent
+    InstrumentReviewComponent,
+    InactiveAlertsComponent
   ],
   exports: [
     AlertsComponent,
-    InstrumentReviewComponent
+    InstrumentReviewComponent,
+    InactiveAlertsComponent
   ],
   imports: [
     CommonModule,

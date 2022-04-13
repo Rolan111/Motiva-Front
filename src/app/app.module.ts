@@ -15,12 +15,11 @@ import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
-import {InactiveAlertsComponent} from './inactive-alerts/inactive-alerts.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InactiveAlertsComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +35,8 @@ import {InactiveAlertsComponent} from './inactive-alerts/inactive-alerts.compone
     ForumModule,
     CareRoutesModule,
     CareSheetModule,
-    AlertsModule
+    AlertsModule,
+    NgbModule
 
   ],
   providers: [],

@@ -1,0 +1,25 @@
+table {
+  margin-bottom: 3px;
+}
+
+td {
+  width: 340px;
+  background-color: #dedede;
+}
+
+nav {
+  display: block;
+  width: 700px;
+  height: 200px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+}
+
+.alineandoboton {
+  padding: 10px 0;
+  text-align: center;
+}
+
+.btn {
+  margin: 10px;
+}

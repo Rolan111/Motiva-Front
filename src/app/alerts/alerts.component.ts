@@ -69,7 +69,7 @@ export class AlertsComponent implements OnInit {
                       let extrayendoMunicipio: any = data5;
                       extrayendoMunicipio.forEach((recorriendoArray5: any) => {
                         //Traemos la FECHA de la coleccion ANSWER_PSYCHOSOCIAL 102
-                        this.alertsService.getAnswerPsychosocialByIdPollIdQuestion(recorriendoArray.idPoll, 102).subscribe(data6 => {
+                        this.alertsService.getAnswerPsychosocialByIdPollAndIdQuestion(recorriendoArray.idPoll, 102).subscribe(data6 => {
                           let extrayendoFecha: any = data6;
                           extrayendoFecha.forEach((recorriendoArray6: any) => {
 
