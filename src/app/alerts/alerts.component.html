@@ -1,6 +1,6 @@
 <mat-card>
 
-  <button mat-raised-button color="accent" routerLink="instrument-review">Revisar Instrumento</button>
+  <button mat-raised-button color="accent" routerLink="instrument-review/29">Revisar Instrumento</button>
   <mat-card-title>Alertas Activadas</mat-card-title>
   <table mat-table [dataSource]="arrayDeAlertasTabla" class="mat-elevation-z8">
 
@@ -38,7 +38,8 @@
     <ng-container matColumnDef="review">
       <th mat-header-cell *matHeaderCellDef> Revisar</th>
       <td mat-cell *matCellDef="let element" (click)="review(element.id_poll)">
-        <button mat-raised-button color="accent" routerLink="instrument-review">Revisar</button>
+        <!--        <button mat-raised-button color="accent" routerLink="instrument-review">Revisar</button>-->
+        <button mat-raised-button color="accent" [routerLink]="['instrument-review', element?.id_poll]">Revisar</button>
       </td>
     </ng-container>
 

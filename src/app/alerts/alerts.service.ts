@@ -16,6 +16,7 @@ export class AlertsService {
   constructor(private http: HttpClient) {
   }
 
+  //Tabla ALERT
   public getAlertSize() {
     const path = mainUrl + 'api/alerts-size';
     const headers = this.getHeader();
@@ -28,28 +29,51 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
+  //Tabla POLL
   public getPollById(id: any) {
     const path = mainUrl + 'api/pollById/';
     const headers = this.getHeader();
     return this.http.get(path + id, {headers});
   }
 
+  //Tabla USER
   public getUserById(id: any) {
     const path = mainUrl + 'api/userById/';
     const headers = this.getHeader();
     return this.http.get(path + id, {headers});
   }
 
+  //Tabla ANSWER
   public getAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
     const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
 
-  public getAnswerPsychosocialByIdPollIdQuestion(id_poll: any, id_question: any) {
+  //Tabla ANSWER PSYCHOSOCIAL
+  public getAllAnswersPsychosocial() {
+    const path = mainUrl + 'api/answer-psychosocial-all';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+  public getAnswerPsychosocialByIdPoll(id_poll: any) {
+    const path = mainUrl + 'api/answer-psychosocial-ByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll, {headers});
+  }
+
+  public getAnswerPsychosocialByIdPollAndIdQuestion(id_poll: any, id_question: any) {
     const path = mainUrl + 'api/answer-psychosocial-ByIdPollAndIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_poll + '/' + id_question, {headers});
+  }
+
+  //Tabla QUESTION
+  public getQuestionByIdQuestion(id_question: any) {
+    const path = mainUrl + 'api/questionByIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_question, {headers});
   }
 
   getHeader() {

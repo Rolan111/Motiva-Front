@@ -19,8 +19,8 @@ export class CareSheetService {
   constructor(private http: HttpClient) {
   }
 
-  public getInstrumentAnswers() {
-    const path = mainUrl + 'api/care-sheet-instrument-answers';
+  public getInstrumentAnswers(idPoll: any) {
+    const path = mainUrl + 'api/care-sheet-instrument-answers-ByIdPoll';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
   }

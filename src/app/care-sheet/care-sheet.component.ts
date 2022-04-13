@@ -45,7 +45,7 @@ export class CareSheetComponent implements OnInit {
     private careSheetService: CareSheetService
   ) {
     this.form = this.formBuilder.group({
-        capturaIdPoll: ['', Validators.required],
+        capturaIdPoll: ['29', Validators.required],
         city: ['', Validators.required],
         departament: ['Cauca'],
         evaluationDate: ['', Validators.required],
@@ -111,7 +111,11 @@ export class CareSheetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.careSheetService.getInstrumentAnswers().subscribe(respuesta => {
+
+  }
+
+  recuperarRespuestas() {
+    this.careSheetService.getInstrumentAnswers(29).subscribe(respuesta => {
       this.listaValidandoCareSheet = respuesta;
       this.listaValidandoCareSheet.forEach((recorriendoArray: any) => {
         this.form.get('capturaIdPoll')?.setValue(recorriendoArray.id_poll);
@@ -123,15 +127,15 @@ export class CareSheetComponent implements OnInit {
           this.form.get('sex')?.setValue(recorriendoArray.open_answer);
         }
 
-          if (recorriendoArray.id_question == 1) {
-            this.form.get('age')?.setValue(recorriendoArray.open_answer);
-          }
+        if (recorriendoArray.id_question == 1) {
+          this.form.get('age')?.setValue(recorriendoArray.open_answer);
+        }
 
-          if (recorriendoArray.id_question == 200) {
-            this.form.get('name')?.setValue(recorriendoArray.open_answer);
-          }
+        if (recorriendoArray.id_question == 200) {
+          this.form.get('name')?.setValue(recorriendoArray.open_answer);
+        }
 
-          if (recorriendoArray.id_question == 202) {
+        if (recorriendoArray.id_question == 202) {
             this.form.get('lastName')?.setValue(recorriendoArray.open_answer);
           }
 
@@ -156,121 +160,103 @@ export class CareSheetComponent implements OnInit {
         });
       }
     );
-
   }
-
 
   public saveForm() {
     this.listaDeRespuestas.push({
       id_question: 101,
       id_option_answer: 0,
       open_answer: this.form.value.departament,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 102,
       id_option_answer: 0,
       open_answer: this.form.value.evaluationDate,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 110,
       id_option_answer: 0,
       open_answer: this.form.value.religion,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 111,
       id_option_answer: 0,
       open_answer: this.form.value.placeBirth,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 112,
       id_option_answer: 0,
       open_answer: this.form.value.origin,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 113,
       id_option_answer: 0,
       open_answer: this.form.value.originAddress,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 114,
       id_option_answer: 0,
       open_answer: this.form.value.neighborhood,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 115,
       id_option_answer: 0,
       open_answer: this.form.value.stratum,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 116,
       id_option_answer: 0,
       open_answer: this.form.value.phone,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 117,
       id_option_answer: 0,
       open_answer: this.form.value.reasonConsultation,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 118,
       id_option_answer: 0,
       open_answer: this.form.value.currentIllness,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 119,
       id_option_answer: 0,
       open_answer: this.form.value.AP_APS_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 120,
       id_option_answer: 0,
       open_answer: this.form.value.AP_APS_Diagnostics,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 121,
       id_option_answer: 0,
       open_answer: this.form.value.AP_APS_Medicine,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 122,
       id_option_answer: 0,
       open_answer: this.form.value.AP_APS_Dose,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 123,
       id_option_answer: 0,
       open_answer: this.form.value.AP_APS_Time,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -278,35 +264,30 @@ export class CareSheetComponent implements OnInit {
       id_question: 124,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AM_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 125,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AM_Diagnostics,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 126,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AM_Medicine,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 127,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AM_Dose,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 128,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AM_Time,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -314,7 +295,6 @@ export class CareSheetComponent implements OnInit {
       id_question: 129,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AQ_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -322,28 +302,24 @@ export class CareSheetComponent implements OnInit {
       id_question: 130,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AR_employmentSituation,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 131,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AR_Relationships,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 132,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AR_socialRelationships,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 133,
       id_option_answer: 0,
       open_answer: this.form.value.AP_AR_familyRelationships,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -351,14 +327,12 @@ export class CareSheetComponent implements OnInit {
       id_question: 134,
       id_option_answer: 0,
       open_answer: this.form.value.AF_APS_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 135,
       id_option_answer: 0,
       open_answer: this.form.value.AF_AM_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -366,28 +340,24 @@ export class CareSheetComponent implements OnInit {
       id_question: 136,
       id_option_answer: 0,
       open_answer: this.form.value.EM_Time,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 137,
       id_option_answer: 0,
       open_answer: this.form.value.EM_Place,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 138,
       id_option_answer: 0,
       open_answer: this.form.value.EM_Person,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 139,
       id_option_answer: 0,
       open_answer: this.form.value.EM_Observations,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -395,28 +365,24 @@ export class CareSheetComponent implements OnInit {
       id_question: 140,
       id_option_answer: 0,
       open_answer: this.form.value.EPIS_healthProblems,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 141,
       id_option_answer: 0,
       open_answer: this.form.value.EPIS_healthBeliefSystem,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 142,
       id_option_answer: 0,
       open_answer: this.form.value.EPIS_copingWithIllness,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 143,
       id_option_answer: 0,
       open_answer: this.form.value.EPIS_diagnosticImpression,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
@@ -426,7 +392,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 300,
           open_answer: this.form.value.especifique_promocionSalud,
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -435,7 +400,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 301,
           open_answer: this.form.value.seleccione_prevencionEnfermedad,
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -444,7 +408,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 302,
           open_answer: "",
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -453,7 +416,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 303,
           open_answer: "",
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -462,7 +424,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 304,
           open_answer: "",
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -471,7 +432,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 305,
           open_answer: "",
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -480,7 +440,6 @@ export class CareSheetComponent implements OnInit {
           id_question: 144,
           id_option_answer: 306,
           open_answer: "",
-          id_clinic_history: 1,
           id_poll: this.form.value.capturaIdPoll
         });
         break
@@ -491,21 +450,18 @@ export class CareSheetComponent implements OnInit {
       id_question: 145,
       id_option_answer: 0,
       open_answer: this.form.value.professionalName,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 146,
       id_option_answer: 0,
       open_answer: this.form.value.TP,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 147,
       id_option_answer: 0,
       open_answer: this.form.value.Profession,
-      id_clinic_history: 1,
       id_poll: this.form.value.capturaIdPoll
     });
 
