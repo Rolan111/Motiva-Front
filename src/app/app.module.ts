@@ -16,6 +16,7 @@ import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantita
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CareRasmModule} from "./care-rasm/care-rasm.module";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     CareRoutesModule,
     CareSheetModule,
     AlertsModule,
-    NgbModule
+    NgbModule,
+    CareRasmModule
 
   ],
   providers: [],

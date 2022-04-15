@@ -21,11 +21,9 @@ export class RepComAgentService {
 
 
   public get() {
-    return this.http.get(mainUrl + 'api/rep-com-agents', {
-      headers: new HttpHeaders({
-        'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token)
-      })
-    });
+    const path = mainUrl + 'api/rep-com-agents';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
   }
 
   create(repComAgent: RepComAgentModel): Observable<DataResponse> {

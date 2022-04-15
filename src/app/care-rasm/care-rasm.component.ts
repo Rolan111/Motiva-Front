@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {CareRasmService} from "./care-rasm.service";
 
 @Component({
   selector: 'app-care-rasm',
@@ -7,9 +9,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CareRasmComponent implements OnInit {
 
-  constructor() { }
+  listRASM: any = [];
+  auxiliar: any = [];
+  displayedColumns: string[] = ['id_poll', 'type_rasm'];
+  dataSource!: MatTableDataSource<any>;
 
-  ngOnInit(): void {
+  constructor(private careRasmService: CareRasmService) {
   }
 
+  ngOnInit(): void {
+    this.loadRASM()
+  }
+
+  private loadRASM() {
+    this.careRasmService.getAllRASM().subscribe(data => {
+      this.listRASM = data;
+      this.dataSource = new MatTableDataSource(this.listRASM)
+    })
+  }
 }
