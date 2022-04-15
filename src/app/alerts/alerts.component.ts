@@ -24,6 +24,7 @@ export class AlertsComponent implements OnInit {
 
   displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
   dataSource = this.arrayDeAlertasTabla;
+  //dataSource!: MatTableDataSource<any>;
 
   constructor(private alertsService: AlertsService) {
   }
@@ -69,8 +70,9 @@ export class AlertsComponent implements OnInit {
                       let extrayendoMunicipio: any = data5;
                       extrayendoMunicipio.forEach((recorriendoArray5: any) => {
                         //Traemos la FECHA de la coleccion ANSWER_PSYCHOSOCIAL 102
-                        this.alertsService.getAnswerPsychosocialByIdPollAndIdQuestion(recorriendoArray.idPoll, 102).subscribe(data6 => {
+                        this.alertsService.getAnswerPsychosocialByIdPollAndIdQuestion(recorriendoArray.idPoll, 102).subscribe((data6) => {
                           let extrayendoFecha: any = data6;
+
                           extrayendoFecha.forEach((recorriendoArray6: any) => {
 
                             this.procesamientoDeAlertas.push({
@@ -107,11 +109,8 @@ export class AlertsComponent implements OnInit {
 
       })
 
-    })
-
+      }
+    )
   }
 
-  review(id_poll: any) {
-    console.log('Entrando a revisar', id_poll)
-  }
 }

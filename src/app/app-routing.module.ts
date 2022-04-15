@@ -37,7 +37,7 @@ const routes: Routes = [
       {path: 'alerts', component: AlertsComponent},
       {path: 'alerts/instrument-review/:variable', component: InstrumentReviewComponent},
       {path: 'care-rasm', component: CareRasmComponent},
-      {path: 'inactive-alerts', component: InactiveAlertsComponent},
+      {path: 'alerts/inactive-alerts', component: InactiveAlertsComponent},
     ]
   },
 ];

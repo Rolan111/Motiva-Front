@@ -29,6 +29,12 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
+  public deleteAlertByIdPoll(idPoll: any) {
+    const path = mainUrl + 'api/alert-delete/';
+    const headers = this.getHeader();
+    return this.http.delete(path + idPoll, {headers});
+  }
+
   //Tabla POLL
   public getPollById(id: any) {
     const path = mainUrl + 'api/pollById/';
@@ -74,6 +80,26 @@ export class AlertsService {
     const path = mainUrl + 'api/questionByIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_question, {headers});
+  }
+
+  //Tabla INACTIVE_ALERT
+  public getAllInactiveAlerts() {
+    const path = mainUrl + 'api/inactive-alert';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+  public postInactiveAlert(body: any) {
+    const path = mainUrl + 'api/inactive-alert-create/';
+    const headers = this.getHeader();
+    return this.http.post(path, body, {headers});
+  }
+
+  //Tabla RASM
+  public postRASM(body: any) {
+    const path = mainUrl + 'api/rasm-create/';
+    const headers = this.getHeader();
+    return this.http.post(path, body, {headers});
   }
 
   getHeader() {

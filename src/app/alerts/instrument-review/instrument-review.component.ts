@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertsService} from "../alerts.service";
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {ActivatedRoute} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-instrument-review',
@@ -13,11 +14,19 @@ export class InstrumentReviewComponent implements OnInit {
 
   public capturaIdPollUrl: any;
 
+  form: FormGroup;
   recuperandoPreguntas: any = [];
   recuperandoRespuestas: any = [];
   resultadoFinal2: any = [];
 
-  constructor(private alertsService: AlertsService, config: NgbModalConfig, private modalService: NgbModal, private route: ActivatedRoute) {
+  constructor(private alertsService: AlertsService,
+              config: NgbModalConfig,
+              private modalService: NgbModal,
+              private route: ActivatedRoute,
+              private formBuilder: FormBuilder) {
+    this.form = this.formBuilder.group({
+      type_rasm: ['', Validators.required]
+    })
     config.backdrop = 'static';
     config.keyboard = false;
   }
@@ -57,6 +66,28 @@ export class InstrumentReviewComponent implements OnInit {
       })
 
     })
+  }
+
+  sendInactivelAlert() {
+    //Enviamos el registro a la tabla INACTIVE_ALERT
+    this.alertsService.postInactiveAlert({
+      id_poll: this.capturaIdPollUrl,
+      type_rasm: this.form.value.type_rasm
+    }).subscribe()
+
+    //Eliminamos el registro de ALERT
+    this.alertsService.deleteAlertByIdPoll(this.capturaIdPollUrl).subscribe()
+
+  }
+
+  sendRASM() {
+    this.alertsService.postRASM({
+      id_poll: this.capturaIdPollUrl,
+      type_rasm: this.form.value.type_rasm
+    }).subscribe()
+
+    //Eliminamos el registro de ALERT
+    this.alertsService.deleteAlertByIdPoll(this.capturaIdPollUrl).subscribe()
   }
 
 }

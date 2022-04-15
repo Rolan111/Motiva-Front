@@ -1,43 +1,25 @@
 import {Injectable} from '@angular/core';
-import {LocalStorage} from "../storage/local-storage";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {LocalStorageKeyEnum} from "../enums/enum";
 import {environment} from "../../environments/environment";
+import {LocalStorage} from "../storage/local-storage";
 
 const mainUrl = environment.url;
 
 @Injectable({
   providedIn: 'root'
 })
-export class ForumService {
+export class CareRasmService {
 
   oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {
   }
 
-  public getAll() {
-    const path = mainUrl + 'api/rep-com-agents';
+  public getAllRASM() {
+    const path = mainUrl + 'api/rasm';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
-  }
-
-  public get(id: any) {
-    const path = mainUrl + 'api/rep-com-agent';
-    const headers = this.getHeader();
-    return this.http.get(path + id, {headers});
-  }
-
-  public getComments(id: any) {
-    const path = mainUrl + 'api/rep-com-agent-forum-comments/';
-    const headers = this.getHeader();
-    return this.http.get(path + id, {headers});
-  }
-
-  public postComments(id: any, body: any) {
-    const path = mainUrl + 'api/rep-com-agent-comments-create/';
-    const headers = this.getHeader();
-    return this.http.post(path + id, body, {headers});
   }
 
   getHeader() {
@@ -49,5 +31,4 @@ export class ForumService {
       'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
     });
   }
-
 }
