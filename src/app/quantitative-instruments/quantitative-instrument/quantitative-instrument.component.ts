@@ -30,6 +30,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   questions: Array<Question> = [];
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
+  score: number = 0;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -230,6 +231,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.firstName,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer2: AnswerModel = {
@@ -239,6 +241,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.secondName,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer3: AnswerModel = {
@@ -248,6 +251,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.firstLastName,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer4: AnswerModel = {
@@ -257,6 +261,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.secondLastName,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer5: AnswerModel = {
@@ -266,6 +271,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer6: AnswerModel = {
@@ -275,6 +281,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.identification,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer7: AnswerModel = {
@@ -284,6 +291,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.address,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer8: AnswerModel = {
@@ -293,6 +301,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.cellphone,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8)
@@ -306,6 +315,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.age,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer10: AnswerModel = {
@@ -315,6 +325,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer11: AnswerModel = {
@@ -324,6 +335,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer12: AnswerModel = {
@@ -333,6 +345,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer13: AnswerModel = {
@@ -342,6 +355,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer14: AnswerModel = {
@@ -351,6 +365,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.municipalityResidence,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer15: AnswerModel = {
@@ -360,6 +375,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.personCoexist,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer16: AnswerModel = {
@@ -369,6 +385,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer17: AnswerModel = {
@@ -378,6 +395,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer18: AnswerModel = {
@@ -387,6 +405,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer19: AnswerModel = {
@@ -396,6 +415,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer20: AnswerModel = {
@@ -405,6 +425,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer21: AnswerModel = {
@@ -414,6 +435,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer22: AnswerModel = {
@@ -423,6 +445,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.numberChildren,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer23: AnswerModel = {
@@ -432,6 +455,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.dependents,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     this.answerList.push(answer9, answer10, answer11, answer12, answer13, answer14, answer15, answer16, answer17, answer18,
@@ -446,6 +470,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer25: AnswerModel = {
@@ -455,6 +480,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.disorderDisease,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer26: AnswerModel = {
@@ -464,6 +490,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.physicalMental,
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     this.answerList.push(answer24, answer25, answer26)
@@ -477,6 +504,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer28: AnswerModel = {
@@ -486,6 +514,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer29: AnswerModel = {
@@ -495,6 +524,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer30: AnswerModel = {
@@ -504,6 +534,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer31: AnswerModel = {
@@ -513,6 +544,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer32: AnswerModel = {
@@ -522,6 +554,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer33: AnswerModel = {
@@ -531,6 +564,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer34: AnswerModel = {
@@ -540,6 +574,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer35: AnswerModel = {
@@ -549,6 +584,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer36: AnswerModel = {
@@ -558,6 +594,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer37: AnswerModel = {
@@ -567,6 +604,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     this.answerList.push(answer27, answer28, answer29, answer30, answer31, answer32, answer33, answer34, answer35, answer36, answer37)
@@ -580,6 +618,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer39: AnswerModel = {
@@ -589,6 +628,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer40: AnswerModel = {
@@ -598,6 +638,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer41: AnswerModel = {
@@ -607,6 +648,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer42: AnswerModel = {
@@ -616,6 +658,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer43: AnswerModel = {
@@ -625,6 +668,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer44: AnswerModel = {
@@ -634,6 +678,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer45: AnswerModel = {
@@ -643,6 +688,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer46: AnswerModel = {
@@ -652,6 +698,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer47: AnswerModel = {
@@ -661,6 +708,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer48: AnswerModel = {
@@ -670,6 +718,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer49: AnswerModel = {
@@ -679,6 +728,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer50: AnswerModel = {
@@ -688,6 +738,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer51: AnswerModel = {
@@ -697,6 +748,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer52: AnswerModel = {
@@ -706,6 +758,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer53: AnswerModel = {
@@ -715,6 +768,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer54: AnswerModel = {
@@ -724,6 +778,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer55: AnswerModel = {
@@ -733,6 +788,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     let answer56: AnswerModel = {
@@ -742,6 +798,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
+      score: 0,
     };
 
     this.answerList.push(answer38, answer39, answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
