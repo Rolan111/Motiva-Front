@@ -7,6 +7,7 @@ import {LocalStorage} from "../storage/local-storage";
 import {LocalStorageKeyEnum} from "../enums/enum";
 import {AnswerModel} from "./answer.model";
 import {PollModel} from "./poll.model";
+import {AlertModel} from "./alert.model";
 
 const mainUrl = environment.url;
 
@@ -47,6 +48,12 @@ export class QuantitativeInstrumentService {
     const path = mainUrl + 'api/poll';
     const headers = this.getHeader();
     return this.http.post<DataResponse>(path, poll, {headers});
+  }
+
+  createAlert(alert: AlertModel): Observable<DataResponse> {
+    const path = mainUrl + 'api/alert-create';
+    const headers = this.getHeader();
+    return this.http.post<DataResponse>(path, alert, {headers});
   }
 
   getAnswersByIdPoll(idPoll: number): Observable<any> {
