@@ -36,5 +36,3 @@ $candy-app-theme: mat-light-theme((
 ));
 @include angular-material-theme($candy-app-theme);
 
-/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/bootstrap';

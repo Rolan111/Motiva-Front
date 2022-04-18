@@ -1,51 +1,48 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertsService} from "../alerts.service";
-import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {MatDialog} from '@angular/material/dialog';
+import {DialogInactiveAlertComponent} from "../dialogs/dialog-inactive-alert/dialog-inactive-alert.component";
+import {DialogRasmComponent} from "../dialogs/dialog-rasm/dialog-rasm.component";
+
+export interface DialogData {
+  id_poll: number;
+}
 
 @Component({
   selector: 'app-instrument-review',
   templateUrl: './instrument-review.component.html',
-  providers: [NgbModalConfig, NgbModal],
   styleUrls: ['./instrument-review.component.scss']
 })
 export class InstrumentReviewComponent implements OnInit {
 
   public capturaIdPollUrl: any;
+  id_poll!: number;
 
   form: FormGroup;
   recuperandoPreguntas: any = [];
   recuperandoRespuestas: any = [];
   resultadoFinal2: any = [];
 
-  constructor(private alertsService: AlertsService,
-              config: NgbModalConfig,
-              private modalService: NgbModal,
+  constructor(public dialog: MatDialog,
+              private alertsService: AlertsService,
               private route: ActivatedRoute,
+              private router: Router,
               private formBuilder: FormBuilder) {
     this.form = this.formBuilder.group({
       type_rasm: ['', Validators.required]
     })
-    config.backdrop = 'static';
-    config.keyboard = false;
   }
 
-  conten: any = 'content';
-
-  open(content: any) {
-    this.modalService.open(content, {centered: true});
-  }
 
   ngOnInit(): void {
     //capturamos id_poll de la URL
     this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
-      // this.loadAnswerPsychosocial(params.variable)
       this.capturaIdPollUrl = params.variable
     })
     this.loadAnswerPsychosocial();
-    console.log('El id capturadeo del URL es> ', this.capturaIdPollUrl)
   }
 
   private loadAnswerPsychosocial() {
@@ -68,26 +65,31 @@ export class InstrumentReviewComponent implements OnInit {
     })
   }
 
-  sendInactivelAlert() {
-    //Enviamos el registro a la tabla INACTIVE_ALERT
-    this.alertsService.postInactiveAlert({
-      id_poll: this.capturaIdPollUrl,
-      type_rasm: this.form.value.type_rasm
-    }).subscribe()
+  //DIALOGS
 
-    //Eliminamos el registro de ALERT
-    this.alertsService.deleteAlertByIdPoll(this.capturaIdPollUrl).subscribe()
+  openDialogInactiveAlert(): void {
+    const dialogRef = this.dialog.open(DialogInactiveAlertComponent, {
+      width: '350px',
+      data: {id_poll: this.capturaIdPollUrl}
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog inactive-alerts was closed');
+      // Redireccionamos a al componente INACTIVE_ALERTS
+    });
   }
 
-  sendRASM() {
-    this.alertsService.postRASM({
-      id_poll: this.capturaIdPollUrl,
-      type_rasm: this.form.value.type_rasm
-    }).subscribe()
+  openDialogRASM(): void {
+    const dialogRef = this.dialog.open(DialogRasmComponent, {
+      width: '450px',
+      data: {id_poll: this.capturaIdPollUrl}
+    });
 
-    //Eliminamos el registro de ALERT
-    this.alertsService.deleteAlertByIdPoll(this.capturaIdPollUrl).subscribe()
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog rasm was closed');
+      // Redireccionamos a al componente INACTIVE_ALERTS
+    });
   }
+
 
 }
