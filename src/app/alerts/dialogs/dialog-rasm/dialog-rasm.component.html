@@ -1,0 +1,14 @@
+<h1 mat-dialog-title>Activar Ruta de atención </h1>
+<div mat-dialog-content>
+  <p>¿Qué tipo de ruta desea activar?</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Tipo de ruta</mat-label>
+    <form [formGroup]="form">
+      <input matInput formControlName="type_rasm">
+    </form>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="accent" cdkFocusInitial (click)="sendRASM()">Activar Ruta</button>
+</div>

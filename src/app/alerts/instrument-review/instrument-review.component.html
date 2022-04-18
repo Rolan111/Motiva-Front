@@ -14,50 +14,10 @@
   </nav>
 
   <div class="alineandoboton">
-    <button class="btn btn-warning" (click)="open(modalDesactivacionAlerta)"> Desactivar Alerta</button>
-    <button mat-raised-button class="btb btn-success" (click)="open(modalActivacionRuta)">Activar Ruta de Atención
-    </button>
+    <button class="btn" mat-raised-button color="primary" (click)="openDialogInactiveAlert()">Desactivar Alerta</button>
+    <button mat-raised-button color="accent" (click)="openDialogRASM()">Activar ruta de atención</button>
   </div>
 
-<!--  Modal para ACTIVACIÓN DE RUTA -->
-  <ng-template #modalActivacionRuta let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title"><b>Activación Ruta de Atención</b></h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="form">
-        <mat-form-field class="inputClass" appearance="fill">
-          <mat-label>Tipo de RUTA</mat-label>
-          <input formControlName="type_rasm" matInput placeholder="Tipo de ruta">
-        </mat-form-field>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">Cancelar</button>
-      <button type="button" class="btn btn-outline-success" (click)="c(sendRASM())" routerLink="../../../care-rasm">
-        Activar Ruta
-      </button>
-    </div>
-  </ng-template>
-
-  <!--  Modal para DESACTIVACIÓN DE ALERTA -->
-  <ng-template #modalDesactivacionAlerta let-c="close" let-d="dismiss">
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title2"><b>¡Desactivación de Alerta!</b></h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
-    </div>
-    <div class="modal-body">
-      ¿Está seguro desea desactivar esta Alerta?
-    </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="c('Cancel click')">Cancelar</button>
-      <button type="button" class="btn btn-outline-warning" (click)="c(sendInactivelAlert())"
-              routerLink="../../inactive-alerts">Desactivar Alerta
-      </button>
-    </div>
-  </ng-template>
-
-
 </mat-card>
+
 

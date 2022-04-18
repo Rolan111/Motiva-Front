@@ -24,7 +24,6 @@ export class AlertsComponent implements OnInit {
 
   displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
   dataSource = this.arrayDeAlertasTabla;
-  //dataSource!: MatTableDataSource<any>;
 
   constructor(private alertsService: AlertsService) {
   }

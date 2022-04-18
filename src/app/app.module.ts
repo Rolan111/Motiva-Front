@@ -15,12 +15,13 @@ import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CareRasmModule} from "./care-rasm/care-rasm.module";
+import {OVAComponent} from './ova/ova.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    OVAComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +38,6 @@ import {CareRasmModule} from "./care-rasm/care-rasm.module";
     CareRoutesModule,
     CareSheetModule,
     AlertsModule,
-    NgbModule,
     CareRasmModule
 
   ],
