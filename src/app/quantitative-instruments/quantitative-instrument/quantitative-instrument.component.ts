@@ -325,7 +325,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: answerForm.value.sex == 2 ? 2 : 0,
     };
 
     let answer11: AnswerModel = {
@@ -355,7 +355,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: answerForm.value.zoneResidence == 15 ? 2 : 0,
     };
 
     let answer14: AnswerModel = {
@@ -480,7 +480,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: answerForm.value.disorderDisease,
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: answerForm.value.disorderDisease != '' ? 5 : 0,
     };
 
     let answer26: AnswerModel = {
@@ -584,7 +584,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: answerForm.value.diomesticViolence == 104 ? 5 : 0,
     };
 
     let answer36: AnswerModel = {
@@ -618,7 +618,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [111, 112].includes(answerForm.value.one) ? 1 : 0,
     };
 
     let answer39: AnswerModel = {
@@ -628,7 +628,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [115, 116].includes(answerForm.value.two) ? 1 : 0,
     };
 
     let answer40: AnswerModel = {
@@ -638,7 +638,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [119, 120].includes(answerForm.value.three) ? 1 : 0,
     };
 
     let answer41: AnswerModel = {
@@ -648,7 +648,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [123, 124].includes(answerForm.value.four) ? 1 : 0,
     };
 
     let answer42: AnswerModel = {
@@ -658,7 +658,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [127, 128].includes(answerForm.value.five) ? 1 : 0,
     };
 
     let answer43: AnswerModel = {
@@ -668,7 +668,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [133, 134].includes(answerForm.value.six) ? 1 : 0,
     };
 
     let answer44: AnswerModel = {
@@ -678,7 +678,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [135, 136].includes(answerForm.value.seven) ? 1 : 0,
     };
 
     let answer45: AnswerModel = {
@@ -688,7 +688,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [139, 140].includes(answerForm.value.eight) ? 1 : 0,
     };
 
     let answer46: AnswerModel = {
@@ -698,7 +698,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [143, 144].includes(answerForm.value.nine) ? 1 : 0,
     };
 
     let answer47: AnswerModel = {
@@ -708,7 +708,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [147, 148].includes(answerForm.value.ten) ? 1 : 0,
     };
 
     let answer48: AnswerModel = {
@@ -718,7 +718,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [151, 152].includes(answerForm.value.eleven) ? 1 : 0,
     };
 
     let answer49: AnswerModel = {
@@ -728,7 +728,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [155, 156].includes(answerForm.value.twelve) ? 1 : 0,
     };
 
     let answer50: AnswerModel = {
@@ -748,7 +748,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [163, 164].includes(answerForm.value.fourteen) ? 1 : 0,
     };
 
     let answer52: AnswerModel = {
@@ -758,7 +758,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [167, 168].includes(answerForm.value.fifteen) ? 1 : 0,
     };
 
     let answer53: AnswerModel = {
@@ -768,7 +768,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [171, 172].includes(answerForm.value.sixteen) ? 1 : 0,
     };
 
     let answer54: AnswerModel = {
@@ -778,7 +778,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [175, 176].includes(answerForm.value.seventeen) ? 1 : 0,
     };
 
     let answer55: AnswerModel = {
@@ -788,7 +788,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [179, 180].includes(answerForm.value.eighteen) ? 25 : 0,
     };
 
     let answer56: AnswerModel = {
@@ -798,7 +798,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: [183, 184].includes(answerForm.value.nineteen) ? 1 : 0,
     };
 
     this.answerList.push(answer38, answer39, answer40, answer41, answer42, answer43, answer44, answer45, answer46, answer47, answer48, answer49,
