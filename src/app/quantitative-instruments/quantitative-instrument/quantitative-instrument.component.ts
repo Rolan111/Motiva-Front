@@ -788,7 +788,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: [179, 180].includes(answerForm.value.eighteen) ? 25 : 0,
+      score: this.scoreEighteen(answerForm.value.eighteen),
     };
 
     let answer56: AnswerModel = {
@@ -907,6 +907,20 @@ export class QuantitativeInstrumentComponent implements OnInit {
       case 204:
         this.typeIdentificationQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
         this.typeIdentificationQuestion.forEach(item => this.typeIdentificationList = item.optionAnswerDtoList);
+        break;
+    }
+  }
+
+  private scoreEighteen(eighteen: number): any {
+    switch (eighteen) {
+      case 179:
+        return 25;
+        break;
+      case 180:
+        return 25;
+        break;
+      case 181:
+        return 13;
         break;
     }
   }
