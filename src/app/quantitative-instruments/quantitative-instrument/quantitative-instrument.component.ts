@@ -7,6 +7,7 @@ import {OptionAnswer} from "../option-answer.model";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
+import {AlertModel} from "../alert.model";
 
 interface ListTypes {
   viewValue: string;
@@ -36,7 +37,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
   sexQuestion: Question[] = [];
   ethnicityQuestion: Question[] = [];
   civilStatus: Question[] = [];
-  question5: Question[] = [];
   typeHome: Question[] = [];
   accessServicies: Question[] = [];
   educationLevel: Question[] = [];
@@ -524,8 +524,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: this.scoreAftermath(answerForm.value.aftermath),
     };
+
+    console.log('answer29', answer29)
 
     let answer30: AnswerModel = {
       idAnswer: this.idAnswer + 29,
@@ -830,9 +832,16 @@ export class QuantitativeInstrumentComponent implements OnInit {
       type: "ADULT",
     };
 
+    this.answerList.forEach(x => this.score = this.score + x.score)
+
+    let alert: AlertModel = {
+      idAlert: 1,
+      idPoll: this.idPoll,
+      score: this.score
+    }
+
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
-        this.quanInstService.createPoll(poll);
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
         this.answerList = [];
         window.location.reload();
@@ -840,6 +849,16 @@ export class QuantitativeInstrumentComponent implements OnInit {
         this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
       }
     });
+
+    this.quanInstService.createPoll(poll).subscribe({
+      next: () => {
+      }
+    })
+
+    this.quanInstService.createAlert(alert).subscribe({
+      next: () => {
+      }
+    })
   }
 
   selectQuestion(idQuestion: number) {
@@ -923,6 +942,35 @@ export class QuantitativeInstrumentComponent implements OnInit {
         return 13;
         break;
     }
+  }
+
+  private scoreAftermath(aftermath: Array<number>): any {
+    let score: Array<number> = aftermath;
+    let addScore: number = 0;
+    for (let x of score) {
+      switch (x) {
+        case 70:
+          addScore = addScore + 1;
+          break;
+        case 71:
+          addScore = addScore + 2;
+          break;
+        case 72:
+          addScore = addScore + 1;
+          break;
+        case 73:
+          addScore = addScore + 1;
+          break;
+        case 74:
+          addScore = addScore + 1;
+          break;
+        case 75:
+          addScore = addScore + 1;
+          break;
+      }
+    }
+
+    return addScore;
   }
 
   selectMentalHealthNeeds(idQuestions: Array<number>) {
