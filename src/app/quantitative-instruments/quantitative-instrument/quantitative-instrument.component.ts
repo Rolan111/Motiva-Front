@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
 import {AlertModel} from "../alert.model";
+import {CareSheetService} from "../../care-sheet/care-sheet.service";
 
 interface ListTypes {
   viewValue: string;
@@ -85,6 +86,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   nineteenList: Array<OptionAnswer> = [];
 
   constructor(
+    private careSheetService: CareSheetService,
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
@@ -546,7 +548,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: this.scoreDeadFamily(answerForm.value.deadFamily),
     };
 
     let answer32: AnswerModel = {
@@ -556,7 +558,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: this.scoreWorkSituation(answerForm.value.workSituation),
     };
 
     let answer33: AnswerModel = {
@@ -566,7 +568,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: 0,
+      score: this.scoreStudentSituation(answerForm.value.studentSituation),
     };
 
     let answer34: AnswerModel = {
@@ -842,6 +844,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
+        this.quanInstService.createPoll(poll);
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
         this.answerList = [];
         window.location.reload();
@@ -946,31 +949,106 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   private scoreAftermath(aftermath: Array<number>): any {
     let score: Array<number> = aftermath;
-    let addScore: number = 0;
+    let addScoreAftermath: number = 0;
     for (let x of score) {
       switch (x) {
         case 70:
-          addScore = addScore + 1;
+          addScoreAftermath = addScoreAftermath + 1;
           break;
         case 71:
-          addScore = addScore + 2;
+          addScoreAftermath = addScoreAftermath + 2;
           break;
         case 72:
-          addScore = addScore + 1;
+          addScoreAftermath = addScoreAftermath + 1;
           break;
         case 73:
-          addScore = addScore + 1;
+          addScoreAftermath = addScoreAftermath + 1;
           break;
         case 74:
-          addScore = addScore + 1;
+          addScoreAftermath = addScoreAftermath + 1;
           break;
         case 75:
-          addScore = addScore + 1;
+          addScoreAftermath = addScoreAftermath + 1;
           break;
       }
     }
 
-    return addScore;
+    return addScoreAftermath;
+  }
+
+  private scoreDeadFamily(deadFamily: Array<number>): any {
+    let score: Array<number> = deadFamily;
+    let addScoreDeadFamily: number = 0;
+    for (let x of score) {
+      switch (x) {
+        case 80:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+        case 81:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+        case 82:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+        case 83:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+        case 84:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+        case 85:
+          addScoreDeadFamily = addScoreDeadFamily + 1;
+          break;
+      }
+    }
+
+    return addScoreDeadFamily;
+  }
+
+  private scoreWorkSituation(workSituation: Array<number>): any {
+    let score: Array<number> = workSituation;
+    let addScoreWorkSituation: number = 0;
+    for (let x of score) {
+      switch (x) {
+        case 88:
+          addScoreWorkSituation = addScoreWorkSituation + 1;
+          break;
+        case 89:
+          addScoreWorkSituation = addScoreWorkSituation + 1;
+          break;
+        case 90:
+          addScoreWorkSituation = addScoreWorkSituation + 1;
+          break;
+        case 91:
+          addScoreWorkSituation = addScoreWorkSituation + 1;
+          break;
+      }
+    }
+
+    return addScoreWorkSituation;
+  }
+
+  private scoreStudentSituation(studentSituation: Array<number>): any {
+    let score: Array<number> = studentSituation;
+    let addScoreStudentSituation: number = 0;
+    for (let x of score) {
+      switch (x) {
+        case 94:
+          addScoreStudentSituation = addScoreStudentSituation + 1;
+          break;
+        case 96:
+          addScoreStudentSituation = addScoreStudentSituation + 1;
+          break;
+        case 98:
+          addScoreStudentSituation = addScoreStudentSituation + 1;
+          break;
+        case 99:
+          addScoreStudentSituation = addScoreStudentSituation + 1;
+          break;
+      }
+    }
+
+    return addScoreStudentSituation;
   }
 
   selectMentalHealthNeeds(idQuestions: Array<number>) {
@@ -1097,5 +1175,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+  }
+
+  enviandoACareSheet() {
+    this.careSheetService.shareIdPoll = this.idPoll;
+    this.careSheetService.shareCity = this.secundaryInfo.value.municipalityResidence;
+    this.careSheetService.shareSex = this.secundaryInfo.value.sex;
+    this.careSheetService.shareName = this.personalInfo.value.firstName;
+    this.careSheetService.shareLastName = this.personalInfo.value.firstLastName;
+    this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
+    this.careSheetService.shareEthnicity = this.secundaryInfo.value.ethnicity;
   }
 }
