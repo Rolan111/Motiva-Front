@@ -21,6 +21,7 @@ export class CareSheetService {
   shareLastName: string = 'Esperando...';
   shareIdentificationNumber: number = 0;
   shareEthnicity: number = 0;
+  sharePhone: number = 0;
 
   oLocalStorage = new LocalStorage();
 

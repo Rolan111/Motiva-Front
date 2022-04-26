@@ -1185,5 +1185,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.careSheetService.shareLastName = this.personalInfo.value.firstLastName;
     this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
     this.careSheetService.shareEthnicity = this.secundaryInfo.value.ethnicity;
+    this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
   }
 }
