@@ -546,13 +546,13 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   private scoreModeStudy(studyMode: number): any {
     switch (studyMode) {
       case 216 :
-        return this.score + 1;
+        return 1;
         break;
       case 217:
-        return this.score + 3;
+        return 3;
         break;
       case 218:
-        return this.score + 2;
+        return 2;
         break;
     }
   }
