@@ -38,9 +38,8 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Fecha de evaluación</mat-label>
-                <input formControlName="evaluationDate" matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input formControlName="evaluationDate" maxlength="50" type="text" matInput placeholder="Departamento"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')" readonly>
               </mat-form-field>
             </mat-grid-tile>
 
@@ -75,8 +74,11 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Edad</mat-label>
-                <input type="number" formControlName="age" matInput placeholder="Edad">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input formControlName="dateBirth" matInput [matDatepicker]="picker2" readonly
+                       (ngModelChange)="calculandoEdad()">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </mat-grid-tile>
 
