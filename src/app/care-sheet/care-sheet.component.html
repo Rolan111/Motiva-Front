@@ -36,9 +36,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Fecha de evaluación</mat-label>
-                <input formControlName="evaluationDate" matInput [matDatepicker]="picker">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input formControlName="evaluationDate" matInput readonly>
               </mat-form-field>
             </mat-grid-tile>
 
@@ -71,17 +69,19 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Edad</mat-label>
-                <input type="number" formControlName="age" matInput placeholder="Edad">
+                <mat-label>Fecha de nacimiento</mat-label>
+                <input formControlName="dateBirth" readonly matInput [matDatepicker]="picker2"
+                       (ngModelChange)="calculandoEdad()">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
               </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="2" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Fecha de nacimiento</mat-label>
-                <input formControlName="dateBirth" matInput [matDatepicker]="picker2">
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+                <mat-label>Edad</mat-label>
+                <!--                <input type="number" formControlName="age" matInput placeholder="Edad" readonly>-->
+                <input matInput disabled [value]="edadCalculada">
               </mat-form-field>
             </mat-grid-tile>
 

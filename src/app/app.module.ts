@@ -16,12 +16,10 @@ import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantita
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
 import {CareRasmModule} from "./care-rasm/care-rasm.module";
-import {OVAComponent} from './ova/ova.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    OVAComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,

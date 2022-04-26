@@ -2,16 +2,13 @@
   <mat-card-title>Rutas de atención Activas</mat-card-title>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-    <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
-
-    <!-- Position Column -->
+    <!-- id_poll Column -->
     <ng-container matColumnDef="id_poll">
       <th mat-header-cell *matHeaderCellDef> Id_Poll</th>
       <td mat-cell *matCellDef="let element"> {{element.id_poll}} </td>
     </ng-container>
 
-    <!-- Position Column -->
+    <!-- type_rasm Column -->
     <ng-container matColumnDef="type_rasm">
       <th mat-header-cell *matHeaderCellDef> Type_rasm</th>
       <td mat-cell *matCellDef="let element"> {{element.type_rasm}} </td>
