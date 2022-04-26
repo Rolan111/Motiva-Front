@@ -69,13 +69,12 @@ export class InstrumentReviewComponent implements OnInit {
 
   openDialogInactiveAlert(): void {
     const dialogRef = this.dialog.open(DialogInactiveAlertComponent, {
-      width: '350px',
+      width: '400px',
       data: {id_poll: this.capturaIdPollUrl}
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog inactive-alerts was closed');
-      // Redireccionamos a al componente INACTIVE_ALERTS
     });
   }
 
@@ -87,7 +86,6 @@ export class InstrumentReviewComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog rasm was closed');
-      // Redireccionamos a al componente INACTIVE_ALERTS
     });
   }
 
