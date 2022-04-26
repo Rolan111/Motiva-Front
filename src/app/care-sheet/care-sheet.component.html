@@ -21,15 +21,17 @@
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Cidudad - Municipio</mat-label>
-                <input formControlName="city" matInput placeholder="Cidudad-Municipio">
+                <mat-label>Ciudad - Municipio</mat-label>
+                <input formControlName="city" maxlength="30" matInput placeholder="Ciudad-Municipio"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Departamento</mat-label>
-                <input formControlName="departament" type="text" matInput placeholder="Departamento">
+                <input formControlName="departament" maxlength="50" type="text" matInput placeholder="Departamento"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
 
@@ -52,19 +54,21 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Nombre del paciente</mat-label>
-                <input formControlName="name" matInput placeholder="Nombre del paciente ">
+                <input formControlName="name" maxlength="50" matInput placeholder="Nombre del paciente "
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Apellido del paciente</mat-label>
-                <input formControlName="lastName" matInput placeholder="Apellido del paciente">
+                <input formControlName="lastName" maxlength="50" matInput placeholder="Apellido del paciente"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>No. de identificación</mat-label>
-                <input type="number" formControlName="identificationNumber" matInput
+                <input type="number" maxlength="12" formControlName="identificationNumber" matInput
                        placeholder="No. de identificación">
               </mat-form-field>
             </mat-grid-tile>
@@ -72,7 +76,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Edad</mat-label>
-                <input type="number" formControlName="age" matInput placeholder="Edad">
+                <input type="number" maxlength="3" formControlName="age" matInput placeholder="Edad">
               </mat-form-field>
             </mat-grid-tile>
 
@@ -108,46 +112,52 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Etnia</mat-label>
-                <input formControlName="ethnicity" matInput placeholder="Etnia">
+                <input formControlName="ethnicity" maxlength="3000" matInput placeholder="Etnia"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Religión</mat-label>
-                <input formControlName="religion" type="text" matInput placeholder="Religión">
+                <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Lugar de nacimiento</mat-label>
-                <input formControlName="placeBirth" type="text" matInput placeholder="Lugar de nacimiento">
+                <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Procedencia</mat-label>
-                <input formControlName="origin" matInput placeholder="Procedencia">
+                <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Dirección de procedencia</mat-label>
-                <input formControlName="originAddress" matInput placeholder="Dirección de procedencia">
+                <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia"
+                       oninput="this.value=this.value.replace(/[^A-Za-z0-9]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Barrio</mat-label>
-                <input formControlName="neighborhood" matInput placeholder="Barrio">
+                <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               </mat-form-field>
             </mat-grid-tile>
 
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Estrato</mat-label>
-                <input type="number" formControlName="stratum" matInput
+                <input type="number" maxlength="2" formControlName="stratum" matInput
                        placeholder="Estrato">
               </mat-form-field>
             </mat-grid-tile>
@@ -155,7 +165,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Teléfono</mat-label>
-                <input type="number" formControlName="phone" matInput
+                <input type="number" maxlength="10" formControlName="phone" matInput
                        placeholder="Teléfono">
               </mat-form-field>
             </mat-grid-tile>
