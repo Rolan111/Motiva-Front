@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {LoginInterface} from "./login.interface";
 import {LocalStorageKeyEnum} from "../enums/enum";
 import {LocalStorage} from "../storage/local-storage";
+import {LoginModel} from "./login.model";
 
 @Component({
   selector: 'app-login',
@@ -54,17 +55,21 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.loginService.logIn(data.value).subscribe((response: LoginInterface) => {
-      if (response.name != null) {
-        this.setLocalStorage(response);
-        this.router.navigateByUrl('/navbar');
+    console.log(data.value)
+
+    this.loginService.logIn(data.value).subscribe({
+      next: (response: LoginInterface) => {
+        if (response.name != null) {
+          this.setLocalStorage(response);
+          this.router.navigateByUrl('/navbar');
+        }
+      }, error: (error) => {
+        if (error.status === 401 || error.statusText === "ok") {
+          this.openSnackBar("Usuario o Contraseña incorrecta", "Alert");
+          return;
+        }
+        this.openSnackBar("Error al iniciar session", "Alert");
       }
-    }, error => {
-      if (error.status === 401 || error.statusText === "ok") {
-        this.openSnackBar("Usuario o Contraseña incorrecta", "Alert");
-        return;
-      }
-      this.openSnackBar("Error al iniciar session", "Alert");
     })
   }
 
@@ -76,6 +81,22 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/navbar');
       }
     );
+  }
+
+  guestLogin() {
+    let guest: LoginModel = {
+      username: "1061852963",
+      password: "motivapw"
+    }
+
+    this.loginService.logIn(guest).subscribe({
+      next: (response: LoginInterface) => {
+        if (response.name != null) {
+          this.setLocalStorage(response);
+          this.router.navigateByUrl('/navbar');
+        }
+      }
+    })
   }
 
   private setLocalStorage(user: LoginInterface) {
