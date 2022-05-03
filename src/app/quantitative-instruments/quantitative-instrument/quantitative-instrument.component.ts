@@ -852,6 +852,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.createPoll(poll).subscribe({
       next: () => {
+      }, error: () => {
+
       }
     })
 
