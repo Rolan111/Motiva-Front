@@ -14,6 +14,15 @@ const mainUrl = environment.url;
 })
 export class CareSheetService {
 
+  shareIdPoll: number = 0;
+  shareCity: string = 'Esperando...';
+  shareSex: number = 0;
+  shareName: string = 'Esperando...';
+  shareLastName: string = 'Esperando...';
+  shareIdentificationNumber: number = 0;
+  shareEthnicity: number = 0;
+  sharePhone: number = 0;
+
   oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {

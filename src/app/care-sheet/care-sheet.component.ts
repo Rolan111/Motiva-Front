@@ -4,6 +4,7 @@ import {ActivatedRoute} from "@angular/router";
 import {TrackingSheetService} from "../tracking-sheet/tracking-sheet.service";
 import {CareSheetService} from "./care-sheet.service";
 import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
+import {ToastrService} from "ngx-toastr";
 
 
 @Component({
@@ -13,6 +14,7 @@ import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
 })
 export class CareSheetComponent implements OnInit {
 
+  edadCalculada: any = 0;
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
 
   nivelIntervencionModeloBiopsicosocial: string[] = ['Promoción de la salud', 'Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
@@ -39,41 +41,42 @@ export class CareSheetComponent implements OnInit {
   form: FormGroup;
 
   constructor(
+    private toastr: ToastrService,
     private route: ActivatedRoute,
     private trackingSheetService: TrackingSheetService,
     private formBuilder: FormBuilder,
-    private careSheetService: CareSheetService
+    public careSheetService: CareSheetService
   ) {
     this.form = this.formBuilder.group({
-        capturaIdPoll: ['29', Validators.required],
-        city: ['', Validators.required],
-        departament: ['Cauca'],
-        evaluationDate: ['', Validators.required],
-        sex: ['', Validators.required],
-        name: ['', Validators.required],
-        lastName: ['', Validators.required],
-        identificationNumber: ['', Validators.required],
-        age: ['', Validators.required],
-        dateBirth: ['', Validators.required],
+      capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
+      city: [this.careSheetService.shareCity, Validators.required],
+      departament: ['Cauca'],
+      evaluationDate: ['', Validators.required],
+      sex: ['', Validators.required],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      identificationNumber: ['', Validators.required],
+      age: ['', Validators.required],
+      dateBirth: ['', Validators.required],
 
-        ethnicity: ['', Validators.required],
-        religion: ['', Validators.required],
-        placeBirth: ['', Validators.required],
-        origin: ['', Validators.required],
-        originAddress: ['', Validators.required],
-        neighborhood: ['', Validators.required],
-        stratum: ['', Validators.required],
-        phone: ['', Validators.required],
+      ethnicity: ['', Validators.required],
+      religion: ['', Validators.required],
+      placeBirth: ['', Validators.required],
+      origin: ['', Validators.required],
+      originAddress: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      stratum: ['', Validators.required],
+      phone: this.careSheetService.sharePhone,
 
-        reasonConsultation: ['', Validators.required],
-        currentIllness: ['', Validators.required],
-        AP_APS_Observations: ['', Validators.required],
-        AP_APS_Diagnostics: ['', Validators.required],
-        AP_APS_Medicine: ['', Validators.required],
-        AP_APS_Dose: ['', Validators.required],
-        AP_APS_Time: ['', Validators.required],
+      reasonConsultation: ['', Validators.required],
+      currentIllness: ['', Validators.required],
+      AP_APS_Observations: ['', Validators.required],
+      AP_APS_Diagnostics: ['', Validators.required],
+      AP_APS_Medicine: ['', Validators.required],
+      AP_APS_Dose: ['', Validators.required],
+      AP_APS_Time: ['', Validators.required],
 
-        AP_AM_Observations: ['', Validators.required],
+      AP_AM_Observations: ['', Validators.required],
         AP_AM_Diagnostics: ['', Validators.required],
         AP_AM_Medicine: ['', Validators.required],
         AP_AM_Dose: ['', Validators.required],
@@ -110,11 +113,82 @@ export class CareSheetComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
+    this.form.get('evaluationDate')?.setValue(new Date().toLocaleDateString())
+    switch (this.careSheetService.shareSex) {
+      case 1: {
+        this.form.get('sex')?.setValue('Hombre')
+        break;
+      }
+      case 2: {
+        this.form.get('sex')?.setValue('Mujer')
+        break;
+      }
+
+      case 3: {
+        this.form.get('sex')?.setValue('Indeterminado')
+        break;
+      }
+      default: {
+        this.form.get('sex')?.setValue('Esperando...')
+        break;
+      }
+    }
+
+    this.form.get('name')?.setValue(this.careSheetService.shareName)
+    this.form.get('lastName')?.setValue(this.careSheetService.shareLastName)
+    this.form.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
+
+    switch (this.careSheetService.shareEthnicity) {
+      case 4: {
+        this.form.get('ethnicity')?.setValue('Indígena')
+        break;
+      }
+
+      case 5: {
+        this.form.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
+        break;
+      }
+
+      case 6: {
+        this.form.get('ethnicity')?.setValue('Gitano/Rrom')
+        break;
+      }
+
+      case 7: {
+        this.form.get('ethnicity')?.setValue('Palenquero')
+        break;
+      }
+      case 8: {
+        this.form.get('ethnicity')?.setValue('Raizal')
+        break;
+      }
+
+      case 9: {
+        this.form.get('ethnicity')?.setValue('Ninguno')
+        break;
+      }
+
+      default: {
+        this.form.get('ethnicity')?.setValue('Esperando...')
+        break;
+      }
+    }
 
   }
 
+  calculandoEdad() {
+    let fechaSeleccionada: any = this.form.value.dateBirth;
+    let fechaActual: any = new Date();
+    let diferenciaTiempo: any = Math.abs(fechaActual - fechaSeleccionada);
+    let age = Math.floor((diferenciaTiempo / (1000 * 3600 * 24)) / 365.25);
+    this.form.get('age')?.setValue(age)
+    this.edadCalculada = age;
+  }
+
   recuperarRespuestas() {
+
     this.careSheetService.getInstrumentAnswers(29).subscribe(respuesta => {
       this.listaValidandoCareSheet = respuesta;
       this.listaValidandoCareSheet.forEach((recorriendoArray: any) => {
@@ -467,9 +541,13 @@ export class CareSheetComponent implements OnInit {
 
     //Procedemos a guardar
     for (let guardando of this.listaDeRespuestas) {
-      this.careSheetService.create2(guardando).subscribe()
+      this.careSheetService.create2(guardando).subscribe(value => {
+      }, error => {
+        this.toastr.error('¡La información no se ha podido registrar!', 'Error')
+      }, () => {
+      })
     }
-
+    this.toastr.success('¡La información ha sido registrada!', 'Enviado');
   }
 
 }

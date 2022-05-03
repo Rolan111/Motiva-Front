@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
 import {AlertModel} from "../alert.model";
+import {CareSheetService} from "../../care-sheet/care-sheet.service";
 
 interface ListTypes {
   viewValue: string;
@@ -85,6 +86,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   nineteenList: Array<OptionAnswer> = [];
 
   constructor(
+    private careSheetService: CareSheetService,
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
@@ -842,6 +844,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
+        this.quanInstService.createPoll(poll);
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
         this.answerList = [];
         window.location.reload();
@@ -1174,5 +1177,16 @@ export class QuantitativeInstrumentComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+  }
+
+  enviandoACareSheet() {
+    this.careSheetService.shareIdPoll = this.idPoll;
+    this.careSheetService.shareCity = this.secundaryInfo.value.municipalityResidence;
+    this.careSheetService.shareSex = this.secundaryInfo.value.sex;
+    this.careSheetService.shareName = this.personalInfo.value.firstName;
+    this.careSheetService.shareLastName = this.personalInfo.value.firstLastName;
+    this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
+    this.careSheetService.shareEthnicity = this.secundaryInfo.value.ethnicity;
+    this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
   }
 }
