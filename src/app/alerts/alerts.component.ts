@@ -35,6 +35,8 @@ export class AlertsComponent implements OnInit {
     })
 
     this.loadAlerts();
+
+    console.log('La captura es> ', this.alertsService.getAlertSize2())
   }
 
 

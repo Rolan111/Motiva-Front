@@ -14,7 +14,10 @@ export class AlertsService {
   oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {
+
   }
+
+  trayendoData: any = [];
 
   //Tabla ALERT
   public getAlertSize() {
@@ -23,6 +26,16 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
+  public getAlertSize2() {
+    this.getAllAlerts().subscribe(data => {
+      console.log(data)
+      this.trayendoData.push(data);
+    })
+
+    return this.trayendoData;
+  }
+
+  //*****************************
   public getAllAlerts() {
     const path = mainUrl + 'api/alerts-pruebas';
     const headers = this.getHeader();
