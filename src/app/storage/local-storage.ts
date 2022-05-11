@@ -1,7 +1,5 @@
 export class LocalStorage {
 
-  constructor() {}
-
   setItem(key: any, value: any) {
     window.localStorage.setItem(this.getKeyValue(key), JSON.stringify(value));
   }

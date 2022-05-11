@@ -1,1 +1,1 @@
-export * from './image.model';
+export * from './imageModel';
