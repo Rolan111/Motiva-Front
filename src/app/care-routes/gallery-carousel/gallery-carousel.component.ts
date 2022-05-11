@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {imageModel} from "../image.model";
+import {ImageModel} from "../imageModel";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
@@ -42,16 +42,13 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 })
 export class GalleryCarouselComponent implements OnInit {
 
-  @Input() images!: Array<imageModel>;
+  @Input() images!: Array<ImageModel>;
   //@Input() selectedImage!: number;
   @Input() selectedImage: any;
   @Output() closeCarousel = new EventEmitter<void>();
   public animState = 'middle';
   //public animImage!: number;
   public animImage: any;
-
-  constructor() {
-  }
 
   ngOnInit(): void {
     this.animImage = this.selectedImage;

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {imageModel} from "../image.model";
+import {ImageModel} from "../imageModel";
 
 @Component({
   selector: 'app-gallery',
@@ -27,12 +27,7 @@ export class GalleryComponent implements OnInit {
       row: '2/2',
       col: '5'
     }
-  ] as Array<imageModel>;
-
-  constructor() {
-
-  }
-
+  ] as Array<ImageModel>;
 
   ngOnInit(): void {
     //console.log('Imagen inicial: ',this.selectedImage)
