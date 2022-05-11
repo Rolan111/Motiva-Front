@@ -7,6 +7,4 @@ export class ShowImagesService {
 
   @Output() disparadorDeImages: EventEmitter<any> = new EventEmitter();
 
-  constructor() {
-  }
 }

@@ -19,7 +19,7 @@ export class RepComAgentComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private RepComAgentService: RepComAgentService,
+    private repComAgentService: RepComAgentService,
     private formBuilder: FormBuilder,
     private toastr: ToastrService) {
 
@@ -48,7 +48,7 @@ export class RepComAgentComponent implements OnInit {
   }
 
   public loadData() {
-    this.RepComAgentService.get().subscribe(respuesta => {
+    this.repComAgentService.get().subscribe(respuesta => {
     })
   }
 
@@ -78,7 +78,7 @@ export class RepComAgentComponent implements OnInit {
       evidence: form.value.evidence,
       activityProfessionalIncharge: form.value.activityProfessionalIncharge,
     }
-    this.RepComAgentService.create(repComAgentModel).subscribe(response => {
+    this.repComAgentService.create(repComAgentModel).subscribe(response => {
       console.log(response.data)
       this.probandoReactivos()
     })
