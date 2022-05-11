@@ -547,13 +547,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     switch (studyMode) {
       case 216 :
         return 1;
-        break;
       case 217:
         return 3;
-        break;
       case 218:
         return 2;
-        break;
     }
   }
 
