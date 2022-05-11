@@ -9,9 +9,6 @@ export class CommentsComponent implements OnInit {
 
   @Input() recibiendoComments: any;
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     console.log('La data recibida de report-description es: ', this.recibiendoComments)
   }
