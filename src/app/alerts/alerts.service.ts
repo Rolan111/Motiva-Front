@@ -35,7 +35,6 @@ export class AlertsService {
     return this.trayendoData;
   }
 
-  //*****************************
   public getAllAlerts() {
     const path = mainUrl + 'api/alerts-pruebas';
     const headers = this.getHeader();

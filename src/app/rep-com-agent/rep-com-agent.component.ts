@@ -55,7 +55,7 @@ export class RepComAgentComponent implements OnInit {
   public probandoReactivos() {
 
     this.submited = true;
-    if (this.form.invalid) { //no deja pasar si no es valido
+    if (this.form.invalid) {
       return;
     }
     this.toastr.success('El reporte de agente comunitario ha sido cargado!', 'Registro exitoso');
