@@ -14,7 +14,7 @@ const mainUrl = environment.url;
 })
 export class RepComAgentService {
 
-  oLocalStorage = new LocalStorage(); //Otenemos el token para pasarlo a los headers
+  oLocalStorage = new LocalStorage();
 
   constructor(private http: HttpClient) {
   }

@@ -3,7 +3,6 @@
     <div *ngFor="let image of images; let i = index" [style.gridRow]="image.row" [style.gridCol]="image.col"
          class="image">
       <img [src]="image.url" (click)="selectedImage = i">
-      <!--      <img [src]="image.url" (click)="revisarImagenSeleccionada(i)">-->
       <span>+</span>
     </div>
   </div>

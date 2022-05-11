@@ -7,7 +7,6 @@ import {imageModel} from "../image.model";
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-  //public selectedImage?: number = null;
   public selectedImage: any = null;
   public images = [
     {
@@ -35,10 +34,6 @@ export class GalleryComponent implements OnInit {
 
 
   ngOnInit(): void {
-    //console.log('Imagen inicial: ',this.selectedImage)
   }
 
-  revisarImagenSeleccionada(i: any) {
-    //console.log('la imagen seleccionada fue: ',i)
-  }
 }

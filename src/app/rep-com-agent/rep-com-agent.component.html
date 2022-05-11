@@ -1,7 +1,6 @@
 <mat-card>
   <mat-card-title>Reporte Actividades de Agentes Comunitarios</mat-card-title>
   <span *ngIf="submited && form.invalid">Todos los campos son obligatorios</span>
-  <!-- los nombres de formControlName deben estar mapeados en el .ts   -->
   <form [formGroup]="form" (ngSubmit)="saveForm(form)">
 
     <mat-form-field class="inputClass" appearance="fill">
