@@ -939,13 +939,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
     switch (eighteen) {
       case 179:
         return 25;
-        break;
       case 180:
         return 25;
-        break;
       case 181:
         return 13;
-        break;
     }
   }
 
@@ -982,26 +979,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let score: Array<number> = deadFamily;
     let addScoreDeadFamily: number = 0;
     for (let x of score) {
-      switch (x) {
-        case 80:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-        case 81:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-        case 82:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-        case 83:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-        case 84:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-        case 85:
-          addScoreDeadFamily = addScoreDeadFamily + 1;
-          break;
-      }
+      if (x > 79 && x < 86)
+        addScoreDeadFamily = addScoreDeadFamily + 1;
     }
 
     return addScoreDeadFamily;
@@ -1011,20 +990,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let score: Array<number> = workSituation;
     let addScoreWorkSituation: number = 0;
     for (let x of score) {
-      switch (x) {
-        case 88:
-          addScoreWorkSituation = addScoreWorkSituation + 1;
-          break;
-        case 89:
-          addScoreWorkSituation = addScoreWorkSituation + 1;
-          break;
-        case 90:
-          addScoreWorkSituation = addScoreWorkSituation + 1;
-          break;
-        case 91:
-          addScoreWorkSituation = addScoreWorkSituation + 1;
-          break;
-      }
+      if (x > 87 && x < 92)
+        addScoreWorkSituation = addScoreWorkSituation + 1;
     }
 
     return addScoreWorkSituation;
@@ -1034,20 +1001,14 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let score: Array<number> = studentSituation;
     let addScoreStudentSituation: number = 0;
     for (let x of score) {
-      switch (x) {
-        case 94:
-          addScoreStudentSituation = addScoreStudentSituation + 1;
-          break;
-        case 96:
-          addScoreStudentSituation = addScoreStudentSituation + 1;
-          break;
-        case 98:
-          addScoreStudentSituation = addScoreStudentSituation + 1;
-          break;
-        case 99:
-          addScoreStudentSituation = addScoreStudentSituation + 1;
-          break;
-      }
+      if (x == 94)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
+
+      if (x == 96)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
+
+      if (x > 97 && x < 100)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
     }
 
     return addScoreStudentSituation;
