@@ -9,9 +9,6 @@ export class CardComponent implements OnInit {
 
   @Input() recibiendoData: any = [];
 
-  constructor() {
-  }
-
   ngOnInit(): void {
     console.log('La data recibida en card de forum es: ', this.recibiendoData)
   }
