@@ -529,8 +529,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       score: this.scoreAftermath(answerForm.value.aftermath),
     };
 
-    console.log('answer29', answer29)
-
     let answer30: AnswerModel = {
       idAnswer: this.idAnswer + 29,
       idQuestion: 20,
@@ -821,10 +819,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
         this.saveAnswerComorbidity(answerForm);
 
       if (answerForm.value.hadCovid)
-        this.saveMentalHealthNeeds(answerForm);
+        this.saveAnswerFactor(answerForm);
 
       if (answerForm.value.one)
-        this.saveAnswerFactor(answerForm);
+        this.saveMentalHealthNeeds(answerForm);
     });
 
     let poll: PollModel = {
@@ -844,7 +842,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
-        this.quanInstService.createPoll(poll);
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
         this.answerList = [];
         window.location.reload();
@@ -855,13 +852,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.createPoll(poll).subscribe({
       next: () => {
+        this.openSnackBar('Se guardó correctamente la encuesta', 'Alert');
       }, error: () => {
-
+        this.openSnackBar('No se guardó correctamente', 'Alert');
       }
     })
 
     this.quanInstService.createAlert(alert).subscribe({
       next: () => {
+        this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
       }
     })
   }
