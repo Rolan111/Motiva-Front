@@ -17,7 +17,6 @@ import {LoginModel} from "./login.model";
 export class LoginComponent implements OnInit {
   formLogin!: FormGroup;
   hide: boolean = true;
-  userNameLogin: string = '';
   oLocalStorage = new LocalStorage();
   loginResponse!: LoginInterface;
 
@@ -55,14 +54,9 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    console.log(data.value)
-
     this.loginService.logIn(data.value).subscribe({
       next: (response: LoginInterface) => {
-        if (response.name != null) {
-          this.setLocalStorage(response);
-          this.router.navigateByUrl('/navbar');
-        }
+        this.responseLogin(response);
       }, error: (error) => {
         if (error.status === 401 || error.statusText === "ok") {
           this.openSnackBar("Usuario o Contraseña incorrecta", "Alert");
@@ -71,6 +65,13 @@ export class LoginComponent implements OnInit {
         this.openSnackBar("Error al iniciar session", "Alert");
       }
     })
+  }
+
+  private responseLogin(response: LoginInterface) {
+    if (response.name != null) {
+      this.setLocalStorage(response);
+      this.router.navigateByUrl('/navbar');
+    }
   }
 
   logInMock(dataForm: any) {
@@ -91,10 +92,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.logIn(guest).subscribe({
       next: (response: LoginInterface) => {
-        if (response.name != null) {
-          this.setLocalStorage(response);
-          this.router.navigateByUrl('/navbar');
-        }
+        this.responseLogin(response);
       }
     })
   }
