@@ -16,10 +16,12 @@ import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantita
 import {CareSheetModule} from "./care-sheet/care-sheet.module";
 import {AlertsModule} from "./alerts/alerts.module";
 import {CareRasmModule} from "./care-rasm/care-rasm.module";
+import {SupportModule} from "./support/support.module";
+import {ReportsModule} from "./reports/reports.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,9 @@ import {CareRasmModule} from "./care-rasm/care-rasm.module";
     CareRoutesModule,
     CareSheetModule,
     AlertsModule,
-    CareRasmModule
+    CareRasmModule,
+    SupportModule,
+    ReportsModule
 
   ],
   providers: [],

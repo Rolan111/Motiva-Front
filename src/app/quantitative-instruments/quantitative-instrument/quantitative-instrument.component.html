@@ -1,5 +1,8 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
+
+  <!-- Información Personal -->
+
   <mat-step [stepControl]="personalInfo" color="primary">
     <ng-template matStepLabel>Información Personal</ng-template>
     <mat-card class="advancedForm">
@@ -88,10 +91,12 @@
     </mat-card>
   </mat-step>
 
-  <mat-step [stepControl]="secundaryInfo">
+  <!-- Factores sociodemográficos -->
+
+  <mat-step [stepControl]="sociodemographicFactors">
     <ng-template matStepLabel>Factores sociodemográficos</ng-template>
     <mat-card class="advancedForm">
-      <form [formGroup]="secundaryInfo">
+      <form [formGroup]="sociodemographicFactors">
         <mat-grid-list cols="3" rowHeight="80px">
           <mat-grid-tile>
             <mat-form-field class="inputClass">
@@ -287,6 +292,8 @@
     </mat-card>
   </mat-step>
 
+  <!--Comorbilidades, trastornos y enfermedades preexistentes-->
+
   <mat-step>
     <ng-template matStepLabel>Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
     <mat-card class="advancedForm">
@@ -334,10 +341,11 @@
     </mat-card>
   </mat-step>
 
+  <!-- Factores contextuales asociados al COVID-19 -->
   <mat-step>
     <ng-template matStepLabel>Factores contextuales asociados al Covid-19</ng-template>
     <mat-card class="advancedForm">
-      <form [formGroup]="factors">
+      <form [formGroup]="factorsCovid19">
         <mat-grid-list cols="3" rowHeight="100">
           <mat-grid-tile>
             <div class="example-radio-group">
@@ -388,7 +396,7 @@
               <mat-label>¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de usus amigos ,
                 familiares u otras personas cercanas de su entorno por Covid-19?
               </mat-label>
-              <mat-select formControlName="deadFamily" multiple (click)="selectQuestion(21)">
+              <mat-select formControlName="deadFamilySymptom" multiple (click)="selectQuestion(21)">
                 <mat-option *ngFor="let item of deadFamilyList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
@@ -480,6 +488,7 @@
     </mat-card>
   </mat-step>
 
+<!-- Necesidades en salud mental asociadas al COVID-19 -->
   <mat-step>
     <ng-template matStepLabel>Necesidades en salud mental asociadas al Covid-19</ng-template>
     <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">
@@ -682,12 +691,21 @@
         </mat-grid-list>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, secundaryInfo,
-          comorbidityInfo, factors, mentalHealthNeeds])">
-            Enviar
+
+          <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
+          comorbidityInfo, factorsCovid19, mentalHealthNeeds])">
+<!--
+            <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
+          comorbidityInfo, factorsCovid19, mentalHealthNeeds]); enviandoACareSheet()" routerLink="../care-sheet">
+-->
+            <!--
+          <button mat-button matStepperNext (click)="pruebasRecepcionFormulario()" routerLink="../care-sheet">
+-->
+          Enviar
           </button>
         </mat-card-actions>
       </form>
     </mat-card>
   </mat-step>
+
 </mat-vertical-stepper>
