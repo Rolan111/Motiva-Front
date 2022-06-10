@@ -20,13 +20,17 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument.component.scss']
 })
 export class QuantitativeInstrumentComponent implements OnInit {
+  //Declaración de las colecciones de formularios
   personalInfo!: FormGroup;
-  secundaryInfo!: FormGroup;
+  sociodemographicFactors!: FormGroup;
   comorbidityInfo!: FormGroup;
-  factors!: FormGroup;
+  factorsCovid19!: FormGroup;
   mentalHealthNeeds!: FormGroup;
+
+  //Variables para cada formulario
   occupationValue: number = 0;
-  answerList: Array<AnswerModel> = [];
+  answerList: Array<AnswerModel> = []; //Array que guardará las respuestas de todos los formularios
+
   idAnswer: number = 0;
   idPoll: number = 0;
   questions: Array<Question> = [];
@@ -65,6 +69,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   deadFamilyList: Array<OptionAnswer> = [];
   workSituationList: Array<OptionAnswer> = [];
   studentSituationList: Array<OptionAnswer> = [];
+
   oneList: Array<OptionAnswer> = [];
   twoList: Array<OptionAnswer> = [];
   threeList: Array<OptionAnswer> = [];
@@ -152,48 +157,56 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
+  /* Captura de información de los FORMULARIOS */
+
+  //Información personal
   private formQuantitative() {
+
     this.personalInfo = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       firstLastName: ['', Validators.required],
       secondName: [''],
       secondLastName: [''],
-      identification: ['', Validators.required],
       typeIdentification: ['', Validators.required],
+      identification: ['', Validators.required],
       address: ['', Validators.required],
       cellphone: ['', Validators.required],
     });
 
-    this.secundaryInfo = this.formBuilder.group({
+    //Formulario Factores Sociodemográficos
+    this.sociodemographicFactors = this.formBuilder.group({
       age: ['', Validators.required],
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
       civilStatus: ['', Validators.required],
+      zoneResidence: ['', Validators.required],
       municipalityResidence: ['', Validators.required],
-      accessServicies: ['', Validators.required],
-      numberChildren: ['', Validators.required],
-      socialSecurity: ['', Validators.required],
       personCoexist: ['', Validators.required],
       typeHome: ['', Validators.required],
+      accessServicies: ['', Validators.required],
       educationLevel: ['', Validators.required],
-      dependents: ['', Validators.required],
       occupation: ['', Validators.required],
       workMode: [''],
-      zoneResidence: ['', Validators.required],
+      socialSecurity: ['', Validators.required],
+      numberChildren: ['', Validators.required],
+      dependents: ['', Validators.required],
+
     });
 
+    //Formulario Comorbilidades, trastornos y enfermedades preexistentes
     this.comorbidityInfo = this.formBuilder.group({
       comorbilities: this.formBuilder.array([]),
       disorderDisease: [''],
       physicalMental: [''],
     })
 
-    this.factors = this.formBuilder.group({
+    //Formulario Factores contextuales asociados al COVID-19
+    this.factorsCovid19 = this.formBuilder.group({
       hadCovid: [''],
-      affectationCovid: [''],
+      affectationCovid: [],
       aftermath: ['', Validators.required],
       deadFamilyCovid: [''],
-      deadFamily: [''],
+      deadFamilySymptom: [[]],
       workSituation: ['', Validators.required],
       studentSituation: [''],
       conflictVictim: [''],
@@ -202,6 +215,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       vaccinationPosture: [''],
     });
 
+    //Necesidades en salud mental asociadas al Covid-19
     this.mentalHealthNeeds = this.formBuilder.group({
       one: [''],
       two: [''],
@@ -225,6 +239,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
     });
   }
 
+  //*** Empieza el proceso de GUARDADO ***
+
+  //1 En cada método se pasan los datos de los diferentes formularios al modelo de la tabla ANSWER
+    // Posteriormente en cada método se guarda en en array "answerList" todas las respuestas obtenidas de todos los formularios
   saveAnswerPersonalInfo(answerForm: FormGroup) {
     let answer1: AnswerModel = {
       idAnswer: this.idAnswer,
@@ -309,7 +327,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8)
   }
 
-  saveAnswerSecundaryInfo(answerForm: FormGroup) {
+  saveAnswerSociodemographicFactors(answerForm: FormGroup) {
     let answer9: AnswerModel = {
       idAnswer: this.idAnswer + 8,
       idQuestion: 1,
@@ -464,7 +482,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       answer19, answer20, answer21, answer22, answer23)
   }
 
-  saveAnswerComorbidity(answerForm: FormGroup) {
+  saveAnswerComorbidityInfo(answerForm: FormGroup) {
     let answer24: AnswerModel = {
       idAnswer: this.idAnswer + 23,
       idQuestion: 16,
@@ -498,7 +516,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer24, answer25, answer26)
   }
 
-  saveAnswerFactor(answerForm: FormGroup) {
+  saveAnswerFactorsCovid19(answerForm: FormGroup) {
     let answer27: AnswerModel = {
       idAnswer: this.idAnswer + 26,
       idQuestion: 17,
@@ -542,11 +560,11 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer31: AnswerModel = {
       idAnswer: this.idAnswer + 30,
       idQuestion: 21,
-      idOptionAnswers: answerForm.value.deadFamily,
+      idOptionAnswers: answerForm.value.deadFamilySymptom,
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: this.scoreDeadFamily(answerForm.value.deadFamily),
+      score: this.scoreDeadFamily(answerForm.value.deadFamilySymptom),
     };
 
     let answer32: AnswerModel = {
@@ -557,6 +575,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: 'ADULT',
       score: this.scoreWorkSituation(answerForm.value.workSituation),
+      //score: 0,
     };
 
     let answer33: AnswerModel = {
@@ -567,6 +586,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: 'ADULT',
       score: this.scoreStudentSituation(answerForm.value.studentSituation),
+      //score: 0,
     };
 
     let answer34: AnswerModel = {
@@ -612,7 +632,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.answerList.push(answer27, answer28, answer29, answer30, answer31, answer32, answer33, answer34, answer35, answer36, answer37)
   }
 
-  saveMentalHealthNeeds(answerForm: FormGroup) {
+  saveAnswerMentalHealthNeeds(answerForm: FormGroup) {
     let answer38: AnswerModel = {
       idAnswer: this.idAnswer + 37,
       idQuestion: 2801,
@@ -807,22 +827,26 @@ export class QuantitativeInstrumentComponent implements OnInit {
       answer50, answer51, answer52, answer53, answer54, answer55, answer56)
   }
 
+  //2 Se recorre cada formulario (5 en total), se cargan las respuestas al modelo y a "answerList"
+    //Posteriormente se llaman los servicios y los datos se envían a la base de datos
   sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
+
     answerFormList.forEach(answerForm => {
+
       if (answerForm.value.firstName)
         this.saveAnswerPersonalInfo(answerForm);
 
       if (answerForm.value.sex)
-        this.saveAnswerSecundaryInfo(answerForm);
+        this.saveAnswerSociodemographicFactors(answerForm);
 
       if (answerForm.value.comorbilities)
-        this.saveAnswerComorbidity(answerForm);
+        this.saveAnswerComorbidityInfo(answerForm);
 
       if (answerForm.value.hadCovid)
-        this.saveAnswerFactor(answerForm);
+        this.saveAnswerFactorsCovid19(answerForm);
 
       if (answerForm.value.one)
-        this.saveMentalHealthNeeds(answerForm);
+        this.saveAnswerMentalHealthNeeds(answerForm);
     });
 
     let poll: PollModel = {
@@ -840,6 +864,19 @@ export class QuantitativeInstrumentComponent implements OnInit {
       score: this.score
     }
 
+    console.log('El puntaje TOTAL es: ',this.score)
+    console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
+
+    //LLamado del servicio para guardar a la tabla POll
+    this.quanInstService.createPoll(poll).subscribe({
+      next: () => {
+        this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
+      }, error: () => {
+        this.openSnackBar('No se guardó correctamente', 'Alert');
+      }
+    })
+
+    //llamado del SERVICIO para guardar a la tabla ANSWER
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
@@ -850,20 +887,108 @@ export class QuantitativeInstrumentComponent implements OnInit {
       }
     });
 
-    this.quanInstService.createPoll(poll).subscribe({
-      next: () => {
-        this.openSnackBar('Se guardó correctamente la encuesta', 'Alert');
-      }, error: () => {
-        this.openSnackBar('No se guardó correctamente', 'Alert');
-      }
-    })
-
+    //LLamado del servicio para guardar a la tabla Alert
     this.quanInstService.createAlert(alert).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
       }
     })
+
   }
+
+  // *** Fin proceso guardado ***
+
+
+  //          *** Manejo del PUNTAJE ****
+
+  //<editor-fold desc="Manejo del Puntaje">
+
+  private scoreAftermath(aftermath: Array<number>): any {
+    let score: Array<number> = aftermath;
+    let addScoreAftermath: number = 0;
+    for (let x of score) {
+      switch (x) {
+        case 70:
+          addScoreAftermath = addScoreAftermath + 1;
+          break;
+        case 71:
+          addScoreAftermath = addScoreAftermath + 2;
+          break;
+        case 72:
+          addScoreAftermath = addScoreAftermath + 1;
+          break;
+        case 73:
+          addScoreAftermath = addScoreAftermath + 1;
+          break;
+        case 74:
+          addScoreAftermath = addScoreAftermath + 1;
+          break;
+        case 75:
+          addScoreAftermath = addScoreAftermath + 1;
+          break;
+        case 76:
+          addScoreAftermath = addScoreAftermath + 7;
+          break;
+      }
+    }
+
+    return addScoreAftermath;
+  }
+
+  private scoreDeadFamily(deadFamily: Array<number>): any {
+    let score: Array<number> = deadFamily;
+    let addScoreDeadFamily: number = 0;
+    for (let x of score) {
+      if (x > 79 && x < 86)
+        addScoreDeadFamily = addScoreDeadFamily + 1;
+      if (x==86)
+        addScoreDeadFamily = addScoreDeadFamily + 7;
+    }
+
+    return addScoreDeadFamily;
+  }
+
+  private scoreWorkSituation(workSituation: Array<number>): any {
+    let score: Array<number> = workSituation;
+    let addScoreWorkSituation: number = 0;
+    for (let x of score) {
+      if (x > 87 && x < 92)
+        addScoreWorkSituation = addScoreWorkSituation + 1;
+    }
+
+    return addScoreWorkSituation;
+  }
+
+  private scoreStudentSituation(studentSituation: Array<number>): any {
+    let score: Array<number> = studentSituation;
+    let addScoreStudentSituation: number = 0;
+    for (let x of score) {
+      if (x == 94)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
+
+      if (x == 96)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
+
+      if (x > 97 && x < 100)
+        addScoreStudentSituation = addScoreStudentSituation + 1;
+    }
+
+    return addScoreStudentSituation;
+  }
+
+  private scoreEighteen(eighteen: number): any { //De necesidades en salud mental
+    switch (eighteen) {
+      case 179:
+        return 25;
+      case 180:
+        return 25;
+      case 181:
+        return 13;
+    }
+  }
+  //</editor-fold>
+
+  //*** Fin manejo del puntaje ***
 
   selectQuestion(idQuestion: number) {
     switch (idQuestion) {
@@ -933,86 +1058,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
         break;
     }
   }
-
-  private scoreEighteen(eighteen: number): any {
-    switch (eighteen) {
-      case 179:
-        return 25;
-      case 180:
-        return 25;
-      case 181:
-        return 13;
-    }
-  }
-
-  private scoreAftermath(aftermath: Array<number>): any {
-    let score: Array<number> = aftermath;
-    let addScoreAftermath: number = 0;
-    for (let x of score) {
-      switch (x) {
-        case 70:
-          addScoreAftermath = addScoreAftermath + 1;
-          break;
-        case 71:
-          addScoreAftermath = addScoreAftermath + 2;
-          break;
-        case 72:
-          addScoreAftermath = addScoreAftermath + 1;
-          break;
-        case 73:
-          addScoreAftermath = addScoreAftermath + 1;
-          break;
-        case 74:
-          addScoreAftermath = addScoreAftermath + 1;
-          break;
-        case 75:
-          addScoreAftermath = addScoreAftermath + 1;
-          break;
-      }
-    }
-
-    return addScoreAftermath;
-  }
-
-  private scoreDeadFamily(deadFamily: Array<number>): any {
-    let score: Array<number> = deadFamily;
-    let addScoreDeadFamily: number = 0;
-    for (let x of score) {
-      if (x > 79 && x < 86)
-        addScoreDeadFamily = addScoreDeadFamily + 1;
-    }
-
-    return addScoreDeadFamily;
-  }
-
-  private scoreWorkSituation(workSituation: Array<number>): any {
-    let score: Array<number> = workSituation;
-    let addScoreWorkSituation: number = 0;
-    for (let x of score) {
-      if (x > 87 && x < 92)
-        addScoreWorkSituation = addScoreWorkSituation + 1;
-    }
-
-    return addScoreWorkSituation;
-  }
-
-  private scoreStudentSituation(studentSituation: Array<number>): any {
-    let score: Array<number> = studentSituation;
-    let addScoreStudentSituation: number = 0;
-    for (let x of score) {
-      if (x == 94)
-        addScoreStudentSituation = addScoreStudentSituation + 1;
-
-      if (x == 96)
-        addScoreStudentSituation = addScoreStudentSituation + 1;
-
-      if (x > 97 && x < 100)
-        addScoreStudentSituation = addScoreStudentSituation + 1;
-    }
-
-    return addScoreStudentSituation;
-  }
-
   selectMentalHealthNeeds(idQuestions: Array<number>) {
     idQuestions.forEach(idQuestion => {
       switch (idQuestion) {
@@ -1096,16 +1141,18 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
-  isControlHasError(controlName: string, validationType: string): boolean {
-    const control = this.personalInfo.controls[controlName];
+
+  isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
+    const control = this.sociodemographicFactors.controls[controlName];
     if (!control)
       return false;
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
 
-  isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
-    const control = this.secundaryInfo.controls[controlName];
+  //<editor-fold desc="Métodos no usados">
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.personalInfo.controls[controlName];
     if (!control)
       return false;
 
@@ -1130,6 +1177,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       comorbilities.removeAt(i);
     }
   }
+  //</editor-fold>
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
@@ -1139,14 +1187,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
     });
   }
 
+  //Datos enviados al siguiente formulario - Ficha de atención
   enviandoACareSheet() {
     this.careSheetService.shareIdPoll = this.idPoll;
-    this.careSheetService.shareCity = this.secundaryInfo.value.municipalityResidence;
-    this.careSheetService.shareSex = this.secundaryInfo.value.sex;
+    this.careSheetService.shareCity = this.sociodemographicFactors.value.municipalityResidence;
+    this.careSheetService.shareSex = this.sociodemographicFactors.value.sex;
     this.careSheetService.shareName = this.personalInfo.value.firstName;
     this.careSheetService.shareLastName = this.personalInfo.value.firstLastName;
     this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
-    this.careSheetService.shareEthnicity = this.secundaryInfo.value.ethnicity;
+    this.careSheetService.shareEthnicity = this.sociodemographicFactors.value.ethnicity;
     this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
   }
 }

@@ -43,16 +43,13 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 export class GalleryCarouselComponent implements OnInit {
 
   @Input() images!: Array<ImageModel>;
-  //@Input() selectedImage!: number;
   @Input() selectedImage: any;
   @Output() closeCarousel = new EventEmitter<void>();
   public animState = 'middle';
-  //public animImage!: number;
   public animImage: any;
 
   ngOnInit(): void {
     this.animImage = this.selectedImage;
-    //console.log("La imagen seleccionada es: "+this.selectedImage)
   }
 
   public close(): void {

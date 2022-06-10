@@ -17,6 +17,8 @@ import {InstrumentReviewComponent} from "./alerts/instrument-review/instrument-r
 import {CareRasmComponent} from "./care-rasm/care-rasm.component";
 import {InactiveAlertsComponent} from "./alerts/inactive-alerts/inactive-alerts.component";
 import {OVAComponent} from "./ova/ova.component";
+import {SupportComponent} from "./support/support.component";
+import {ReportsComponent} from "./reports/reports.component";
 
 
 const routes: Routes = [
@@ -40,6 +42,8 @@ const routes: Routes = [
       {path: 'care-rasm', component: CareRasmComponent},
       {path: 'alerts/inactive-alerts', component: InactiveAlertsComponent},
       {path: 'ova', component: OVAComponent},
+      {path: 'support', component: SupportComponent},
+      {path: 'reports', component: ReportsComponent},
     ]
   },
 ];

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {TrackingSheetService} from "../tracking-sheet/tracking-sheet.service";
 import {CareSheetService} from "./care-sheet.service";
 import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
 import {ToastrService} from "ngx-toastr";
@@ -43,7 +42,6 @@ export class CareSheetComponent implements OnInit {
   constructor(
     private toastr: ToastrService,
     private route: ActivatedRoute,
-    private trackingSheetService: TrackingSheetService,
     private formBuilder: FormBuilder,
     public careSheetService: CareSheetService
   ) {

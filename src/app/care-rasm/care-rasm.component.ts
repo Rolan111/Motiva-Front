@@ -10,7 +10,6 @@ import {CareRasmService} from "./care-rasm.service";
 export class CareRasmComponent implements OnInit {
 
   listRASM: any = [];
-  auxiliar: any = [];
   displayedColumns: string[] = ['id_poll', 'type_rasm'];
   dataSource!: MatTableDataSource<any>;
 
