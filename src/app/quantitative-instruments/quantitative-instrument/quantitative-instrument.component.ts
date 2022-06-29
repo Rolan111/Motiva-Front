@@ -9,6 +9,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
 import {AlertModel} from "../alert.model";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
+import { nanoid } from 'nanoid'
+import { arrayMunicipios } from "../../enums/enum";
 
 interface ListTypes {
   viewValue: string;
@@ -32,7 +34,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
   answerList: Array<AnswerModel> = []; //Array que guardará las respuestas de todos los formularios
 
   idAnswer: number = 0;
-  idPoll: number = 0;
+  // idPoll: number = 0;
+  idPoll!: string;
   questions: Array<Question> = [];
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
@@ -99,50 +102,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   ) {
   }
 
-  citiesList: ListTypes[] = [
-    {viewValue: 'POPAYAN'},
-    {viewValue: 'ALMAGUER'},
-    {viewValue: 'ARGELIA'},
-    {viewValue: 'BALBOA'},
-    {viewValue: 'BOLIVAR'},
-    {viewValue: 'BUENOS AIRES'},
-    {viewValue: 'CAJIBIO'},
-    {viewValue: 'CALDONO'},
-    {viewValue: 'CALOTO'},
-    {viewValue: 'CORINTO'},
-    {viewValue: 'EL TAMBO'},
-    {viewValue: 'FLORENCIA'},
-    {viewValue: 'GUACHENE'},
-    {viewValue: 'GUAPI'},
-    {viewValue: 'INZA'},
-    {viewValue: 'JAMBALO'},
-    {viewValue: 'LA SIERRA'},
-    {viewValue: 'LA VEGA'},
-    {viewValue: 'LOPEZ'},
-    {viewValue: 'MERCADERES'},
-    {viewValue: 'MIRANDA'},
-    {viewValue: 'MORALES'},
-    {viewValue: 'PADILLA'},
-    {viewValue: 'PAEZ'},
-    {viewValue: 'PIAMONTE'},
-    {viewValue: 'PIENDAMO'},
-    {viewValue: 'PUERTO TEJADA'},
-    {viewValue: 'PATIA'},
-    {viewValue: 'PURACE'},
-    {viewValue: 'ROSAS'},
-    {viewValue: 'SAN SEBASTIAN'},
-    {viewValue: 'SANTANDER DE QUILICHAO'},
-    {viewValue: 'SANTA ROSA'},
-    {viewValue: 'SILVIA'},
-    {viewValue: 'SOTARA'},
-    {viewValue: 'SUAREZ'},
-    {viewValue: 'SUCRE'},
-    {viewValue: 'TIMBIO'},
-    {viewValue: 'TIMBIQUI'},
-    {viewValue: 'TORIBIO'},
-    {viewValue: 'TOTORO'},
-    {viewValue: 'VILLA RICA'}
-  ];
+  citiesList:ListTypes[] = arrayMunicipios;
 
   ngOnInit(): void {
     this.formQuantitative();
@@ -153,15 +113,20 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
-      this.idPoll = response.data.idPoll;
+      // this.idPoll = response.data.idPoll;
+      this.idPoll=nanoid(10);
+      console.log(
+        'EL ID POLL ES', this.idPoll)
     })
+
   }
 
   /* Captura de información de los FORMULARIOS */
 
-  //Información personal
+
   private formQuantitative() {
 
+    //Formulario Información personal
     this.personalInfo = this.formBuilder.group({
       firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       firstLastName: ['', Validators.required],
@@ -853,8 +818,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
       approvalDoc: "/document",
       evidence: "evidence",
       idCity: 1,
+      idPoll: this.idPoll,
       type: "ADULT",
     };
+    //
 
     this.answerList.forEach(x => this.score = this.score + x.score)
 
@@ -881,8 +848,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
         this.answerList = [];
-        window.location.reload();
+        this.sendToCareSheet();
       }, error: () => {
+        this.answerList = [];
         this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
       }
     });
@@ -1188,7 +1156,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   }
 
   //Datos enviados al siguiente formulario - Ficha de atención
-  enviandoACareSheet() {
+  sendToCareSheet() {
     this.careSheetService.shareIdPoll = this.idPoll;
     this.careSheetService.shareCity = this.sociodemographicFactors.value.municipalityResidence;
     this.careSheetService.shareSex = this.sociodemographicFactors.value.sex;
@@ -1197,5 +1165,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
     this.careSheetService.shareEthnicity = this.sociodemographicFactors.value.ethnicity;
     this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
+    this.router.navigate(['navbar/care-sheet'])
   }
+
 }

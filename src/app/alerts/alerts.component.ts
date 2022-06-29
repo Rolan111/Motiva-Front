@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AlertsService} from "./alerts.service";
 import {of} from "rxjs";
 
-export interface Alerts {
+export interface AlertsModel {
   id_poll: number;
   professional: number;
   beneficiary: string;
@@ -19,7 +19,7 @@ export class AlertsComponent implements OnInit {
 
   alertSizeAux: number[] = [];
   arrayDeAlertas: any = [];
-  procesamientoDeAlertas: Alerts[] = [];
+  procesamientoDeAlertas: AlertsModel[] = [];
   arrayDeAlertasTabla: any = [];
 
   displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
@@ -32,15 +32,17 @@ export class AlertsComponent implements OnInit {
     //Consultamos la cantidad de registros
     this.alertsService.getAlertSize().subscribe((data: any) => {
       this.alertSizeAux.push(data);
+      console.log('La cantidad de alertas es: ',data)
     })
 
     this.loadAlerts();
 
-    console.log('La captura es> ', this.alertsService.getAlertSize2())
+    console.log('La captura de la cantidad de datos en alerts es: ', this.alertsService.getAlertSize2())
   }
 
 
   private loadAlerts() {
+
     this.alertsService.getAllAlerts().subscribe(data => {
       this.arrayDeAlertas = data;
       this.arrayDeAlertas.forEach((recorriendoArray: any) => {
@@ -55,10 +57,11 @@ export class AlertsComponent implements OnInit {
               extrayendoNameUser.forEach((recorriendoArray3: any) => {
                 //Aqui capturamos el NOMBRE DEL PROFESIONAL
                 //Ahora traermos el NOMBRE DEL BENEFICIARIO consultando la tabla ANSWER con el id_poll y el id_question
-                this.alertsService.getAnswerByPollAndIdQuestion(recorriendoArray.idPoll, 200).subscribe(data4 => {
+                this.alertsService.getAnswerByIdPollAndIdQuestion(recorriendoArray.idPoll, 200).subscribe(data4 => {
                   let extrayendoNameBeneficiario: any = data4;
+                  console.log('Las alertan son> ',data4)
                   extrayendoNameBeneficiario.forEach((recorriendoArray4: any) => {
-                    //Traemos el MUNICIPIO consultando en la ficha de atención
+                    //Traemos el MUNICIPIO consultando en la tabla ANSWER id 5 o 6 según corresponda
                     //Pero primero verificamos si el cuestionario es ADULT o CHILD ya que la pregunta corresponde a numeros diferentes
                     let preguntaTipoDeEncuesta: any;
                     if (recorriendoArray2.type == 'ADULT') {
@@ -67,32 +70,25 @@ export class AlertsComponent implements OnInit {
                       preguntaTipoDeEncuesta = 5;
                     }
 
-                    this.alertsService.getAnswerByPollAndIdQuestion(recorriendoArray.idPoll, preguntaTipoDeEncuesta).subscribe(data5 => {
+                    this.alertsService.getAnswerByIdPollAndIdQuestion(recorriendoArray.idPoll, preguntaTipoDeEncuesta).subscribe(data5 => {
                       let extrayendoMunicipio: any = data5;
                       extrayendoMunicipio.forEach((recorriendoArray5: any) => {
-                        //Traemos la FECHA de la coleccion ANSWER_PSYCHOSOCIAL 102
-                        this.alertsService.getAnswerPsychosocialByIdPollAndIdQuestion(recorriendoArray.idPoll, 102).subscribe((data6) => {
-                          let extrayendoFecha: any = data6;
 
-                          extrayendoFecha.forEach((recorriendoArray6: any) => {
-
-                            this.procesamientoDeAlertas.push({
-                              id_poll: recorriendoArray.idPoll,
-                              professional: recorriendoArray3.name,
-                              beneficiary: recorriendoArray4.openAnswer,
-                              municipality: recorriendoArray5.openAnswer,
-                              date: recorriendoArray6.open_answer
-                            })
-
-                            if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {
-                              of(this.procesamientoDeAlertas).subscribe(dataN => {
-                                this.arrayDeAlertasTabla = dataN;
+                        this.procesamientoDeAlertas.push({
+                                id_poll: recorriendoArray.idPoll,
+                                professional: recorriendoArray3.name,
+                                beneficiary: recorriendoArray4.openAnswer,
+                                municipality: recorriendoArray5.openAnswer,
+                                //date: recorriendoArray6.open_answer
+                                date: 'La fecha'
                               })
-                            }
 
-                          })
-                        })
-
+                              if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {
+                              // if (this.procesamientoDeAlertas.length == 1) {
+                                of(this.procesamientoDeAlertas).subscribe(dataN => {
+                                  this.arrayDeAlertasTabla = dataN;
+                                })
+                              }
 
                       })
 
