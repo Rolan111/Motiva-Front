@@ -1,0 +1,135 @@
+<mat-card>
+  <h1 align="center">Soporte para el uso de herramientas tecnológicas</h1>
+  <h3><b>NOTA:</b> Si su reporte a soporte aplica para más de un tipo de solicitud o más de un tipo de aplicativo tecnológico, por favor realice una petición diferente por cada reporte que considere.</h3>
+  <mat-grid-list cols="2" rowHeight="4:1">
+    <mat-grid-tile><div>Tipo de solicitud:</div> </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-radio-group aria-label="Select an option" class="ajustandoTexto">
+        <mat-radio-button value="1" >Soporte técnico (si requiere soporte para los aplicativos en salud mental)</mat-radio-button>
+        <br>
+        <mat-radio-button value="2">Petición (Para registrar una consulta en el marco de salud mental)</mat-radio-button>
+      </mat-radio-group>
+    </mat-grid-tile>
+
+    <mat-grid-tile> <div>Tipo de aplicativo tecnológico:</div> </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" >Plataforma web</mat-radio-button>
+        <br>
+        <mat-radio-button value="2">Aplicación móvil</mat-radio-button>
+        <br>
+        <mat-radio-button value="3">Objeto virtual de aprendizaje</mat-radio-button>
+      </mat-radio-group>
+    </mat-grid-tile>
+    <mat-grid-tile> <div>Tipo de solicitante</div> </mat-grid-tile>
+    <mat-grid-tile>
+      <mat-radio-group aria-label="Select an option">
+        <mat-radio-button value="1" >Psicólogo de campo</mat-radio-button>
+        <br>
+        <mat-radio-button value="2">Agente comunitario</mat-radio-button>
+        <br>
+        <mat-radio-button value="3">Ciudadano</mat-radio-button>
+      </mat-radio-group>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="2" [rowspan]="6.4">
+
+        <table>
+          <tr>
+            <td>Nombres: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Nombres</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Apellidos: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Apellidos</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Tipo de identificación: </td>
+            <td>
+              <mat-form-field appearance="fill">
+                <mat-label>Seleccione Tipo de Identificación</mat-label>
+                <mat-select disableRipple>
+                  <mat-option value="1">T.I Tarjeta de identidad</mat-option>
+                  <mat-option value="2">C.C Cédula de ciudadanía</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>No. Identificación: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>No. Identificación</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>No. Contacto: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>No. Contacto</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Municipio: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Seleccione municipio</mat-label>
+                <mat-select disableRipple>
+                  <mat-option *ngFor="let municipios of listaMunicipios" [value]="municipios.viewValue">
+                    {{municipios.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Correo electrónico: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Correo electrónico</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Asunto: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Asunto</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>Descripción: </td>
+            <td>
+              <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>Descripción</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </td>
+          </tr>
+        </table>
+
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="2">
+      <button mat-raised-button>Cargar archivo</button>
+      <button mat-raised-button color="primary">Enviar</button>
+    </mat-grid-tile>
+
+  </mat-grid-list>
+</mat-card>
