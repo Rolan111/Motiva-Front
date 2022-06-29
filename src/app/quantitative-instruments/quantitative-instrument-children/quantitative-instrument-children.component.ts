@@ -26,7 +26,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   answerList: Array<AnswerModel> = [];
   questions: Array<Question> = [];
   idAnswer: number = 0;
-  idPoll: number = 0;
+  // idPoll: number = 0;
+  idPoll!: string;
   score: number = 0;
 
   typeIdentificationQuestion: Question[] = [];
@@ -169,7 +170,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 200,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstName,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -179,7 +180,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 201,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondName,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -189,7 +190,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 202,
       idOptionAnswers: [],
       openAnswer: answerForm.value.firstLastName,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -199,7 +200,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 203,
       idOptionAnswers: [],
       openAnswer: answerForm.value.secondLastName,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -209,7 +210,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 204,
       idOptionAnswers: [answerForm.value.typeIdentification],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -219,7 +220,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 205,
       idOptionAnswers: [],
       openAnswer: answerForm.value.identification,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -229,7 +230,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 206,
       idOptionAnswers: [],
       openAnswer: answerForm.value.address,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -239,7 +240,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 207,
       idOptionAnswers: [],
       openAnswer: answerForm.value.cellphone,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -253,7 +254,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 1,
       idOptionAnswers: [],
       openAnswer: answerForm.value.age,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -263,7 +264,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 2,
       idOptionAnswers: [answerForm.value.sex],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -273,7 +274,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 3,
       idOptionAnswers: [answerForm.value.ethnicity],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -283,7 +284,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 4,
       idOptionAnswers: [answerForm.value.zoneResidence],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: answerForm.value.zoneResidence == 196 ? 1 : 0,
     };
@@ -293,7 +294,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 5,
       idOptionAnswers: [],
       openAnswer: answerForm.value.municipalityResidence,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -303,7 +304,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 6,
       idOptionAnswers: [],
       openAnswer: answerForm.value.personCoexist,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -313,7 +314,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 7,
       idOptionAnswers: [answerForm.value.typeHome],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -323,7 +324,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 8,
       idOptionAnswers: answerForm.value.accessServicies,
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -333,7 +334,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 9,
       idOptionAnswers: [answerForm.value.educationLevel],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -343,7 +344,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 10,
       idOptionAnswers: [answerForm.value.studyMode],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: this.scoreModeStudy(answerForm.value.studyMode),
     };
@@ -353,7 +354,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 11,
       idOptionAnswers: [answerForm.value.socialSecurity],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -368,7 +369,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 12,
       idOptionAnswers: answerForm.value.comorbilities,
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -378,7 +379,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 12,
       idOptionAnswers: [],
       openAnswer: answerForm.value.disorderDisease,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: answerForm.value.disorderDisease != '' ? 5 : 0,
     };
@@ -388,7 +389,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 12,
       idOptionAnswers: [],
       openAnswer: answerForm.value.physicalMental,
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
     };
@@ -402,7 +403,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 13,
       idOptionAnswers: [answerForm.value.one],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: [236, 237, 238].includes(answerForm.value.one) ? 1 : 0,
     };
@@ -412,7 +413,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 14,
       idOptionAnswers: [answerForm.value.two],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: [240, 241, 242].includes(answerForm.value.two) ? 1 : 0,
     };
@@ -422,7 +423,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 15,
       idOptionAnswers: [answerForm.value.three],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: [244, 245, 246].includes(answerForm.value.three) ? 1 : 0,
     };
@@ -432,7 +433,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 16,
       idOptionAnswers: [answerForm.value.four],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: [248, 249, 250].includes(answerForm.value.four) ? 1 : 0,
     };
@@ -442,7 +443,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idQuestion: 17,
       idOptionAnswers: [answerForm.value.five],
       openAnswer: '',
-      idPoll: this.idAnswer,
+      idPoll: this.idPoll,
       type: 'CHILDREN',
       score: [252, 253, 254].includes(answerForm.value.five) ? 1 : 0,
     };
@@ -470,6 +471,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       approvalDoc: "/document",
       evidence: "evidence",
       idCity: 1,
+      idPoll: this.idPoll,
       type: "CHILDREN",
     };
 

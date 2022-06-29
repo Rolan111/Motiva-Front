@@ -1,12 +1,30 @@
 <mat-card>
   <h2>Revisión Instrumento Cuantitativo y Ficha de Atención</h2>
+
+  <h3><b>Instrumento Cuantitativo</b></h3>
   <nav>
 
-    <div *ngFor="let mostrarDatos of resultadoFinal2">
+    <div *ngFor="let mostrarDatosInstrumentos of resultadoFinalInstrumentos">
       <table>
         <tr>
-          <td><b>Pregunta:</b> {{mostrarDatos?.pregunta}}</td>
-          <td><b>Respuesta:</b> {{mostrarDatos.respuesta}}</td>
+          <td><b>Pregunta:</b> {{mostrarDatosInstrumentos?.pregunta}}</td>
+          <td><b>Respuesta:</b> {{mostrarDatosInstrumentos.respuesta}}</td>
+        </tr>
+      </table>
+
+    </div>
+  </nav>
+
+  <br>
+  <h3><b>Ficha de Atención</b></h3>
+
+  <nav>
+
+    <div *ngFor="let mostrarDatosFicha of resultadoFinalFicha">
+      <table>
+        <tr>
+          <td><b>Pregunta:</b> {{mostrarDatosFicha?.pregunta}}</td>
+          <td><b>Respuesta:</b> {{mostrarDatosFicha.respuesta}}</td>
         </tr>
       </table>
 

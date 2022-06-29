@@ -21,9 +21,8 @@ export class InstrumentReviewComponent implements OnInit {
   id_poll!: number;
 
   form: FormGroup;
-  recuperandoPreguntas: any = [];
-  recuperandoRespuestas: any = [];
-  resultadoFinal2: any = [];
+  resultadoFinalInstrumentos: any = [];
+  resultadoFinalFicha: any = [];
 
   constructor(public dialog: MatDialog,
               private alertsService: AlertsService,
@@ -42,9 +41,64 @@ export class InstrumentReviewComponent implements OnInit {
       const {params} = paramMap
       this.capturaIdPollUrl = params.variable
     })
+    this.loadQuantitativeInstrument();
     this.loadAnswerPsychosocial();
   }
 
+
+  //Carga preguntas y respuestas deL INSTRUMENTO CUANTITATIVO
+  private loadQuantitativeInstrument() {
+    //opción dos
+
+    //ahora nos traemos la pregunta perteneciente al id question
+    this.alertsService.getQuestionsAdult().subscribe(data => {
+      let extractingQuestions: any = data;
+      extractingQuestions.forEach((recorriendoQuestion: any) => {
+        this.alertsService.getAnswerByIdPollAndIdQuestion(this.capturaIdPollUrl, recorriendoQuestion.idQuestion).subscribe(data2=>{
+
+          let extractingAnswers:any = data2;
+          extractingAnswers.forEach((recorriendoAnswers: any)=>{
+
+            if(recorriendoAnswers.idOptionAnswers == ''){ //Si está vacío significa que la respuesta es de tipo abierta
+              console.log('Las preguntas son: ', recorriendoQuestion.description)
+              console.log('Las respuestas son: ', recorriendoAnswers.openAnswer)
+              this.resultadoFinalInstrumentos.push({
+                pregunta: recorriendoQuestion.description,
+                respuesta: recorriendoAnswers.openAnswer
+              })
+            }else{//si no está vacío puede tener una o varias respuestas en el array así que lo recorremos
+
+              recorriendoAnswers.idOptionAnswers.forEach((recorriendoOptionAnswers1:any)=>{
+                //console.log('Los datos son: ',recorriendoOptionAnswers1)
+                this.alertsService.getOtionAnswerByIdOptionAnswer(recorriendoOptionAnswers1).subscribe(data3=>{
+                  let extractingOptionAnswer:any = data3;
+                  extractingOptionAnswer.forEach((recorriendoOptionAnswer:any)=>{
+                    console.log('Las preguntas son: ', recorriendoQuestion.description)
+                    console.log('Las respuestas son: ', recorriendoOptionAnswer.description)
+                    this.resultadoFinalInstrumentos.push({
+                      pregunta: recorriendoQuestion.description,
+                      respuesta: recorriendoOptionAnswer.description
+                    })
+                  })
+                })
+              })
+
+
+
+            }
+
+
+          })
+
+        })
+
+
+      })
+    })
+
+  }
+
+  //Carga preguntas y respuestas de la FICHA DE ATENCIÓN
   private loadAnswerPsychosocial() {
     this.alertsService.getAnswerPsychosocialByIdPoll(this.capturaIdPollUrl).subscribe(data => {
       let extrayendoAnsPsyIdQuestion: any = data;
@@ -53,7 +107,7 @@ export class InstrumentReviewComponent implements OnInit {
         this.alertsService.getQuestionByIdQuestion(recorriendoAnsPsy.id_question).subscribe(data2 => {
           let extrayendoQuestion: any = data2;
           extrayendoQuestion.forEach((recorriendoQuestion: any) => {
-            this.resultadoFinal2.push({
+            this.resultadoFinalFicha.push({
               pregunta: recorriendoQuestion.description,
               respuesta: recorriendoAnsPsy.open_answer
             })
@@ -64,6 +118,7 @@ export class InstrumentReviewComponent implements OnInit {
 
     })
   }
+
 
   //DIALOGS
 

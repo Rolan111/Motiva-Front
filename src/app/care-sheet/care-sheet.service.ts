@@ -14,7 +14,8 @@ const mainUrl = environment.url;
 })
 export class CareSheetService {
 
-  shareIdPoll: number = 0;
+  // shareIdPoll: number = 0;
+  shareIdPoll: string = '';
   shareCity: string = 'Esperando...';
   shareSex: number = 0;
   shareName: string = 'Esperando...';

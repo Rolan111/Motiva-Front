@@ -28,7 +28,7 @@ export class AlertsService {
 
   public getAlertSize2() {
     this.getAllAlerts().subscribe(data => {
-      console.log(data)
+      // console.log('Para la cantidad de datos: ',data)
       this.trayendoData.push(data);
     })
 
@@ -36,7 +36,7 @@ export class AlertsService {
   }
 
   public getAllAlerts() {
-    const path = mainUrl + 'api/alerts-pruebas';
+    const path = mainUrl + 'api/alerts';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
   }
@@ -62,11 +62,18 @@ export class AlertsService {
   }
 
   //Tabla ANSWER
-  public getAnswerByPollAndIdQuestion(id_poll: any, id_question: any) {
+  public getAnswerByIdPoll(id_poll: any) {
+    const path = mainUrl + 'api/answerByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll, {headers});
+  }
+
+  public getAnswerByIdPollAndIdQuestion(id_poll: any, id_question: any) {
     const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
+
 
   //Tabla ANSWER PSYCHOSOCIAL
   public getAllAnswersPsychosocial() {
@@ -75,7 +82,7 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
-  public getAnswerPsychosocialByIdPoll(id_poll: any) {
+  public getAnswerPsychosocialByIdPoll(id_poll: any) { //Trae las respuestas completas con el id_poll
     const path = mainUrl + 'api/answer-psychosocial-ByIdPoll/';
     const headers = this.getHeader();
     return this.http.get(path + id_poll, {headers});
@@ -88,10 +95,23 @@ export class AlertsService {
   }
 
   //Tabla QUESTION
+  public getQuestionsAdult() {
+    const path = mainUrl + 'api/questionsAdult';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
   public getQuestionByIdQuestion(id_question: any) {
     const path = mainUrl + 'api/questionByIdQuestion/';
     const headers = this.getHeader();
     return this.http.get(path + id_question, {headers});
+  }
+
+  //Tabla OPTION_ANSWER
+  public getOtionAnswerByIdOptionAnswer(id_option_answer: any) {
+    const path = mainUrl + 'api/optionAnswerByIdOptionAnswer/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_option_answer, {headers});
   }
 
   //Tabla INACTIVE_ALERT

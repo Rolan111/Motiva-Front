@@ -17,10 +17,6 @@ export class CareSheetComponent implements OnInit {
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
 
   nivelIntervencionModeloBiopsicosocial: string[] = ['Promoción de la salud', 'Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
-  listaPrevencionEnfermedad: string[] = ['Primario', 'Secundario', 'Terciario', 'Cuaternario'];
-
-  public listaValidandoCareSheet: any = [];
-  public listaOpcionesDeRespuesta: any = [];
 
   /*FORMULARIO*/
   step = 0;
@@ -45,6 +41,7 @@ export class CareSheetComponent implements OnInit {
     private formBuilder: FormBuilder,
     public careSheetService: CareSheetService
   ) {
+    //Construcción del Formulario
     this.form = this.formBuilder.group({
       capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
       city: [this.careSheetService.shareCity, Validators.required],
@@ -183,55 +180,6 @@ export class CareSheetComponent implements OnInit {
     let age = Math.floor((diferenciaTiempo / (1000 * 3600 * 24)) / 365.25);
     this.form.get('age')?.setValue(age)
     this.edadCalculada = age;
-  }
-
-  recuperarRespuestas() {
-
-    this.careSheetService.getInstrumentAnswers(29).subscribe(respuesta => {
-      this.listaValidandoCareSheet = respuesta;
-      this.listaValidandoCareSheet.forEach((recorriendoArray: any) => {
-        this.form.get('capturaIdPoll')?.setValue(recorriendoArray.id_poll);
-        if (recorriendoArray.id_question == 5) {
-          this.form.get('city')?.setValue(recorriendoArray.open_answer);
-        }
-
-        if (recorriendoArray.id_question == 2) {
-          this.form.get('sex')?.setValue(recorriendoArray.open_answer);
-        }
-
-        if (recorriendoArray.id_question == 1) {
-          this.form.get('age')?.setValue(recorriendoArray.open_answer);
-        }
-
-        if (recorriendoArray.id_question == 200) {
-          this.form.get('name')?.setValue(recorriendoArray.open_answer);
-        }
-
-        if (recorriendoArray.id_question == 202) {
-            this.form.get('lastName')?.setValue(recorriendoArray.open_answer);
-          }
-
-          if (recorriendoArray.id_question == 205) {
-            this.form.get('identificationNumber')?.setValue(recorriendoArray.open_answer);
-          }
-
-          if (recorriendoArray.id_question == 3) {//Traemos las opciones de respuestas
-            recorriendoArray.id_option_answers.forEach((recorriendo2: bigint) => {
-
-              this.careSheetService.getOpcionesRespuestas(recorriendo2).subscribe((respuesta2: any) => {
-                this.listaOpcionesDeRespuesta = respuesta2;
-                this.listaOpcionesDeRespuesta.forEach((recorriendo3: any) => {
-                  this.form.get('ethnicity')?.setValue(recorriendo3.description);
-                })
-
-              })
-
-            })
-          }
-
-        });
-      }
-    );
   }
 
   public saveForm() {
