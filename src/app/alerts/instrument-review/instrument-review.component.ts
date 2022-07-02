@@ -7,7 +7,7 @@ import {DialogInactiveAlertComponent} from "../dialogs/dialog-inactive-alert/dia
 import {DialogRasmComponent} from "../dialogs/dialog-rasm/dialog-rasm.component";
 
 export interface DialogData {
-  id_poll: number;
+  id_poll: string;
 }
 
 @Component({
@@ -18,7 +18,7 @@ export interface DialogData {
 export class InstrumentReviewComponent implements OnInit {
 
   public capturaIdPollUrl: any;
-  id_poll!: number;
+  id_poll!: string;
 
   form: FormGroup;
   resultadoFinalInstrumentos: any = [];
