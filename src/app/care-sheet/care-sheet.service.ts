@@ -6,6 +6,7 @@ import {environment} from "../../environments/environment";
 import {RepComAgentModel} from "../rep-com-agent/rep-com-agent.model";
 import {Observable} from "rxjs";
 import {DataResponse} from "../util/data-response";
+import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
 
 const mainUrl = environment.url;
 
@@ -29,28 +30,16 @@ export class CareSheetService {
   constructor(private http: HttpClient) {
   }
 
-  public getInstrumentAnswers(idPoll: any) {
-    const path = mainUrl + 'api/care-sheet-instrument-answers-ByIdPoll';
-    const headers = this.getHeader();
-    return this.http.get(path, {headers});
-  }
-
-  public getOpcionesRespuestas(id: any) {
-    const path = mainUrl + 'api/care-sheet-options-answers/';
-    const headers = this.getHeader();
-    return this.http.get(path + id, {headers});
-  }
-
-  create(repComAgent: RepComAgentModel): Observable<DataResponse> {
-    const path = mainUrl + 'api/rep-com-agent-create';
-    const headers = this.getHeader();
-    return this.http.post<DataResponse>(path, repComAgent, {headers});
-  }
-
   public create2(body: any) {
     const headers = this.getHeader();
     const path = mainUrl + 'api/care-sheet-answer-psychosocial-create';
     return this.http.post(path, body, {headers});
+  }
+
+  public create3(body: Array<AnswerPsychosocialModel>):Observable<DataResponse> {
+    const headers = this.getHeader();
+    const path = mainUrl + 'api/care-sheet-answer-psychosocial-create2';
+    return this.http.post<DataResponse>(path, body, {headers});
   }
 
   getHeader() {

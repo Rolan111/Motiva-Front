@@ -15,6 +15,7 @@ export class CareSheetComponent implements OnInit {
 
   edadCalculada: any = 0;
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
+  // listaDeRespuestas: Array<AnswerPsychosocialModel> = [];
 
   nivelIntervencionModeloBiopsicosocial: string[] = ['Promoción de la salud', 'Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
 
@@ -486,6 +487,7 @@ export class CareSheetComponent implements OnInit {
     });
 
     //Procedemos a guardar
+
     for (let guardando of this.listaDeRespuestas) {
       this.careSheetService.create2(guardando).subscribe(value => {
       }, error => {
@@ -494,6 +496,17 @@ export class CareSheetComponent implements OnInit {
       })
     }
     this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+
+    //Guardado Tipo 2
+
+      // this.careSheetService.create3(this.listaDeRespuestas).subscribe(value => {
+      //   // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+      // }, error => {
+      //   this.toastr.error('¡La información no se ha podido registrar!', 'Error')
+      // }, () => {
+      //   this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+      // })
+
   }
 
 }
