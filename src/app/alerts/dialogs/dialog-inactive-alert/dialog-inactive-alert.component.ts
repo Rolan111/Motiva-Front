@@ -26,7 +26,7 @@ export class DialogInactiveAlertComponent implements OnInit {
   sendInactiveAlert(): void {
     //Enviamos el registro a la tabla INACTIVE_ALERT
     this.alertsService.postInactiveAlert({
-      id_poll: this.data.id_poll
+      idPoll: this.data.id_poll
     }).subscribe()
 
     //Eliminamos el registro de ALERT

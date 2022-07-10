@@ -34,8 +34,8 @@ export class DialogRasmComponent implements OnInit {
   sendRASM() {
     //Enviamos el registro a RASM
     this.alertsService.postRASM({
-      id_poll: this.data.id_poll,
-      type_rasm: this.form.value.type_rasm
+      idPoll: this.data.id_poll,
+      typeRasm: this.form.value.type_rasm
     }).subscribe();
 
     //Eliminamos el registro de ALERT
