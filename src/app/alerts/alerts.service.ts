@@ -116,7 +116,7 @@ export class AlertsService {
 
   //Tabla INACTIVE_ALERT
   public getAllInactiveAlerts() {
-    const path = mainUrl + 'api/inactive-alert';
+    const path = mainUrl + 'api/inactive-alerts';
     const headers = this.getHeader();
     return this.http.get(path, {headers});
   }

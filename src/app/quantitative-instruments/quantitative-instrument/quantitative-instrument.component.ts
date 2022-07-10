@@ -168,12 +168,12 @@ export class QuantitativeInstrumentComponent implements OnInit {
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
       hadCovid: [''],
-      affectationCovid: [],
-      aftermath: ['', Validators.required],
+      affectationCovid: [0],
+      aftermath: [[], Validators.required],
       deadFamilyCovid: [''],
       deadFamilySymptom: [[]],
-      workSituation: ['', Validators.required],
-      studentSituation: [''],
+      workSituation: [[], Validators.required],
+      studentSituation: [[]],
       conflictVictim: [''],
       diomesticViolence: [''],
       mentalHealth: [''],
@@ -199,7 +199,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       fifteen: [''],
       sixteen: [''],
       seventeen: [''],
-      eighteen: [''],
+      eighteen: [0],
       nineteen: [''],
     });
   }
@@ -510,6 +510,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: 'ADULT',
       score: this.scoreAftermath(answerForm.value.aftermath),
+      // score: this.scoreAftermath(this.factorsCovid19.value.aftermath),
     };
 
     let answer30: AnswerModel = {
@@ -835,32 +836,42 @@ export class QuantitativeInstrumentComponent implements OnInit {
     console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
 
     //LLamado del servicio para guardar a la tabla POll
-    this.quanInstService.createPoll(poll).subscribe({
-      next: () => {
-        this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
-      }, error: () => {
-        this.openSnackBar('No se guardó correctamente', 'Alert');
-      }
-    })
+    // this.quanInstService.createPoll(poll).subscribe({
+    //   next: () => {
+    //     this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
+    //   }, error: () => {
+    //     this.openSnackBar('No se guardó correctamente', 'Alert');
+    //   }
+    // })
 
     //llamado del SERVICIO para guardar a la tabla ANSWER
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
+        this.quanInstService.createPoll(poll).subscribe({
+          next: () => {
+            this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
+          }, error: () => {
+            this.openSnackBar('No se guardó correctamente', 'Alert');
+          }
+        })
+
+        //LLamado del servicio para guardar a la tabla Alert
+        this.quanInstService.createAlert(alert).subscribe({
+          next: () => {
+            this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
+          }
+        })
+
         this.answerList = [];
         this.sendToCareSheet();
       }, error: () => {
         this.answerList = [];
-        this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+        this.score = 0;
+        this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO', 'Alert');
       }
     });
 
-    //LLamado del servicio para guardar a la tabla Alert
-    this.quanInstService.createAlert(alert).subscribe({
-      next: () => {
-        this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
-      }
-    })
 
   }
 

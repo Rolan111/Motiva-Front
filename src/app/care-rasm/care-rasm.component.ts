@@ -22,6 +22,7 @@ export class CareRasmComponent implements OnInit {
 
   private loadRASM() {
     this.careRasmService.getAllRASM().subscribe(data => {
+      console.log('La data de RASM es: ',data)
       this.listRASM = data;
       this.dataSource = new MatTableDataSource(this.listRASM)
     })

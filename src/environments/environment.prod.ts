@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  url: 'http://back.motiva-ucc.com:5000/',
+  url: 'http://3.88.39.15:5000/',
 };
