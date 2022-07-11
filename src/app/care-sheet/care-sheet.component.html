@@ -556,6 +556,8 @@
   </mat-card>
 
 </mat-step>
+
+<!--  Nivel de intervención modelo biopsicosocial -->
 <mat-step color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
 
@@ -566,28 +568,27 @@
 
     <form [formGroup]="form">
       <mat-grid-list cols="2" rowHeight="85px">
+
+        <mat-grid-tile [colspan]="2">
+          Especifique: Promoción de la salud
+          <mat-form-field class="inputClass" appearance="fill">
+            <mat-label>Especifique - Promoción de la salud</mat-label>
+            <input formControlName="especifique_promocionSalud" type="text" matInput
+                   placeholder="Promoción de la salud">
+          </mat-form-field>
+        </mat-grid-tile>
+
         <mat-grid-tile [colspan]="2" [rowspan]="3">
           <mat-radio-group formControlName="nivelIntervencionElegida">
-            <ul>
-              <li *ngFor="let nivelIntervencion of nivelIntervencionModeloBiopsicosocial">
+              <div *ngFor="let nivelIntervencion of nivelIntervencionModeloBiopsicosocial">
                 <mat-radio-button class="example-radio-button" [value]="nivelIntervencion">
                   {{nivelIntervencion}}
                 </mat-radio-button>
-              </li>
-            </ul>
+              </div>
 
           </mat-radio-group>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="2">
-
-          <div *ngIf="form.value.nivelIntervencionElegida == 'Promoción de la salud'">
-            Especifique: Promoción de la salud
-            <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Especifique - Promoción de la salud</mat-label>
-              <input formControlName="especifique_promocionSalud" type="text" matInput
-                     placeholder="Promoción de la salud">
-            </mat-form-field>
-          </div>
 
           <div *ngIf="form.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
             Especifique: Prevención de la enfermedad
@@ -616,6 +617,8 @@
   </mat-card>
 
 </mat-step>
+
+<!--  Profesional responsable-->
 <mat-step color="primary">
   <ng-template matStepLabel> Profesional responsable </ng-template>
 
@@ -625,6 +628,7 @@
     </mat-card-header>
 
     <form [formGroup]="form">
+
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -632,12 +636,7 @@
             <input formControlName="professionalName" matInput placeholder="Nombre">
           </mat-form-field>
         </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>TP:</mat-label>
-            <input formControlName="TP" type="text" matInput placeholder="TP">
-          </mat-form-field>
-        </mat-grid-tile>
+
         <mat-grid-tile [colspan]="2" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Profesión:</mat-label>
@@ -655,4 +654,5 @@
   </mat-card>
 
 </mat-step>
+
 </mat-vertical-stepper>

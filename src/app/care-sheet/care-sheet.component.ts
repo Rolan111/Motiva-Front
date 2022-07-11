@@ -17,7 +17,7 @@ export class CareSheetComponent implements OnInit {
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
   // listaDeRespuestas: Array<AnswerPsychosocialModel> = [];
 
-  nivelIntervencionModeloBiopsicosocial: string[] = ['Promoción de la salud', 'Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
+  nivelIntervencionModeloBiopsicosocial: string[] = ['Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
 
   /*FORMULARIO*/
   step = 0;
@@ -102,7 +102,6 @@ export class CareSheetComponent implements OnInit {
         seleccione_prevencionEnfermedad: [Validators.required],
 
         professionalName: ['', Validators.required],
-        TP: ['', Validators.required],
         Profession: ['', Validators.required]
       }
     );
@@ -350,6 +349,8 @@ export class CareSheetComponent implements OnInit {
       open_answer: this.form.value.AF_APS_Observations,
       id_poll: this.form.value.capturaIdPoll
     });
+
+    //REVISAR ORDEN
     this.listaDeRespuestas.push({
       id_question: 135,
       id_option_answer: 0,
@@ -406,19 +407,19 @@ export class CareSheetComponent implements OnInit {
       open_answer: this.form.value.EPIS_diagnosticImpression,
       id_poll: this.form.value.capturaIdPoll
     });
+    this.listaDeRespuestas.push({
+      id_question: 144,
+      id_option_answer: 300,
+      open_answer: this.form.value.especifique_promocionSalud,
+      id_poll: this.form.value.capturaIdPoll
+    });
+
 
     switch (this.form.value.nivelIntervencionElegida) {
-      case "Promoción de la salud":
-        this.listaDeRespuestas.push({
-          id_question: 144,
-          id_option_answer: 300,
-          open_answer: this.form.value.especifique_promocionSalud,
-          id_poll: this.form.value.capturaIdPoll
-        });
-        break
+
       case "Prevención de la enfermedad":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 301,
           open_answer: this.form.value.seleccione_prevencionEnfermedad,
           id_poll: this.form.value.capturaIdPoll
@@ -426,7 +427,7 @@ export class CareSheetComponent implements OnInit {
         break
       case "Adherencia al tratamiento":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 302,
           open_answer: "",
           id_poll: this.form.value.capturaIdPoll
@@ -434,7 +435,7 @@ export class CareSheetComponent implements OnInit {
         break
       case "Afrontamiento de la enfermedad":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 303,
           open_answer: "",
           id_poll: this.form.value.capturaIdPoll
@@ -442,7 +443,7 @@ export class CareSheetComponent implements OnInit {
         break
       case "Psicooncología":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 304,
           open_answer: "",
           id_poll: this.form.value.capturaIdPoll
@@ -450,7 +451,7 @@ export class CareSheetComponent implements OnInit {
         break
       case "Manejo del dolor":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 305,
           open_answer: "",
           id_poll: this.form.value.capturaIdPoll
@@ -458,7 +459,7 @@ export class CareSheetComponent implements OnInit {
         break
       case "Intervención en enfermedades crónicas transmisibles y no transmisibles":
         this.listaDeRespuestas.push({
-          id_question: 144,
+          id_question: 145,
           id_option_answer: 306,
           open_answer: "",
           id_poll: this.form.value.capturaIdPoll
@@ -468,17 +469,12 @@ export class CareSheetComponent implements OnInit {
     }
 
     this.listaDeRespuestas.push({
-      id_question: 145,
+      id_question: 146,
       id_option_answer: 0,
       open_answer: this.form.value.professionalName,
       id_poll: this.form.value.capturaIdPoll
     });
-    this.listaDeRespuestas.push({
-      id_question: 146,
-      id_option_answer: 0,
-      open_answer: this.form.value.TP,
-      id_poll: this.form.value.capturaIdPoll
-    });
+
     this.listaDeRespuestas.push({
       id_question: 147,
       id_option_answer: 0,
