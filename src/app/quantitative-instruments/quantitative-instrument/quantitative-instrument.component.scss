@@ -1,8 +1,9 @@
 .inputClass{
-  width: 290px;
+  width: 380px;
   margin-top: 5px;
   margin-left: 10px;
   margin-right: 10px;
+
 }
 .selectClass{
   width: 400px;
@@ -44,4 +45,10 @@
 ::-webkit-scrollbar-thumb {
   background: #888;
 }
-
+::ng-deep mat-tooltip-component{
+  & .mat-tooltip{
+    background: #143853;
+    width: 1000px;
+    font-size: large;
+  }
+}

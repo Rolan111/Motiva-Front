@@ -1,12 +1,23 @@
-.mat-card1 {
-  top: 190px;
-  width: 800px;
+.inputClass{
+  width: 380px;
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+
 }
 
-.mat-form-field {
-  width: 80%;
-  margin-top: 20px;
+.linear{
+  margin-top: 500px;
 }
+.selectClass{
+  width: 400px;
+  margin-top: 22px;
+  margin-left: 15px;
+}
+.mat-card1 {
+  width: 850px;
+}
+
 
 .example-headers-align .mat-expansion-panel-header-title,
 .example-headers-align .mat-expansion-panel-header-description {
@@ -20,4 +31,36 @@
 
 .example-headers-align .mat-form-field + .mat-form-field {
   margin-left: 8px;
+}
+
+.example-radio-group {
+  display: inline-block;
+  flex-direction: column;
+  margin-left: 12px;
+}
+
+.example-radio-button {
+  margin: 5px;
+}
+
+.checkboxGrid{
+  display: flex !important;
+  justify-content: flex-start !important;
+  align-content: center !important;
+  width: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #fff4f3;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
 }
