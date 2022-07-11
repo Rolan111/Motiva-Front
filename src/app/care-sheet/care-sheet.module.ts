@@ -2,6 +2,8 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {AngularMaterialModule} from "../angular-material.module";
 import {CareSheetComponent} from "./care-sheet.component";
+import {MatStepperModule} from "@angular/material/stepper";
+
 
 
 @NgModule({
@@ -13,7 +15,8 @@ import {CareSheetComponent} from "./care-sheet.component";
   ],
   imports: [
     CommonModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    MatStepperModule
   ]
 })
 export class CareSheetModule {

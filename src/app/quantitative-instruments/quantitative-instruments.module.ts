@@ -4,14 +4,15 @@ import {QuantitativeInstrumentModule} from "./quantitative-instrument/quantitati
 import {
   QuantitativeInstrumentChildrenModule
 } from "./quantitative-instrument-children/quantitative-instrument-children.module";
-
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     QuantitativeInstrumentModule,
-    QuantitativeInstrumentChildrenModule
+    QuantitativeInstrumentChildrenModule,
+    MatTooltipModule
   ]
 })
 export class QuantitativeInstrumentsModule { }

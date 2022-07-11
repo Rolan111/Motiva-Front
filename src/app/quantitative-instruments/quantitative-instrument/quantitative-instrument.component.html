@@ -12,7 +12,7 @@
       <form [formGroup]="personalInfo">
         <mat-grid-list cols="2" rowHeight="85px">
           <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
+            <mat-form-field class="inputClass" appearance="standard"                            >
               <mat-label>Primer nombre</mat-label>
               <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName"
                      oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
@@ -23,14 +23,14 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Segundo Nombre</mat-label>
+              <mat-label>Segundo nombre</mat-label>
               <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName"
                      oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Primer Apellido</mat-label>
+              <mat-label>Primer apellido</mat-label>
               <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required>
               <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
                 <strong>Campo requerido</strong>
@@ -39,13 +39,13 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Segundo Apellido</mat-label>
+              <mat-label>Segundo apellido</mat-label>
               <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Tipo de Documento</mat-label>
+              <mat-label>Tipo de documento</mat-label>
               <mat-select formControlName="typeIdentification" (click)="selectQuestion(204)" required>
                 <mat-option *ngFor="let item of typeIdentificationList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -77,7 +77,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>No. telefónico</mat-label>
+              <mat-label>No. Telefónico</mat-label>
               <input type="text" matInput placeholder="Número telefóinico" maxlength="10" minlength="8"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
               <mat-error *ngIf="isControlHasError('cellphone', 'required')">
@@ -224,8 +224,9 @@
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Ocupación</mat-label>
+            <mat-form-field appearance="standard" class="inputClass"
+                            matTooltip="Estado de ocupación de la persona durante la pandemia del Covid-19">
+              <mat-label >Ocupación</mat-label>
               <mat-select [(ngModel)]="occupationValue" formControlName="occupation" (click)="selectQuestion(11)"
                           required>
                 <mat-option *ngFor="let item of occupationList" [value]="item.idOptionAnswer">
