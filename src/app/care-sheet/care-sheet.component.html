@@ -1,9 +1,10 @@
 <mat-grid-tile-header>Ficha de atención</mat-grid-tile-header>
 
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical  linear">
+<!---
+-->
 
-
-<mat-step color="primary" >
+<!--  <mat-step  color="primary" >
   <ng-template matStepLabel>Datos personales básicos</ng-template>
 
   <mat-card class="mat-card1">
@@ -63,7 +64,10 @@
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>No. de identificación</mat-label>
                 <input type="number" maxlength="12" formControlName="identificationNumber" matInput
-                       placeholder="No. de identificación">
+                       placeholder="No. de identificación" required>
+                <mat-error *ngIf="isControlHasError('identificationNumber','required')">
+                  <strong>Campo Requerido</strong>
+                </mat-error>
 
               </mat-form-field>
             </mat-grid-tile>
@@ -73,8 +77,12 @@
                 <mat-label>Fecha de nacimiento</mat-label>
                 <input formControlName="dateBirth" matInput [matDatepicker]="picker2" readonly
                        (ngModelChange)="calculandoEdad()">
+                <mat-error *ngIf="isControlHasError('dateBirth','required')">
+                  <strong>Campo Requerido</strong>
+                </mat-error>
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
+
 
               </mat-form-field>
             </mat-grid-tile>
@@ -82,7 +90,7 @@
             <mat-grid-tile [colspan]="2" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Edad</mat-label>
-                <!--      <input type="number" formControlName="age" matInput placeholder="Edad" readonly>-->
+                &lt;!&ndash;      <input type="number" formControlName="age" matInput placeholder="Edad" readonly>&ndash;&gt;
                 <input matInput disabled [value]="edadCalculada">
               </mat-form-field>
             </mat-grid-tile>
@@ -118,8 +126,8 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Religión</mat-label>
             <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-            <mat-error *ngIf="form.dirty ">
+                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'') ">
+            <mat-error *ngIf="isControlHasError('religion','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
           </mat-form-field>
@@ -129,14 +137,19 @@
             <mat-label>Lugar de nacimiento</mat-label>
             <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento"
                    oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <mat-error *ngIf="isControlHasError('placeBirth','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
-
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Procedencia</mat-label>
             <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia"
                    oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <mat-error *ngIf="isControlHasError('origin','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -144,6 +157,9 @@
             <mat-label>Dirección de procedencia</mat-label>
             <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia"
                    oninput="this.value=this.value.replace(/[^A-Za-z0-9]/g,'')">
+            <mat-error *ngIf="isControlHasError('originAddress','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -151,28 +167,30 @@
             <mat-label>Barrio</mat-label>
             <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio"
                    oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <mat-error *ngIf="isControlHasError('neighborhood','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
-
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Estrato</mat-label>
-            <input type="number" maxlength="2" formControlName="stratum" matInput
-                   placeholder="Estrato">
+            <input type="number" maxlength="2" formControlName="stratum" matInput placeholder="Estrato">
+            <mat-error *ngIf="isControlHasError('stratum','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
-
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Teléfono</mat-label>
-            <input type="number" maxlength="10" formControlName="phone" matInput
-                   placeholder="Teléfono">
+            <input type="number" maxlength="10" formControlName="phone" matInput placeholder="Teléfono">
+            <mat-error *ngIf="isControlHasError('phone','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
-
       </mat-grid-list>
-
-
     </form>
     <mat-card-actions>
       <button mat-button matStepperPrevious>Atrás</button>
@@ -184,24 +202,28 @@
 </mat-step>
 <mat-step color="primary">
   <ng-template matStepLabel>Consulta</ng-template>
-
   <mat-card class="mat-card1">
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
-
     <form [formGroup]="form">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Motivo de consulta</mat-label>
             <input formControlName="reasonConsultation" matInput placeholder="Motivo de consulta">
+            <mat-error *ngIf="isControlHasError('reasonConsultation', 'required')">
+              <strong>Campo requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Enfermedad actual</mat-label>
             <input formControlName="currentIllness" type="text" matInput placeholder="Enfermedad actual">
+            <mat-error *ngIf="isControlHasError('currentIllness', 'required')">
+              <strong>Campo requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -218,24 +240,28 @@
 </mat-step>
 <mat-step color="primary">
   <ng-template matStepLabel> Antecedentes personales </ng-template>
-
   <mat-card class="mat-card1">
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
-
     <form [formGroup]="form">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observaciones</mat-label>
             <input formControlName="AP_APS_Observations" matInput placeholder="Observaciones">
+            <mat-error *ngIf="isControlHasError('AP_APS_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Diagnósticos</mat-label>
             <input formControlName="AP_APS_Diagnostics" type="text" matInput placeholder="Diagnósticos">
+            <mat-error *ngIf="isControlHasError('AP_APS_Diagnostics','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
@@ -248,18 +274,27 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Medicamento</mat-label>
             <input formControlName="AP_APS_Medicine" type="text" matInput placeholder="Medicamento">
+            <mat-error *ngIf="isControlHasError('AP_APS_Medicine','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Dosis</mat-label>
             <input formControlName="AP_APS_Dose" type="text" matInput placeholder="Dosis">
+            <mat-error *ngIf="isControlHasError('AP_APS_Dose','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Tiempo</mat-label>
             <input formControlName="AP_APS_Time" type="text" matInput placeholder="Tiempo">
+            <mat-error *ngIf="isControlHasError('AP_APS_Time','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
@@ -290,12 +325,18 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observaciones</mat-label>
             <input formControlName="AP_AM_Observations" matInput placeholder="Observaciones">
+            <mat-error *ngIf="isControlHasError('AP_AM_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Diagnósticos</mat-label>
             <input formControlName="AP_AM_Diagnostics" type="text" matInput placeholder="Diagnósticos">
+            <mat-error *ngIf="isControlHasError('AP_AM_Diagnostics','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
@@ -308,25 +349,31 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Medicamento</mat-label>
             <input formControlName="AP_AM_Medicine" type="text" matInput placeholder="Medicamento">
+            <mat-error *ngIf="isControlHasError('AP_AM_Medicine','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Dosis</mat-label>
             <input formControlName="AP_AM_Dose" type="text" matInput placeholder="Dosis">
+            <mat-error *ngIf="isControlHasError('AP_AM_Dose','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Tiempo</mat-label>
             <input formControlName="AP_AM_Time" type="text" matInput placeholder="Tiempo">
+            <mat-error *ngIf="isControlHasError('AP_AM_Time','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
 
       </mat-grid-list>
-
-
-
     </form>
     <mat-card-actions>
       <button mat-button matStepperPrevious>Atrás</button>
@@ -350,6 +397,9 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observaciones</mat-label>
             <input formControlName="AP_AQ_Observations" type="text" matInput placeholder="Observaciones">
+            <mat-error *ngIf="isControlHasError('AP_AQ_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -375,8 +425,10 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Situación laboral</mat-label>
-            <input formControlName="AP_AR_employmentSituation" type="text" matInput
-                   placeholder="Situación laboral">
+            <input formControlName="AP_AR_employmentSituation" type="text" matInput                   placeholder="Situación laboral">
+            <mat-error *ngIf="isControlHasError('AP_AR_employmentSituation','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -384,6 +436,9 @@
             <mat-label>Situaciones interpersonales</mat-label>
             <input formControlName="AP_AR_Relationships" type="text" matInput
                    placeholder="Situaciones interpersonales">
+            <mat-error *ngIf="isControlHasError('AP_AR_Relationships','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -391,6 +446,9 @@
             <mat-label>Relaciones sociales</mat-label>
             <input formControlName="AP_AR_socialRelationships" type="text" matInput
                    placeholder="Relaciones sociales">
+            <mat-error *ngIf="isControlHasError('AP_AR_socialRelationships','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -398,6 +456,9 @@
             <mat-label>Situaciones familiares</mat-label>
             <input formControlName="AP_AR_familyRelationships" type="text" matInput
                    placeholder="Situaciones familiares">
+            <mat-error *ngIf="isControlHasError('AP_AR_familyRelationships','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -424,6 +485,9 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observaciones</mat-label>
             <input formControlName="AF_APS_Observations" type="text" matInput placeholder="Observaciones">
+            <mat-error *ngIf="isControlHasError('AF_APS_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -450,6 +514,9 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observaciones</mat-label>
             <input formControlName="AF_AM_Observations" type="text" matInput placeholder="Observaciones">
+            <mat-error *ngIf="isControlHasError('AF_AM_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -476,24 +543,36 @@
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Tiempo</mat-label>
             <input formControlName="EM_Time" type="text" matInput placeholder="Tiempo">
+            <mat-error *ngIf="isControlHasError('EM_Time','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Lugar</mat-label>
             <input formControlName="EM_Place" type="text" matInput placeholder="Lugar">
+            <mat-error *ngIf="isControlHasError('EM_Place','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Persona</mat-label>
             <input formControlName="EM_Person" type="text" matInput placeholder="Persona">
+            <mat-error *ngIf="isControlHasError('EM_Person','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Observación</mat-label>
             <input formControlName="EM_Observations" type="text" matInput placeholder="Observación">
+            <mat-error *ngIf="isControlHasError('EM_Observations','required')">
+              <strong>Campo Requerido</strong>
+            </mat-error>
           </mat-form-field>
         </mat-grid-tile>
       </mat-grid-list>
@@ -555,10 +634,9 @@
 
   </mat-card>
 
-</mat-step>
-
+</mat-step>-->-->
 <!--  Nivel de intervención modelo biopsicosocial -->
-<mat-step color="primary">
+<mat-step  color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
 
   <mat-card class="mat-card1">
@@ -570,11 +648,12 @@
       <mat-grid-list cols="2" rowHeight="85px">
 
         <mat-grid-tile [colspan]="2">
-          Especifique: Promoción de la salud
+          Promoción de la salud
           <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Especifique - Promoción de la salud</mat-label>
+            <mat-label>Especifique:</mat-label>
             <input formControlName="especifique_promocionSalud" type="text" matInput
                    placeholder="Promoción de la salud">
+
           </mat-form-field>
         </mat-grid-tile>
 
@@ -584,9 +663,13 @@
                 <mat-radio-button class="example-radio-button" [value]="nivelIntervencion">
                   {{nivelIntervencion}}
                 </mat-radio-button>
+
+
+
               </div>
 
           </mat-radio-group>
+
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="2">
 
@@ -604,6 +687,7 @@
               <br>
             </mat-radio-group>
           </div>
+
 
         </mat-grid-tile>
       </mat-grid-list>
