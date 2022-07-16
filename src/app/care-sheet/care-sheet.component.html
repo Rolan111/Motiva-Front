@@ -4,7 +4,7 @@
 <!---
 -->
 
-<!--  <mat-step  color="primary" >
+ <mat-step  [stepControl]="form" color="primary" >
   <ng-template matStepLabel>Datos personales básicos</ng-template>
 
   <mat-card class="mat-card1">
@@ -90,7 +90,7 @@
             <mat-grid-tile [colspan]="2" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Edad</mat-label>
-                &lt;!&ndash;      <input type="number" formControlName="age" matInput placeholder="Edad" readonly>&ndash;&gt;
+                <!-- <input type="number" formControlName="age" matInput placeholder="Edad" readonly> -->
                 <input matInput disabled [value]="edadCalculada">
               </mat-form-field>
             </mat-grid-tile>
@@ -104,7 +104,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step [stepControl]="form" color="primary">
   <ng-template matStepLabel>Procedencia</ng-template>
 
   <mat-card class="mat-card1">
@@ -200,7 +200,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel>Consulta</ng-template>
   <mat-card class="mat-card1">
     <mat-card-header>
@@ -238,7 +238,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes personales </ng-template>
   <mat-card class="mat-card1">
     <mat-card-header>
@@ -311,7 +311,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes Médicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -383,7 +383,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes Quirúrgicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -412,7 +412,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes Relacionales </ng-template>
 
   <mat-card class="mat-card1">
@@ -471,7 +471,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes familiares </ng-template>
 
   <mat-card class="mat-card1">
@@ -500,7 +500,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Antecedentes médicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -529,7 +529,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Estado mental </ng-template>
 
   <mat-card class="mat-card1">
@@ -586,7 +586,7 @@
   </mat-card>
 
 </mat-step>
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
 
   <mat-card class="mat-card1">
@@ -634,9 +634,10 @@
 
   </mat-card>
 
-</mat-step>-->-->
+</mat-step>
+
 <!--  Nivel de intervención modelo biopsicosocial -->
-<mat-step  color="primary">
+<mat-step   [stepControl]="form" color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
 
   <mat-card class="mat-card1">
@@ -703,7 +704,7 @@
 </mat-step>
 
 <!--  Profesional responsable-->
-<mat-step color="primary">
+<mat-step  [stepControl]="form" color="primary">
   <ng-template matStepLabel> Profesional responsable </ng-template>
 
   <mat-card class="mat-card1">
