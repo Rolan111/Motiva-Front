@@ -815,6 +815,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
         this.saveAnswerMentalHealthNeeds(answerForm);
     });
 
+    this.answerList.forEach(x => this.score = this.score + x.score)
+
     let poll: PollModel = {
       approvalDoc: "/document",
       evidence: "evidence",
@@ -822,9 +824,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: "ADULT",
     };
-    //
 
-    this.answerList.forEach(x => this.score = this.score + x.score)
+    // this.answerList.forEach(x => this.score = this.score + x.score)
+    //this.answerList.forEach(x => console.log('Recorriendo escores es: ',x.score))
 
     let alert: AlertModel = {
       idAlert: 1,
@@ -832,7 +834,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       score: this.score
     }
 
-    console.log('El puntaje TOTAL es: ',this.score)
+    console.log('El puntaje TOTAL es: ', this.score)
     console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
 
     //LLamado del servicio para guardar a la tabla POll
@@ -848,6 +850,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
         this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
+
+        //Llamado del servicio para guardar en la tabla POLL
         this.quanInstService.createPoll(poll).subscribe({
           next: () => {
             this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
@@ -1037,6 +1041,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
         break;
     }
   }
+
   selectMentalHealthNeeds(idQuestions: Array<number>) {
     idQuestions.forEach(idQuestion => {
       switch (idQuestion) {
