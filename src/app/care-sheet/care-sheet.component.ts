@@ -515,12 +515,7 @@ export class CareSheetComponent implements OnInit {
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
-  isControlHasErrorRadioB(controlName: string, validationType: string): boolean {
-    const control = this.form.controls[controlName];
-    if (!control)
-      return false;
-    return control.hasError(validationType) && (control.invalid || control.touched);
-  }
+
 
 
 }
