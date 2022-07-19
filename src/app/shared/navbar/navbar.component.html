@@ -41,6 +41,9 @@
       <a routerLink="care-routes" mat-list-item *ngIf="buttonMenuForum">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
         &nbsp;&nbsp;Rutas de atención</a>
+      <a routerLink="care-rasm" mat-list-item *ngIf="buttonMenuForum">
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+        &nbsp;&nbsp;Beneficiarios en ruta de atención</a>
       <mat-divider></mat-divider>
       <mat-panel-title>
         Seguimiento a usuarios
@@ -50,9 +53,10 @@
         &nbsp;&nbsp;Ficha de seguimiento</a>
       <a routerLink="alerts" mat-list-item *ngIf="buttonMenuAlerts">
         <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
-        &nbsp;&nbsp;Alertas</a>
+        &nbsp;&nbsp;Alertas Activas</a>
       <a routerLink="alerts/inactive-alerts" mat-list-item>
-        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>Rutas Inactivas</a>
+        <mat-icon fontSet="material-icons-two-tone">face</mat-icon>
+          Alertas Inactivas</a>
       <mat-divider></mat-divider>
       <mat-panel-title>
         Soporte

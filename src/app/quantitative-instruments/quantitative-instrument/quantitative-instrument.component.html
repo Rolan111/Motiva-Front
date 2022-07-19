@@ -252,7 +252,7 @@
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
+            <mat-form-field appearance="standard" class="inputClass" matTooltip="Percepción de seguridad social en salud: Considera que a partir de la pandemia por Covid-19 la atención en salud:">
               <mat-label>Percepción de seguridad social en salud</mat-label>
               <mat-select formControlName="socialSecurity" (click)="selectQuestion(13)" required>
                 <mat-option *ngFor="let item of socialSecurityList" [value]="item.idOptionAnswer">

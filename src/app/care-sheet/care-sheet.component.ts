@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {CareSheetService} from "./care-sheet.service";
 import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
 import {ToastrService} from "ngx-toastr";
+import {Observable, of} from "rxjs";
 
 
 @Component({
@@ -38,6 +39,7 @@ export class CareSheetComponent implements OnInit {
 
   constructor(
     private toastr: ToastrService,
+    private router: Router,
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
     public careSheetService: CareSheetService
@@ -482,26 +484,31 @@ export class CareSheetComponent implements OnInit {
       id_poll: this.form.value.capturaIdPoll
     });
 
-    //Procedemos a guardar
+    //PROCEDEMOS A GUARDAR
 
-    for (let guardando of this.listaDeRespuestas) {
-      this.careSheetService.create2(guardando).subscribe(value => {
-      }, error => {
-        this.toastr.error('¡La información no se ha podido registrar!', 'Error')
-      }, () => {
-      })
-    }
-    this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+    // Guardado tipo 1
+    // for (let guardando of this.listaDeRespuestas) {
+    //   this.careSheetService.create(guardando).subscribe(value => {
+    //   }, error => {
+    //     this.toastr.error('¡La información no se ha podido registrar!', 'Error')
+    //   }, () => {
+    //   })
+    // }
+    // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+
 
     //Guardado Tipo 2
 
-      // this.careSheetService.create3(this.listaDeRespuestas).subscribe(value => {
-      //   // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
-      // }, error => {
-      //   this.toastr.error('¡La información no se ha podido registrar!', 'Error')
-      // }, () => {
-      //   this.toastr.success('¡La información ha sido registrada!', 'Enviado');
-      // })
+      this.careSheetService.create2(this.listaDeRespuestas).subscribe(value => {
+        // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+      }, error => {
+        this.toastr.error('¡La información no se ha podido registrar!', 'Error')
+        this.listaDeRespuestas = [];
+      }, () => {
+        this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+        this.listaDeRespuestas = [];
+        this.router.navigate(['navbar/dashboard'])
+      })
 
   }
 
