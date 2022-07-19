@@ -30,13 +30,14 @@ export class CareSheetService {
   constructor(private http: HttpClient) {
   }
 
-  public create2(body: any) {
+  public create(body: any) {
     const headers = this.getHeader();
     const path = mainUrl + 'api/care-sheet-answer-psychosocial-create';
     return this.http.post(path, body, {headers});
   }
 
-  public create3(body: Array<AnswerPsychosocialModel>):Observable<DataResponse> {
+  //Aquí está completo
+  public create2(body: Array<AnswerPsychosocialModel>):Observable<DataResponse> {
     const headers = this.getHeader();
     const path = mainUrl + 'api/care-sheet-answer-psychosocial-create2';
     return this.http.post<DataResponse>(path, body, {headers});
