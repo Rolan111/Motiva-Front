@@ -35,24 +35,23 @@ export class CareSheetComponent implements OnInit {
     this.step--;
   }
 
-  form: FormGroup;
 
-  formPersonalInfo: FormGroup;
-  formOrigin: FormGroup;
-  formConsultation: FormGroup;
+  formPersonalInfo!: FormGroup;
+  formOrigin!: FormGroup;
+  formConsultation!: FormGroup;
 
-  formAP_PsychiatricHistory: FormGroup;
-  formAP_MedicalHistory: FormGroup;
-  formAP_SurgicalHistory: FormGroup;
-  formAP_RelationalHistory: FormGroup;
+  formAP_PsychiatricHistory!: FormGroup;
+  formAP_MedicalHistory!: FormGroup;
+  formAP_SurgicalHistory!: FormGroup;
+  formAP_RelationalHistory!: FormGroup;
 
-  formAF_PsychiatricHistory: FormGroup;
-  formAF_MedicalHistory: FormGroup;
+  formAF_PsychiatricHistory!: FormGroup;
+  formAF_MedicalHistory!: FormGroup;
 
-  formStateOfMind: FormGroup;
-  formPsychosocialEvaluation: FormGroup;
-  formInterventionLevel: FormGroup;
-  formResponsibleProfessional: FormGroup;
+  formStateOfMind!: FormGroup;
+  formPsychosocialEvaluation!: FormGroup;
+  formInterventionLevel!: FormGroup;
+  formResponsibleProfessional!: FormGroup;
 
 
   constructor(
@@ -62,216 +61,73 @@ export class CareSheetComponent implements OnInit {
     private formBuilder: FormBuilder,
     public careSheetService: CareSheetService
   ) {
-    //Construcción del Formulario
-    this.form = this.formBuilder.group({
-      capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
 
-      city: [this.careSheetService.shareCity, Validators.required],
-      department: ['Cauca'],
-      evaluationDate: ['', Validators.required],
-      sex: ['', Validators.required],
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      identificationNumber: ['', Validators.required],
-      age: ['', Validators.required],
-      dateBirth: ['', Validators.required],
-
-      ethnicity: ['', Validators.required],
-      religion: ['', Validators.required],
-      placeBirth: ['', Validators.required],
-      origin: ['', Validators.required],
-      originAddress: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      stratum: ['', Validators.required],
-      phone: this.careSheetService.sharePhone,
-
-      reasonConsultation: ['', Validators.required],
-      currentIllness: ['', Validators.required],
-
-      AP_APS_Observations: ['', Validators.required],
-      AP_APS_Diagnostics: ['', Validators.required],
-      AP_APS_Medicine: ['', Validators.required],
-      AP_APS_Dose: ['', Validators.required],
-      AP_APS_Time: ['', Validators.required],
-
-      AP_AM_Observations: ['', Validators.required],
-      AP_AM_Diagnostics: ['', Validators.required],
-      AP_AM_Medicine: ['', Validators.required],
-      AP_AM_Dose: ['', Validators.required],
-      AP_AM_Time: ['', Validators.required],
-
-        AP_AQ_Observations: ['', Validators.required],
-
-        AP_AR_employmentSituation: ['', Validators.required],
-        AP_AR_Relationships: ['', Validators.required],
-        AP_AR_socialRelationships: ['', Validators.required],
-        AP_AR_familyRelationships: ['', Validators.required],
-
-        AF_APS_Observations: ['', Validators.required],
-        AF_AM_Observations: ['', Validators.required],
-
-        EM_Time: ['', Validators.required],
-        EM_Place: ['', Validators.required],
-        EM_Person: ['', Validators.required],
-        EM_Observations: ['', Validators.required],
-
-        EPIS_healthProblems: ['', Validators.required],
-        EPIS_healthBeliefSystem: ['', Validators.required],
-        EPIS_copingWithIllness: ['', Validators.required],
-        EPIS_diagnosticImpression: ['', Validators.required],
-
-      especifique_promocionSalud: [''],
-      nivelIntervencionElegida: [Validators.required],
-      seleccione_prevencionEnfermedad: [Validators.required],
-
-        professionalName: ['', Validators.required],
-        Profession: ['', Validators.required]
-      }
-    );
-
-    this.formPersonalInfo = this.formBuilder.group({
-      capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
-      city: [this.careSheetService.shareCity, Validators.required],
-      department: ['Cauca'],
-      evaluationDate: ['', Validators.required],
-      sex: ['', Validators.required],
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
-      identificationNumber: ['', Validators.required],
-      age: ['', Validators.required],
-      dateBirth: ['', Validators.required],
-    })
-    this.formOrigin = this.formBuilder.group({
-      ethnicity: ['', Validators.required],
-      religion: ['', Validators.required],
-      placeBirth: ['', Validators.required],
-      origin: ['', Validators.required],
-      originAddress: ['', Validators.required],
-      neighborhood: ['', Validators.required],
-      stratum: ['', Validators.required],
-      phone: this.careSheetService.sharePhone,
-    })
-    this.formConsultation = this.formBuilder.group({
-      reasonConsultation: ['', Validators.required],
-      currentIllness: ['', Validators.required],
-    })
-
-    //Antecedetes personales
-    this.formAP_PsychiatricHistory = this.formBuilder.group({
-      AP_APS_Observations: ['', Validators.required],
-      AP_APS_Diagnostics: ['', Validators.required],
-      AP_APS_Medicine: ['', Validators.required],
-      AP_APS_Dose: ['', Validators.required],
-      AP_APS_Time: ['', Validators.required],
-    })
-    this.formAP_MedicalHistory = this.formBuilder.group({
-      AP_AM_Observations: ['', Validators.required],
-      AP_AM_Diagnostics: ['', Validators.required],
-      AP_AM_Medicine: ['', Validators.required],
-      AP_AM_Dose: ['', Validators.required],
-      AP_AM_Time: ['', Validators.required],
-    })
-    this.formAP_SurgicalHistory = this.formBuilder.group({
-      AP_AQ_Observations: ['', Validators.required],
-    })
-    this.formAP_RelationalHistory = this.formBuilder.group({
-      AP_AR_employmentSituation: ['', Validators.required],
-      AP_AR_Relationships: ['', Validators.required],
-      AP_AR_socialRelationships: ['', Validators.required],
-      AP_AR_familyRelationships: ['', Validators.required],
-    })
-
-    //Antecedentes familiares
-    this.formAF_PsychiatricHistory = this.formBuilder.group({
-      AF_APS_Observations: ['', Validators.required],
-    })
-    this.formAF_MedicalHistory = this.formBuilder.group({
-      AF_AM_Observations: ['', Validators.required],
-    })
-
-    this.formStateOfMind = this.formBuilder.group({
-      EM_Time: ['', Validators.required],
-      EM_Place: ['', Validators.required],
-      EM_Person: ['', Validators.required],
-      EM_Observations: ['', Validators.required],
-    })
-    this.formPsychosocialEvaluation = this.formBuilder.group({
-      EPIS_healthProblems: ['', Validators.required],
-      EPIS_healthBeliefSystem: ['', Validators.required],
-      EPIS_copingWithIllness: ['', Validators.required],
-      EPIS_diagnosticImpression: ['', Validators.required],
-    })
-    this.formInterventionLevel = this.formBuilder.group({
-      especifique_promocionSalud: [''],
-      nivelIntervencionElegida: [Validators.required],
-      seleccione_prevencionEnfermedad: [Validators.required],
-    })
-    this.formResponsibleProfessional = this.formBuilder.group({
-      professionalName: ['', Validators.required],
-      Profession: ['', Validators.required]
-    })
 
   }
 
 
   ngOnInit(): void {
-    this.form.get('evaluationDate')?.setValue(new Date().toLocaleDateString())
+    this.formCareSheet();
+
+
+    this.formPersonalInfo.get('evaluationDate')?.setValue(new Date().toLocaleDateString())
+
     switch (this.careSheetService.shareSex) {
       case 1: {
-        this.form.get('sex')?.setValue('Hombre')
+        this.formPersonalInfo.get('sex')?.setValue('Hombre')
         break;
       }
       case 2: {
-        this.form.get('sex')?.setValue('Mujer')
+        this.formPersonalInfo.get('sex')?.setValue('Mujer')
         break;
       }
 
       case 3: {
-        this.form.get('sex')?.setValue('Indeterminado')
+        this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
         break;
       }
       default: {
-        this.form.get('sex')?.setValue('Esperando...')
+        this.formPersonalInfo.get('sex')?.setValue('Esperando...')
         break;
       }
     }
 
-    this.form.get('name')?.setValue(this.careSheetService.shareName)
-    this.form.get('lastName')?.setValue(this.careSheetService.shareLastName)
-    this.form.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
+    this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
+    this.formPersonalInfo.get('lastName')?.setValue(this.careSheetService.shareLastName)
+    this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
 
     switch (this.careSheetService.shareEthnicity) {
       case 4: {
-        this.form.get('ethnicity')?.setValue('Indígena')
+        this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
 
       case 5: {
-        this.form.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
+        this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
 
       case 6: {
-        this.form.get('ethnicity')?.setValue('Gitano/Rrom')
+        this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
 
       case 7: {
-        this.form.get('ethnicity')?.setValue('Palenquero')
+        this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
       }
       case 8: {
-        this.form.get('ethnicity')?.setValue('Raizal')
+        this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
 
       case 9: {
-        this.form.get('ethnicity')?.setValue('Ninguno')
+        this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }
 
       default: {
-        this.form.get('ethnicity')?.setValue('Esperando...')
+        this.formOrigin.get('ethnicity')?.setValue('Esperando...')
         break;
       }
     }
@@ -279,13 +135,14 @@ export class CareSheetComponent implements OnInit {
   }
 
   calculandoEdad() {
-    let fechaSeleccionada: any = this.form.value.dateBirth;
+    let fechaSeleccionada: any = this.formPersonalInfo.value.dateBirth;
     let fechaActual: any = new Date();
     let diferenciaTiempo: any = Math.abs(fechaActual - fechaSeleccionada);
     let age = Math.floor((diferenciaTiempo / (1000 * 3600 * 24)) / 365.25);
-    this.form.get('age')?.setValue(age)
+    this.formPersonalInfo.get('age')?.setValue(age)
     this.edadCalculada = age;
   }
+/*
 
   //Guardado de datos
   public saveForm() {
@@ -617,15 +474,101 @@ export class CareSheetComponent implements OnInit {
 
   }
 
+*/
 
   //Validators
   isControlHasError(controlName: string, validationType: string): boolean {
-    const control = this.form.controls[controlName];
+    const control = this.formPersonalInfo.controls[controlName];
 
     if (!control)
       return false;
 
     return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+
+  private formCareSheet(){
+
+    this.formPersonalInfo = this.formBuilder.group({
+      capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
+      city: [this.careSheetService.shareCity, Validators.required],
+      department: ['Cauca'],
+      evaluationDate: ['', Validators.required],
+      sex: ['', Validators.required],
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      identificationNumber: ['', Validators.required],
+      age: ['', Validators.required],
+      dateBirth: ['', Validators.required],
+    })
+    this.formOrigin = this.formBuilder.group({
+      ethnicity: ['', Validators.required],
+      religion: ['', Validators.required],
+      placeBirth: ['', Validators.required],
+      origin: ['', Validators.required],
+      originAddress: ['', Validators.required],
+      neighborhood: ['', Validators.required],
+      stratum: ['', Validators.required],
+      phone: this.careSheetService.sharePhone,
+    })
+    this.formConsultation = this.formBuilder.group({
+      reasonConsultation: ['', Validators.required],
+      currentIllness: ['', Validators.required],
+    })
+
+    //Antecedetes personales
+    this.formAP_PsychiatricHistory = this.formBuilder.group({
+      AP_APS_Observations: ['', Validators.required],
+      AP_APS_Diagnostics: ['', Validators.required],
+      AP_APS_Medicine: ['', Validators.required],
+      AP_APS_Dose: ['', Validators.required],
+      AP_APS_Time: ['', Validators.required],
+    })
+    this.formAP_MedicalHistory = this.formBuilder.group({
+      AP_AM_Observations: ['', Validators.required],
+      AP_AM_Diagnostics: ['', Validators.required],
+      AP_AM_Medicine: ['', Validators.required],
+      AP_AM_Dose: ['', Validators.required],
+      AP_AM_Time: ['', Validators.required],
+    })
+    this.formAP_SurgicalHistory = this.formBuilder.group({
+      AP_AQ_Observations: ['', Validators.required],
+    })
+    this.formAP_RelationalHistory = this.formBuilder.group({
+      AP_AR_employmentSituation: ['', Validators.required],
+      AP_AR_Relationships: ['', Validators.required],
+      AP_AR_socialRelationships: ['', Validators.required],
+      AP_AR_familyRelationships: ['', Validators.required],
+    })
+
+    //Antecedentes familiares
+    this.formAF_PsychiatricHistory = this.formBuilder.group({
+      AF_APS_Observations: ['', Validators.required],
+    })
+    this.formAF_MedicalHistory = this.formBuilder.group({
+      AF_AM_Observations: ['', Validators.required],
+    })
+
+    this.formStateOfMind = this.formBuilder.group({
+      EM_Time: ['', Validators.required],
+      EM_Place: ['', Validators.required],
+      EM_Person: ['', Validators.required],
+      EM_Observations: ['', Validators.required],
+    })
+    this.formPsychosocialEvaluation = this.formBuilder.group({
+      EPIS_healthProblems: ['', Validators.required],
+      EPIS_healthBeliefSystem: ['', Validators.required],
+      EPIS_copingWithIllness: ['', Validators.required],
+      EPIS_diagnosticImpression: ['', Validators.required],
+    })
+    this.formInterventionLevel = this.formBuilder.group({
+      especifique_promocionSalud: [''],
+      nivelIntervencionElegida: [Validators.required],
+      seleccione_prevencionEnfermedad: [Validators.required],
+    })
+    this.formResponsibleProfessional = this.formBuilder.group({
+      professionalName: ['', Validators.required],
+      Profession: ['', Validators.required]
+    })
   }
 
 

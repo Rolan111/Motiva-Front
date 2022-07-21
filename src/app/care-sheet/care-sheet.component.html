@@ -2,7 +2,7 @@
 
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical  linear">
 <!--  Datos personales básicos -->
-  <mat-step [stepControl]="form" color="primary" >
+<!--  <mat-step [stepControl]="formPersonalInfo" color="primary" >
   <ng-template matStepLabel>Datos personales básicos</ng-template>
 
   <mat-card class="mat-card1">
@@ -10,8 +10,8 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-<!--    Datos personales básicos -->
-    <form [formGroup]="form">
+&lt;!&ndash;    Datos personales básicos &ndash;&gt;
+    <form [formGroup]="formPersonalInfo">
 
           <mat-grid-list cols="2" rowHeight="85px">
 
@@ -122,8 +122,8 @@
 
 </mat-step>
 
-<!-- Procedencia -->
-  <mat-step [stepControl]="form" color="primary">
+&lt;!&ndash; Procedencia &ndash;&gt;
+  <mat-step [stepControl]="formOrigin" color="primary">
   <ng-template matStepLabel>Procedencia</ng-template>
 
   <mat-card class="mat-card1">
@@ -131,8 +131,8 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-<!--    Procedencia -->
-    <form [formGroup]="form">
+&lt;!&ndash;    Procedencia &ndash;&gt;
+    <form [formGroup]="formOrigin">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -222,16 +222,16 @@
 
   </mat-card>
 
-</mat-step>
+</mat-step>-->
 
 <!-- Consulta y enfermedad actual -->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formConsultation" color="primary">
   <ng-template matStepLabel>Consulta</ng-template>
   <mat-card class="mat-card1">
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
-    <form [formGroup]="form">
+    <form [formGroup]="formConsultation">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -265,13 +265,13 @@
 </mat-step>
 
 <!-- Antecedentes personales -->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formAP_PsychiatricHistory" color="primary">
   <ng-template matStepLabel> Antecedentes personales </ng-template>
   <mat-card class="mat-card1">
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
-    <form [formGroup]="form">
+    <form [formGroup]="formAP_PsychiatricHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -338,7 +338,7 @@
   </mat-card>
 
 </mat-step>
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formAP_MedicalHistory" color="primary">
   <ng-template matStepLabel> Antecedentes Médicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -346,7 +346,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formAP_MedicalHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -410,7 +410,8 @@
   </mat-card>
 
 </mat-step>
-  <mat-step  [stepControl]="form" color="primary">
+
+  <mat-step  [stepControl]="formAP_SurgicalHistory" color="primary">
   <ng-template matStepLabel> Antecedentes Quirúrgicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -418,7 +419,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formAP_SurgicalHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="2" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -439,7 +440,7 @@
   </mat-card>
 
 </mat-step>
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formAP_RelationalHistory" color="primary">
   <ng-template matStepLabel> Antecedentes Relacionales </ng-template>
 
   <mat-card class="mat-card1">
@@ -447,7 +448,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formAP_RelationalHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -500,7 +501,7 @@
 </mat-step>
 
 <!--  Antecedentes familiares-->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formAF_PsychiatricHistory" color="primary">
   <ng-template matStepLabel> Antecedentes familiares </ng-template>
 
   <mat-card class="mat-card1">
@@ -508,7 +509,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formAF_PsychiatricHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -529,7 +530,7 @@
   </mat-card>
 
 </mat-step>
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formAF_MedicalHistory" color="primary">
   <ng-template matStepLabel> Antecedentes médicos </ng-template>
 
   <mat-card class="mat-card1">
@@ -537,7 +538,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formAF_MedicalHistory">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -560,7 +561,7 @@
 </mat-step>
 
 <!--  Estado Mental -->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formStateOfMind" color="primary">
   <ng-template matStepLabel> Estado mental </ng-template>
 
   <mat-card class="mat-card1">
@@ -568,7 +569,7 @@
       <mat-card-title>CONCIENCIA - Orientación</mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formStateOfMind">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
@@ -619,7 +620,7 @@
 </mat-step>
 
 <!--  Evaluación psicosocial integral en salud -->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formPsychosocialEvaluation" color="primary">
   <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
 
   <mat-card class="mat-card1">
@@ -627,7 +628,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formPsychosocialEvaluation">
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="standard">
@@ -670,7 +671,7 @@
 </mat-step>
 
 <!--  Nivel de intervención modelo biopsicosocial -->
-  <mat-step   [stepControl]="form" color="primary">
+  <mat-step   [stepControl]="formInterventionLevel" color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
 
   <mat-card class="mat-card1">
@@ -678,7 +679,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formInterventionLevel">
       <mat-grid-list cols="2" rowHeight="85px">
 
         <mat-grid-tile [colspan]="2">
@@ -707,7 +708,7 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="2" [rowspan]="2">
 
-          <div *ngIf="form.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
+          <div *ngIf="formInterventionLevel.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
             Especifique: Prevención de la enfermedad
             <mat-radio-group formControlName="seleccione_prevencionEnfermedad">
               <br>
@@ -737,7 +738,7 @@
 </mat-step>
 
 <!--  Profesional responsable-->
-  <mat-step  [stepControl]="form" color="primary">
+  <mat-step  [stepControl]="formResponsibleProfessional" color="primary">
   <ng-template matStepLabel> Profesional responsable </ng-template>
 
   <mat-card class="mat-card1">
@@ -745,7 +746,7 @@
       <mat-card-title></mat-card-title>
     </mat-card-header>
 
-    <form [formGroup]="form">
+    <form [formGroup]="formResponsibleProfessional">
 
       <mat-grid-list cols="2" rowHeight="85px">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -765,8 +766,8 @@
 
     </form>
     <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button color="primary" (click)="saveForm()">Enviar</button>
+<!--      <button mat-button matStepperPrevious>Atrás</button>-->
+<!--      <button mat-button color="primary" (click)="saveForm()">Enviar</button>-->
     </mat-card-actions>
 
   </mat-card>
