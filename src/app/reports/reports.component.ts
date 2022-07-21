@@ -15,6 +15,11 @@ interface Food {
 })
 export class ReportsComponent implements OnInit {
 
+  dt:any = new Date();
+  month:any = this.dt.getMonth();
+  year:any = this.dt.getFullYear();
+  daysInMonth = new Date(this.year, this.month, 0).getDate();
+
   form: FormGroup;
 
   constructor(
@@ -34,6 +39,7 @@ export class ReportsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    console.log("Los dias son: ", this.daysInMonth)
 
   }
 
