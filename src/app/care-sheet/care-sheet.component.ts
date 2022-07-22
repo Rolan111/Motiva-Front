@@ -69,7 +69,6 @@ export class CareSheetComponent implements OnInit {
   ngOnInit(): void {
     this.formCareSheet();
 
-
     this.formPersonalInfo.get('evaluationDate')?.setValue(new Date().toLocaleDateString())
 
     switch (this.careSheetService.shareSex) {
@@ -97,31 +96,31 @@ export class CareSheetComponent implements OnInit {
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
 
     switch (this.careSheetService.shareEthnicity) {
-      case 4: {
+      case 1: {
         this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
 
-      case 5: {
+      case 2: {
         this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
 
-      case 6: {
+      case 3: {
         this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
 
-      case 7: {
+      case 4: {
         this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
       }
-      case 8: {
+      case 5: {
         this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
 
-      case 9: {
+      case 6: {
         this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }
@@ -142,7 +141,6 @@ export class CareSheetComponent implements OnInit {
     this.formPersonalInfo.get('age')?.setValue(age)
     this.edadCalculada = age;
   }
-/*
 
   //Guardado de datos
   public saveForm() {
@@ -151,167 +149,167 @@ export class CareSheetComponent implements OnInit {
       id_question: 101,
       id_option_answer: 0,
       open_answer: this.formPersonalInfo.value.departament,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPersonalInfo.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 102,
       id_option_answer: 0,
       open_answer: this.formPersonalInfo.value.evaluationDate,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPersonalInfo.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 110,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.religion,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 111,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.placeBirth,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 112,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.origin,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 113,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.originAddress,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 114,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.neighborhood,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 115,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.stratum,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 116,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.phone,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formOrigin.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 117,
       id_option_answer: 0,
-      open_answer: this.form.value.reasonConsultation,
-      id_poll: this.form.value.capturaIdPoll
+      open_answer: this.formConsultation.value.reasonConsultation,
+      id_poll: this.formConsultation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 118,
       id_option_answer: 0,
       open_answer: this.formConsultation.value.currentIllness,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formConsultation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 119,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 120,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Diagnostics,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 121,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Medicine,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 122,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Dose,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 123,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Time,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 124,
       id_option_answer: 0,
       open_answer: this.formAP_MedicalHistory.value.AP_AM_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 125,
       id_option_answer: 0,
       open_answer: this.formAP_MedicalHistory.value.AP_AM_Diagnostics,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 126,
       id_option_answer: 0,
       open_answer: this.formAP_MedicalHistory.value.AP_AM_Medicine,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 127,
       id_option_answer: 0,
       open_answer: this.formAP_MedicalHistory.value.AP_AM_Dose,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 128,
       id_option_answer: 0,
       open_answer: this.formAP_MedicalHistory.value.AP_AM_Time,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 129,
       id_option_answer: 0,
       open_answer: this.formAP_SurgicalHistory.value.AP_AQ_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 130,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_employmentSituation,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 131,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_Relationships,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 132,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_socialRelationships,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 133,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_familyRelationships,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 134,
       id_option_answer: 0,
       open_answer: this.formAF_PsychiatricHistory.value.AF_APS_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAF_PsychiatricHistory.value.capturaIdPoll
     });
 
     //REVISAR ORDEN
@@ -319,63 +317,63 @@ export class CareSheetComponent implements OnInit {
       id_question: 135,
       id_option_answer: 0,
       open_answer: this.formAF_MedicalHistory.value.AF_AM_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formAF_MedicalHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 136,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Time,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formStateOfMind.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 137,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Place,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formStateOfMind.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 138,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Person,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formStateOfMind.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 139,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Observations,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formStateOfMind.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 140,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_healthProblems,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 141,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_healthBeliefSystem,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 142,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_copingWithIllness,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 143,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_diagnosticImpression,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 144,
       id_option_answer: 300,
       open_answer: this.formInterventionLevel.value.especifique_promocionSalud,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formInterventionLevel.value.capturaIdPoll
     });
 
 
@@ -386,7 +384,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 301,
           open_answer: this.formInterventionLevel.value.seleccione_prevencionEnfermedad,
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
       case "Adherencia al tratamiento":
@@ -394,7 +392,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 302,
           open_answer: "",
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
       case "Afrontamiento de la enfermedad":
@@ -402,7 +400,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 303,
           open_answer: "",
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
       case "Psicooncología":
@@ -410,7 +408,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 304,
           open_answer: "",
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
       case "Manejo del dolor":
@@ -418,7 +416,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 305,
           open_answer: "",
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
       case "Intervención en enfermedades crónicas transmisibles y no transmisibles":
@@ -426,7 +424,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 306,
           open_answer: "",
-          id_poll: this.form.value.capturaIdPoll
+          id_poll: this.formInterventionLevel.value.capturaIdPoll
         });
         break
 
@@ -436,14 +434,14 @@ export class CareSheetComponent implements OnInit {
       id_question: 146,
       id_option_answer: 0,
       open_answer: this.formResponsibleProfessional.value.professionalName,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formResponsibleProfessional.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 147,
       id_option_answer: 0,
       open_answer: this.formResponsibleProfessional.value.Profession,
-      id_poll: this.form.value.capturaIdPoll
+      id_poll: this.formResponsibleProfessional.value.capturaIdPoll
     });
 
     //PROCEDEMOS A GUARDAR
@@ -474,34 +472,25 @@ export class CareSheetComponent implements OnInit {
 
   }
 
-*/
 
-  //Validators
-  isControlHasError(controlName: string, validationType: string): boolean {
-    const control = this.formPersonalInfo.controls[controlName];
 
-    if (!control)
-      return false;
-
-    return control.hasError(validationType) && (control.dirty || control.touched);
-  }
 
   private formCareSheet(){
 
     this.formPersonalInfo = this.formBuilder.group({
       capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
-      city: [this.careSheetService.shareCity, Validators.required],
+      city: [this.careSheetService.shareCity],
       department: ['Cauca'],
       evaluationDate: ['', Validators.required],
-      sex: ['', Validators.required],
-      name: ['', Validators.required],
-      lastName: ['', Validators.required],
+      sex: [''],
+      name: [''],
+      lastName: [''],
       identificationNumber: ['', Validators.required],
       age: ['', Validators.required],
       dateBirth: ['', Validators.required],
     })
     this.formOrigin = this.formBuilder.group({
-      ethnicity: ['', Validators.required],
+      ethnicity: [''],
       religion: ['', Validators.required],
       placeBirth: ['', Validators.required],
       origin: ['', Validators.required],
@@ -570,6 +559,85 @@ export class CareSheetComponent implements OnInit {
       Profession: ['', Validators.required]
     })
   }
+
+  //Validators
+  isControlHasErrorPI(controlName: string, validationType: string): boolean {
+    const control = this.formPersonalInfo.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorOrigin(controlName: string, validationType: string): boolean {
+    const control = this.formOrigin.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorConsultation(controlName: string, validationType: string): boolean {
+    const control = this.formConsultation.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorAP_PsychiatricHistory(controlName: string, validationType: string): boolean {
+    const control = this.formConsultation.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorAP_MedicalHistory(controlName: string, validationType: string): boolean {
+    const control = this.formAP_MedicalHistory.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+  isControlHasErrorAP_SurgicalHistory(controlName: string, validationType: string): boolean {
+      const control = this.formAP_SurgicalHistory.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorAP_RelationalHistory(controlName: string, validationType: string): boolean {
+      const control = this.formAP_RelationalHistory.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorAF_PsychiatricHistory(controlName: string, validationType: string): boolean {
+      const control = this.formAF_PsychiatricHistory.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorAF_MedicalHistory(controlName: string, validationType: string): boolean {
+      const control = this.formAF_MedicalHistory.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorStateOfMind(controlName: string, validationType: string): boolean {
+      const control = this.formStateOfMind.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorPsychosocialEvaluation(controlName: string, validationType: string): boolean {
+      const control = this.formPsychosocialEvaluation.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+  isControlHasErrorResponsibleProfessional(controlName: string, validationType: string): boolean {
+      const control = this.formResponsibleProfessional.controls[controlName];
+      if (!control)
+        return false;
+      return control.hasError(validationType) && (control.dirty || control.touched);
+    }
+
+
+
+
+
 
 
 
