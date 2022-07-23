@@ -15,8 +15,11 @@ interface Food {
 })
 export class ReportsComponent implements OnInit {
 
+  dateStart1:any = "2022-07-28";
+  dateEnd1:any = "2022-07-27";
+
   dt:any = new Date();
-  month:any = this.dt.getMonth();
+  month:any = this.dt.getMonth()-4;
   year:any = this.dt.getFullYear();
   daysInMonth = new Date(this.year, this.month, 0).getDate();
 
@@ -39,7 +42,11 @@ export class ReportsComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    console.log("Los dias son: ", this.daysInMonth)
+    if(this.dateStart1>this.dateEnd1){
+      console.log('La fecha inicial es MAYOR a la fecha final')
+    }else {
+      console.log('La fecha inicial es MENOR a la fecha final')
+    }
 
   }
 
