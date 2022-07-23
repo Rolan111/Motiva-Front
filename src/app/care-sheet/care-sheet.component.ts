@@ -640,12 +640,6 @@ export class CareSheetComponent implements OnInit {
     }
 
   onFirstGroupChange() {
-    console.log('se ha detectado un cambio', this.formInterventionLevel)
-    // this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors({'incorrect': false});
-    // this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors({'pristine':false});
-
-    // this.formInterventionLevel.setErrors({'status':'VALID'})
-    // this.formInterventionLevel.setErrors({'pristine':false})
     this.contadoclicks = this.contadoclicks+1;
     if(this.contadoclicks>1){
       this.formInterventionLevel.controls['']
