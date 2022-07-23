@@ -2,7 +2,9 @@
 
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical  linear">
 <!--  Datos personales básicos -->
-  <mat-step [stepControl]="formPersonalInfo" color="primary" >
+
+
+<!--  <mat-step [stepControl]="formPersonalInfo" color="primary" >
   <ng-template matStepLabel>Datos personales básicos</ng-template>
 
   <mat-card class="mat-card1">
@@ -111,7 +113,7 @@
 
 </mat-step>
 
-<!--Procedencia-->
+&lt;!&ndash;Procedencia&ndash;&gt;
   <mat-step [stepControl]="formOrigin" color="primary">
   <ng-template matStepLabel>Procedencia</ng-template>
 
@@ -212,7 +214,7 @@
 
 </mat-step>
 
-<!-- Consulta y enfermedad actual -->
+&lt;!&ndash; Consulta y enfermedad actual &ndash;&gt;
   <mat-step  [stepControl]="formConsultation" color="primary">
   <ng-template matStepLabel>Consulta</ng-template>
   <mat-card class="mat-card1">
@@ -252,7 +254,7 @@
 
 </mat-step>
 
-<!-- Antecedentes personales -->
+&lt;!&ndash; Antecedentes personales &ndash;&gt;
   <mat-step  [stepControl]="formAP_PsychiatricHistory" color="primary">
   <ng-template matStepLabel> Antecedentes personales </ng-template>
   <mat-card class="mat-card1">
@@ -484,7 +486,7 @@
 
 </mat-step>
 
-<!--  Antecedentes familiares-->
+&lt;!&ndash;  Antecedentes familiares&ndash;&gt;
   <mat-step  [stepControl]="formAF_PsychiatricHistory" color="primary">
   <ng-template matStepLabel> Antecedentes familiares </ng-template>
 
@@ -544,7 +546,7 @@
 
 </mat-step>
 
-<!--  Estado Mental -->
+&lt;!&ndash;  Estado Mental &ndash;&gt;
   <mat-step  [stepControl]="formStateOfMind" color="primary">
   <ng-template matStepLabel> Estado mental </ng-template>
 
@@ -603,7 +605,7 @@
 
 </mat-step>
 
-<!--  Evaluación psicosocial integral en salud -->
+&lt;!&ndash;  Evaluación psicosocial integral en salud &ndash;&gt;
   <mat-step  [stepControl]="formPsychosocialEvaluation" color="primary">
   <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
 
@@ -664,8 +666,9 @@
 
   </mat-card>
 
-</mat-step>
+</mat-step>-->
 
+  
 <!--  Nivel de intervención modelo biopsicosocial -->
   <mat-step   [stepControl]="formInterventionLevel" color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
@@ -688,8 +691,13 @@
           </mat-form-field>
         </mat-grid-tile>
 
+        <mat-grid-tile [colspan]="2"> Especifique Nivel de intervención        </mat-grid-tile>
+
         <mat-grid-tile [colspan]="2" [rowspan]="3">
-          <mat-radio-group formControlName="nivelIntervencionElegida">
+
+          <mat-radio-group formControlName="nivelIntervencionElegida"
+                           [(ngModel)]="firstGroup"
+                           (ngModelChange)="onFirstGroupChange()">
               <div *ngFor="let nivelIntervencion of nivelIntervencionModeloBiopsicosocial">
                 <mat-radio-button class="example-radio-button" [value]="nivelIntervencion">
                   {{nivelIntervencion}}
@@ -720,7 +728,9 @@
     </form>
     <mat-card-actions>
             <button mat-button matStepperPrevious>Atrás</button>
-            <button mat-button color="primary" (click)="saveForm()">Enviar</button>
+      <!--<button mat-raised-button color="primary" >Enviar</button>-->
+      <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid ">Enviar</button>
+            <!--<button mat-button color="primary" (click)="saveForm()">Enviar</button>-->
     </mat-card-actions>
 
 
