@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Form, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Form, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CareSheetService} from "./care-sheet.service";
 import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
@@ -15,6 +15,7 @@ import {Observable, of} from "rxjs";
 export class CareSheetComponent implements OnInit {
 
   edadCalculada: any = 0;
+  contadoclicks = 0;
 
   firstGroup = 0;
   bvariable = 0;
@@ -554,7 +555,7 @@ export class CareSheetComponent implements OnInit {
       EPIS_diagnosticImpression: ['', Validators.required],
     })
     this.formInterventionLevel = this.formBuilder.group({
-      especifique_promocionSalud: [''],
+      especifique_promocionSalud: ['', [Validators.required]],
       nivelIntervencionElegida: ['Ninguno', [Validators.required]],
       seleccione_prevencionEnfermedad: [Validators.required],
     })
@@ -639,19 +640,23 @@ export class CareSheetComponent implements OnInit {
     }
 
   onFirstGroupChange() {
+    console.log('se ha detectado un cambio', this.formInterventionLevel)
+    // this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors({'incorrect': false});
+    // this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors({'pristine':false});
+
+    // this.formInterventionLevel.setErrors({'status':'VALID'})
+    // this.formInterventionLevel.setErrors({'pristine':false})
+    this.contadoclicks = this.contadoclicks+1;
+    if(this.contadoclicks>1){
+      this.formInterventionLevel.controls['']
+      this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors(null);
+    }
     if(this.firstGroup === 1 ) {
       this.bvariable = this.firstGroup;
     } else {
       this.bvariable = 0;
     }
   }
-
-
-
-
-
-
-
 
 
 }

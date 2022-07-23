@@ -668,7 +668,7 @@
 
 </mat-step>-->
 
-  
+
 <!--  Nivel de intervención modelo biopsicosocial -->
   <mat-step   [stepControl]="formInterventionLevel" color="primary">
   <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
@@ -685,7 +685,7 @@
           Promoción de la salud
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Especifique:</mat-label>
-            <input formControlName="especifique_promocionSalud" type="text" matInput
+            <input  formControlName="especifique_promocionSalud" type="text" matInput
                    placeholder="Promoción de la salud">
 
           </mat-form-field>
@@ -729,7 +729,8 @@
     <mat-card-actions>
             <button mat-button matStepperPrevious>Atrás</button>
       <!--<button mat-raised-button color="primary" >Enviar</button>-->
-      <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid ">Enviar</button>
+      <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid">Enviar</button>
+
             <!--<button mat-button color="primary" (click)="saveForm()">Enviar</button>-->
     </mat-card-actions>
 
