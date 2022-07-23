@@ -15,10 +15,14 @@ import {Observable, of} from "rxjs";
 export class CareSheetComponent implements OnInit {
 
   edadCalculada: any = 0;
+
+  firstGroup = 0;
+  bvariable = 0;
+
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
   // listaDeRespuestas: Array<AnswerPsychosocialModel> = [];
 
-  nivelIntervencionModeloBiopsicosocial: string[] = ['Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles'];
+  nivelIntervencionModeloBiopsicosocial: string[] = ['Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles','Ninguno'];
 
   /*FORMULARIO*/
   step = 0;
@@ -551,7 +555,7 @@ export class CareSheetComponent implements OnInit {
     })
     this.formInterventionLevel = this.formBuilder.group({
       especifique_promocionSalud: [''],
-      nivelIntervencionElegida: [Validators.required],
+      nivelIntervencionElegida: ['Ninguno', [Validators.required]],
       seleccione_prevencionEnfermedad: [Validators.required],
     })
     this.formResponsibleProfessional = this.formBuilder.group({
@@ -633,6 +637,15 @@ export class CareSheetComponent implements OnInit {
         return false;
       return control.hasError(validationType) && (control.dirty || control.touched);
     }
+
+  onFirstGroupChange() {
+    if(this.firstGroup === 1 ) {
+      this.bvariable = this.firstGroup;
+    } else {
+      this.bvariable = 0;
+    }
+  }
+
 
 
 
