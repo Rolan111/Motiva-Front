@@ -59,3 +59,19 @@ export var arrayMunicipios:any=[
   {viewValue: 'VILLA RICA'}
 ]
 
+//actualización 1
+export var arrayMeses:any=[
+  {viewValue: 'ENERO'},
+  {viewValue: 'FEBRERO'},
+  {viewValue: 'MARZO'},
+  {viewValue: 'ABRIL'},
+  {viewValue: 'MAYO'},
+  {viewValue: 'JUNIO'},
+  {viewValue: 'JULIO'},
+  {viewValue: 'AGOSTO'},
+  {viewValue: 'SEPTIEMBRE'},
+  {viewValue: 'OCTUBRE'},
+  {viewValue: 'NOVIEMBRE'},
+  {viewValue: 'DICIEMBRE'}
+]
+

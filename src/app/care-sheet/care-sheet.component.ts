@@ -101,31 +101,31 @@ export class CareSheetComponent implements OnInit {
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
 
     switch (this.careSheetService.shareEthnicity) {
-      case 1: {
+      case 4: {
         this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
 
-      case 2: {
+      case 5: {
         this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
 
-      case 3: {
+      case 6: {
         this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
 
-      case 4: {
+      case 7: {
         this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
       }
-      case 5: {
+      case 8: {
         this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
 
-      case 6: {
+      case 9: {
         this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }
