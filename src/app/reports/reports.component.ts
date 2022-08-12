@@ -1,10 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportsService} from "./reports.service";
-import {conditionallyCreateMapObjectLiteral} from "@angular/compiler/src/render3/view/util";
+import {arrayMeses, arrayMunicipios} from "../enums/enum";
 
 interface Food {
   value: string;
+  viewValue: string;
+}
+
+interface Professional {
+  value: string;
+  viewValue: string;
+}
+
+interface month {
+  // value: string;
   viewValue: string;
 }
 
@@ -21,7 +31,7 @@ export class ReportsComponent implements OnInit {
   dt:any = new Date();
   month:any = this.dt.getMonth()-4;
   year:any = this.dt.getFullYear();
-  daysInMonth = new Date(this.year, this.month, 0).getDate();
+  daysInMonth = new Date(this.year, this.month, 0).getDate(); //calcula los días que tiene el mes
 
   form: FormGroup;
 
@@ -41,7 +51,11 @@ export class ReportsComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Profesional 3s'},
   ];
 
+  month2: month[] = arrayMeses;
+
+
   ngOnInit(): void {
+    console.log('Los meses son', this.month2)
     if(this.dateStart1>this.dateEnd1){
       console.log('La fecha inicial es MAYOR a la fecha final')
     }else {
