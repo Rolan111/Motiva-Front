@@ -28,8 +28,7 @@
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <mat-form-field class="inputClass" appearance="fill">
                 <mat-label>Departamento</mat-label>
-                <input formControlName="department" maxlength="50" type="text" matInput placeholder="Departamento"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+                <input formControlName="department" maxlength="50" type="text" matInput placeholder="Departamento">
                 <mat-error *ngIf="isControlHasErrorPI('department','required')">
                   <strong>Campo Requerido</strong>
                 </mat-error>
@@ -138,8 +137,7 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Religión</mat-label>
-            <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'') ">
+            <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión">
             <mat-error *ngIf="isControlHasErrorOrigin('religion','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -148,8 +146,7 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Lugar de nacimiento</mat-label>
-            <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento">
             <mat-error *ngIf="isControlHasErrorOrigin('placeBirth','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -158,8 +155,7 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Procedencia</mat-label>
-            <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia">
             <mat-error *ngIf="isControlHasErrorOrigin('origin','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -168,8 +164,7 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Dirección de procedencia</mat-label>
-            <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia"
-                   oninput="this.value=this.value.replace(/[^A-Za-z0-9]/g,'')">
+            <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia">
             <mat-error *ngIf="isControlHasErrorOrigin('originAddress','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -178,8 +173,7 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
             <mat-label>Barrio</mat-label>
-            <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio">
             <mat-error *ngIf="isControlHasErrorOrigin('neighborhood','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -447,9 +441,9 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Situaciones interpersonales</mat-label>
+            <mat-label>Relaciones interpersonales</mat-label>
             <input formControlName="AP_AR_Relationships" type="text" matInput
-                   placeholder="Situaciones interpersonales">
+                   placeholder="Relaciones interpersonales">
             <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_Relationships','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
@@ -467,9 +461,9 @@
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
           <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Situaciones familiares</mat-label>
+            <mat-label>Relaciones familiares</mat-label>
             <input formControlName="AP_AR_familyRelationships" type="text" matInput
-                   placeholder="Situaciones familiares">
+                   placeholder="Relaciones familiares">
             <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_familyRelationships','required')">
               <strong>Campo Requerido</strong>
             </mat-error>
