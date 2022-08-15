@@ -13,7 +13,7 @@ import {Observable, of} from "rxjs";
   styleUrls: ['./care-sheet.component.scss']
 })
 export class CareSheetComponent implements OnInit {
-
+  maxDate = new Date();
   edadCalculada: any = 0;
   contadoclicks = 0;
 
@@ -566,6 +566,7 @@ export class CareSheetComponent implements OnInit {
   }
 
   //Validators
+
   isControlHasErrorPI(controlName: string, validationType: string): boolean {
     const control = this.formPersonalInfo.controls[controlName];
     if (!control)
