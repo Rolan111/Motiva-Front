@@ -1,5 +1,5 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {NgModule, LOCALE_ID} from '@angular/core';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import {CdkTreeModule} from "@angular/cdk/tree";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatButtonModule} from "@angular/material/button";
@@ -38,6 +38,9 @@ import {HttpClientModule} from "@angular/common/http";
 import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MatDialogModule} from "@angular/material/dialog";
+import localeEs from '@angular/common/locales/es';
+
+registerLocaleData(localeEs, 'es');
 
 const materialModules = [
   CdkTreeModule,
@@ -88,6 +91,7 @@ const materialModules = [
     CommonModule,
     materialModules,
   ],
+  providers: [ { provide: LOCALE_ID, useValue: 'es' } ],
   exports: [
     materialModules,
   ],
