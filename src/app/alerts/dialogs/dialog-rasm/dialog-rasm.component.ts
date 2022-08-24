@@ -13,7 +13,9 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 export class DialogRasmComponent implements OnInit {
 
   typeRams: any = "hola";
+  typeRasmi: any = [];
   form: FormGroup;
+
 
   constructor(
     public dialogRef: MatDialogRef<DialogRasmComponent>,
@@ -29,6 +31,11 @@ export class DialogRasmComponent implements OnInit {
 
   ngOnInit(): void {
     console.log('Alerta> id_poll: ', this.data.id_poll)
+    this.alertsService.getAllTypeRasmi().subscribe(data => {
+      console.log('La data es: ',data)
+      this.typeRasmi.push(data)
+    },error => error,() => console.log('Asi quedo type rasmi: ',this.typeRasmi))
+
   }
 
   sendRASM() {
