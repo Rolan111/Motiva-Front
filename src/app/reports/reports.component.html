@@ -1,18 +1,7 @@
 <mat-card>
   <h1>REPORTES</h1>
   <form [formGroup]="form">
-    <mat-form-field class="inputClass" appearance="fill">
-      <mat-label>Fecha inicio</mat-label>
-      <input formControlName="dateStart" matInput [matDatepicker]="picker1" readonly>
-      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-      <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field class="inputClass" appearance="fill">
-      <mat-label>Fecha fin</mat-label>
-      <input formControlName="dateEnd" matInput [matDatepicker]="picker2" readonly>
-      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
-    </mat-form-field>
+    <h2>Seleccione el mes del reporte</h2>
     <br>
     <mat-form-field appearance="fill">
       <mat-label>Seleccione el mes de reporte</mat-label>

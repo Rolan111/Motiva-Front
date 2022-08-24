@@ -134,6 +134,13 @@ export class AlertsService {
     return this.http.post(path, body, {headers});
   }
 
+  //Tabla type_rasmi
+  public getAllTypeRasmi() {
+    const path = mainUrl + 'api/type-rasmi';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
   getHeader() {
     return new HttpHeaders({
       'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),
