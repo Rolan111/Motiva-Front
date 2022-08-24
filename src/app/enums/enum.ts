@@ -61,17 +61,17 @@ export var arrayMunicipios:any=[
 
 //actualización 1
 export var arrayMeses:any=[
-  {viewValue: 'ENERO'},
-  {viewValue: 'FEBRERO'},
-  {viewValue: 'MARZO'},
-  {viewValue: 'ABRIL'},
-  {viewValue: 'MAYO'},
-  {viewValue: 'JUNIO'},
-  {viewValue: 'JULIO'},
-  {viewValue: 'AGOSTO'},
-  {viewValue: 'SEPTIEMBRE'},
-  {viewValue: 'OCTUBRE'},
-  {viewValue: 'NOVIEMBRE'},
-  {viewValue: 'DICIEMBRE'}
+  {value: '01', viewValue: 'ENERO'},
+  {value: '02', viewValue: 'FEBRERO'},
+  {value: '03', viewValue: 'MARZO'},
+  {value: '04', viewValue: 'ABRIL'},
+  {value: '05', viewValue: 'MAYO'},
+  {value: '06', viewValue: 'JUNIO'},
+  {value: '07', viewValue: 'JULIO'},
+  {value: '08', viewValue: 'AGOSTO'},
+  {value: '09', viewValue: 'SEPTIEMBRE'},
+  {value: '10', viewValue: 'OCTUBRE'},
+  {value: '11', viewValue: 'NOVIEMBRE'},
+  {value: '12', viewValue: 'DICIEMBRE'}
 ]
 
