@@ -1,733 +1,729 @@
 <mat-grid-tile-header>Ficha de atención</mat-grid-tile-header>
 
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical  linear">
-<!--  Datos personales básicos -->
-
+  <!--  Datos personales básicos -->
 
   <mat-step [stepControl]="formPersonalInfo" color="primary" >
-  <ng-template matStepLabel>Datos personales básicos</ng-template>
+    <ng-template matStepLabel>Datos personales básicos</ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formPersonalInfo">
+      <form [formGroup]="formPersonalInfo">
 
-          <mat-grid-list cols="2" rowHeight="85px">
+        <mat-grid-list cols="2" rowHeight="85px">
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Ciudad - Municipio</mat-label>
-                <input readonly formControlName="city" maxlength="30" matInput placeholder="Ciudad-Municipio"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Ciudad - Municipio</mat-label>
+              <input readonly formControlName="city" maxlength="30" matInput placeholder="Ciudad-Municipio"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
 
-              </mat-form-field>
-            </mat-grid-tile>
+            </mat-form-field>
+          </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Departamento</mat-label>
-                <input formControlName="department" maxlength="50" type="text" matInput placeholder="Departamento">
-                <mat-error *ngIf="isControlHasErrorPI('department','required')">
-                  <strong>Campo Requerido</strong>
-                </mat-error>
-              </mat-form-field>
-            </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Departamento</mat-label>
+              <input formControlName="department" maxlength="50" type="text" matInput placeholder="Departamento">
+              <mat-error *ngIf="isControlHasErrorPI('department','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Fecha de evaluación</mat-label>
-                <input formControlName="evaluationDate" matInput [matDatepicker]="picker1" readonly>
-                <mat-error *ngIf="isControlHasErrorPI('evaluationDate','required')">
-                  <strong>Campo Requerido</strong>
-                </mat-error>
-                <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-                <mat-datepicker #picker1></mat-datepicker>
-              </mat-form-field>
-            </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Fecha de evaluación</mat-label>
+              <input formControlName="evaluationDate" matInput [matDatepicker]="picker1" [max]="maxDate" readonly>
+              <mat-error *ngIf="isControlHasErrorPI('evaluationDate','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Sexo</mat-label>
-                <input readonly formControlName="sex" type="text" matInput placeholder="Sexo">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Sexo</mat-label>
+              <input readonly formControlName="sex" type="text" matInput placeholder="Sexo">
 
-              </mat-form-field>
-            </mat-grid-tile>
+            </mat-form-field>
+          </mat-grid-tile>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Nombre del paciente</mat-label>
-                <input readonly formControlName="name" maxlength="50" matInput placeholder="Nombre del paciente "
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Nombre del paciente</mat-label>
+              <input readonly formControlName="name" maxlength="50" matInput placeholder="Nombre del paciente "
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Apellido del paciente</mat-label>
+              <input readonly formControlName="lastName" maxlength="50" matInput placeholder="Apellido del paciente"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>No. de identificación</mat-label>
+              <input type="number" maxlength="12" formControlName="identificationNumber" matInput
+                     placeholder="No. de identificación" required>
+              <mat-error *ngIf="isControlHasErrorPI('identificationNumber','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Apellido del paciente</mat-label>
-                <input readonly formControlName="lastName" maxlength="50" matInput placeholder="Apellido del paciente"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-              </mat-form-field>
-            </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>No. de identificación</mat-label>
-                <input type="number" maxlength="12" formControlName="identificationNumber" matInput
-                       placeholder="No. de identificación" required>
-                <mat-error *ngIf="isControlHasErrorPI('identificationNumber','required')">
-                  <strong>Campo Requerido</strong>
-                </mat-error>
-              </mat-form-field>
-            </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Fecha de nacimiento</mat-label>
+              <input formControlName="dateBirth" matInput [matDatepicker]="picker2" [max]="maxDate" readonly
+                     (ngModelChange)="calculandoEdad()">
+              <mat-error *ngIf="isControlHasErrorPI('dateBirth','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
 
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Fecha de nacimiento</mat-label>
-                <input formControlName="dateBirth" matInput [matDatepicker]="picker2" readonly
-                       (ngModelChange)="calculandoEdad()">
-                <mat-error *ngIf="isControlHasErrorPI('dateBirth','required')">
-                  <strong>Campo Requerido</strong>
-                </mat-error>
-                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
 
-              </mat-form-field>
-            </mat-grid-tile>
-
-            <mat-grid-tile [colspan]="2" [rowspan]="1">
-              <mat-form-field class="inputClass" appearance="fill">
-                <mat-label>Edad</mat-label>
-                <input matInput disabled [value]="edadCalculada">
-              </mat-form-field>
-            </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Edad</mat-label>
+              <input matInput disabled [value]="edadCalculada">
+            </mat-form-field>
+          </mat-grid-tile>
 
 
-          </mat-grid-list>
+        </mat-grid-list>
 
-    </form>
-    <button mat-button matStepperNext>Siguiente</button>
+      </form>
+      <button mat-button matStepperNext>Siguiente</button>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash;Procedencia&ndash;&gt;
+  &lt;!&ndash;Procedencia&ndash;&gt;
   <mat-step [stepControl]="formOrigin" color="primary">
-  <ng-template matStepLabel>Procedencia</ng-template>
+    <ng-template matStepLabel>Procedencia</ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formOrigin">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Etnia</mat-label>
-            <input readonly formControlName="ethnicity" maxlength="3000" matInput placeholder="Etnia"
-                   oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-            <mat-error *ngIf="isControlHasErrorOrigin('ethnicity','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+      <form [formGroup]="formOrigin">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Etnia</mat-label>
+              <input readonly formControlName="ethnicity" maxlength="3000" matInput placeholder="Etnia"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <mat-error *ngIf="isControlHasErrorOrigin('ethnicity','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Religión</mat-label>
-            <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión">
-            <mat-error *ngIf="isControlHasErrorOrigin('religion','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Lugar de nacimiento</mat-label>
-            <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento">
-            <mat-error *ngIf="isControlHasErrorOrigin('placeBirth','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Procedencia</mat-label>
-            <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia">
-            <mat-error *ngIf="isControlHasErrorOrigin('origin','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Dirección de procedencia</mat-label>
-            <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia">
-            <mat-error *ngIf="isControlHasErrorOrigin('originAddress','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Barrio</mat-label>
-            <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio">
-            <mat-error *ngIf="isControlHasErrorOrigin('neighborhood','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Estrato</mat-label>
-            <input type="number" maxlength="2" formControlName="stratum" matInput placeholder="Estrato">
-            <mat-error *ngIf="isControlHasErrorOrigin('stratum','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Teléfono</mat-label>
-            <input type="number" maxlength="10" formControlName="phone" matInput placeholder="Teléfono">
-            <mat-error *ngIf="isControlHasErrorOrigin('phone','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Religión</mat-label>
+              <input formControlName="religion" maxlength="3000" type="text" matInput placeholder="Religión">
+              <mat-error *ngIf="isControlHasErrorOrigin('religion','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Lugar de nacimiento</mat-label>
+              <input formControlName="placeBirth" maxlength="3000" type="text" matInput placeholder="Lugar de nacimiento">
+              <mat-error *ngIf="isControlHasErrorOrigin('placeBirth','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Procedencia</mat-label>
+              <input formControlName="origin" maxlength="3000" matInput placeholder="Procedencia">
+              <mat-error *ngIf="isControlHasErrorOrigin('origin','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Dirección de procedencia</mat-label>
+              <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia">
+              <mat-error *ngIf="isControlHasErrorOrigin('originAddress','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Barrio</mat-label>
+              <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio">
+              <mat-error *ngIf="isControlHasErrorOrigin('neighborhood','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Estrato</mat-label>
+              <input type="number" maxlength="2" formControlName="stratum" matInput placeholder="Estrato">
+              <mat-error *ngIf="isControlHasErrorOrigin('stratum','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Teléfono</mat-label>
+              <input type="number" maxlength="10" formControlName="phone" matInput placeholder="Teléfono">
+              <mat-error *ngIf="isControlHasErrorOrigin('phone','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash; Consulta y enfermedad actual &ndash;&gt;
+  &lt;!&ndash; Consulta y enfermedad actual &ndash;&gt;
   <mat-step  [stepControl]="formConsultation" color="primary">
-  <ng-template matStepLabel>Consulta</ng-template>
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="formConsultation">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Motivo de consulta</mat-label>
-            <input formControlName="reasonConsultation" matInput placeholder="Motivo de consulta">
-            <mat-error *ngIf="isControlHasErrorConsultation('reasonConsultation', 'required')">
-              <strong>Campo requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Enfermedad actual</mat-label>
-            <input formControlName="currentIllness" type="text" matInput placeholder="Enfermedad actual">
-            <mat-error *ngIf="isControlHasErrorConsultation('currentIllness', 'required')">
-              <strong>Campo requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
+    <ng-template matStepLabel>Consulta</ng-template>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="formConsultation">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Motivo de consulta</mat-label>
+              <input formControlName="reasonConsultation" matInput placeholder="Motivo de consulta">
+              <mat-error *ngIf="isControlHasErrorConsultation('reasonConsultation', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Enfermedad actual</mat-label>
+              <input formControlName="currentIllness" type="text" matInput placeholder="Enfermedad actual">
+              <mat-error *ngIf="isControlHasErrorConsultation('currentIllness', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
 
 
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash; Antecedentes personales &ndash;&gt;
+
+  &lt;!&ndash; Antecedentes personales &ndash;&gt;
   <mat-step  [stepControl]="formAP_PsychiatricHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes personales </ng-template>
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
-    <form [formGroup]="formAP_PsychiatricHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <input formControlName="AP_APS_Observations" matInput placeholder="Observaciones">
-            <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Diagnósticos</mat-label>
-            <input formControlName="AP_APS_Diagnostics" type="text" matInput placeholder="Diagnósticos">
-            <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Diagnostics','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+    <ng-template matStepLabel> Antecedentes personales </ng-template>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <form [formGroup]="formAP_PsychiatricHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Antecedentes psiquiátricos</mat-label>
+              <input formControlName="AP_APS_Observations" matInput placeholder="Observaciones">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Diagnósticos</mat-label>
+              <input formControlName="AP_APS_Diagnostics" type="text" matInput placeholder="Diagnósticos">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Diagnostics','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <h3>Tratamiento</h3>
-          <mat-divider></mat-divider>
-        </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Tratamiento</h3>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Medicamento</mat-label>
-            <input formControlName="AP_APS_Medicine" type="text" matInput placeholder="Medicamento">
-            <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Medicine','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Dosis</mat-label>
-            <input formControlName="AP_APS_Dose" type="text" matInput placeholder="Dosis">
-            <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Dose','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Tiempo</mat-label>
-            <input formControlName="AP_APS_Time" type="text" matInput placeholder="Tiempo">
-            <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Time','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Medicamento</mat-label>
+              <input formControlName="AP_APS_Medicine" type="text" matInput placeholder="Medicamento">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Medicine','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Dosis</mat-label>
+              <input formControlName="AP_APS_Dose" type="text" matInput placeholder="Dosis">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Dose','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Tiempo</mat-label>
+              <input formControlName="AP_APS_Time" type="text" matInput placeholder="Tiempo">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_APS_Time','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
   <mat-step  [stepControl]="formAP_MedicalHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes Médicos </ng-template>
+    <ng-template matStepLabel> Antecedentes Médicos </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formAP_MedicalHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <input formControlName="AP_AM_Observations" matInput placeholder="Observaciones">
-            <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Diagnósticos</mat-label>
-            <input formControlName="AP_AM_Diagnostics" type="text" matInput placeholder="Diagnósticos">
-            <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Diagnostics','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+      <form [formGroup]="formAP_MedicalHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Observaciones</mat-label>
+              <input formControlName="AP_AM_Observations" matInput placeholder="Observaciones">
+              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Diagnósticos</mat-label>
+              <input formControlName="AP_AM_Diagnostics" type="text" matInput placeholder="Diagnósticos">
+              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Diagnostics','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <h3>Tratamiento</h3>
-          <mat-divider></mat-divider>
-        </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Tratamiento</h3>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Medicamento</mat-label>
-            <input formControlName="AP_AM_Medicine" type="text" matInput placeholder="Medicamento">
-            <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Medicine','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Dosis</mat-label>
-            <input formControlName="AP_AM_Dose" type="text" matInput placeholder="Dosis">
-            <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Dose','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Tiempo</mat-label>
-            <input formControlName="AP_AM_Time" type="text" matInput placeholder="Tiempo">
-            <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Time','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Medicamento</mat-label>
+              <input formControlName="AP_AM_Medicine" type="text" matInput placeholder="Medicamento">
+              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Medicine','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Dosis</mat-label>
+              <input formControlName="AP_AM_Dose" type="text" matInput placeholder="Dosis">
+              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Dose','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Tiempo</mat-label>
+              <input formControlName="AP_AM_Time" type="text" matInput placeholder="Tiempo">
+              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Time','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
 
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
   <mat-step  [stepControl]="formAP_SurgicalHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes Quirúrgicos </ng-template>
+    <ng-template matStepLabel> Antecedentes Quirúrgicos </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formAP_SurgicalHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="2" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <input formControlName="AP_AQ_Observations" type="text" matInput placeholder="Observaciones">
-            <mat-error *ngIf="isControlHasErrorAP_SurgicalHistory('AP_AQ_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      <form [formGroup]="formAP_SurgicalHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Observaciones</mat-label>
+              <input formControlName="AP_AQ_Observations" type="text" matInput placeholder="Observaciones">
+              <mat-error *ngIf="isControlHasErrorAP_SurgicalHistory('AP_AQ_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
   <mat-step  [stepControl]="formAP_RelationalHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes Relacionales </ng-template>
+    <ng-template matStepLabel> Antecedentes Relacionales </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formAP_RelationalHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Situación laboral</mat-label>
-            <input formControlName="AP_AR_employmentSituation" type="text" matInput                   placeholder="Situación laboral">
-            <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_employmentSituation','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Relaciones interpersonales</mat-label>
-            <input formControlName="AP_AR_Relationships" type="text" matInput
-                   placeholder="Relaciones interpersonales">
-            <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_Relationships','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Relaciones sociales</mat-label>
-            <input formControlName="AP_AR_socialRelationships" type="text" matInput
-                   placeholder="Relaciones sociales">
-            <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_socialRelationships','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Relaciones familiares</mat-label>
-            <input formControlName="AP_AR_familyRelationships" type="text" matInput
-                   placeholder="Relaciones familiares">
-            <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_familyRelationships','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      <form [formGroup]="formAP_RelationalHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Situación laboral</mat-label>
+              <input formControlName="AP_AR_employmentSituation" type="text" matInput                   placeholder="Situación laboral">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_employmentSituation','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Relaciones interpersonales</mat-label>
+              <input formControlName="AP_AR_Relationships" type="text" matInput
+                     placeholder="Relaciones interpersonales">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_Relationships','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Relaciones sociales</mat-label>
+              <input formControlName="AP_AR_socialRelationships" type="text" matInput
+                     placeholder="Relaciones sociales">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_socialRelationships','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Relaciones familiares</mat-label>
+              <input formControlName="AP_AR_familyRelationships" type="text" matInput
+                     placeholder="Relaciones familiares">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_familyRelationships','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash;  Antecedentes familiares&ndash;&gt;
+  &lt;!&ndash;  Antecedentes familiares&ndash;&gt;
   <mat-step  [stepControl]="formAF_PsychiatricHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes familiares </ng-template>
+    <ng-template matStepLabel> Antecedentes Psiquiátricos</ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title>Antecedentes psiquiátricos</mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
 
-    <form [formGroup]="formAF_PsychiatricHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <input formControlName="AF_APS_Observations" type="text" matInput placeholder="Observaciones">
-            <mat-error *ngIf="isControlHasErrorAF_PsychiatricHistory('AF_APS_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      <form [formGroup]="formAF_PsychiatricHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Observaciones</mat-label>
+              <input formControlName="AF_APS_Observations" type="text" matInput placeholder="Observaciones">
+              <mat-error *ngIf="isControlHasErrorAF_PsychiatricHistory('AF_APS_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
   <mat-step  [stepControl]="formAF_MedicalHistory" color="primary">
-  <ng-template matStepLabel> Antecedentes médicos </ng-template>
+    <ng-template matStepLabel> Antecedentes médicos </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formAF_MedicalHistory">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observaciones</mat-label>
-            <input formControlName="AF_AM_Observations" type="text" matInput placeholder="Observaciones">
-            <mat-error *ngIf="isControlHasErrorAF_MedicalHistory('AF_AM_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      <form [formGroup]="formAF_MedicalHistory">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Observaciones</mat-label>
+              <input formControlName="AF_AM_Observations" type="text" matInput placeholder="Observaciones">
+              <mat-error *ngIf="isControlHasErrorAF_MedicalHistory('AF_AM_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash;  Estado Mental &ndash;&gt;
+  &lt;!&ndash;  Estado Mental &ndash;&gt;
   <mat-step  [stepControl]="formStateOfMind" color="primary">
-  <ng-template matStepLabel> Estado mental </ng-template>
+    <ng-template matStepLabel> Estado mental </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title>Conciencia - Orientación:</mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title>Conciencia - Orientación:</mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formStateOfMind">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Tiempo</mat-label>
-            <input formControlName="EM_Time" type="text" matInput placeholder="Tiempo">
-            <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Time','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Lugar</mat-label>
-            <input formControlName="EM_Place" type="text" matInput placeholder="Lugar">
-            <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Place','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Persona</mat-label>
-            <input formControlName="EM_Person" type="text" matInput placeholder="Persona">
-            <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Person','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Observación</mat-label>
-            <input formControlName="EM_Observations" type="text" matInput placeholder="Observación">
-            <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Observations','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
+      <form [formGroup]="formStateOfMind">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Tiempo</mat-label>
+              <input formControlName="EM_Time" type="text" matInput placeholder="Tiempo">
+              <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Time','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Lugar</mat-label>
+              <input formControlName="EM_Place" type="text" matInput placeholder="Lugar">
+              <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Place','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Persona</mat-label>
+              <input formControlName="EM_Person" type="text" matInput placeholder="Persona">
+              <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Person','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Observación</mat-label>
+              <input formControlName="EM_Observations" type="text" matInput placeholder="Observación">
+              <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Observations','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
 
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
-&lt;!&ndash;  Evaluación psicosocial integral en salud &ndash;&gt;
+  &lt;!&ndash;  Evaluación psicosocial integral en salud &ndash;&gt;
   <mat-step  [stepControl]="formPsychosocialEvaluation" color="primary">
-  <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
+    <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formPsychosocialEvaluation">
-      <mat-grid-list cols="2" rowHeight="85px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="standard">
-            <mat-label>Problema en salud:</mat-label>
-            <input formControlName="EPIS_healthProblems" type="text" matInput placeholder="Problema en salud ">
-            <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_healthProblems','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Sistema de creencias en salud:</mat-label>
-            <input formControlName="EPIS_healthBeliefSystem" type="text" matInput
-                   placeholder="Sistema de creencias en salud">
-            <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_healthBeliefSystem','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Afrontamiento de la enfermedad:</mat-label>
-            <input formControlName="EPIS_copingWithIllness" type="text" matInput
-                   placeholder="Afrontamiento de la enfermedad">
-            <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_copingWithIllness','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Impresión diagnóstica (según código CIE10):</mat-label>
-            <input formControlName="EPIS_diagnosticImpression" type="text" matInput
-                   placeholder="Impresión diagnóstica">
-            <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_diagnosticImpression','required')">
-              <strong>Campo Requerido</strong>
-            </mat-error>
-          </mat-form-field>
-        </mat-grid-tile>
-      </mat-grid-list>
-
-
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext >Siguiente</button>
-    </mat-card-actions>
-
-  </mat-card>
-
-</mat-step>
+      <form [formGroup]="formPsychosocialEvaluation">
+        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="standard">
+              <mat-label>Problema en salud:</mat-label>
+              <input formControlName="EPIS_healthProblems" type="text" matInput placeholder="Problema en salud ">
+              <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_healthProblems','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Sistema de creencias en salud:</mat-label>
+              <input formControlName="EPIS_healthBeliefSystem" type="text" matInput
+                     placeholder="Sistema de creencias en salud">
+              <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_healthBeliefSystem','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Afrontamiento de la enfermedad:</mat-label>
+              <input formControlName="EPIS_copingWithIllness" type="text" matInput
+                     placeholder="Afrontamiento de la enfermedad">
+              <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_copingWithIllness','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Impresión diagnóstica (según código CIE10):</mat-label>
+              <input formControlName="EPIS_diagnosticImpression" type="text" matInput
+                     placeholder="Impresión diagnóstica">
+              <mat-error *ngIf="isControlHasErrorPsychosocialEvaluation('EPIS_diagnosticImpression','required')">
+                <strong>Campo Requerido</strong>
+              </mat-error>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
 
 
-<!--  Nivel de intervención modelo biopsicosocial -->
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-button matStepperNext >Siguiente</button>
+      </mat-card-actions>
+
+    </mat-card>
+
+  </mat-step>
+
+
+  <!--  Nivel de intervención modelo biopsicosocial -->
   <mat-step   [stepControl]="formInterventionLevel" color="primary">
-  <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
+    <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
 
-  <mat-card class="mat-card1">
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
+    <mat-card class="mat-card1">
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
 
-    <form [formGroup]="formInterventionLevel">
-      <mat-grid-list cols="2" rowHeight="85px">
+      <form [formGroup]="formInterventionLevel">
+        <mat-grid-list cols="2" rowHeight="85px">
 
-        <mat-grid-tile [colspan]="2">
-          Promoción de la salud
-          <mat-form-field class="inputClass" appearance="fill">
-            <mat-label>Especifique:</mat-label>
-            <input  formControlName="especifique_promocionSalud" type="text" matInput
-                   placeholder="Promoción de la salud">
+          <mat-grid-tile [colspan]="2">
+            Promoción de la salud
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Especifique:</mat-label>
+              <input  formControlName="especifique_promocionSalud" type="text" matInput
+                      placeholder="Promoción de la salud">
 
-          </mat-form-field>
-        </mat-grid-tile>
+            </mat-form-field>
+          </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="2"> Especifique Nivel de intervención        </mat-grid-tile>
+          <mat-grid-tile [colspan]="2"> Especifique Nivel de intervención        </mat-grid-tile>
 
-        <mat-grid-tile [colspan]="2" [rowspan]="3">
+          <mat-grid-tile [colspan]="2" [rowspan]="3">
 
-          <mat-radio-group formControlName="nivelIntervencionElegida"
-                           [(ngModel)]="firstGroup"
-                           (ngModelChange)="onFirstGroupChange()">
+            <mat-radio-group formControlName="nivelIntervencionElegida"
+                             [(ngModel)]="firstGroup"
+                             (ngModelChange)="onFirstGroupChange()">
               <div *ngFor="let nivelIntervencion of nivelIntervencionModeloBiopsicosocial">
                 <mat-radio-button class="example-radio-button" [value]="nivelIntervencion">
                   {{nivelIntervencion}}
                 </mat-radio-button>
               </div>
-          </mat-radio-group>
-        </mat-grid-tile>
-
-        <mat-grid-tile [colspan]="2" [rowspan]="2">
-          <div *ngIf="formInterventionLevel.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
-            Especifique: Prevención de la enfermedad
-            <mat-radio-group formControlName="seleccione_prevencionEnfermedad">
-              <br>
-              <mat-radio-button value="Primario">Primario</mat-radio-button>
-              <br>
-              <mat-radio-button value="Secundario">Secundario</mat-radio-button>
-              <br>
-              <mat-radio-button value="Terciario">Terciario</mat-radio-button>
-              <br>
-              <mat-radio-button value="Cuaternario">Cuaternario</mat-radio-button>
-              <br>
             </mat-radio-group>
-          </div>
+          </mat-grid-tile>
 
-        </mat-grid-tile>
-      </mat-grid-list>
+          <mat-grid-tile [colspan]="2" [rowspan]="2">
+            <div *ngIf="formInterventionLevel.value.nivelIntervencionElegida == 'Prevención de la enfermedad'">
+              Especifique: Prevención de la enfermedad
+              <mat-radio-group formControlName="seleccione_prevencionEnfermedad">
+                <br>
+                <mat-radio-button value="Primario">Primario</mat-radio-button>
+                <br>
+                <mat-radio-button value="Secundario">Secundario</mat-radio-button>
+                <br>
+                <mat-radio-button value="Terciario">Terciario</mat-radio-button>
+                <br>
+                <mat-radio-button value="Cuaternario">Cuaternario</mat-radio-button>
+                <br>
+              </mat-radio-group>
+            </div>
 
-    </form>
-    <mat-card-actions>
-      <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid" (click)="saveForm()">Enviar</button>
-    </mat-card-actions>
+          </mat-grid-tile>
+        </mat-grid-list>
+
+      </form>
+      <mat-card-actions>
+        <button mat-button matStepperPrevious>Atrás</button>
+        <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid" (click)="saveForm()">Enviar</button>
+      </mat-card-actions>
 
 
-  </mat-card>
+    </mat-card>
 
-</mat-step>
+  </mat-step>
 
 </mat-vertical-stepper>
