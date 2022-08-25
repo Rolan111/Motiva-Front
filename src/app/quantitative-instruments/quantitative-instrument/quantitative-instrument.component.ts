@@ -11,6 +11,7 @@ import {AlertModel} from "../alert.model";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
 import { nanoid } from 'nanoid'
 import { arrayMunicipios } from "../../enums/enum";
+import {timeout, timer} from "rxjs";
 
 interface ListTypes {
   viewValue: string;
@@ -167,17 +168,17 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
-      hadCovid: [''],
-      affectationCovid: [0],
+      hadCovid: ['', Validators.required],
+      affectationCovid: [0, Validators.required],
       aftermath: [[], Validators.required],
-      deadFamilyCovid: [''],
-      deadFamilySymptom: [[]],
+      deadFamilyCovid: ['', Validators.required],
+      deadFamilySymptom: [[], Validators.required],
       workSituation: [[], Validators.required],
-      studentSituation: [[]],
-      conflictVictim: [''],
-      diomesticViolence: [''],
-      mentalHealth: [''],
-      vaccinationPosture: [''],
+      studentSituation: [[], Validators.required],
+      conflictVictim: ['', Validators.required],
+      diomesticViolence: ['', Validators.required],
+      mentalHealth: ['', Validators.required],
+      vaccinationPosture: ['', Validators.required],
     });
 
     //Necesidades en salud mental asociadas al Covid-19
@@ -816,6 +817,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     });
 
     this.answerList.forEach(x => this.score = this.score + x.score)
+    // setTimeout(timeout, 5000)
 
     let poll: PollModel = {
       approvalDoc: "/document",
@@ -861,11 +863,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
         })
 
         //LLamado del servicio para guardar a la tabla Alert
-        this.quanInstService.createAlert(alert).subscribe({
-          next: () => {
-            this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
-          }
-        })
+        if(this.score >= 25){
+          this.quanInstService.createAlert(alert).subscribe({
+            next: () => {
+              this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
+            }
+          })
+        }
 
         this.answerList = [];
         this.sendToCareSheet();
