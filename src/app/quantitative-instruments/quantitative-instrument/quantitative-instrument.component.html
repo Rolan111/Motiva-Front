@@ -315,8 +315,8 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput maxlength="150" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease">
-                <mat-error *ngIf="isControlHasError('disorderDisease', 'required')">
+                <input matInput maxlength="150" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="historyMentalIllness">
+                <mat-error *ngIf="isControlHasError('historyMentalIllness', 'required')">
                   <strong>Campo requerido</strong>
                 </mat-error>
               </mat-form-field>
@@ -326,8 +326,8 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>14. Discapacidad física o mental</mat-label>
-                <input matInput maxlength="150" placeholder="Discapacidad física o mental" formControlName="physicalMental">
-                <mat-error *ngIf="isControlHasError('physicalMental', 'required')">
+                <input matInput maxlength="150" placeholder="Discapacidad física o mental" formControlName="disabilityPhysicalMental">
+                <mat-error *ngIf="isControlHasError('disabilityPhysicalMental', 'required')">
                   <strong>Campo requerido</strong>
                 </mat-error>
               </mat-form-field>
