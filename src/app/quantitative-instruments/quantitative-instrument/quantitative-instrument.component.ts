@@ -162,8 +162,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     //Formulario Comorbilidades, trastornos y enfermedades preexistentes
     this.comorbidityInfo = this.formBuilder.group({
       comorbilities: this.formBuilder.array([]),
-      disorderDisease: [''],
-      physicalMental: [''],
+      historyMentalIllness: [''],
+      disabilityPhysicalMental: [''],
     })
 
     //Formulario Factores contextuales asociados al COVID-19
@@ -453,7 +453,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idAnswer: this.idAnswer + 23,
       idQuestion: 16,
       idOptionAnswers: answerForm.value.comorbilities,
-      openAnswer: '',
+      openAnswer: 'Enfermedad: ',
       idPoll: this.idPoll,
       type: 'ADULT',
       score: 0,
@@ -463,17 +463,19 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idAnswer: this.idAnswer + 24,
       idQuestion: 16,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.disorderDisease,
+      openAnswer: 'Ant enf mental en familia: ' + answerForm.value.historyMentalIllness,
       idPoll: this.idPoll,
       type: 'ADULT',
-      score: answerForm.value.disorderDisease != '' ? 5 : 0,
+      score: answerForm.value.historyMentalIllness != '' ? 5 : 0,
     };
+
+
 
     let answer26: AnswerModel = {
       idAnswer: this.idAnswer + 25,
       idQuestion: 16,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.physicalMental,
+      openAnswer: 'Discapacidad Fisica o Mental: '+answerForm.value.disabilityPhysicalMental,
       idPoll: this.idPoll,
       type: 'ADULT',
       score: 0,
