@@ -15,8 +15,9 @@ import {Observable, of} from "rxjs";
 export class CareSheetComponent implements OnInit {
   maxDate = new Date();
   edadCalculada: any = 0;
-  contadoclicks = 0;
 
+
+  contadoclicks = 0;
   firstGroup = 0;
   bvariable = 0;
 
@@ -633,17 +634,11 @@ export class CareSheetComponent implements OnInit {
         return false;
       return control.hasError(validationType) && (control.dirty || control.touched);
     }
-  isControlHasErrorResponsibleProfessional(controlName: string, validationType: string): boolean {
-      const control = this.formResponsibleProfessional.controls[controlName];
-      if (!control)
-        return false;
-      return control.hasError(validationType) && (control.dirty || control.touched);
-    }
 
   onFirstGroupChange() {
     this.contadoclicks = this.contadoclicks+1;
     if(this.contadoclicks>1){
-      this.formInterventionLevel.controls['']
+      /*this.formInterventionLevel.controls['']*/
       this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors(null);
     }
     if(this.firstGroup === 1 ) {
