@@ -1,7 +1,6 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
   <!-- Información Personal -->
-
   <mat-step [stepControl]="personalInfo" color="primary">
     <ng-template matStepLabel>Información Personal (Verificar en ficha de atención física)</ng-template>
     <mat-card class="advancedForm">
@@ -90,6 +89,7 @@
     </mat-card>
   </mat-step>
 
+
   <!-- Factores sociodemográficos -->
 
   <mat-step [stepControl]="sociodemographicFactors">
@@ -154,9 +154,7 @@
                 <mat-radio-button class="example-radio-button" value="15">Rural</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="16">Urbano</mat-radio-button>
               </mat-radio-group>
-              <mat-error *ngIf="isControlHasErrorSecundary('zoneResidence', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
+
             </div>
           </mat-grid-tile>
           <mat-grid-tile>
@@ -226,7 +224,7 @@
             <mat-form-field appearance="standard" class="inputClass"
                             matTooltip="Estado de ocupación de la persona durante la pandemia del Covid-19">
               <mat-label >11. Ocupación</mat-label>
-              <mat-select [(ngModel)]="occupationValue" formControlName="occupation" (click)="selectQuestion(11)"
+              <mat-select [(value)]="occupationValue" formControlName="occupation" (click)="selectQuestion(11)"
                           required>
                 <mat-option *ngFor="let item of occupationList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -343,30 +341,33 @@
   </mat-step>
 
 
+
   <!-- Factores contextuales asociados al COVID-19 -->
-  <mat-step>
+  <mat-step [stepControl]="factorsCovid19">
     <ng-template matStepLabel>Factores contextuales asociados al Covid-19</ng-template>
     <mat-card class="advancedForm">
-      <form [formGroup]="factorsCovid19">
+      <form [formGroup]="factorsCovid19" >
         <mat-grid-list cols="2" rowHeight="100">
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>17. ¿Ha sido diagnosticado con Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="hadCovid" [(ngModel)]="hadCovid">
+              <mat-radio-group class="example-radio-group" formControlName="hadCovid" [(ngModel)]="hadCovidValue" required>
                 <mat-radio-button class="example-radio-button" value="65">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="66">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
-
-          <mat-grid-tile *ngIf="hadCovid == 65">
+          <mat-grid-tile *ngIf="hadCovidValue == 65">
             <mat-form-field appearance="standard" class="inputClass" >
               <mat-label>18. ¿Qué tan grave fue su afectación debido al Covid-19?</mat-label>
-              <mat-select formControlName="affectationCovid" (click)="selectQuestion(18)">
+              <mat-select formControlName="affectationCovid" (click)="selectQuestion(18)" >
                 <mat-option *ngFor="let item of affectationCovidList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('affectationCovid', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -374,11 +375,14 @@
             <mat-form-field appearance="standard" class="inputClass"
                             matTooltip="¿Padeció o padece secuelas en alguno de los siguientes ámbitos?">
               <mat-label>19. A raiz de la pandemia por covid-19 ¿Padeció o padece secuelas en alguno de los siguientes ámbitos?</mat-label>
-              <mat-select formControlName="aftermath" multiple (click)="selectQuestion(19)">
+              <mat-select formControlName="aftermath"  (click)="selectQuestion(19)" multiple required>
                 <mat-option *ngFor="let item of aftermathList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('aftermath', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
@@ -386,11 +390,12 @@
             <div class="example-radio-group">
               <label>20. ¿Padeció el fallecimiento de amigos, familiares u otras personas cercabas de su entorno a raíz del
                 Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid"
+              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid" required
                                [(ngModel)]="deadFamilyCovid">
                 <mat-radio-button class="example-radio-button" value="78">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="79">No</mat-radio-button>
               </mat-radio-group>
+
             </div>
           </mat-grid-tile>
 
@@ -406,6 +411,9 @@
                   {{item.description}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('deadFamilySymptom', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
           <!-- PREGUNTA 22 -->
@@ -415,72 +423,89 @@
               <mat-label>22. ¿Experimentó alguna de las siguientes situaciones en su trabajo como resultado de la pandemia
                 por Covid-19?
               </mat-label>
-              <mat-select formControlName="workSituation" multiple (click)="selectQuestion(22)">
+              <mat-select formControlName="workSituation" multiple (click)="selectQuestion(22)" >
                 <mat-option *ngFor="let item of workSituationList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('workSituation', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
           <!-- PREGUNTA 23 -->
           <mat-grid-tile *ngIf="occupationValue == 43"  >
             <mat-form-field matTooltip="¿Experimentó alguna de las siguientes situaciones en el colegio o universidad como resultado de
                 la pandemia por Covid-19?" appearance="standard" class="inputClass" >
-              <mat-label>23. ¿Experimentó alguna de las siguientes situaciones en el colegio o universidad como resultado de
-                la pandemia por Covid-19?
+              <mat-label>23. ¿Experimentó alguna de las siguientes situaciones en el colegio
+                o universidad como resultado de               la pandemia por Covid-19?
               </mat-label>
               <mat-select formControlName="studentSituation" multiple (click)="selectQuestion(23)">
                 <mat-option *ngFor="let item of studentSituationList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('studentSituation', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </mat-form-field>
           </mat-grid-tile>
 
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>24. ¿Ha sido víctima del conflicto armado?</label>
-              <mat-radio-group class="example-radio-group" formControlName="conflictVictim">
+              <mat-radio-group class="example-radio-group" formControlName="conflictVictim" required>
                 <mat-radio-button class="example-radio-button" value="102">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="103">No</mat-radio-button>
               </mat-radio-group>
             </div>
+
           </mat-grid-tile>
         </mat-grid-list>
+
+
 
         <mat-grid-list cols="1" rowHeight="80px">
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>25. ¿Ha experimentado episodios de violencia intrafamiliar o de pareja a nivel físico, verbal o
                 psicológico durante la pandemia por Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="diomesticViolence">
+              <mat-radio-group class="example-radio-group" formControlName="diomesticViolence" required>
                 <mat-radio-button class="example-radio-button" value="104">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="105">No</mat-radio-button>
               </mat-radio-group>
+              <mat-error *ngIf="isControlHasErrorfactorsCovid19('diomesticViolence  ', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
             </div>
           </mat-grid-tile>
 
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
               <label>26. ¿Asistió a servicios en salud mental durante la pandemia?</label>
-              <mat-radio-group class="example-radio-group" formControlName="mentalHealth">
+              <mat-radio-group class="example-radio-group" formControlName="mentalHealth" required>
                 <mat-radio-button class="example-radio-button" value="313">Si</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="314">No</mat-radio-button>
               </mat-radio-group>
+
             </div>
           </mat-grid-tile>
 
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
               <label>27. Su postura con respecto a la vacunación contra el Covid-19 es:</label>
-              <mat-radio-group class="example-radio-group" formControlName="vaccinationPosture">
+              <mat-radio-group class="example-radio-group" formControlName="vaccinationPosture" required>
                 <mat-radio-button class="example-radio-button" value="108">1. A favor</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="109">2. En contra</mat-radio-button>
                 <mat-radio-button class="example-radio-button" value="110">3. Indiferente</mat-radio-button>
               </mat-radio-group>
+
             </div>
           </mat-grid-tile>
+
+
         </mat-grid-list>
+
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
           <button mat-button matStepperNext (click)="selectMentalHealthNeeds([2801, 2802, 2803, 2804, 2805,
@@ -492,10 +517,10 @@
   </mat-step>
 
 <!-- Necesidades en salud mental asociadas al COVID-19 -->
-  <mat-step>
+  <mat-step [stepControl]="mentalHealthNeeds">
     <ng-template matStepLabel>Necesidades en salud mental asociadas al Covid-19</ng-template>
     <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">
-      <form [formGroup]="mentalHealthNeeds">
+      <form [formGroup]="mentalHealthNeeds"  (ngModelChange)="onMentalHealthNeedsFormChange()">
         <mat-card-header>
           <mat-card-title>28. A raíz de la pandemia por Covid-19:</mat-card-title>
 
@@ -505,7 +530,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha sentido triste o infeliz</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="one">
+              <mat-radio-group class="example-radio-group" formControlName="one" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of oneList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -515,7 +540,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha dormido menos de lo habitual</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="two">
+              <mat-radio-group class="example-radio-group" formControlName="two" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twoList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -526,7 +551,7 @@
               <label>Le han afectado eventos inesperados en su vida o en la vida de las personas con las que se
                 relaciona</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="three">
+              <mat-radio-group class="example-radio-group" formControlName="three" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of threeList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -536,7 +561,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha perdido el control y la estabilidad debido a problemas y cambios importantes en su vida</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="four">
+              <mat-radio-group class="example-radio-group" formControlName="four" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fourList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -546,7 +571,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha perdido el interes en otras actividades o personas</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="five">
+              <mat-radio-group class="example-radio-group" formControlName="five" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fiveList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -556,7 +581,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha sentido optimista y motivado(a) a pesar de sus fracasos</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="six">
+              <mat-radio-group class="example-radio-group" formControlName="six" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of sixList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -566,7 +591,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>No ha podido concentrarse tan bien como habitualmente</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="seven">
+              <mat-radio-group class="example-radio-group" formControlName="seven" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of sevenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -576,7 +601,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha incrementado en consumo de alcohol u otras sustancias psicoactivas</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="eight">
+              <mat-radio-group class="example-radio-group" formControlName="eight" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of eightList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -586,7 +611,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha criticado y culpado a mi mismo por todo lo malo que ha sucedido</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="nine">
+              <mat-radio-group class="example-radio-group" formControlName="nine" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of nineList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -596,7 +621,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha sentido inquieto, tenso o agitado</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="ten">
+              <mat-radio-group class="example-radio-group" formControlName="ten" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of tenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -606,7 +631,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha estado mas irritable de lo habitual</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="eleven">
+              <mat-radio-group class="example-radio-group" formControlName="eleven" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of elevenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -616,7 +641,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha sentido miedo y desesperanza respecto a su futuro</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="twelve">
+              <mat-radio-group class="example-radio-group" formControlName="twelve" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twelveList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -626,7 +651,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Todo el tiempo ha pensado en su salud y le ha preocupado adquirir una enfermedad</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="thirteen">
+              <mat-radio-group class="example-radio-group" formControlName="thirteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of thirteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -636,7 +661,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha sentido mas cansado o fatigado de lo habitual</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="fourteen">
+              <mat-radio-group class="example-radio-group" formControlName="fourteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fourteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -646,7 +671,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>No ha experimentado placer por las cosas que solia disfrutar</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="fifteen">
+              <mat-radio-group class="example-radio-group" formControlName="fifteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fifteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -656,7 +681,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha perdido interes en el sexo</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="sixteen">
+              <mat-radio-group class="example-radio-group" formControlName="sixteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of sixteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -666,7 +691,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Se ha sentido culpable respecto de las cosas que hizo o debió hacer</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="seventeen">
+              <mat-radio-group class="example-radio-group" formControlName="seventeen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of seventeenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -676,7 +701,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha tenido pensamientos o deseos de matarse</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="eighteen">
+              <mat-radio-group class="example-radio-group" formControlName="eighteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of eighteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -686,7 +711,7 @@
             <div class="example-radio-group" style="width: 100%">
               <label>Ha experimentado soledad</label>
               <br>
-              <mat-radio-group class="example-radio-group" formControlName="nineteen">
+              <mat-radio-group class="example-radio-group" formControlName="nineteen" required>
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of nineteenList"
                                   [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
               </mat-radio-group>
@@ -696,7 +721,8 @@
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
 
-          <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
+          <button mat-button matStepperNext [disabled]="mentalHealthNeeds.invalid"
+                  (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
           comorbidityInfo, factorsCovid19, mentalHealthNeeds])">
           Enviar
           </button>

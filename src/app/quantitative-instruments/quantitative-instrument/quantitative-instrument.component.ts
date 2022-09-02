@@ -23,6 +23,18 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument.component.scss']
 })
 export class QuantitativeInstrumentComponent implements OnInit {
+
+  //Ng-model
+  occupationValue: number = 0;
+  hadCovidValue: number = 0;
+  deadFamilyCovidValue: number = 0;
+
+  //Control for last form - mentalHealthNeeds-
+  contadoclicks = 0;
+  firstGroup = 0;
+  bvariable = 0;
+
+
   //Declaración de las colecciones de formularios
   personalInfo!: FormGroup;
   sociodemographicFactors!: FormGroup;
@@ -31,7 +43,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
   mentalHealthNeeds!: FormGroup;
 
   //Variables para cada formulario
-  occupationValue: number = 0;
   answerList: Array<AnswerModel> = []; //Array que guardará las respuestas de todos los formularios
 
   idAnswer: number = 0;
@@ -120,11 +131,14 @@ export class QuantitativeInstrumentComponent implements OnInit {
         'EL ID POLL ES', this.idPoll)
     })
 
+    this.addValidatorWorkMode();
+    this.addValidatorAffectationCovid();
+    this.addValidatorDeadFamilyCovid();
+    this.addValidatorWorkSituation();
+
   }
 
-  /* Captura de información de los FORMULARIOS */
-
-
+    /* Captura de información de los FORMULARIOS */
   private formQuantitative() {
 
     //Formulario Información personal
@@ -151,7 +165,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       typeHome: ['', Validators.required],
       accessServicies: ['', Validators.required],
       educationLevel: ['', Validators.required],
-      occupation: ['', Validators.required],
+      occupation: new FormControl('', [Validators.required]),
       workMode: [''],
       socialSecurity: ['', Validators.required],
       numberChildren: ['', Validators.required],
@@ -168,13 +182,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
-      hadCovid: ['', Validators.required],
-      affectationCovid: [0, Validators.required],
-      aftermath: [[], Validators.required],
-      deadFamilyCovid: ['', Validators.required],
-      deadFamilySymptom: [[], Validators.required],
-      workSituation: [[], Validators.required],
-      studentSituation: [[], Validators.required],
+      hadCovid: new FormControl(null, Validators.required),
+      affectationCovid: [[]],
+      aftermath: ['', Validators.required],
+      deadFamilyCovid: new FormControl(null, Validators.required),
+      deadFamilySymptom: [[]],
+      workSituation: [[]],
+      studentSituation: [[]],
       conflictVictim: ['', Validators.required],
       diomesticViolence: ['', Validators.required],
       mentalHealth: ['', Validators.required],
@@ -183,25 +197,25 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Necesidades en salud mental asociadas al Covid-19
     this.mentalHealthNeeds = this.formBuilder.group({
-      one: [''],
-      two: [''],
-      three: [''],
-      four: [''],
-      five: [''],
-      six: [''],
-      seven: [''],
-      eight: [''],
-      nine: [''],
-      ten: [''],
-      eleven: [''],
-      twelve: [''],
-      thirteen: [''],
-      fourteen: [''],
-      fifteen: [''],
-      sixteen: [''],
-      seventeen: [''],
-      eighteen: [0],
-      nineteen: [''],
+      one: ['', Validators.required],
+      two: ['', Validators.required],
+      three: ['', Validators.required],
+      four: ['', Validators.required],
+      five: ['', Validators.required],
+      six: ['', Validators.required],
+      seven: ['', Validators.required],
+      eight: ['', Validators.required],
+      nine: ['', Validators.required],
+      ten: ['', Validators.required],
+      eleven: ['', Validators.required],
+      twelve: ['', Validators.required],
+      thirteen: ['', Validators.required],
+      fourteen: ['', Validators.required],
+      fifteen: ['', Validators.required],
+      sixteen: ['', Validators.required],
+      seventeen: ['', Validators.required],
+      eighteen: [0, Validators.required],
+      nineteen: ['', Validators.required],
     });
   }
 
@@ -1131,30 +1145,134 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
+  /*
+  * Control Errors
+  */
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.personalInfo.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
+  }
+
 
   isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
     const control = this.sociodemographicFactors.controls[controlName];
     if (!control)
       return false;
-
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
 
-  //<editor-fold desc="Métodos no usados">
-  isControlHasError(controlName: string, validationType: string): boolean {
-    const control = this.personalInfo.controls[controlName];
+  isControlHasErrorfactorsCovid19(controlName: string, validationType: string): boolean {
+    const control = this.factorsCovid19.controls[controlName];
     if (!control)
       return false;
-
-    return control.hasError(validationType) && (control.dirty || control.touched);
+   return  control.hasError(validationType) && (control.dirty || control.touched);
   }
 
-  isControlHasErrorComorbidity(controlName: string, validationType: string): boolean {
-    const control = this.comorbidityInfo.controls[controlName];
-    if (!control)
-      return false;
+  onMentalHealthNeedsFormChange() {
+    this.contadoclicks = this.contadoclicks+1;
+    if(this.contadoclicks>1){
+      this.mentalHealthNeeds.controls['mentalHealthNeeds'].setErrors(null);
+    }
+    if(this.firstGroup === 1 ) {
+      this.bvariable = this.firstGroup;
+    } else {
+      this.bvariable = 0;
+    }
+  }
 
-    return control.hasError(validationType) && (control.dirty || control.touched);
+
+/*
+* Agrega la propiedad Validators a paneles ocultos
+* */
+  private addValidatorWorkMode() {
+    // @ts-ignore
+    this.sociodemographicFactors.get('occupation').valueChanges
+      .subscribe(value => {
+        console.log(value);
+          if(value == 38 || value == 39) {
+            console.log('workMode')
+            console.log(value);
+            // @ts-ignore
+            this.sociodemographicFactors.get('workMode').setValidators(Validators.required)
+          }else if(value == 38 || value == 39 || value == 44){
+            console.log(value+ " :workSituation")
+            // @ts-ignore
+            this.factorsCovid19.get('workSituation').setValidators(Validators.required)
+          }else if(value == 43){
+            console.log("studentSituation")
+            // @ts-ignore
+            this.factorsCovid19.get('studentSituation').setValidators(Validators.required)
+          }else   {
+            // @ts-ignore
+            this.sociodemographicFactors.get('workMode').clearValidators();
+            // @ts-ignore
+            this.sociodemographicFactors.get('workMode').updateValueAndValidity();
+            // @ts-ignore
+            this.factorsCovid19.get('workSituation').clearValidators();
+            // @ts-ignore
+            this.factorsCovid19.get('workSituation').updateValueAndValidity();
+            // @ts-ignore
+            this.factorsCovid19.get('studentSituation').clearValidators();
+            // @ts-ignore
+            this.factorsCovid19.get('studentSituation').updateValueAndValidity();
+
+          }
+        }
+      );
+  }
+  private  addValidatorWorkSituation(){
+    // @ts-ignore
+    this.sociodemographicFactors.get('occupation').valueChanges
+      .subscribe(value => {
+        if(value == 38 || value == 39 || value == 44) {
+          console.log(value + " :workSituation")
+          // @ts-ignore
+          this.factorsCovid19.get('workSituation').setValidators(Validators.required)
+        }else   {
+            // @ts-ignore
+            this.factorsCovid19.get('workSituation').clearValidators();
+            // @ts-ignore
+            this.factorsCovid19.get('workSituation').updateValueAndValidity();
+          }
+        }
+      );
+  }
+  private addValidatorAffectationCovid() {
+    // @ts-ignore
+    this.factorsCovid19.get('hadCovid').valueChanges
+      .subscribe(value => {
+          if(value == 65) {
+            console.log("hadCovid")
+            // @ts-ignore
+            this.factorsCovid19.get('affectationCovid').setValidators(Validators.required)
+          }else{
+            // @ts-ignore
+            this.factorsCovid19.get('affectationCovid').clearValidators();
+            // @ts-ignore
+            this.factorsCovid19.get('affectationCovid').updateValueAndValidity();
+          }
+        }
+      );
+  }
+  private addValidatorDeadFamilyCovid() {
+    // @ts-ignore
+    this.factorsCovid19.get('deadFamilyCovid').valueChanges
+      .subscribe(value => {
+          if(value == 78) {
+            console.log("deadFamilyCovid");
+            // @ts-ignore
+            this.factorsCovid19.get('deadFamilySymptom').setValidators(Validators.required);
+          }else {
+            // @ts-ignore
+            this.factorsCovid19.get('deadFamilySymptom').clearValidators();
+            // @ts-ignore
+            this.factorsCovid19.get('deadFamilySymptom').updateValueAndValidity();
+          }
+        }
+      );
   }
 
   onCheckboxChange(event: any) {
