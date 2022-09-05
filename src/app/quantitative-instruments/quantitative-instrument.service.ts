@@ -26,6 +26,12 @@ export class QuantitativeInstrumentService {
     return this.http.get<any>(path, {headers});
   }
 
+  public getAnswerByIdPollAndIdQuestion(id_poll: any, id_question: any) {
+    const path = mainUrl + 'api/answerByIdPollAndIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_poll + '/' + id_question, {headers});
+  }
+
   createAnswer(quantitativeInstrumentForm: Array<AnswerModel>): Observable<DataResponse> {
     const path = mainUrl + 'api/answer';
     const headers = this.getHeader();
