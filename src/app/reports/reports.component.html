@@ -1,19 +1,86 @@
-<mat-card>
+<mat-card class="advancedForm">
   <h1>REPORTES</h1>
   <form [formGroup]="form">
-    <h2>Seleccione el mes del reporte</h2>
-    <br>
-    <mat-form-field appearance="fill">
-      <mat-label>Seleccione el mes de reporte</mat-label>
-      <mat-select formControlName="monthSelected">
-        <mat-option *ngFor="let month of month2" [value]="month.value">
-          {{month.viewValue}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <h3>Exportar a XLSX</h3>
-    <button mat-raised-button color="primary" (click)="procesamientoFechas()">Descargar</button>
-    <br>
+    <mat-grid-list cols="3" rowHeight="85px">
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccione el mes</mat-label>
+          <mat-select formControlName="monthSelected">
+            <mat-option *ngFor="let month of monthList" [value]="month.value">
+              {{month.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Tipo de consulta</mat-label>
+          <mat-select  formControlName="typeConsultSelected"
+            [(value)]="consultSelected" >
+            <mat-option value="1">Municipio</mat-option>
+            <mat-option value="2">Zona</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+
+      <mat-grid-tile *ngIf="consultSelected == 1">
+        <mat-form-field appearance="fill">
+          <mat-label>Seleccione el municipio</mat-label>
+          <mat-select formControlName="municipalitySelected">
+            <mat-option *ngFor="let mun of municipiosList" [value]="mun.viewValue">
+              {{mun.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile *ngIf="consultSelected == 2">
+         <mat-form-field appearance="fill">
+          <mat-label>Seleccione la Sub-región</mat-label>
+          <mat-select formControlName="subRegionSelected">
+            <mat-option *ngFor="let subregion of subRegionList" [value]="subregion.value">
+              {{subregion.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione Zona</mat-label>
+            <mat-select formControlName="zoneSelected">
+              <mat-option *ngFor="let zona of zonaList" [value]="zona.value">
+                {{zona.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+          <mat-form-field appearance="fill">
+            <mat-label>Seleccione tipo ruta</mat-label>
+            <mat-select formControlName="typeRouteSelected">
+              <mat-option *ngFor="let ruta of rutasList" [value]="ruta.value">
+                {{ruta.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+      </mat-grid-tile>
+
+
+    </mat-grid-list>
+
+    <mat-grid-list cols="4" rowHeight="4:1">
+
+      <mat-grid-tile [colspan]="2">
+        <button mat-raised-button color="primary" (click)="procesamientoFechas()">Descargar reporte</button>
+      </mat-grid-tile>
+    </mat-grid-list>
+
 <!--    <h3>Export as XLSX</h3>-->
 <!--    <div>-->
 <!--      <button mat-raised-button color="primary" (click)="exportAsXLSX()">Descargar xlxs</button>-->

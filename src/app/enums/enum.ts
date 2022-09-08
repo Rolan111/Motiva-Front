@@ -75,3 +75,26 @@ export var arrayMeses:any=[
   {value: '12', viewValue: 'DICIEMBRE'}
 ]
 
+export var arraySubRegion:any=[
+  {value: '01', viewValue: 'CENTRO '},
+  {value: '02', viewValue: 'MACIZO'},
+  {value: '03', viewValue: 'NORTE'},
+  {value: '04', viewValue: 'ORIENTE'},
+  {value: '05', viewValue: 'PACIFICO'},
+  {value: '06', viewValue: 'PIEDEMONTE AMAZONICO'},
+  {value: '07', viewValue: 'SUR'},
+  {value: '08',viewValue: 'TODOS'}
+
+]
+export var arrayZona:any=[
+  {value: '01', viewValue: 'URBANA '},
+  {value: '02', viewValue: 'RURAL'},
+  {value: '03', viewValue: 'TODAS'},
+]
+export var arrayRutas:any=[
+  {value: '01', viewValue: 'SI '},
+  {value: '02', viewValue: 'NO'},
+  {value: '03', viewValue: 'TODAS'},
+]
+
+
