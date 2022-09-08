@@ -117,6 +117,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
   citiesList:ListTypes[] = arrayMunicipios;
 
   ngOnInit(): void {
+    console.log("Tipo cities: ",typeof this.citiesList)
+
     this.formQuantitative();
 
     this.quanInstService.findAllQuestions('ADULT').subscribe(response => {
@@ -143,6 +145,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Información personal
     this.personalInfo = this.formBuilder.group({
+
       firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
       firstLastName: ['', Validators.required],
       secondName: [''],

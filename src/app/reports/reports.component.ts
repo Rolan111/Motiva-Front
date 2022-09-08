@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportsService} from "./reports.service";
-import {arrayMeses} from "../enums/enum";
+import {arrayMeses, arrayRutas,arrayZona, arraySubRegion, arrayMunicipios} from "../enums/enum";
 import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 
-interface month {
+interface ListTypes{
   value: string;
   viewValue: string;
 }
@@ -37,7 +37,17 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class ReportsComponent implements OnInit {
 
   datosAExportar:any = [];
-  month2: month[] = arrayMeses;
+  consultSelected:any;
+
+
+  monthList: ListTypes[] = arrayMeses;
+  municipiosList: ListTypes[] = arrayMunicipios;
+  subRegionList: ListTypes[] = arraySubRegion;
+  zonaList: ListTypes[] = arrayZona;
+  rutasList: ListTypes[] = arrayRutas;
+
+
+
   form: FormGroup;
 
   //Variables para imprimir en excel
@@ -51,10 +61,16 @@ export class ReportsComponent implements OnInit {
     private reportsService: ReportsService,
     private quantitativeInstrumentService: QuantitativeInstrumentService
   ) {
+
     this.form = this.formBuilder.group({
       dateStart: ['', Validators.required],
       dateEnd: ['', Validators.required],
-      monthSelected: ['', Validators.required]
+      monthSelected: ['', Validators.required],
+      typeConsultSelected: ['', Validators.required],
+      municipalitySelected: ['', Validators.required],
+      subRegionSelected: ['', Validators.required],
+      zoneSelected: ['', Validators.required],
+      typeRouteSelected: ['', Validators.required],
     })
   }
 
@@ -100,11 +116,19 @@ export class ReportsComponent implements OnInit {
 
     let selectedDateStart: string = DateStart;
     let selectedDateEnd: string = DateEnd;
+    let municipalitySelected: string = this.form.value.municipalitySelected;
+    let subRegionSelected: string = this.form.value.subRegionSelected;
+    let zoneSelected: string = this.form.value.zoneSelected;
+    let typeRouteSelected: string = this.form.value.typeRouteSelected;
 
     // let selectedDateStart: any = new Date(DateStart);
     // let selectedDateEnd: any = new Date(DateEnd);
 
     console.log('La fecha inicial capturada es: ', DateStart)
+    console.log('Municipio ', municipalitySelected)
+    console.log('subregion: ', subRegionSelected)
+    console.log('Zona: ', zoneSelected)
+    console.log('Ruta : ', typeRouteSelected)
 
     this.reportsService.getPolls().subscribe(data=>{ //Consultamos la tabla Poll
       console.log('La data inicial poll es: ',data)
@@ -189,6 +213,9 @@ export class ReportsComponent implements OnInit {
   exportAsXLSX():void{
     this.reportsService.exportToExcel(this.dataSource, 'my_export')
   }
+
+
+
 
   probandoMetodos(){
     console.log('El mes seleccionado fue: ', this.form.value.monthSelected)
