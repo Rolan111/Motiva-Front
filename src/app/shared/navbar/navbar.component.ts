@@ -13,16 +13,25 @@ export class NavbarComponent {
   fullName: string = '';
   rol: string = '';
   oLocalStorage = new LocalStorage();
+
   buttonMenuDashBoard: boolean = false;
   buttonMenuQuantitive: boolean = false;
-  buttonMenuQuantitiveChildren: boolean = false;
-  buttonMenuSettings: boolean = false;
+  // buttonMenuQuantitiveChildren: boolean = false;
+  buttonMenuTrackingSheet: boolean = false;
   buttonMenuCommunityAgents: boolean = false;
   buttonMenuForum: boolean = false;
-  buttonMenuTrakingSheet: boolean = false;
+  buttonMenuCareRoutes: boolean = false;
+  buttonMenuCareRasm: boolean = false;
+  buttonMenuCareSheet: boolean = false;
   buttonMenuAlerts: boolean = false;
+  buttonMenuInactiveAlerts: boolean = false;
+  buttonMenuSupport: boolean = false;
+  buttonMenuReports: boolean = false;
+  buttonMenuOva: boolean = false;
+
   buttonMenuContact: boolean = false;
   buttonMenuAssignment: boolean = true;
+  buttonMenuSettings: boolean = false;
 
   constructor(
     public dialog: MatDialog
@@ -44,57 +53,76 @@ export class NavbarComponent {
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.type);
     this.oLocalStorage.removeItem(LocalStorageKeyEnum.token);
 
-    this.buttonMenuQuantitiveChildren = false;
-    this.buttonMenuCommunityAgents = false;
-    this.buttonMenuTrakingSheet = false;
-    this.buttonMenuAlerts = false;
-    this.buttonMenuQuantitive = false;
-    this.buttonMenuAssignment = false;
     this.buttonMenuDashBoard = false;
+    this.buttonMenuQuantitive = false;
+    // this.buttonMenuQuantitiveChildren = false;
+    this.buttonMenuTrackingSheet = false;
+    this.buttonMenuCommunityAgents = false;
+    this.buttonMenuForum = false;
+    this.buttonMenuCareRoutes = false;
+    this.buttonMenuCareRasm = false;
+    this.buttonMenuCareSheet = false;
+    this.buttonMenuAlerts = false;
+    this.buttonMenuInactiveAlerts = false;
+    this.buttonMenuSupport = false;
+    this.buttonMenuReports = false;
+    this.buttonMenuOva = false;
+
+    this.buttonMenuAssignment = false;
     this.buttonMenuSettings = false;
     this.buttonMenuContact = false;
-    this.buttonMenuForum = false;
+
   }
 
   private typeRole(rol: any) {
     switch (rol) {
       case RolesEnum.SUPERVISOR:
         this.rol = 'Supervisor';
-        this.buttonMenuQuantitiveChildren = true;
-        this.buttonMenuCommunityAgents = true;
-        this.buttonMenuTrakingSheet = true;
-        this.buttonMenuAlerts = true;
-        this.buttonMenuAssignment = true;
-        this.buttonMenuQuantitive = true;
         this.buttonMenuDashBoard = true;
-        this.buttonMenuSettings = true;
-        this.buttonMenuContact = true;
+        this.buttonMenuQuantitive = true;
+        // this.buttonMenuQuantitiveChildren = true;
+        this.buttonMenuCareSheet = true;
+        this.buttonMenuCommunityAgents = true;
         this.buttonMenuForum = true;
-        break;
-      case RolesEnum.USER:
-        this.rol = 'Invitado';
-        this.buttonMenuSettings = true;
-        this.buttonMenuContact = true;
-        this.buttonMenuForum = true;
+        this.buttonMenuCareRoutes = true;
+        this.buttonMenuCareRasm = true;
+        this.buttonMenuTrackingSheet = true;
+        this.buttonMenuAlerts = true;
+        this.buttonMenuInactiveAlerts = true;
+        this.buttonMenuSupport = true;
+        this.buttonMenuReports = true;
+        this.buttonMenuOva = true;
         break;
       case RolesEnum.P_CAMPO:
         this.rol = 'Psicólogo de campo';
         this.buttonMenuDashBoard = true;
-        this.buttonMenuTrakingSheet = true;
-        this.buttonMenuAlerts = true;
-        this.buttonMenuQuantitiveChildren = true;
         this.buttonMenuQuantitive = true;
-        this.buttonMenuSettings = true;
-        this.buttonMenuContact = true;
+        this.buttonMenuCareSheet = true;
         this.buttonMenuForum = true;
+        this.buttonMenuCareRoutes = true;
+        this.buttonMenuCareRasm = true;
+        this.buttonMenuOva = true;
         break;
       case RolesEnum.AGENTE:
         this.rol = 'Agente comunitario';
         this.buttonMenuDashBoard = true;
         this.buttonMenuCommunityAgents = true;
+        this.buttonMenuForum = true;
+        this.buttonMenuCareRoutes = true;
+        this.buttonMenuOva = true;
+
         this.buttonMenuSettings = true;
         this.buttonMenuContact = true;
+        break;
+      case RolesEnum.USER:
+        this.rol = 'Invitado';
+        this.buttonMenuCareRoutes = true;
         this.buttonMenuForum = true;
+        this.buttonMenuOva = true;
+
+        this.buttonMenuSettings = true;
+        this.buttonMenuContact = true;
+
         break;
     }
   }
