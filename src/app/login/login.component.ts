@@ -86,8 +86,8 @@ export class LoginComponent implements OnInit {
 
   guestLogin() {
     let guest: LoginModel = {
-      username: "1061852963",
-      password: "motivapw"
+      username: "1061801200",
+      password: "Pe1061801200"
     }
 
     this.loginService.logIn(guest).subscribe({
