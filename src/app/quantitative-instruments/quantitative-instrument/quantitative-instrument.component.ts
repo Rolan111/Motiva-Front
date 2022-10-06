@@ -185,10 +185,12 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
-      hadCovid: new FormControl(null, Validators.required),
+      // hadCovid: new FormControl(null, Validators.required),
+      hadCovid: ['', Validators.required],
       affectationCovid: [[]],
       aftermath: ['', Validators.required],
-      deadFamilyCovid: new FormControl(null, Validators.required),
+      // deadFamilyCovid: new FormControl(null, Validators.required),
+      deadFamilyCovid: ['', Validators.required],
       deadFamilySymptom: [[]],
       workSituation: [[]],
       studentSituation: [[]],
@@ -515,12 +517,36 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer28: AnswerModel = {
       idAnswer: this.idAnswer + 27,
       idQuestion: 18,
-      idOptionAnswers: [answerForm.value.affectationCovid],
+      idOptionAnswers: answerForm.value.affectationCovid,
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
       score: 0,
     };
+
+    // let answer28: AnswerModel;
+    //
+    // if(answerForm.value.hadCovid == 66){ //Selecciona NO
+    //     answer28 = {
+    //     idAnswer: this.idAnswer + 27,
+    //     idQuestion: 18,
+    //     idOptionAnswers: [],
+    //     openAnswer: '',
+    //     idPoll: this.idPoll,
+    //     type: 'ADULT',
+    //     score: 0,
+    //   }
+    // }else{
+    //    answer28 = {
+    //     idAnswer: this.idAnswer + 27,
+    //     idQuestion: 18,
+    //     idOptionAnswers: [answerForm.value.affectationCovid],
+    //     openAnswer: '',
+    //     idPoll: this.idPoll,
+    //     type: 'ADULT',
+    //     score: 0,
+    //   }
+    // }
 
     let answer29: AnswerModel = {
       idAnswer: this.idAnswer + 28,

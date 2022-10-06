@@ -1,6 +1,6 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
-  <!-- Información Personal -->
+<!--   Información Personal -->
   <mat-step [stepControl]="personalInfo" color="primary">
     <ng-template matStepLabel>Información Personal (Verificar en ficha de atención física)</ng-template>
     <mat-card class="advancedForm">
@@ -351,13 +351,15 @@
           <mat-grid-tile>
             <div class="example-radio-group">
               <label>17. ¿Ha sido diagnosticado con Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="hadCovid" [(ngModel)]="hadCovidValue" required>
-                <mat-radio-button class="example-radio-button" value="65">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="66">No</mat-radio-button>
+<!--              <mat-radio-group class="example-radio-group" formControlName="hadCovid" [(ngModel)]="hadCovidValue" required>-->
+              <mat-radio-group class="example-radio-group" formControlName="hadCovid" required>
+                <mat-radio-button class="example-radio-button" (change)="hadCovid=65" value="65">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" (change)="hadCovid=66" value="66">No</mat-radio-button>
               </mat-radio-group>
             </div>
           </mat-grid-tile>
-          <mat-grid-tile *ngIf="hadCovidValue == 65">
+
+          <mat-grid-tile *ngIf="hadCovid == 65">
             <mat-form-field appearance="standard" class="inputClass" >
               <mat-label>18. ¿Qué tan grave fue su afectación debido al Covid-19?</mat-label>
               <mat-select formControlName="affectationCovid" (click)="selectQuestion(18)" >
@@ -390,12 +392,10 @@
             <div class="example-radio-group">
               <label>20. ¿Padeció el fallecimiento de amigos, familiares u otras personas cercabas de su entorno a raíz del
                 Covid-19?</label>
-              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid" required
-                               [(ngModel)]="deadFamilyCovid">
-                <mat-radio-button class="example-radio-button" value="78">Si</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="79">No</mat-radio-button>
+              <mat-radio-group class="example-radio-group" formControlName="deadFamilyCovid" required>
+                <mat-radio-button class="example-radio-button" (change)="deadFamilyCovid=78" value="78">Si</mat-radio-button>
+                <mat-radio-button class="example-radio-button" (change)="deadFamilyCovid=79" value="79">No</mat-radio-button>
               </mat-radio-group>
-
             </div>
           </mat-grid-tile>
 
@@ -403,7 +403,7 @@
             <mat-form-field appearance="standard" class="inputClass"
                             matTooltip="¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento
                             de usus amigos , familiares u otras personas cercanas de su entorno por Covid-19?">
-              <mat-label>21. ¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de usus amigos ,
+              <mat-label>21. ¿Experimentó alguno de los siguientes sintomas a raíz del fallecimiento de sus amigos ,
                 familiares u otras personas cercanas de su entorno por Covid-19?
               </mat-label>
               <mat-select formControlName="deadFamilySymptom" multiple (click)="selectQuestion(21)">
@@ -459,8 +459,8 @@
                 <mat-radio-button class="example-radio-button" value="103">No</mat-radio-button>
               </mat-radio-group>
             </div>
-
           </mat-grid-tile>
+
         </mat-grid-list>
 
 

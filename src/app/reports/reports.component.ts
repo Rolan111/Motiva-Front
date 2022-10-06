@@ -131,6 +131,7 @@ export class ReportsComponent implements OnInit {
     console.log('Ruta : ', typeRouteSelected)
 
     this.reportsService.getPolls().subscribe(data=>{ //Consultamos la tabla Poll
+
       console.log('La data inicial poll es: ',data)
       let capturandoDataPoll:any = data;
       capturandoDataPoll.forEach((data1:any)=>{
