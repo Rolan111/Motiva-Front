@@ -7,8 +7,28 @@
       <mat-card-header>
         <mat-card-title>Beneficiario</mat-card-title>
       </mat-card-header>
+
       <form [formGroup]="personalInfo">
+
+        <mat-grid-list cols="1" rowHeight="85px">
+
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Fecha de evaluación</mat-label>
+              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [max]="maxDate" readonly>
+              <mat-error *ngIf="isControlHasError('applicationDate', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
+
         <mat-grid-list cols="2" rowHeight="85px">
+
+
+
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard"                            >
               <mat-label>Primer nombre</mat-label>
@@ -29,7 +49,8 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Primer apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required>
+              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -38,7 +59,8 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Segundo apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName">
+              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName"
+                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>

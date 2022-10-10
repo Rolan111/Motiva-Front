@@ -75,7 +75,6 @@ export class CareSheetComponent implements OnInit {
   ngOnInit(): void {
     this.formCareSheet();
 
-    this.formPersonalInfo.get('evaluationDate')?.setValue(new Date().toLocaleDateString())
 
     switch (this.careSheetService.shareSex) {
       case 1: {
@@ -158,12 +157,6 @@ export class CareSheetComponent implements OnInit {
       id_poll: this.formPersonalInfo.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
-      id_question: 102,
-      id_option_answer: 0,
-      open_answer: this.formPersonalInfo.value.evaluationDate,
-      id_poll: this.formPersonalInfo.value.capturaIdPoll
-    });
-    this.listaDeRespuestas.push({
       id_question: 110,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.religion,
@@ -175,12 +168,7 @@ export class CareSheetComponent implements OnInit {
       open_answer: this.formOrigin.value.placeBirth,
       id_poll: this.formOrigin.value.capturaIdPoll
     });
-    this.listaDeRespuestas.push({
-      id_question: 112,
-      id_option_answer: 0,
-      open_answer: this.formOrigin.value.origin,
-      id_poll: this.formOrigin.value.capturaIdPoll
-    });
+
     this.listaDeRespuestas.push({
       id_question: 113,
       id_option_answer: 0,
@@ -487,7 +475,6 @@ export class CareSheetComponent implements OnInit {
       capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
       city: [this.careSheetService.shareCity],
       department: ['Cauca'],
-      evaluationDate: ['', Validators.required],
       sex: [''],
       name: [''],
       lastName: [''],
