@@ -34,17 +34,7 @@
             </mat-form-field>
           </mat-grid-tile>
 
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Fecha de evaluación</mat-label>
-              <input formControlName="evaluationDate" matInput [matDatepicker]="picker1" [max]="maxDate" readonly>
-              <mat-error *ngIf="isControlHasErrorPI('evaluationDate','required')">
-                <strong>Campo Requerido</strong>
-              </mat-error>
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-          </mat-grid-tile>
+
 
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">

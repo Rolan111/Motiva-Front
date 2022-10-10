@@ -26,8 +26,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   //Ng-model
   occupationValue: number = 0;
-  hadCovidValue: number = 0;
-  deadFamilyCovidValue: number = 0;
+
+  maxDate = new Date();
+
+
 
   //Control for last form - mentalHealthNeeds-
   contadoclicks = 0;
@@ -120,6 +122,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     console.log("Tipo cities: ",typeof this.citiesList)
 
     this.formQuantitative();
+    this.personalInfo.get('applicationDate')?.setValue(new Date().toLocaleDateString())
+
 
     this.quanInstService.findAllQuestions('ADULT').subscribe(response => {
       this.questions = response.data;
@@ -145,8 +149,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Información personal
     this.personalInfo = this.formBuilder.group({
-
-      firstName: new FormControl('', [Validators.required, Validators.pattern('^[a-zA-Z ]*$')]),
+      applicationDate: ['', Validators.required],
+      firstName: ['', Validators.required],
       firstLastName: ['', Validators.required],
       secondName: [''],
       secondLastName: [''],
@@ -229,6 +233,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
   //1 En cada método se pasan los datos de los diferentes formularios al modelo de la tabla ANSWER
     // Posteriormente en cada método se guarda en en array "answerList" todas las respuestas obtenidas de todos los formularios
   saveAnswerPersonalInfo(answerForm: FormGroup) {
+    let answer0: AnswerModel = {
+      idAnswer: this.idAnswer,
+      idQuestion: 102,
+      idOptionAnswers: [],
+      openAnswer: answerForm.value.applicationDate,
+      idPoll: this.idPoll,
+      type: 'ADULT',
+      score: 0,
+    };
     let answer1: AnswerModel = {
       idAnswer: this.idAnswer,
       idQuestion: 200,
@@ -309,7 +322,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       score: 0,
     };
 
-    this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8)
+    this.answerList.push(answer0,answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8)
   }
 
   saveAnswerSociodemographicFactors(answerForm: FormGroup) {
