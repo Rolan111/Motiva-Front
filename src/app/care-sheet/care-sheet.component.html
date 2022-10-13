@@ -151,8 +151,8 @@
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Dirección de procedencia</mat-label>
-              <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección de procedencia">
+              <mat-label>Dirección</mat-label>
+              <input formControlName="originAddress" maxlength="3000" matInput placeholder="Dirección">
               <mat-error *ngIf="isControlHasErrorOrigin('originAddress','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -160,8 +160,8 @@
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Barrio</mat-label>
-              <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio">
+              <mat-label>Barrio/Vereda</mat-label>
+              <input formControlName="neighborhood" maxlength="3000" matInput placeholder="Barrio/Vereda">
               <mat-error *ngIf="isControlHasErrorOrigin('neighborhood','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -564,15 +564,7 @@
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Observación</mat-label>
-              <input formControlName="EM_Observations" type="text" matInput placeholder="Observación">
-              <mat-error *ngIf="isControlHasErrorStateOfMind('EM_Observations','required')">
-                <strong>Campo Requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
+
         </mat-grid-list>
 
       </form>

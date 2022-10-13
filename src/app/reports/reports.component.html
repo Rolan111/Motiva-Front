@@ -21,7 +21,7 @@
           <mat-select  formControlName="typeConsultSelected"
             [(value)]="consultSelected" >
             <mat-option value="1">Municipio</mat-option>
-            <mat-option value="2">Zona</mat-option>
+            <mat-option value="2">Sub-región</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
@@ -61,8 +61,11 @@
       </mat-grid-tile>
 
       <mat-grid-tile>
-          <mat-form-field appearance="fill">
-            <mat-label>Seleccione tipo ruta</mat-label>
+          <mat-form-field appearance="fill"
+                          matTooltip=" 'SI', para visualizar las personas que tienen asignada una ruta de
+                           atención. 'NO', para no visualizar las personas que tienen asignada una ruta de
+                           atención. 'TODAS', para vizualizar TODA la información">
+            <mat-label>Activación rutas de atención</mat-label>
             <mat-select formControlName="typeRouteSelected">
               <mat-option *ngFor="let ruta of rutasList" [value]="ruta.value">
                 {{ruta.viewValue}}
