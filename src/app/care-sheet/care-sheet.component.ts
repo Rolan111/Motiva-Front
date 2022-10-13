@@ -333,13 +333,6 @@ export class CareSheetComponent implements OnInit {
       id_poll: this.formStateOfMind.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
-      id_question: 139,
-      id_option_answer: 0,
-      open_answer: this.formStateOfMind.value.EM_Observations,
-      id_poll: this.formStateOfMind.value.capturaIdPoll
-    });
-
-    this.listaDeRespuestas.push({
       id_question: 140,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_healthProblems,
@@ -534,7 +527,7 @@ export class CareSheetComponent implements OnInit {
       EM_Time: ['', Validators.required],
       EM_Place: ['', Validators.required],
       EM_Person: ['', Validators.required],
-      EM_Observations: ['', Validators.required],
+
     })
     this.formPsychosocialEvaluation = this.formBuilder.group({
       EPIS_healthProblems: ['', Validators.required],
