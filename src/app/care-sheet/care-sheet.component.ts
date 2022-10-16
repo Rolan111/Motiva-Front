@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Form, FormBuilder, FormGroup, ValidationErrors, Validators} from "@angular/forms";
+import {Form, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CareSheetService} from "./care-sheet.service";
 import {AnswerPsychosocialModel} from "./answer-psychosocial.model";
 import {ToastrService} from "ngx-toastr";
-import {Observable, of} from "rxjs";
 
 
 @Component({
@@ -26,34 +25,11 @@ export class CareSheetComponent implements OnInit {
 
   nivelIntervencionModeloBiopsicosocial: string[] = ['Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles','Ninguno'];
 
-  /*FORMULARIO*/
-  step = 0;
-
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
-
-
   formPersonalInfo!: FormGroup;
   formOrigin!: FormGroup;
   formConsultation!: FormGroup;
-
   formAP_PsychiatricHistory!: FormGroup;
-  formAP_MedicalHistory!: FormGroup;
-  formAP_SurgicalHistory!: FormGroup;
   formAP_RelationalHistory!: FormGroup;
-
-  formAF_PsychiatricHistory!: FormGroup;
-  formAF_MedicalHistory!: FormGroup;
-
   formStateOfMind!: FormGroup;
   formPsychosocialEvaluation!: FormGroup;
   formInterventionLevel!: FormGroup;
@@ -168,7 +144,6 @@ export class CareSheetComponent implements OnInit {
       open_answer: this.formOrigin.value.placeBirth,
       id_poll: this.formOrigin.value.capturaIdPoll
     });
-
     this.listaDeRespuestas.push({
       id_question: 113,
       id_option_answer: 0,
@@ -239,39 +214,39 @@ export class CareSheetComponent implements OnInit {
     this.listaDeRespuestas.push({
       id_question: 124,
       id_option_answer: 0,
-      open_answer: this.formAP_MedicalHistory.value.AP_AM_Observations,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Observations,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 125,
       id_option_answer: 0,
-      open_answer: this.formAP_MedicalHistory.value.AP_AM_Diagnostics,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Diagnostics,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 126,
       id_option_answer: 0,
-      open_answer: this.formAP_MedicalHistory.value.AP_AM_Medicine,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Medicine,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 127,
       id_option_answer: 0,
-      open_answer: this.formAP_MedicalHistory.value.AP_AM_Dose,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Dose,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
     this.listaDeRespuestas.push({
       id_question: 128,
       id_option_answer: 0,
-      open_answer: this.formAP_MedicalHistory.value.AP_AM_Time,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Time,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
       id_question: 129,
       id_option_answer: 0,
-      open_answer: this.formAP_SurgicalHistory.value.AP_AQ_Observations,
-      id_poll: this.formAP_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_PsychiatricHistory.value.AP_AQ_Observations,
+      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
@@ -302,16 +277,16 @@ export class CareSheetComponent implements OnInit {
     this.listaDeRespuestas.push({
       id_question: 134,
       id_option_answer: 0,
-      open_answer: this.formAF_PsychiatricHistory.value.AF_APS_Observations,
-      id_poll: this.formAF_PsychiatricHistory.value.capturaIdPoll
+      open_answer: this.formAP_RelationalHistory.value.AF_APS_Observations,
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
 
     //REVISAR ORDEN
     this.listaDeRespuestas.push({
       id_question: 135,
       id_option_answer: 0,
-      open_answer: this.formAF_MedicalHistory.value.AF_AM_Observations,
-      id_poll: this.formAF_MedicalHistory.value.capturaIdPoll
+      open_answer: this.formAP_RelationalHistory.value.AF_AM_Observations,
+      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
     });
 
     this.listaDeRespuestas.push({
@@ -497,30 +472,26 @@ export class CareSheetComponent implements OnInit {
       AP_APS_Medicine: ['', Validators.required],
       AP_APS_Dose: ['', Validators.required],
       AP_APS_Time: ['', Validators.required],
-    })
-    this.formAP_MedicalHistory = this.formBuilder.group({
+      //AP_MedicalHistory
       AP_AM_Observations: ['', Validators.required],
       AP_AM_Diagnostics: ['', Validators.required],
       AP_AM_Medicine: ['', Validators.required],
       AP_AM_Dose: ['', Validators.required],
       AP_AM_Time: ['', Validators.required],
+      //AP_SurgicalHistory
+      AP_AQ_Observations: ['', Validators.required]
     })
-    this.formAP_SurgicalHistory = this.formBuilder.group({
-      AP_AQ_Observations: ['', Validators.required],
-    })
+
     this.formAP_RelationalHistory = this.formBuilder.group({
       AP_AR_employmentSituation: ['', Validators.required],
       AP_AR_Relationships: ['', Validators.required],
       AP_AR_socialRelationships: ['', Validators.required],
       AP_AR_familyRelationships: ['', Validators.required],
-    })
-
-    //Antecedentes familiares
-    this.formAF_PsychiatricHistory = this.formBuilder.group({
+      //AF_PsychiatricHistory - Antecedentes familiares
       AF_APS_Observations: ['', Validators.required],
-    })
-    this.formAF_MedicalHistory = this.formBuilder.group({
-      AF_AM_Observations: ['', Validators.required],
+      //AF_MedicalHistory - Antecedentes Medicos
+      AF_AM_Observations: ['', Validators.required]
+
     })
 
     this.formStateOfMind = this.formBuilder.group({
@@ -572,32 +543,8 @@ export class CareSheetComponent implements OnInit {
       return false;
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
-  isControlHasErrorAP_MedicalHistory(controlName: string, validationType: string): boolean {
-    const control = this.formAP_MedicalHistory.controls[controlName];
-    if (!control)
-      return false;
-    return control.hasError(validationType) && (control.dirty || control.touched);
-  }
-  isControlHasErrorAP_SurgicalHistory(controlName: string, validationType: string): boolean {
-      const control = this.formAP_SurgicalHistory.controls[controlName];
-      if (!control)
-        return false;
-      return control.hasError(validationType) && (control.dirty || control.touched);
-    }
   isControlHasErrorAP_RelationalHistory(controlName: string, validationType: string): boolean {
       const control = this.formAP_RelationalHistory.controls[controlName];
-      if (!control)
-        return false;
-      return control.hasError(validationType) && (control.dirty || control.touched);
-    }
-  isControlHasErrorAF_PsychiatricHistory(controlName: string, validationType: string): boolean {
-      const control = this.formAF_PsychiatricHistory.controls[controlName];
-      if (!control)
-        return false;
-      return control.hasError(validationType) && (control.dirty || control.touched);
-    }
-  isControlHasErrorAF_MedicalHistory(controlName: string, validationType: string): boolean {
-      const control = this.formAF_MedicalHistory.controls[controlName];
       if (!control)
         return false;
       return control.hasError(validationType) && (control.dirty || control.touched);
