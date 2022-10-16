@@ -1,8 +1,8 @@
 <mat-grid-tile-header>Ficha de atención</mat-grid-tile-header>
 
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical  linear">
-  <!--  Datos personales básicos -->
 
+  <!--  Datos personales básicos -->
   <mat-step [stepControl]="formPersonalInfo" color="primary" >
     <ng-template matStepLabel>Datos personales básicos</ng-template>
 
@@ -99,7 +99,6 @@
     </mat-card>
 
   </mat-step>
-
 <!--Procedencia-->
   <mat-step [stepControl]="formOrigin" color="primary">
     <ng-template matStepLabel>Procedencia</ng-template>
@@ -195,9 +194,8 @@
     </mat-card>
 
   </mat-step>
-
    <!--Consulta y enfermedad actual -->
-  <mat-step  [stepControl]="formConsultation" color="primary">
+  <mat-step [stepControl]="formConsultation" color="primary">
     <ng-template matStepLabel>Consulta</ng-template>
     <mat-card class="mat-card1">
       <mat-card-header>
@@ -235,10 +233,8 @@
     </mat-card>
 
   </mat-step>
-
-
 <!--  Antecedentes personales-->
-  <mat-step  [stepControl]="formAP_PsychiatricHistory" color="primary">
+  <mat-step [stepControl]="formAP_PsychiatricHistory" color="primary">
     <ng-template matStepLabel> Antecedentes personales </ng-template>
     <mat-card class="mat-card1">
       <mat-card-header>
@@ -297,31 +293,15 @@
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext >Siguiente</button>
-      </mat-card-actions>
-
-    </mat-card>
-
-  </mat-step>
-  <mat-step  [stepControl]="formAP_MedicalHistory" color="primary">
-    <ng-template matStepLabel> Antecedentes Médicos </ng-template>
-
-    <mat-card class="mat-card1">
-      <mat-card-header>
-        <mat-card-title></mat-card-title>
-      </mat-card-header>
-
-      <form [formGroup]="formAP_MedicalHistory">
-        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Antecedentes Médicos (</h3><h4> Personales)</h4>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Observaciones</mat-label>
               <input formControlName="AP_AM_Observations" matInput placeholder="Observaciones">
-              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Observations','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AM_Observations','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -330,7 +310,7 @@
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Diagnósticos</mat-label>
               <input formControlName="AP_AM_Diagnostics" type="text" matInput placeholder="Diagnósticos">
-              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Diagnostics','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AM_Diagnostics','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -345,7 +325,7 @@
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Medicamento</mat-label>
               <input formControlName="AP_AM_Medicine" type="text" matInput placeholder="Medicamento">
-              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Medicine','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AM_Medicine','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -354,7 +334,7 @@
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Dosis</mat-label>
               <input formControlName="AP_AM_Dose" type="text" matInput placeholder="Dosis">
-              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Dose','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AM_Dose','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
@@ -363,43 +343,32 @@
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Tiempo</mat-label>
               <input formControlName="AP_AM_Time" type="text" matInput placeholder="Tiempo">
-              <mat-error *ngIf="isControlHasErrorAP_MedicalHistory('AP_AM_Time','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AM_Time','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-
-        </mat-grid-list>
-      </form>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext >Siguiente</button>
-      </mat-card-actions>
-
-    </mat-card>
-
-  </mat-step>
-
-  <mat-step  [stepControl]="formAP_SurgicalHistory" color="primary">
-    <ng-template matStepLabel> Antecedentes Quirúrgicos </ng-template>
-
-    <mat-card class="mat-card1">
-      <mat-card-header>
-        <mat-card-title></mat-card-title>
-      </mat-card-header>
-
-      <form [formGroup]="formAP_SurgicalHistory">
-        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Antecedentes Quirúrgicos (</h3><h4> Personales)</h4>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="2" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Observaciones</mat-label>
               <input formControlName="AP_AQ_Observations" type="text" matInput placeholder="Observaciones">
-              <mat-error *ngIf="isControlHasErrorAP_SurgicalHistory('AP_AQ_Observations','required')">
+              <mat-error *ngIf="isControlHasErrorAP_PsychiatricHistory('AP_AQ_Observations','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
+
+
+
+
+
         </mat-grid-list>
+
+
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
@@ -409,6 +378,7 @@
     </mat-card>
 
   </mat-step>
+  <!--  Antecedentes Relacionales-->
   <mat-step  [stepControl]="formAP_RelationalHistory" color="primary">
     <ng-template matStepLabel> Antecedentes Relacionales </ng-template>
 
@@ -422,7 +392,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Situación laboral</mat-label>
-              <input formControlName="AP_AR_employmentSituation" type="text" matInput                   placeholder="Situación laboral">
+              <input formControlName="AP_AR_employmentSituation" type="text" matInput         placeholder="Situación laboral">
               <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_employmentSituation','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -431,8 +401,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Relaciones interpersonales</mat-label>
-              <input formControlName="AP_AR_Relationships" type="text" matInput
-                     placeholder="Relaciones interpersonales">
+              <input formControlName="AP_AR_Relationships" type="text" matInput         placeholder="Relaciones interpersonales">
               <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_Relationships','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -441,8 +410,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Relaciones sociales</mat-label>
-              <input formControlName="AP_AR_socialRelationships" type="text" matInput
-                     placeholder="Relaciones sociales">
+              <input formControlName="AP_AR_socialRelationships" type="text" matInput           placeholder="Relaciones sociales">
               <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_socialRelationships','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -451,70 +419,41 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Relaciones familiares</mat-label>
-              <input formControlName="AP_AR_familyRelationships" type="text" matInput
-                     placeholder="Relaciones familiares">
+              <input formControlName="AP_AR_familyRelationships" type="text" matInput      placeholder="Relaciones familiares">
               <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AP_AR_familyRelationships','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext >Siguiente</button>
-      </mat-card-actions>
 
-    </mat-card>
-
-  </mat-step>
-
-<!--  Antecedentes familiares-->
-  <mat-step  [stepControl]="formAF_PsychiatricHistory" color="primary">
-    <ng-template matStepLabel> Antecedentes Psiquiátricos</ng-template>
-
-    <mat-card class="mat-card1">
-
-      <form [formGroup]="formAF_PsychiatricHistory">
-        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Antecedentes Psiquiátricos (</h3><h4> Relacionales)</h4>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Observaciones</mat-label>
               <input formControlName="AF_APS_Observations" type="text" matInput placeholder="Observaciones">
-              <mat-error *ngIf="isControlHasErrorAF_PsychiatricHistory('AF_APS_Observations','required')">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AF_APS_Observations','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext >Siguiente</button>
-      </mat-card-actions>
-
-    </mat-card>
-
-  </mat-step>
-  <mat-step  [stepControl]="formAF_MedicalHistory" color="primary">
-    <ng-template matStepLabel> Antecedentes médicos </ng-template>
-
-    <mat-card class="mat-card1">
-      <mat-card-header>
-        <mat-card-title></mat-card-title>
-      </mat-card-header>
-
-      <form [formGroup]="formAF_MedicalHistory">
-        <mat-grid-list cols="2" rowHeight="85px">
+          <mat-grid-tile [colspan]="2" [rowspan]="1">
+            <h3>Antecedentes Médicos (</h3><h4> Relacionales)</h4>
+            <mat-divider></mat-divider>
+          </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Observaciones</mat-label>
               <input formControlName="AF_AM_Observations" type="text" matInput placeholder="Observaciones">
-              <mat-error *ngIf="isControlHasErrorAF_MedicalHistory('AF_AM_Observations','required')">
+              <mat-error *ngIf="isControlHasErrorAP_RelationalHistory('AF_AM_Observations','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
             </mat-form-field>
           </mat-grid-tile>
+
+
         </mat-grid-list>
       </form>
       <mat-card-actions>
@@ -525,7 +464,6 @@
     </mat-card>
 
   </mat-step>
-
 <!--  Estado Mental-->
   <mat-step  [stepControl]="formStateOfMind" color="primary">
     <ng-template matStepLabel> Estado mental </ng-template>
@@ -576,8 +514,7 @@
     </mat-card>
 
   </mat-step>
-
-  &lt;!&ndash;  Evaluación psicosocial integral en salud &ndash;&gt;
+  <!--Evaluación psicosocial integral en salud-->
   <mat-step  [stepControl]="formPsychosocialEvaluation" color="primary">
     <ng-template matStepLabel> Evaluación psicosocial integral en salud </ng-template>
 
@@ -639,8 +576,6 @@
     </mat-card>
 
   </mat-step>
-
-
   <!--  Nivel de intervención modelo biopsicosocial -->
   <mat-step   [stepControl]="formInterventionLevel" color="primary">
     <ng-template matStepLabel> Nivel de intervención modelo biopsicosocial: </ng-template>
