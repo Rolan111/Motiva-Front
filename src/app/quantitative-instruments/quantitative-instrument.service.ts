@@ -32,6 +32,18 @@ export class QuantitativeInstrumentService {
     return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
 
+  getAnswersByIdQuestion(idQuestion: number): Observable<any> {
+    const path = mainUrl + 'api/answerByIdQuestion/';
+    const headers = this.getHeader();
+    return this.http.get<any>(path + idQuestion, {headers});
+  }
+
+  getAnswersMultipleByIdPoll(idPoll: string): Observable<any> {
+    const path = mainUrl + 'api/answerMultipleByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get<any>(path + idPoll, {headers});
+  }
+
   createAnswer(quantitativeInstrumentForm: Array<AnswerModel>): Observable<DataResponse> {
     const path = mainUrl + 'api/answer';
     const headers = this.getHeader();
@@ -67,6 +79,7 @@ export class QuantitativeInstrumentService {
     const headers = this.getHeader();
     return this.http.get<any>(path, {headers});
   }
+
 
   getHeader() {
     return new HttpHeaders({
