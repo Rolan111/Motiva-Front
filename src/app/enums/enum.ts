@@ -84,12 +84,40 @@ export var arraySubRegion:any=[
   {value: '06', viewValue: 'PIEDEMONTE AMAZONICO'},
   {value: '07', viewValue: 'SUR'},
   {value: '08',viewValue: 'TODOS'}
-
 ]
+
+export var arrayZonaCentro:string[]=[
+  "SILVIA","POPAYAN", "MORALES", "TIMBIO","PIENDAMO","EL TAMBO", "PURACE", "CAJIBIO", "ARGELIA" //QUITAR ARGELIA -- se usa solo para pruebas
+]
+
+export var arrayZonaMacizo:string[]=[
+  "SAN SEBASTIAN","SANTA ROSA","LA VEGA", "LA SIERRA", "SOTARA","ALMAGUER","ROSAS"
+]
+
+export var arrayZonaNorte:string[]=[
+  "SANTANDER DE QUILICHAO","CORINTO","TORIBIO","BUENOS AIRES","GUACHENE","SUAREZ","PADILLA","CALOTO","VILLA RICA","CALDONO","MIRANDA","JAMBALO","PUERTO TEJADA"
+]
+
+export var arrayZonaOriente:string[]=[
+  "INZA","PAEZ","TOTORO"
+]
+
+export var arrayZonaPacifico:string[]=[
+  "GUAPI","LOPEZ","TIMBIQUI"
+]
+
+export var arrayZonaPiedemonteAmazonico:string[]=[
+  "PIAMONTE"
+]
+
+export var arrayZonaSur:string[]=[
+  "PATIA","FLORENCIA","SUCRE","BALBOA","MERCADERES","BOLIVAR", "ARGELIA"
+]
+
 export var arrayZona:any=[
-  {value: '01', viewValue: 'URBANA '},
-  {value: '02', viewValue: 'RURAL'},
-  {value: '03', viewValue: 'TODAS'},
+  {value: 'URBANA', viewValue: 'URBANA '},
+  {value: 'RURAL', viewValue: 'RURAL'},
+  {value: 'TODAS', viewValue: 'TODAS'},
 ]
 export var arrayRutas:any=[
   {value: '01', viewValue: 'SI '},

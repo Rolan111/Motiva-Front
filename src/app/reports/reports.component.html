@@ -20,14 +20,14 @@
           <mat-label>Tipo de consulta</mat-label>
           <mat-select  formControlName="typeConsultSelected"
             [(value)]="consultSelected" >
-            <mat-option value="1">Municipio</mat-option>
-            <mat-option value="2">Sub-región</mat-option>
+            <mat-option value="municipio">Municipio</mat-option>
+            <mat-option value="sub-region">Sub-región</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>
 
 
-      <mat-grid-tile *ngIf="consultSelected == 1">
+      <mat-grid-tile *ngIf="consultSelected == 'municipio'">
         <mat-form-field appearance="fill">
           <mat-label>Seleccione el municipio</mat-label>
           <mat-select formControlName="municipalitySelected">
@@ -38,7 +38,7 @@
         </mat-form-field>
       </mat-grid-tile>
 
-      <mat-grid-tile *ngIf="consultSelected == 2">
+      <mat-grid-tile *ngIf="consultSelected == 'sub-region'">
          <mat-form-field appearance="fill">
           <mat-label>Seleccione la Sub-región</mat-label>
           <mat-select formControlName="subRegionSelected">

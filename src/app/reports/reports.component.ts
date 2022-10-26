@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportsService} from "./reports.service";
-import {arrayMeses, arrayRutas,arrayZona, arraySubRegion, arrayMunicipios} from "../enums/enum";
+import {arrayMeses, arrayRutas, arrayZona, arraySubRegion, arrayMunicipios, arrayZonaCentro} from "../enums/enum";
 import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 
 interface ListTypes{
@@ -36,8 +36,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ReportsComponent implements OnInit {
 
-  datosAExportar:any = [];
+  datosAExportar:Array<any>=[];
   consultSelected:any;
+  contandoCantidadEncuestas = 1;
 
 
   monthList: ListTypes[] = arrayMeses;
@@ -92,8 +93,6 @@ export class ReportsComponent implements OnInit {
     console.log('La fecha inicio es: ', fechaInicio);
     console.log('La fecha fin es: ', fechaFin);
 
-    let dateStart1:any = "2022-07-28";//fechas de prueba
-    let dateEnd1:any = "2022-07-27";
     this.procesandoReportes(fechaInicio, fechaFin);
   }
 
@@ -116,6 +115,7 @@ export class ReportsComponent implements OnInit {
 
     let selectedDateStart: string = DateStart;
     let selectedDateEnd: string = DateEnd;
+    let typeConsultSelected: string = this.form.value.typeConsultSelected;
     let municipalitySelected: string = this.form.value.municipalitySelected;
     let subRegionSelected: string = this.form.value.subRegionSelected;
     let zoneSelected: string = this.form.value.zoneSelected;
@@ -125,90 +125,113 @@ export class ReportsComponent implements OnInit {
     // let selectedDateEnd: any = new Date(DateEnd);
 
     console.log('La fecha inicial capturada es: ', DateStart)
+    console.log('La fecha final capturada es: ', DateEnd)
     console.log('Municipio ', municipalitySelected)
     console.log('subregion: ', subRegionSelected)
     console.log('Zona: ', zoneSelected)
     console.log('Ruta : ', typeRouteSelected)
 
-    this.reportsService.getPolls().subscribe(data=>{ //Consultamos la tabla Poll
 
-      console.log('La data inicial poll es: ',data)
-      let capturandoDataPoll:any = data;
-      capturandoDataPoll.forEach((data1:any)=>{
-        // let datePoll:any= new Date(data1.date);
-        let datePoll:any = data1.date;
 
-        if(datePoll>=selectedDateStart && datePoll<=selectedDateEnd){
+    this.quantitativeInstrumentService.getAnswersByIdQuestion(102).subscribe(data=>{ //Consultamos la tabla answer donde todos los id_question sean 102 y a open_answer para FECHA DE EVALUACION
+
+      console.log('La data inicial answer es: ',data)
+      let capturandoDataAnswer:any = data;
+      capturandoDataAnswer.forEach((data1:any)=>{ //De aquí sacamos id_poll, fecha, type (Adult, children)
+        let dateInstrument:any = data1.openAnswer;
+
+        if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){
           console.log('La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
-          //Consultamos la tabla answer, Tipo sacar en Poll Type, sexo 2,  Municipio 6
-          this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(data1.idPoll, 2).subscribe(data=>{ //Para consultar sexo
-            let extrayendoSexo:any = data;
-            extrayendoSexo.forEach((data2:any)=>{
+          //Evaluamos Tipo de consulta Municipio/subregion
+          // if(typeConsultSelected=="municipio"){ // Para el caso de consultar MUNICIPIO
 
-              switch (data2.idOptionAnswers[0]){
-                case 1:
-                  this.sexoMostar = "Hombre";
-                  break;
-                case 2:
-                  this.sexoMostar = "Mujer";
-                  break;
-                case 3:
-                  this.sexoMostar = "Indefinido";
-                  break;
-                default:
-                  break;
-              }
-              console.log('El sexo de esta persona es: ', data2.idOptionAnswers[0])
-            })
+            //CÓDIGO NUEVO
+            // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
+            this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
+              console.log('Los datos MULTIPLES consultados son>: ',data)
+              let capturandoMultiplesDatos:any = data;
+              capturandoMultiplesDatos.forEach((data2:any)=>{
+                switch (data2.idQuestion){
+                  case 2: //SEXO
+                    switch (data2.idOptionAnswers[0]){
+                      case 1:
+                        this.sexoMostar = "Hombre";
+                        break;
+                      case 2:
+                        this.sexoMostar = "Mujer";
+                        break;
+                      case 3:
+                        this.sexoMostar = "Indefinido";
+                        break;
+                      default:
+                        break;
+                    }
+                    break;
+                  case 6: //MUNICIPIO
+                    if(typeConsultSelected=="municipio") { // Para el caso de consultar MUNICIPIO unico
+                      data2.openAnswer == municipalitySelected?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica'
+                    }else{//para el caro de SUB-REGION
+                      let contador=0;
+                      while(data2.openAnswer != this.municipioMostrar){
+                        console.log('El valor del contador es: ', contador)
+                        console.log('La data de zona centro es: ',arrayZonaCentro[contador])
+                        data2.openAnswer == arrayZonaCentro[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                        contador++;
+                      }
+                    }
 
-            this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(data1.idPoll, 6).subscribe(data=>{ //Para consultar MUNICIPIO
-              let extrayendoMunicipio:any = data;
-              extrayendoMunicipio.forEach((element:any) => this.municipioMostrar=element.openAnswer)
+                    break;
+                  case 1: //EDAD
+                    this.edadMostrar=data2.openAnswer
+                    break;
+                  case 5: //ZONA
+                    if(zoneSelected=='TODAS'){
+                      data2.idOptionAnswers[0]==15?this.zonaMostrar='Rural':this.zonaMostrar='Urbana'
+                    }else{
+                      let traduciendozona;
+                      //
+                      data2.idOptionAnswers[0]==15?traduciendozona='RURAL':traduciendozona='URBANA'
+                      traduciendozona==zoneSelected?this.zonaMostrar=traduciendozona:this.zonaMostrar='no_clasifica'
+                    }
 
-              this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(data1.idPoll, 1).subscribe(data=>{ //Para consultar EDAD
-                let extrayendoEdad:any = data;
-                extrayendoEdad.forEach((element:any) => this.edadMostrar=element.openAnswer)
-
-                this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(data1.idPoll, 5).subscribe(data=>{//Para consultar ZONA de residencia
-                  let extrayendoZona:any = data;
-                  extrayendoZona.forEach((element:any) => {
-                    element.idOptionAnswers[0]==15?this.zonaMostrar='Rural':this.zonaMostrar='Urbano'
-                  })
-                  // this.zonaMostrar=element.id
-                  this.datosAExportar.push({
-                    "Tipo":data1.type,
-                    "Sexo":this.sexoMostar,
-                    "Municipio":this.municipioMostrar,
-                    "Edad":this.edadMostrar,
-                    "Zona":this.zonaMostrar,
-                    "fecha":data1.date,
-                    "evidencia":data1.evidence,
-                    "id_poll":data1.idPoll
-                  })
-                }, error => {},() => this.reportsService.exportToExcel(this.datosAExportar, 'datosExportados'))
+                    break;
+                  default:
+                    break;
+                }
 
               })
+              this.datosAExportar.push({
+                "id_poll":data1.idPoll,
+                "fecha":data1.openAnswer,
+                "Tipo":data1.type,
+                "Sexo":this.sexoMostar,
+                "Municipio":this.municipioMostrar,
+                "Edad":this.edadMostrar,
+                "Zona":this.zonaMostrar,
+                "evidencia":data1.evidence,
+              })
+            },error => {},() => {
 
+
+              if(this.contandoCantidadEncuestas==capturandoDataAnswer.length){
+
+                this.reportsService.exportToExcel(this.datosAExportar, 'datosExportados');
+                // window.location.reload();
+              }else{
+                this.contandoCantidadEncuestas++
+              }
             })
 
-          })
+            /* +++++++++++++++++++++++++++++++++++++++ FIN CÓDIGO NUEVO +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
 
-          // this.datosAExportar.push({
-          //   "Tipo":data1.type,
-          //   "Sexo":this.sexoMostar,
-          //   "Municipio":this.municipioMostrar,
-          //   "fecha":data1.date,
-          //   "evidencia":data1.evidence,
-          //   "id_poll":data1.idPoll
-          // })
-
+          //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
         }else {
           console.log(' NO HAY REGISTROS dentro de este rango -- Evaluar condición')
         }
       })
-    },error => {},() => {})
-    // },error => {},() => {this.reportsService.exportToExcel(this.datosAExportar, 'datosExportados')})
+    },error => {},() => {
 
+    })
   }
 
   exportAsXLSX():void{
@@ -216,10 +239,8 @@ export class ReportsComponent implements OnInit {
   }
 
 
-
-
-  probandoMetodos(){
-    console.log('El mes seleccionado fue: ', this.form.value.monthSelected)
+  probandoMetodos(){ //para hacer pruebas en los métodos
+    // console.log('El mes seleccionado fue: ', this.form.value.monthSelected)
   }
 
 }
