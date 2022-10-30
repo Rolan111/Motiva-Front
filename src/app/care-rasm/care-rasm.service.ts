@@ -22,6 +22,12 @@ export class CareRasmService {
     return this.http.get(path, {headers});
   }
 
+  public getRASMByIdPoll(idPoll:string) {
+    const path = mainUrl + 'api/rasmByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get(path + idPoll, {headers});
+  }
+
   getHeader() {
     return new HttpHeaders({
       'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),

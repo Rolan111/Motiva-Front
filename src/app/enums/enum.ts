@@ -76,18 +76,18 @@ export var arrayMeses:any=[
 ]
 
 export var arraySubRegion:any=[
-  {value: '01', viewValue: 'CENTRO '},
-  {value: '02', viewValue: 'MACIZO'},
-  {value: '03', viewValue: 'NORTE'},
-  {value: '04', viewValue: 'ORIENTE'},
-  {value: '05', viewValue: 'PACIFICO'},
-  {value: '06', viewValue: 'PIEDEMONTE AMAZONICO'},
-  {value: '07', viewValue: 'SUR'},
-  {value: '08',viewValue: 'TODOS'}
+  {value: 'CENTRO', viewValue: 'CENTRO '},
+  {value: 'MACIZO', viewValue: 'MACIZO'},
+  {value: 'NORTE', viewValue: 'NORTE'},
+  {value: 'ORIENTE', viewValue: 'ORIENTE'},
+  {value: 'PACIFICO', viewValue: 'PACIFICO'},
+  {value: 'PIEDEMONTE AMAZONICO', viewValue: 'PIEDEMONTE AMAZONICO'},
+  {value: 'SUR', viewValue: 'SUR'},
+  {value: 'TODOS',viewValue: 'TODOS'}
 ]
 
 export var arrayZonaCentro:string[]=[
-  "SILVIA","POPAYAN", "MORALES", "TIMBIO","PIENDAMO","EL TAMBO", "PURACE", "CAJIBIO", "ARGELIA" //QUITAR ARGELIA -- se usa solo para pruebas
+  "SILVIA","POPAYAN", "MORALES", "TIMBIO","PIENDAMO","EL TAMBO", "PURACE", "CAJIBIO"
 ]
 
 export var arrayZonaMacizo:string[]=[
@@ -120,9 +120,10 @@ export var arrayZona:any=[
   {value: 'TODAS', viewValue: 'TODAS'},
 ]
 export var arrayRutas:any=[
-  {value: '01', viewValue: 'SI '},
-  {value: '02', viewValue: 'NO'},
-  {value: '03', viewValue: 'TODAS'},
+  {value: 'no_aplicar', viewValue: 'No aplicar este filtro'},
+  {value: 'si', viewValue: 'SI '},
+  {value: 'no', viewValue: 'NO'},
+  {value: 'todas', viewValue: 'TODAS'},
 ]
 
 

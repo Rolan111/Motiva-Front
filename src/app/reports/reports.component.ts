@@ -1,33 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, destroyPlatform, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportsService} from "./reports.service";
-import {arrayMeses, arrayRutas, arrayZona, arraySubRegion, arrayMunicipios, arrayZonaCentro} from "../enums/enum";
+import {
+  arrayMeses,
+  arrayRutas,
+  arrayZona,
+  arraySubRegion,
+  arrayMunicipios,
+  arrayZonaCentro,
+  arrayZonaMacizo, arrayZonaNorte, arrayZonaOriente, arrayZonaPacifico, arrayZonaPiedemonteAmazonico, arrayZonaSur
+} from "../enums/enum";
 import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
+import {CareRasmService} from "../care-rasm/care-rasm.service";
+import {empty, Observable, observable, of, Subscription, timeout} from "rxjs";
 
 interface ListTypes{
   value: string;
   viewValue: string;
 }
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface reporte2{
+  id_poll: string;
+  Fecha: string;
+  Tipo: string;
+  Sexo: string;
+  Municipio: string;
+  Edad: string;
+  Zona: string;
+  Tipo_Ruta_Activada: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 @Component({
   selector: 'app-reports',
@@ -36,9 +37,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ReportsComponent implements OnInit {
 
-  datosAExportar:Array<any>=[];
+  datosAExportar2:Array<reporte2>=[];
+  datosAExportar1:Array<any>=[];
+
   consultSelected:any;
   contandoCantidadEncuestas = 1;
+  contandoCantidadFiltro2 = 1;
 
 
   monthList: ListTypes[] = arrayMeses;
@@ -46,7 +50,6 @@ export class ReportsComponent implements OnInit {
   subRegionList: ListTypes[] = arraySubRegion;
   zonaList: ListTypes[] = arrayZona;
   rutasList: ListTypes[] = arrayRutas;
-
 
 
   form: FormGroup;
@@ -58,9 +61,11 @@ export class ReportsComponent implements OnInit {
   zonaMostrar:any;
 
   constructor(
+    private careRasmService: CareRasmService,
     private formBuilder: FormBuilder,
     private reportsService: ReportsService,
-    private quantitativeInstrumentService: QuantitativeInstrumentService
+    private quantitativeInstrumentService: QuantitativeInstrumentService,
+    // public procesandoReporteRutas: ProcesandoReporteRutas
   ) {
 
     this.form = this.formBuilder.group({
@@ -74,10 +79,6 @@ export class ReportsComponent implements OnInit {
       typeRouteSelected: ['', Validators.required],
     })
   }
-
-  //Tabla de prueba, datos de prueba
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
 
   //procesamiento de las fechas
 
@@ -142,14 +143,14 @@ export class ReportsComponent implements OnInit {
 
         if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){
           console.log('La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
-          //Evaluamos Tipo de consulta Municipio/subregion
+
           // if(typeConsultSelected=="municipio"){ // Para el caso de consultar MUNICIPIO
 
-            //CÓDIGO NUEVO
-            // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
-            this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
-              console.log('Los datos MULTIPLES consultados son>: ',data)
-              let capturandoMultiplesDatos:any = data;
+          // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
+          //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
+          this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
+            console.log('Los datos MULTIPLES consultados son>: ',data)
+            let capturandoMultiplesDatos:any = data;
               capturandoMultiplesDatos.forEach((data2:any)=>{
                 switch (data2.idQuestion){
                   case 2: //SEXO
@@ -170,14 +171,61 @@ export class ReportsComponent implements OnInit {
                   case 6: //MUNICIPIO
                     if(typeConsultSelected=="municipio") { // Para el caso de consultar MUNICIPIO unico
                       data2.openAnswer == municipalitySelected?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica'
-                    }else{//para el caro de SUB-REGION
+
+                    }else{//para el caso de SUB-REGION
+
                       let contador=0;
-                      while(data2.openAnswer != this.municipioMostrar){
-                        console.log('El valor del contador es: ', contador)
-                        console.log('La data de zona centro es: ',arrayZonaCentro[contador])
-                        data2.openAnswer == arrayZonaCentro[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
-                        contador++;
+
+                      if(this.form.value.subRegionSelected=="CENTRO"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaCentro[contador]!=undefined){
+                          // console.log('La data de ZONA CENTRO en la posicion 8 es: ',arrayZonaCentro[8])
+                          data2.openAnswer == arrayZonaCentro[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
                       }
+                      if(this.form.value.subRegionSelected=="MACIZO"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaMacizo[contador]!=undefined){
+                          data2.openAnswer == arrayZonaMacizo[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="NORTE"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaNorte[contador]!=undefined){
+                          data2.openAnswer == arrayZonaNorte[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="ORIENTE"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaOriente[contador]!=undefined){
+                          data2.openAnswer == arrayZonaOriente[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="PACIFICO"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaPacifico[contador]!=undefined){
+                          data2.openAnswer == arrayZonaPacifico[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="PIEDEMONTE AMAZONICO"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaPiedemonteAmazonico[contador]!=undefined){
+                          data2.openAnswer == arrayZonaPiedemonteAmazonico[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="SUR"){
+                        while(data2.openAnswer != this.municipioMostrar && arrayZonaSur[contador]!=undefined){
+                          data2.openAnswer == arrayZonaSur[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+                      if(this.form.value.subRegionSelected=="TODOS" && arrayMunicipios[contador]!=undefined){
+                        while(data2.openAnswer != this.municipioMostrar){
+                          data2.openAnswer == arrayMunicipios[contador]?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica';
+                          contador++;
+                        }
+                      }
+
                     }
 
                     break;
@@ -200,31 +248,33 @@ export class ReportsComponent implements OnInit {
                 }
 
               })
-              this.datosAExportar.push({
+            //Hacemo limpieza de los datos que clasifican para el siguiente filtro
+            if(this.municipioMostrar=='no_clasifica' || this.zonaMostrar=='no_clasifica'){
+              //NO HAGA NADA CON ESTOS DATOS, es decir se perderán si no clasifican
+            }else{
+              this.datosAExportar1.push({
                 "id_poll":data1.idPoll,
-                "fecha":data1.openAnswer,
+                "Fecha":data1.openAnswer,
                 "Tipo":data1.type,
                 "Sexo":this.sexoMostar,
                 "Municipio":this.municipioMostrar,
                 "Edad":this.edadMostrar,
-                "Zona":this.zonaMostrar,
-                "evidencia":data1.evidence,
+                "Zona":this.zonaMostrar
               })
+            }
+
             },error => {},() => {
 
 
-              if(this.contandoCantidadEncuestas==capturandoDataAnswer.length){
+              if(this.contandoCantidadEncuestas==capturandoDataAnswer.length){ //Se han procesado todos los datos del primer filtro
 
-                this.reportsService.exportToExcel(this.datosAExportar, 'datosExportados');
-                // window.location.reload();
+                this.procesandoFiltro2()
+
               }else{
                 this.contandoCantidadEncuestas++
               }
             })
 
-            /* +++++++++++++++++++++++++++++++++++++++ FIN CÓDIGO NUEVO +++++++++++++++++++++++++++++++++++++++++++++++++++++++ */
-
-          //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
         }else {
           console.log(' NO HAY REGISTROS dentro de este rango -- Evaluar condición')
         }
@@ -234,8 +284,140 @@ export class ReportsComponent implements OnInit {
     })
   }
 
+  // ********** inicio SEGUNDO FILTRO ********** Una vez tenemos todos los datos del primer filtro entonces se procede a realizar el SEGUNDO FILTRO en donde se consulta la tabla de reportes
+
+  procesandoFiltro2(){
+
+    if(this.form.value.typeRouteSelected=='no_aplicar'){
+      this.reportsService.exportToExcel(this.datosAExportar1, 'datosExportados');
+    }
+
+    if(this.form.value.typeRouteSelected=='si'){ //SI
+
+      this.datosAExportar1.forEach((dataArray:any)=>{
+
+        this.careRasmService.getRASMByIdPoll(dataArray.id_poll).subscribe(data=>{
+          let datosRASM:any=data;
+          if(data==false){
+            // RASM: NO HAY DATOS PARA ESTE ID
+          }else{
+            datosRASM.forEach((recorriendoDatosRasm:any)=>{
+              this.datosAExportar2.push({
+                id_poll:dataArray.id_poll,
+                Fecha:dataArray.Fecha,
+                Tipo:dataArray.Tipo,
+                Sexo:dataArray.Sexo,
+                Municipio:dataArray.Municipio,
+                Edad:dataArray.Edad,
+                Zona:dataArray.Zona,
+                Tipo_Ruta_Activada:recorriendoDatosRasm.typeRasm
+              })
+            })
+          }
+
+
+        },error => {}, () => {
+          if(this.datosAExportar1.length==this.contandoCantidadFiltro2){
+            this.reportsService.exportToExcel(this.datosAExportar2, 'datosExportados2')
+            window.location.reload();
+          }else{
+            this.contandoCantidadFiltro2++
+          }
+
+        })
+
+      })
+
+    }
+
+    if(this.form.value.typeRouteSelected=='no'){ //NO
+
+      this.datosAExportar1.forEach((dataArray:any)=>{
+
+        this.careRasmService.getRASMByIdPoll(dataArray.id_poll).subscribe(data=>{
+          if(data==false){
+
+              this.datosAExportar2.push({
+                id_poll:dataArray.id_poll,
+                Fecha:dataArray.Fecha,
+                Tipo:dataArray.Tipo,
+                Sexo:dataArray.Sexo,
+                Municipio:dataArray.Municipio,
+                Edad:dataArray.Edad,
+                Zona:dataArray.Zona,
+                Tipo_Ruta_Activada:"NO"
+              })
+          }else{
+            //Los id coinciden entoces esta informacion SE PIERDE
+          }
+
+
+        },error => {}, () => {
+          if(this.datosAExportar1.length==this.contandoCantidadFiltro2){
+            this.reportsService.exportToExcel(this.datosAExportar2, 'datosExportados2')
+            window.location.reload();
+          }else{
+            this.contandoCantidadFiltro2++
+          }
+
+        })
+
+      })
+
+    }
+
+    if(this.form.value.typeRouteSelected=='todas'){ //TODAS
+
+      this.datosAExportar1.forEach((dataArray:any)=>{
+
+        this.careRasmService.getRASMByIdPoll(dataArray.id_poll).subscribe(data=>{
+          let datosRASM:any=data;
+          if(data==false){
+            this.datosAExportar2.push({
+              id_poll:dataArray.id_poll,
+              Fecha:dataArray.Fecha,
+              Tipo:dataArray.Tipo,
+              Sexo:dataArray.Sexo,
+              Municipio:dataArray.Municipio,
+              Edad:dataArray.Edad,
+              Zona:dataArray.Zona,
+              Tipo_Ruta_Activada:"NO"
+            })
+          }else{
+            datosRASM.forEach((recorriendoDatosRasm:any)=>{
+              this.datosAExportar2.push({
+                id_poll:dataArray.id_poll,
+                Fecha:dataArray.Fecha,
+                Tipo:dataArray.Tipo,
+                Sexo:dataArray.Sexo,
+                Municipio:dataArray.Municipio,
+                Edad:dataArray.Edad,
+                Zona:dataArray.Zona,
+                Tipo_Ruta_Activada:recorriendoDatosRasm.typeRasm
+              })
+            })
+          }
+
+
+        },error => {}, () => {
+          if(this.datosAExportar1.length==this.contandoCantidadFiltro2){
+            this.reportsService.exportToExcel(this.datosAExportar2, 'datosExportados2')
+            window.location.reload();
+          }else{
+            this.contandoCantidadFiltro2++
+          }
+
+        })
+
+      })
+    }
+  }
+
+  // *********** FIN SEGUNDO FILTRO ***********
+
+
   exportAsXLSX():void{
-    this.reportsService.exportToExcel(this.dataSource, 'my_export')
+    // this.reportsService.exportToExcel(this.dataSource, 'my_export')
   }
 
 
