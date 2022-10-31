@@ -8,6 +8,10 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
 import {AlertModel} from "../alert.model";
+import {arrayMunicipios} from "../../enums/enum";
+import {QuantitativeInstrumentComponent} from "../quantitative-instrument/quantitative-instrument.component";
+import {CareSheetService} from "../../care-sheet/care-sheet.service";
+import {nanoid} from "nanoid";
 
 interface ListTypes {
   viewValue: string;
@@ -19,10 +23,14 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument-children.component.scss']
 })
 export class QuantitativeInstrumentChildrenComponent implements OnInit {
+
+  isntrumentoAdultos!: QuantitativeInstrumentComponent;
+  //Declaración de las colecciones de formularios
   personalInfo!: FormGroup;
-  secundaryInfo!: FormGroup;
+  sociodemographicFactors!: FormGroup;
   comorbidityInfo!: FormGroup;
   factors!: FormGroup;
+
   answerList: Array<AnswerModel> = [];
   questions: Array<Question> = [];
   idAnswer: number = 0;
@@ -57,56 +65,15 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   fourList: Array<OptionAnswer> = [];
   fiveList: Array<OptionAnswer> = [];
 
-  citiesList: ListTypes[] = [
-    {viewValue: 'POPAYAN'},
-    {viewValue: 'ALMAGUER'},
-    {viewValue: 'ARGELIA'},
-    {viewValue: 'BALBOA'},
-    {viewValue: 'BOLIVAR'},
-    {viewValue: 'BUENOS AIRES'},
-    {viewValue: 'CAJIBIO'},
-    {viewValue: 'CALDONO'},
-    {viewValue: 'CALOTO'},
-    {viewValue: 'CORINTO'},
-    {viewValue: 'EL TAMBO'},
-    {viewValue: 'FLORENCIA'},
-    {viewValue: 'GUACHENE'},
-    {viewValue: 'GUAPI'},
-    {viewValue: 'INZA'},
-    {viewValue: 'JAMBALO'},
-    {viewValue: 'LA SIERRA'},
-    {viewValue: 'LA VEGA'},
-    {viewValue: 'LOPEZ'},
-    {viewValue: 'MERCADERES'},
-    {viewValue: 'MIRANDA'},
-    {viewValue: 'MORALES'},
-    {viewValue: 'PADILLA'},
-    {viewValue: 'PAEZ'},
-    {viewValue: 'PIAMONTE'},
-    {viewValue: 'PIENDAMO'},
-    {viewValue: 'PUERTO TEJADA'},
-    {viewValue: 'PATIA'},
-    {viewValue: 'PURACE'},
-    {viewValue: 'ROSAS'},
-    {viewValue: 'SAN SEBASTIAN'},
-    {viewValue: 'SANTANDER DE QUILICHAO'},
-    {viewValue: 'SANTA ROSA'},
-    {viewValue: 'SILVIA'},
-    {viewValue: 'SOTARA'},
-    {viewValue: 'SUAREZ'},
-    {viewValue: 'SUCRE'},
-    {viewValue: 'TIMBIO'},
-    {viewValue: 'TIMBIQUI'},
-    {viewValue: 'TORIBIO'},
-    {viewValue: 'TOTORO'},
-    {viewValue: 'VILLA RICA'}
-  ];
+  citiesList: ListTypes[] = arrayMunicipios;
 
   constructor(
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
     private _snackBar: MatSnackBar,
+    private careSheetService: CareSheetService
+    // private instrumentoAdultos: QuantitativeInstrumentComponent
   ) {
   }
 
@@ -115,11 +82,12 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.quanInstService.findAllQuestions('CHILDREN').subscribe(response => {
       this.questions = response.data;
+      console.log('La preguntas de CHILDREN son: ',response)
     })
 
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
-      this.idPoll = response.data.idPoll;
+      this.idPoll = nanoid(10);
     })
   }
 
@@ -135,7 +103,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       cellphone: ['', Validators.required],
     });
 
-    this.secundaryInfo = this.formBuilder.group({
+    this.sociodemographicFactors = this.formBuilder.group({
       age: ['', Validators.required],
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
@@ -467,6 +435,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     });
 
+    this.answerList.forEach(x => this.score = this.score + x.score)
+
     let poll: PollModel = {
       approvalDoc: "/document",
       evidence: "evidence",
@@ -474,8 +444,6 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idPoll: this.idPoll,
       type: "CHILDREN",
     };
-
-    this.answerList.forEach(x => this.score = this.score + x.score)
 
     let alert: AlertModel = {
       idAlert: 1,
@@ -485,26 +453,49 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
-        this.openSnackBar('Se guardó correctamente el formulario', 'Alert')
+        this.openSnackBar('Se guardó correctamente el formulario CHILDREN', 'Aceptar')
+
+        this.quanInstService.createPoll(poll).subscribe({
+          next: () => {
+            this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Aceptar');
+          },error: ()=>{
+            this.openSnackBar('No se guardó correctamente la encuesta (Poll)', 'Aceptar');
+          }
+        })
+
+        if(this.score >= 25){
+          this.quanInstService.createAlert(alert).subscribe({
+            next: () => {
+              this.openSnackBar('Se guardó correctamente la alerta', 'Aceptar');
+            }
+          })
+        }
+
         this.answerList = [];
-        window.location.reload();
+        this.sendToCareSheet();
+
       }, error: () => {
-        this.openSnackBar('No se guardó correctamente el formulario', 'Alert');
+        this.answerList = [];
+        this.score = 0;
+        this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO NIÑOS', 'Aceptar');
       }
     });
 
-    this.quanInstService.createPoll(poll).subscribe({
-      next: () => {
-      }
-    });
+  }
 
-    this.quanInstService.createAlert(alert).subscribe({
-      next: () => {
-      }
-    });
+  private scoreModeStudy(studyMode: number): any {
+    switch (studyMode) {
+      case 216 :
+        return 1;
+      case 217:
+        return 3;
+      case 218:
+        return 2;
+    }
   }
 
   selectQuestion(idQuestion: number) {
+
     switch (idQuestion) {
       case 2:
         this.sexQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
@@ -538,21 +529,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         this.comorbilitiesQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
         this.comorbilitiesQuestion.forEach(item => this.comorbilitiesList = item.optionAnswerDtoList);
         break;
-      case 208:
+      case 204:
         this.typeIdentificationQuestion = this.questions.filter(x => x.idQuestion === idQuestion);
         this.typeIdentificationQuestion.forEach(item => this.typeIdentificationList = item.optionAnswerDtoList);
         break;
-    }
-  }
-
-  private scoreModeStudy(studyMode: number): any {
-    switch (studyMode) {
-      case 216 :
-        return 1;
-      case 217:
-        return 3;
-      case 218:
-        return 2;
     }
   }
 
@@ -583,6 +563,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     });
   }
 
+  /*  Control Errores */
+
   isControlHasError(controlName: string, validationType: string): boolean {
     const control = this.personalInfo.controls[controlName];
     if (!control)
@@ -592,7 +574,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   }
 
   isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
-    const control = this.secundaryInfo.controls[controlName];
+    const control = this.sociodemographicFactors.controls[controlName];
     if (!control)
       return false;
 
@@ -617,4 +599,21 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       verticalPosition: 'top'
     });
   }
+
+  sendToCareSheet() {
+    this.careSheetService.shareIdPoll = this.idPoll;
+    this.careSheetService.shareCity = this.sociodemographicFactors.value.municipalityResidence;
+    this.careSheetService.shareSex = this.sociodemographicFactors.value.sex;
+    this.careSheetService.shareName = this.personalInfo.value.firstName;
+    this.careSheetService.shareLastName = this.personalInfo.value.firstLastName;
+    this.careSheetService.shareIdentificationNumber = this.personalInfo.value.identification;
+    this.careSheetService.shareEthnicity = this.sociodemographicFactors.value.ethnicity;
+    this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
+    this.router.navigate(['navbar/care-sheet'])
+  }
+
+  metodoPrueba(){
+    console.log('El sexo es: ',this.sociodemographicFactors.value.sex,'La etnia es: ',this.sociodemographicFactors.value.ethnicity)
+  }
+
 }
