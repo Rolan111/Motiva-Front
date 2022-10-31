@@ -53,16 +53,16 @@ export class CareSheetComponent implements OnInit {
 
 
     switch (this.careSheetService.shareSex) {
-      case 1: {
+      case 1 | 187: {
         this.formPersonalInfo.get('sex')?.setValue('Hombre')
         break;
       }
-      case 2: {
+      case 2 | 188: {
         this.formPersonalInfo.get('sex')?.setValue('Mujer')
         break;
       }
 
-      case 3: {
+      case 3 | 189: {
         this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
         break;
       }
@@ -77,31 +77,31 @@ export class CareSheetComponent implements OnInit {
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
 
     switch (this.careSheetService.shareEthnicity) {
-      case 4: {
+      case 4 | 190: {
         this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
 
-      case 5: {
+      case 5 | 191: {
         this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
 
-      case 6: {
+      case 6 | 192: {
         this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
 
-      case 7: {
+      case 7 | 193: {
         this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
       }
-      case 8: {
+      case 8 | 194: {
         this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
 
-      case 9: {
+      case 9 | 195: {
         this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }

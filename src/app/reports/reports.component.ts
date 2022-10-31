@@ -168,7 +168,8 @@ export class ReportsComponent implements OnInit {
                         break;
                     }
                     break;
-                  case 6: //MUNICIPIO
+                  //MUNICIPIO Y SUBREGIÓN
+                  case 6:
                     if(typeConsultSelected=="municipio") { // Para el caso de consultar MUNICIPIO unico
                       data2.openAnswer == municipalitySelected?this.municipioMostrar=data2.openAnswer:this.municipioMostrar='no_clasifica'
 
@@ -290,6 +291,7 @@ export class ReportsComponent implements OnInit {
 
     if(this.form.value.typeRouteSelected=='no_aplicar'){
       this.reportsService.exportToExcel(this.datosAExportar1, 'datosExportados');
+      window.location.reload();
     }
 
     if(this.form.value.typeRouteSelected=='si'){ //SI

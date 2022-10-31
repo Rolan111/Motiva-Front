@@ -133,8 +133,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       this.idAnswer = response.data.idAnswer;
       // this.idPoll = response.data.idPoll;
       this.idPoll=nanoid(10);
-      console.log(
-        'EL ID POLL ES', this.idPoll)
+      // console.log('EL ID POLL ES', this.idPoll)
     })
 
     this.addValidatorWorkMode();
@@ -894,29 +893,21 @@ export class QuantitativeInstrumentComponent implements OnInit {
       score: this.score
     }
 
-    console.log('El puntaje TOTAL es: ', this.score)
-    console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
-
-    //LLamado del servicio para guardar a la tabla POll
-    // this.quanInstService.createPoll(poll).subscribe({
-    //   next: () => {
-    //     this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
-    //   }, error: () => {
-    //     this.openSnackBar('No se guardó correctamente', 'Alert');
-    //   }
-    // })
+    // console.log('El puntaje TOTAL es: ', this.score)
+    // console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
 
     //llamado del SERVICIO para guardar a la tabla ANSWER
+
     this.quanInstService.createAnswer(this.answerList).subscribe({
       next: () => {
-        this.openSnackBar('Se guardó correctamente el formulario de adulto', 'Alert');
+        this.openSnackBar('Se guardó correctamente el formulario ADULT', 'Aceptar');
 
         //Llamado del servicio para guardar en la tabla POLL
         this.quanInstService.createPoll(poll).subscribe({
           next: () => {
-            this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Alert');
+            this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Aceptar');
           }, error: () => {
-            this.openSnackBar('No se guardó correctamente', 'Alert');
+            this.openSnackBar('No se guardó correctamente la encuesta (Poll)', 'Aceptar');
           }
         })
 
@@ -924,24 +915,24 @@ export class QuantitativeInstrumentComponent implements OnInit {
         if(this.score >= 25){
           this.quanInstService.createAlert(alert).subscribe({
             next: () => {
-              this.openSnackBar('Se guardó correctamente la alerta', 'Alert');
+              this.openSnackBar('Se guardó correctamente la alerta', 'Aceptar');
             }
           })
         }
 
         this.answerList = [];
         this.sendToCareSheet();
+
       }, error: () => {
         this.answerList = [];
         this.score = 0;
-        this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO', 'Alert');
+        this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
       }
     });
 
-
   }
 
-  // *** Fin proceso guardado ***
+  /** Fin proceso guardado */
 
 
   //          *** Manejo del PUNTAJE ****
@@ -1187,9 +1178,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
   }
 
-  /*
-  * Control Errors
-  */
+  /*  Control Errores */
 
   isControlHasError(controlName: string, validationType: string): boolean {
     const control = this.personalInfo.controls[controlName];
@@ -1197,7 +1186,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       return false;
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
-
 
   isControlHasErrorSecundary(controlName: string, validationType: string): boolean {
     const control = this.sociodemographicFactors.controls[controlName];
