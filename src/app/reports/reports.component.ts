@@ -22,6 +22,7 @@ interface ListTypes{
 export interface reporte2{
   id_poll: string;
   Fecha: string;
+  Subregión: string;
   Tipo: string;
   Sexo: string;
   Municipio: string;
@@ -256,6 +257,7 @@ export class ReportsComponent implements OnInit {
               this.datosAExportar1.push({
                 "id_poll":data1.idPoll,
                 "Fecha":data1.openAnswer,
+                "Subregión":this.form.value.subRegionSelected,
                 "Tipo":data1.type,
                 "Sexo":this.sexoMostar,
                 "Municipio":this.municipioMostrar,
@@ -307,6 +309,7 @@ export class ReportsComponent implements OnInit {
               this.datosAExportar2.push({
                 id_poll:dataArray.id_poll,
                 Fecha:dataArray.Fecha,
+                Subregión:this.form.value.subRegionSelected,
                 Tipo:dataArray.Tipo,
                 Sexo:dataArray.Sexo,
                 Municipio:dataArray.Municipio,
@@ -342,6 +345,7 @@ export class ReportsComponent implements OnInit {
               this.datosAExportar2.push({
                 id_poll:dataArray.id_poll,
                 Fecha:dataArray.Fecha,
+                Subregión:this.form.value.subRegionSelected,
                 Tipo:dataArray.Tipo,
                 Sexo:dataArray.Sexo,
                 Municipio:dataArray.Municipio,
@@ -378,6 +382,7 @@ export class ReportsComponent implements OnInit {
             this.datosAExportar2.push({
               id_poll:dataArray.id_poll,
               Fecha:dataArray.Fecha,
+              Subregión:this.form.value.subRegionSelected,
               Tipo:dataArray.Tipo,
               Sexo:dataArray.Sexo,
               Municipio:dataArray.Municipio,
@@ -390,6 +395,7 @@ export class ReportsComponent implements OnInit {
               this.datosAExportar2.push({
                 id_poll:dataArray.id_poll,
                 Fecha:dataArray.Fecha,
+                Subregión:this.form.value.subRegionSelected,
                 Tipo:dataArray.Tipo,
                 Sexo:dataArray.Sexo,
                 Municipio:dataArray.Municipio,
