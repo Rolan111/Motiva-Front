@@ -119,16 +119,12 @@ export class QuantitativeInstrumentComponent implements OnInit {
   citiesList:ListTypes[] = arrayMunicipios;
 
   ngOnInit(): void {
-    console.log("Tipo cities: ",typeof this.citiesList)
 
     this.formQuantitative();
     this.personalInfo.get('applicationDate')?.setValue(new Date().toLocaleDateString())
-
-
     this.quanInstService.findAllQuestions('ADULT').subscribe(response => {
       this.questions = response.data;
     })
-
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
       // this.idPoll = response.data.idPoll;
@@ -494,7 +490,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idAnswer: this.idAnswer + 24,
       idQuestion: 16,
       idOptionAnswers: [],
-      openAnswer: 'Ant enf mental en familia: ' + answerForm.value.historyMentalIllness,
+      openAnswer: 'Diagnosticado con algún trastorno o enfermedad menta: ' + answerForm.value.historyMentalIllness,
       idPoll: this.idPoll,
       type: 'ADULT',
       score: answerForm.value.historyMentalIllness != '' ? 5 : 0,
@@ -1221,18 +1217,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
     // @ts-ignore
     this.sociodemographicFactors.get('occupation').valueChanges
       .subscribe(value => {
-        console.log(value);
           if(value == 38 || value == 39) {
-            console.log('workMode')
-            console.log(value);
             // @ts-ignore
             this.sociodemographicFactors.get('workMode').setValidators(Validators.required)
           }else if(value == 38 || value == 39 || value == 44){
-            console.log(value+ " :workSituation")
             // @ts-ignore
             this.factorsCovid19.get('workSituation').setValidators(Validators.required)
           }else if(value == 43){
-            console.log("studentSituation")
             // @ts-ignore
             this.factorsCovid19.get('studentSituation').setValidators(Validators.required)
           }else   {
@@ -1258,7 +1249,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.sociodemographicFactors.get('occupation').valueChanges
       .subscribe(value => {
         if(value == 38 || value == 39 || value == 44) {
-          console.log(value + " :workSituation")
           // @ts-ignore
           this.factorsCovid19.get('workSituation').setValidators(Validators.required)
         }else   {
@@ -1275,7 +1265,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.factorsCovid19.get('hadCovid').valueChanges
       .subscribe(value => {
           if(value == 65) {
-            console.log("hadCovid")
             // @ts-ignore
             this.factorsCovid19.get('affectationCovid').setValidators(Validators.required)
           }else{
@@ -1292,7 +1281,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.factorsCovid19.get('deadFamilyCovid').valueChanges
       .subscribe(value => {
           if(value == 78) {
-            console.log("deadFamilyCovid");
             // @ts-ignore
             this.factorsCovid19.get('deadFamilySymptom').setValidators(Validators.required);
           }else {

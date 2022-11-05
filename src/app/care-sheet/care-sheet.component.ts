@@ -51,47 +51,49 @@ export class CareSheetComponent implements OnInit {
   ngOnInit(): void {
     this.formCareSheet();
 
-
-    switch (this.careSheetService.shareSex) {
-      case 1 | 187: {
-        this.formPersonalInfo.get('sex')?.setValue('Hombre')
-        break;
-      }
-      case 2 | 188: {
-        this.formPersonalInfo.get('sex')?.setValue('Mujer')
-        break;
-      }
-
-      case 3 | 189: {
-        this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
-        break;
-      }
-      default: {
-        this.formPersonalInfo.get('sex')?.setValue('Esperando...')
-        break;
-      }
-    }
-
     this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
     this.formPersonalInfo.get('lastName')?.setValue(this.careSheetService.shareLastName)
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
+    switch (this.careSheetService.shareSex) {
+
+      case 1 :
+        this.formPersonalInfo.get('sex')?.setValue('Hombre')
+        break;
+      case 2 :
+        this.formPersonalInfo.get('sex')?.setValue('Mujer')
+        break;
+      case 3 :
+        this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
+        break;
+        case  187:
+        this.formPersonalInfo.get('sex')?.setValue('Hombre')
+        break;
+      case  188:
+        this.formPersonalInfo.get('sex')?.setValue('Mujer')
+        break;
+      case  189:
+        this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
+        break;
+      default:
+        this.formPersonalInfo.get('sex')?.setValue('Esperando...')
+        break;
+
+    }
+
 
     switch (this.careSheetService.shareEthnicity) {
       case 4 | 190: {
         this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
-
       case 5 | 191: {
         this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
-
       case 6 | 192: {
         this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
-
       case 7 | 193: {
         this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
@@ -100,12 +102,10 @@ export class CareSheetComponent implements OnInit {
         this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
-
       case 9 | 195: {
         this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }
-
       default: {
         this.formOrigin.get('ethnicity')?.setValue('Esperando...')
         break;

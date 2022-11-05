@@ -1,7 +1,7 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
 <!--   Información Personal -->
-  <mat-step [stepControl]="personalInfo" color="primary">
+  <mat-step  [stepControl]="personalInfo"  color="primary">
     <ng-template matStepLabel>Información Personal (Verificar en ficha de atención física)</ng-template>
     <mat-card class="advancedForm">
       <mat-card-header>
@@ -334,11 +334,9 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput maxlength="150" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="historyMentalIllness"
+                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="historyMentalIllness"
                        oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-                <mat-error *ngIf="isControlHasError('historyMentalIllness', 'required')">
-                  <strong>Campo requerido</strong>
-                </mat-error>
+
               </mat-form-field>
             </div>
           </mat-grid-tile>
@@ -346,12 +344,9 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>14. Discapacidad física o mental</mat-label>
-                <input matInput maxlength="150" placeholder="Discapacidad física o mental" formControlName="disabilityPhysicalMental">
-                <mat-error *ngIf="isControlHasError('disabilityPhysicalMental', 'required')"
-                           oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-                  <strong>Campo requerido</strong>
-                </mat-error>
-              </mat-form-field>
+                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="disabilityPhysicalMental"
+                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+                              </mat-form-field>
             </div>
           </mat-grid-tile>
         </mat-grid-list>
