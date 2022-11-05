@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
 
     this.loginService.logIn(data.value).subscribe({
       next: (response: LoginInterface) => {
+        console.log('La data de sesión es: ',response)
         this.responseLogin(response);
       }, error: (error) => {
         if (error.status === 401 || error.statusText === "ok") {

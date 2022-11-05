@@ -29,8 +29,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   maxDate = new Date();
 
-
-
   //Control for last form - mentalHealthNeeds-
   contadoclicks = 0;
   firstGroup = 0;
@@ -916,12 +914,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
           })
         }
 
-        this.answerList = [];
+        // this.answerList = [];
+        this.answerList.splice(0, this.answerList.length);
+        this.score = 0;
         this.sendToCareSheet();
 
       }, error: () => {
-        this.answerList = [];
+        // this.answerList = [];
         this.score = 0;
+        this.answerList.splice(0, this.answerList.length);
         this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
       }
     });
