@@ -133,7 +133,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       this.idAnswer = response.data.idAnswer;
       // this.idPoll = response.data.idPoll;
       this.idPoll=nanoid(10);
-      // console.log('EL ID POLL ES', this.idPoll)
+      console.log('EL ID POLL ES', this.idPoll)
     })
 
     this.addValidatorWorkMode();
