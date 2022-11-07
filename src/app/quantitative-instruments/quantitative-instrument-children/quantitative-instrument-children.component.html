@@ -10,6 +10,20 @@
       </mat-card-header>
 <!--      INFORMACIÓN PERSONAL-->
       <form [formGroup]="personalInfo">
+        <mat-grid-list cols="1" rowHeight="85px">
+
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <mat-form-field class="inputClass" appearance="fill">
+              <mat-label>Fecha de evaluación</mat-label>
+              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" readonly>
+              <mat-error *ngIf="isControlHasError('applicationDate', 'required')">
+                <strong>Campo requerido</strong>
+              </mat-error>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
         <mat-grid-list cols="2" rowHeight="85px">
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
@@ -61,7 +75,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>No. Identificación</mat-label>
-              <input type="text" matInput maxlength="12" placeholder="Número de identificación" minlength="8"
+              <input type="text" matInput maxlength="12" placeholder="Número de identificación" minlength="7"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
               <mat-error *ngIf="isControlHasError('identification', 'required')">
                 <strong>Campo requerido</strong>
@@ -80,7 +94,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>No. telefónico</mat-label>
-              <input type="text" matInput maxlength="12" minlength="8" placeholder="Número telefónico"
+              <input type="text" matInput minlength="7" [maxLength]="10" placeholder="Número telefónico"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
               <mat-error *ngIf="isControlHasError('cellphone', 'required')">
                 <strong>Campo requerido</strong>
@@ -94,7 +108,7 @@
   </mat-step>
 
 <!--  FACTORES SOCIODEMOGRÁFICOS -->
-  <mat-step [stepControl]="sociodemographicFactors">
+  <mat-step [stepControl]="sociodemographicFactors" color="primary" >
     <ng-template matStepLabel>Factores sociodemográficos</ng-template>
     <mat-card class="advancedForm">
       <form [formGroup]="sociodemographicFactors">
@@ -265,8 +279,7 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>12. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease"
-                       >
+                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease">
 
               </mat-form-field>
             </div>
@@ -275,9 +288,7 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Discapacidad física o mental</mat-label>
-                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMental"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-
+                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMental">
               </mat-form-field>
             </div>
           </mat-grid-tile>
@@ -356,7 +367,8 @@
         </mat-grid-list>
         <mat-card-actions>
           <button mat-button matStepperPrevious>Atrás</button>
-          <button mat-button matStepperNext (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
+          <button mat-button matStepperNext [disabled]="factors.invalid"
+                  (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
           comorbidityInfo, factors])">Enviar
           </button>
         </mat-card-actions>

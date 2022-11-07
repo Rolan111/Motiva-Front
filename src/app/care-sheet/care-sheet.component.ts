@@ -82,27 +82,51 @@ export class CareSheetComponent implements OnInit {
 
 
     switch (this.careSheetService.shareEthnicity) {
-      case 4 | 190: {
+      case 4 : {
         this.formOrigin.get('ethnicity')?.setValue('Indígena')
         break;
       }
-      case 5 | 191: {
+      case 5 : {
         this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
         break;
       }
-      case 6 | 192: {
+      case 6 : {
         this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
         break;
       }
-      case 7 | 193: {
+      case 7 : {
         this.formOrigin.get('ethnicity')?.setValue('Palenquero')
         break;
       }
-      case 8 | 194: {
+      case 8 : {
         this.formOrigin.get('ethnicity')?.setValue('Raizal')
         break;
       }
-      case 9 | 195: {
+      case 9 : {
+        this.formOrigin.get('ethnicity')?.setValue('Ninguno')
+        break;
+      }
+      case 190: {
+        this.formOrigin.get('ethnicity')?.setValue('Indígena')
+        break;
+      }
+      case 191: {
+        this.formOrigin.get('ethnicity')?.setValue('Afrodescendiente/Afrocolombiano')
+        break;
+      }
+      case 192: {
+        this.formOrigin.get('ethnicity')?.setValue('Gitano/Rrom')
+        break;
+      }
+      case 193: {
+        this.formOrigin.get('ethnicity')?.setValue('Palenquero')
+        break;
+      }
+      case 194: {
+        this.formOrigin.get('ethnicity')?.setValue('Raizal')
+        break;
+      }
+      case 195: {
         this.formOrigin.get('ethnicity')?.setValue('Ninguno')
         break;
       }
