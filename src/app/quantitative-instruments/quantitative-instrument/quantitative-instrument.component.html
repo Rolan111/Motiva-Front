@@ -1,7 +1,7 @@
 <mat-grid-tile-header>Instrumento cuantitativo adultos</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
 <!--   Información Personal -->
-  <mat-step  [stepControl]="personalInfo"  color="primary">
+  <mat-step   [stepControl]="personalInfo"  color="primary">
     <ng-template matStepLabel>Información Personal (Verificar en ficha de atención física)</ng-template>
     <mat-card class="advancedForm">
       <mat-card-header>
@@ -15,7 +15,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Fecha de evaluación</mat-label>
-              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [max]="maxDate" readonly>
+              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" readonly>
               <mat-error *ngIf="isControlHasError('applicationDate', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -30,7 +30,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard"                            >
               <mat-label>Primer nombre</mat-label>
-              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName"
+              <input matInput maxlength="30"   placeholder="Primer nombre" formControlName="firstName"
                      oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
               <mat-error *ngIf="isControlHasError('firstName', 'required')">
                 <strong>Campo requerido</strong>
@@ -77,7 +77,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>No. Identificación</mat-label>
-              <input type="text" matInput placeholder="Identificación" maxlength="12" minlength="8"
+              <input type="text" matInput placeholder="Identificación" maxlength="12" minlength="7"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
               <mat-error *ngIf="isControlHasError('identification', 'required')">
                 <strong>Campo requerido</strong>
@@ -96,7 +96,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>No. Telefónico</mat-label>
-              <input type="text" matInput placeholder="Número telefóinico" maxlength="10" minlength="8"
+              <input type="text" matInput placeholder="Número telefóinico" maxlength="10" minlength="6" [maxLength]="10"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
               <mat-error *ngIf="isControlHasError('cellphone', 'required')">
                 <strong>Campo requerido</strong>
@@ -111,7 +111,7 @@
 
   <!-- Factores sociodemográficos -->
 
-  <mat-step [stepControl]="sociodemographicFactors">
+  <mat-step [stepControl]="sociodemographicFactors" color="primary">
     <ng-template matStepLabel>Factores sociodemográficos</ng-template>
     <mat-card class="advancedForm">
       <form [formGroup]="sociodemographicFactors">
@@ -121,13 +121,17 @@
               <mat-label>1. Edad</mat-label>
               <input matInput placeholder="Edad" formControlName="age" maxlength="3"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
-              <mat-error *ngIf="isControlHasErrorSecundary('age', 'required')">
+
+               <mat-error *ngIf="isControlHasErrorSecundary('age', 'required')
+                      && sociodemographicFactors.controls['age'].invalid">
                 <strong>Campo requerido</strong>
               </mat-error>
+
             </mat-form-field>
+
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
+            <mat-form-field appearance="standard">
               <mat-label>2. Sexo</mat-label>
               <mat-select formControlName="sex" (click)="selectQuestion(2)" required>
                 <mat-option *ngFor="let item of sexList" [value]="item.idOptionAnswer">
@@ -332,9 +336,7 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="historyMentalIllness"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-
+                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="historyMentalIllness">
               </mat-form-field>
             </div>
           </mat-grid-tile>
@@ -343,7 +345,7 @@
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>14. Discapacidad física o mental</mat-label>
                 <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="disabilityPhysicalMental"
-                       oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+                        >
                               </mat-form-field>
             </div>
           </mat-grid-tile>

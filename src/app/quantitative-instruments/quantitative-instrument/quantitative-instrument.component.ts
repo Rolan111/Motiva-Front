@@ -27,7 +27,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
   //Ng-model
   occupationValue: number = 0;
 
+  //Validacion ingreso fecha de caracterizacion de beneficiario
   maxDate = new Date();
+  minDate = new Date('December 31, 2021 24:00:00');
 
   //Control for last form - mentalHealthNeeds-
   contadoclicks = 0;
@@ -155,7 +157,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores Sociodemográficos
     this.sociodemographicFactors = this.formBuilder.group({
-      age: ['', Validators.required],
+      age: new FormControl('', [Validators.required,Validators.min(14)]),
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
       civilStatus: ['', Validators.required],
@@ -182,11 +184,9 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
-      // hadCovid: new FormControl(null, Validators.required),
       hadCovid: ['', Validators.required],
       affectationCovid: [[]],
       aftermath: ['', Validators.required],
-      // deadFamilyCovid: new FormControl(null, Validators.required),
       deadFamilyCovid: ['', Validators.required],
       deadFamilySymptom: [[]],
       workSituation: [[]],
@@ -216,7 +216,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       fifteen: ['', Validators.required],
       sixteen: ['', Validators.required],
       seventeen: ['', Validators.required],
-      eighteen: [0, Validators.required],
+      eighteen: ['', Validators.required],
       nineteen: ['', Validators.required],
     });
   }
