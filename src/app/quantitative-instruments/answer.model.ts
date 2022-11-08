@@ -1,14 +1,14 @@
 export class AnswerModel {
   idAnswer: number;
   idQuestion: number;
-  idOptionAnswers: Array<number>[];
+  idOptionAnswers: Array<number>;
   openAnswer: string;
   // idPoll: number;
   idPoll: string;
   type: string;
   score: number;
 
-  constructor(idAnswer: number, idQuestion: number, idOptionAnswers: Array<number>[], openAnswer: string, idPoll: string,
+  constructor(idAnswer: number, idQuestion: number, idOptionAnswers: Array<number>, openAnswer: string, idPoll: string,
               type: string, score: number) {
     this.idAnswer = idAnswer;
     this.idQuestion = idQuestion;

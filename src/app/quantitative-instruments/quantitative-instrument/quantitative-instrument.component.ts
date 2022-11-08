@@ -184,20 +184,20 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //Formulario Factores contextuales asociados al COVID-19
     this.factorsCovid19 = this.formBuilder.group({
-      hadCovid: ['', Validators.required],
-      affectationCovid: [[]],
-      aftermath: ['', Validators.required],
-      deadFamilyCovid: ['', Validators.required],
-      deadFamilySymptom: [[]],
+      hadCovid: [[], Validators.required],
+      affectationCovid: [0],//Para este caso no debe iniciar como array, porque en caso de que no se llene quedaría Array dentro de Array
+      aftermath: [[], Validators.required],
+      deadFamilyCovid: [[], Validators.required],
+      deadFamilySymptom: [[]], /** Para este caso no debe de iniciar en 0 ya que lo espera la validacion del Score */
       workSituation: [[]],
       studentSituation: [[]],
-      conflictVictim: ['', Validators.required],
-      diomesticViolence: ['', Validators.required],
-      mentalHealth: ['', Validators.required],
-      vaccinationPosture: ['', Validators.required],
+      conflictVictim: [[], Validators.required],
+      diomesticViolence: [[], Validators.required],
+      mentalHealth: [[], Validators.required],
+      vaccinationPosture: [[], Validators.required],
     });
 
-    //Necesidades en salud mental asociadas al Covid-19
+    //Formulario Necesidades en salud mental asociadas al Covid-19
     this.mentalHealthNeeds = this.formBuilder.group({
       one: ['', Validators.required],
       two: ['', Validators.required],
@@ -523,41 +523,17 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let answer28: AnswerModel = {
       idAnswer: this.idAnswer + 27,
       idQuestion: 18,
-      idOptionAnswers: answerForm.value.affectationCovid,
+      idOptionAnswers: [answerForm.value.affectationCovid],
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
       score: 0,
     };
 
-    // let answer28: AnswerModel;
-    //
-    // if(answerForm.value.hadCovid == 66){ //Selecciona NO
-    //     answer28 = {
-    //     idAnswer: this.idAnswer + 27,
-    //     idQuestion: 18,
-    //     idOptionAnswers: [],
-    //     openAnswer: '',
-    //     idPoll: this.idPoll,
-    //     type: 'ADULT',
-    //     score: 0,
-    //   }
-    // }else{
-    //    answer28 = {
-    //     idAnswer: this.idAnswer + 27,
-    //     idQuestion: 18,
-    //     idOptionAnswers: [answerForm.value.affectationCovid],
-    //     openAnswer: '',
-    //     idPoll: this.idPoll,
-    //     type: 'ADULT',
-    //     score: 0,
-    //   }
-    // }
-
     let answer29: AnswerModel = {
       idAnswer: this.idAnswer + 28,
       idQuestion: 19,
-      idOptionAnswers: answerForm.value.aftermath,
+      idOptionAnswers: answerForm.value.aftermath, /** Para este caso NO se coloca corchetes ya que quedaria Array dentro de Array y genera error */
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'ADULT',
@@ -574,6 +550,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       type: 'ADULT',
       score: 0,
     };
+
 
     let answer31: AnswerModel = {
       idAnswer: this.idAnswer + 30,
@@ -604,7 +581,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: 'ADULT',
       score: this.scoreStudentSituation(answerForm.value.studentSituation),
-      //score: 0,
     };
 
     let answer34: AnswerModel = {
@@ -847,6 +823,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   //2 Se recorre cada formulario (5 en total), se cargan las respuestas al modelo y a "answerList"
     //Posteriormente se llaman los servicios y los datos se envían a la base de datos
+
   sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
 
     answerFormList.forEach(answerForm => {
@@ -1329,6 +1306,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.careSheetService.shareEthnicity = this.sociodemographicFactors.value.ethnicity;
     this.careSheetService.sharePhone = this.personalInfo.value.cellphone;
     this.router.navigate(['navbar/care-sheet'])
+  }
+
+  pruebasFormularios(){
+    console.log('Los datos del formulario Factores contextuales asociados al covid 19 son: ', this.factorsCovid19)
   }
 
 }
