@@ -115,7 +115,7 @@
         <mat-grid-list cols="3" rowHeight="80px">
           <mat-grid-tile>
             <mat-form-field class="inputClass">
-              <mat-label>Edad</mat-label>
+              <mat-label>1. Edad</mat-label>
               <input matInput formControlName="age" maxlength="3" placeholder="Edad"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
               <mat-error *ngIf="isControlHasErrorSecundary('age', 'required')">
@@ -125,7 +125,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Sexo</mat-label>
+              <mat-label>2. Sexo</mat-label>
               <mat-select formControlName="sex" (click)="selectQuestion(2)" required>
                 <mat-option *ngFor="let item of sexList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -138,7 +138,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Reconocimiento étnico</mat-label>
+              <mat-label>3. Reconocimiento étnico</mat-label>
               <mat-select formControlName="ethnicity" (click)="selectQuestion(3)" required>
                 <mat-option *ngFor="let item of ethnicityList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -151,7 +151,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group">
-              <label>Zona de residencia</label>
+              <label>4. Zona de residencia</label>
               <mat-radio-group class="example-radio-group" aria-label="Zona de residencia"
                                formControlName="zoneResidence">
                 <mat-radio-button class="example-radio-button" value="196">Rural</mat-radio-button>
@@ -164,7 +164,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Municipio de residencia</mat-label>
+              <mat-label>5. Municipio de residencia</mat-label>
               <mat-select formControlName="municipalityResidence" required>
                 <mat-option *ngFor="let city of citiesList" [value]="city.viewValue">
                   {{city.viewValue}}
@@ -177,7 +177,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass">
-              <mat-label>No. Personas con las que convive</mat-label>
+              <mat-label>6. No. Personas con las que convive</mat-label>
               <input matInput formControlName="personCoexist"
                      maxlength="2" placeholder="Número de personas con las que convive"
                      oninput="this.value=this.value.replace(/[^0-9]/g,'')" required>
@@ -188,7 +188,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Tipo de vivienda</mat-label>
+              <mat-label>7. Tipo de vivienda</mat-label>
               <mat-select formControlName="typeHome" (click)="selectQuestion(7)" required>
                 <mat-option *ngFor="let item of typeHomeList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -201,7 +201,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Acceso a servicios</mat-label>
+              <mat-label>8. Acceso a servicios</mat-label>
               <mat-select formControlName="accessServicies" (click)="selectQuestion(8)" multiple required>
                 <mat-option *ngFor="let item of accessServiciesList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -214,7 +214,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Escolaridad</mat-label>
+              <mat-label>9. Escolaridad</mat-label>
               <mat-select formControlName="educationLevel" (click)="selectQuestion(9)" required>
                 <mat-option *ngFor="let item of educationLevelList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -227,7 +227,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Modalidad de estudio:</mat-label>
+              <mat-label>10. Modalidad de estudio:</mat-label>
               <mat-select formControlName="studyMode" (click)="selectQuestion(10)" required>
                 <mat-option *ngFor="let item of studyModeList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -240,7 +240,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Percepción de seguridad social en salud</mat-label>
+              <mat-label>11. Percepción de seguridad social en salud</mat-label>
               <mat-select formControlName="socialSecurity" (click)="selectQuestion(11)" required>
                 <mat-option *ngFor="let item of socialSecurityList" [value]="item.idOptionAnswer">
                   {{item.description}}
@@ -262,10 +262,10 @@
 
 <!--  COMORBILIDADES, TRASTORNO Y ENFERMEDADES PREEXISTENTES -->
   <mat-step>
-    <ng-template matStepLabel>Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
+    <ng-template matStepLabel>12. Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
     <mat-card class="advancedForm">
       <form [formGroup]="comorbidityInfo">
-        <mat-grid-list cols="3" rowHeight="80px">
+        <mat-grid-list cols="2" rowHeight="80px">
           <mat-grid-tile *ngFor="let comorbilities of comorbilitiesList; let i = index">
             <div class="checkboxGrid">
               <mat-checkbox (change)="onCheckboxChange($event)" [value]="comorbilities.idOptionAnswer.toString()">
@@ -312,7 +312,7 @@
         <mat-grid-list cols="1" rowHeight="100px">
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del
+              <label>13. ¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del
                 virus?</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="one">
@@ -323,7 +323,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste estudiando en casa el tiempo que no pudiste salir a causa del virus?</label>
+              <label>14. ¿Cómo te sentiste estudiando en casa el tiempo que no pudiste salir a causa del virus?</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="two">
                 <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twoList"
@@ -333,7 +333,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste al no poder relacionarte con tus amigos como antes, el tiempo que estuviste en
+              <label>15. ¿Cómo te sentiste al no poder relacionarte con tus amigos como antes, el tiempo que estuviste en
                 casa sin poder salir a causa del virus?</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="three">
@@ -344,7 +344,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste al cumplir con tus deberes y tareas el tiempo que estuviste en casa sin poder
+              <label>16. ¿Cómo te sentiste al cumplir con tus deberes y tareas el tiempo que estuviste en casa sin poder
                 salir a causa del virus?</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="four">
@@ -355,7 +355,7 @@
           </mat-grid-tile>
           <mat-grid-tile>
             <div class="example-radio-group" style="width: 100%">
-              <label>¿Cómo te sentiste realizando tus pasatiempos, mientras estuviste en casa sin poder salir a causa
+              <label>17. ¿Cómo te sentiste realizando tus pasatiempos, mientras estuviste en casa sin poder salir a causa
                 del virus?</label>
               <br>
               <mat-radio-group class="example-radio-group" formControlName="five">
