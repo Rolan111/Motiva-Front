@@ -24,6 +24,10 @@ interface ListTypes {
 })
 export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
+  //Validacion ingreso fecha de caracterizacion de beneficiario
+  maxDate = new Date();
+  minDate = new Date('December 31, 2021 24:00:00');
+
   isntrumentoAdultos!: QuantitativeInstrumentComponent;
   //Declaración de las colecciones de formularios
   personalInfo!: FormGroup;
@@ -80,6 +84,9 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   ngOnInit(): void {
     this.formQuantitative();
 
+    this.personalInfo.get('applicationDate')?.setValue(new Date().toLocaleDateString())
+
+
     this.quanInstService.findAllQuestions('CHILDREN').subscribe(response => {
       this.questions = response.data;
       console.log('La preguntas de CHILDREN son: ',response)
@@ -93,6 +100,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   private formQuantitative() {
     this.personalInfo = this.formBuilder.group({
+      applicationDate: ['', Validators.required],
       firstName: ['', Validators.required],
       firstLastName: ['', Validators.required],
       secondName: [''],
@@ -104,7 +112,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     });
 
     this.sociodemographicFactors = this.formBuilder.group({
-      age: ['', Validators.required],
+      age: new FormControl('', [Validators.required,Validators.max(13)]),
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
       zoneResidence: ['', Validators.required],
@@ -124,15 +132,24 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     })
 
     this.factors = this.formBuilder.group({
-      one: [''],
-      two: [''],
-      three: [''],
-      four: [''],
-      five: [''],
+      one: ['', Validators.required],
+      two: ['', Validators.required],
+      three: ['', Validators.required],
+      four: ['', Validators.required],
+      five: ['', Validators.required],
     });
   }
 
   saveAnswerPersonalInfo(answerForm: FormGroup) {
+    let answer0: AnswerModel = {
+      idAnswer: this.idAnswer,
+      idQuestion: 102,
+      idOptionAnswers: [],
+      openAnswer: answerForm.value.applicationDate,
+      idPoll: this.idPoll,
+      type: 'ADULT',
+      score: 0,
+    };
     let answer1: AnswerModel = {
       idAnswer: this.idAnswer,
       idQuestion: 200,
@@ -213,7 +230,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       score: 0,
     };
 
-    this.answerList.push(answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8);
+    this.answerList.push(answer0,answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8);
   }
 
   saveAnswerSecundaryInfo(answerForm: FormGroup) {
