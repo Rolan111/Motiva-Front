@@ -918,16 +918,20 @@ export class QuantitativeInstrumentComponent implements OnInit {
           })
         }
 
-        // this.answerList = [];
         this.answerList.splice(0, this.answerList.length);
+        this.answerList = [];
         this.score = 0;
         this.sendToCareSheet();
 
       }, error: () => {
-        // this.answerList = [];
-        this.score = 0;
         this.answerList.splice(0, this.answerList.length);
+        this.answerList = [];
+        this.score = 0;
         this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
+      }, complete: ()=>{
+        this.answerList.splice(0, this.answerList.length);
+        this.answerList = [];
+        this.score = 0;
       }
     });
 
