@@ -1,4 +1,4 @@
-import {Component, destroyPlatform, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ReportsService} from "./reports.service";
 import {
@@ -12,7 +12,7 @@ import {
 } from "../enums/enum";
 import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 import {CareRasmService} from "../care-rasm/care-rasm.service";
-import {empty, Observable, observable, of, Subscription, timeout} from "rxjs";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 interface ListTypes{
   value: string;
@@ -37,6 +37,9 @@ export interface reporte2{
   styleUrls: ['./reports.component.scss']
 })
 export class ReportsComponent implements OnInit {
+
+
+
 
   datosAExportar2:Array<reporte2>=[];
   datosAExportar1:Array<any>=[];
@@ -66,16 +69,17 @@ export class ReportsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private reportsService: ReportsService,
     private quantitativeInstrumentService: QuantitativeInstrumentService,
+    private _snackBar: MatSnackBar
     // public procesandoReporteRutas: ProcesandoReporteRutas
   ) {
 
     this.form = this.formBuilder.group({
-      dateStart: ['', Validators.required],
-      dateEnd: ['', Validators.required],
+      dateStart: [''],
+      dateEnd: [''],
       monthSelected: ['', Validators.required],
       typeConsultSelected: ['', Validators.required],
-      municipalitySelected: ['', Validators.required],
-      subRegionSelected: ['', Validators.required],
+      municipalitySelected: [''],
+      subRegionSelected: [''],
       zoneSelected: ['', Validators.required],
       typeRouteSelected: ['', Validators.required],
     })
@@ -102,18 +106,12 @@ export class ReportsComponent implements OnInit {
   // dateEnd1:any = "2022-07-27";
 
   ngOnInit(): void {
-    // if(this.dateStart1>this.dateEnd1){
-    //   console.log('La fecha inicial es MAYOR a la fecha final')
-    // }else {
-    //   console.log('La fecha inicial es MENOR a la fecha final')
-    // }
+
+    this.addValidation();
 
   }
 
   procesandoReportes(DateStart:string, DateEnd:string) {
-
-    // let selectedDateStart: any = this.form.value.dateStart;
-    // let selectedDateEnd: any = this.form.value.dateEnd;
 
     let selectedDateStart: string = DateStart;
     let selectedDateEnd: string = DateEnd;
@@ -122,9 +120,6 @@ export class ReportsComponent implements OnInit {
     let subRegionSelected: string = this.form.value.subRegionSelected;
     let zoneSelected: string = this.form.value.zoneSelected;
     let typeRouteSelected: string = this.form.value.typeRouteSelected;
-
-    // let selectedDateStart: any = new Date(DateStart);
-    // let selectedDateEnd: any = new Date(DateEnd);
 
     console.log('La fecha inicial capturada es: ', DateStart)
     console.log('La fecha final capturada es: ', DateEnd)
@@ -137,21 +132,23 @@ export class ReportsComponent implements OnInit {
 
     this.quantitativeInstrumentService.getAnswersByIdQuestion(102).subscribe(data=>{ //Consultamos la tabla answer donde todos los id_question sean 102 y a open_answer para FECHA DE EVALUACION
 
-      console.log('La data inicial answer es: ',data)
-      let capturandoDataAnswer:any = data;
-      capturandoDataAnswer.forEach((data1:any)=>{ //De aquí sacamos id_poll, fecha, type (Adult, children)
-        let dateInstrument:any = data1.openAnswer;
+      if(data.length == 0){
+        this.openSnackBar('NO HAY REGISTROS - EVALUAR LOS FILTROS SELECCIONADOS', 'ACEPTAR');
+      }else{
+        let capturandoDataAnswer:any = data;
+        capturandoDataAnswer.forEach((data1:any)=>{ //De aquí sacamos id_poll, fecha, type (Adult, children)
+          let dateInstrument:any = data1.openAnswer;
 
-        if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){
-          console.log('La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
+          if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){
+            console.log('La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
 
-          // if(typeConsultSelected=="municipio"){ // Para el caso de consultar MUNICIPIO
+            // if(typeConsultSelected=="municipio"){ // Para el caso de consultar MUNICIPIO
 
-          // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
-          //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
-          this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
-            console.log('Los datos MULTIPLES consultados son>: ',data)
-            let capturandoMultiplesDatos:any = data;
+            // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
+            //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
+            this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
+              console.log('Los datos MULTIPLES consultados son>: ',data)
+              let capturandoMultiplesDatos:any = data;
               capturandoMultiplesDatos.forEach((data2:any)=>{
                 switch (data2.idQuestion){
                   case 2: //SEXO
@@ -250,21 +247,21 @@ export class ReportsComponent implements OnInit {
                 }
 
               })
-            //Hacemo limpieza de los datos que clasifican para el siguiente filtro
-            if(this.municipioMostrar=='no_clasifica' || this.zonaMostrar=='no_clasifica'){
-              //NO HAGA NADA CON ESTOS DATOS, es decir se perderán si no clasifican
-            }else{
-              this.datosAExportar1.push({
-                "id_poll":data1.idPoll,
-                "Fecha":data1.openAnswer,
-                "Subregión":this.form.value.subRegionSelected,
-                "Tipo":data1.type,
-                "Sexo":this.sexoMostar,
-                "Municipio":this.municipioMostrar,
-                "Edad":this.edadMostrar,
-                "Zona":this.zonaMostrar
-              })
-            }
+              //Hacemo limpieza de los datos que clasifican para el siguiente filtro
+              if(this.municipioMostrar=='no_clasifica' || this.zonaMostrar=='no_clasifica'){
+                //NO HAGA NADA CON ESTOS DATOS, es decir se perderán si no clasifican
+              }else{
+                this.datosAExportar1.push({
+                  "id_poll":data1.idPoll,
+                  "Fecha":data1.openAnswer,
+                  "Subregión":this.form.value.subRegionSelected,
+                  "Tipo":data1.type,
+                  "Sexo":this.sexoMostar,
+                  "Municipio":this.municipioMostrar,
+                  "Edad":this.edadMostrar,
+                  "Zona":this.zonaMostrar
+                })
+              }
 
             },error => {},() => {
 
@@ -278,11 +275,18 @@ export class ReportsComponent implements OnInit {
               }
             })
 
-        }else {
-          console.log(' NO HAY REGISTROS dentro de este rango -- Evaluar condición')
-        }
-      })
-    },error => {},() => {
+          }else {
+            this.openSnackBar('NO HAY REGISTROS - EVALUAR LOS FILTROS SELECCIONADOS', 'Aceptar');
+            //console.log(' NO HAY REGISTROS dentro de este rango -- Evaluar condición')
+          }
+        })
+
+      }
+
+    },error => {
+      this.openSnackBar('NO HAY REGISTROS -- EVALUAR LOS FILTROS SELECCIONADOS', 'Aceptar');
+
+    },() => {
 
     })
   }
@@ -431,6 +435,41 @@ export class ReportsComponent implements OnInit {
 
   probandoMetodos(){ //para hacer pruebas en los métodos
     // console.log('El mes seleccionado fue: ', this.form.value.monthSelected)
+  }
+
+  //metodo para agregar prop Validators
+  private  addValidation(){
+    // @ts-ignore
+    this.form.get('typeConsultSelected').valueChanges
+      .subscribe((value: any) => {
+        console.log('La consulta es: ', value)
+
+        if(value == 'municipio') {
+          // @ts-ignore
+          this.form.get('municipalitySelected').setValidators(Validators.required)
+          }else  if(value == 'sub-region') {
+          // @ts-ignore
+          this.form.get('subRegionSelected').setValidators(Validators.required)
+        }else{
+          // @ts-ignore
+          this.form.get('municipalitySelected').clearValidators();
+          // @ts-ignore
+          this.form.get('municipalitySelected').updateValueAndValidity();
+          // @ts-ignore
+          this.form.get('subRegionSelected').clearValidators();
+          // @ts-ignore
+          this.form.get('subRegionSelected').updateValueAndValidity();
+
+        }
+        }
+      );
+  }
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 5000,
+      horizontalPosition: 'center',
+      verticalPosition: 'top'
+    });
   }
 
 }
