@@ -22,7 +22,7 @@ export class AlertsComponent implements OnInit {
   procesamientoDeAlertas: AlertsModel[] = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
+  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review', 'ponderado'];
   dataSource = this.arrayDeAlertasTabla;
 
   constructor(private alertsService: AlertsService) {
