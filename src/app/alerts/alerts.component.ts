@@ -8,6 +8,12 @@ export interface AlertsModel {
   beneficiary: string;
   municipality: string;
   date: string;
+  nameProfessional: string;
+  lastNameProfessional: string;
+  nameBeneficiary: string;
+  lastNameBeneficiary: string;
+  identification: number;
+  typeIdentification: string;
   //type_identification: string;
 }
 
@@ -46,6 +52,7 @@ export class AlertsComponent implements OnInit {
 
     this.alertsService.getAllAlerts().subscribe(data => {
       this.arrayDeAlertas = data;
+      console.log(data)
       this.arrayDeAlertas.forEach((recorriendoArray: any) => {
         //Para traer el NOMBRE DEL PROFESIONAL consultamos en la tabla poll y nos traemos el id_user
         this.alertsService.getPollById(recorriendoArray.idPoll).subscribe(data2 => { //para traer los idUser que tiene poll
@@ -87,7 +94,13 @@ export class AlertsComponent implements OnInit {
                                 municipality: recorriendoArray5.openAnswer,
                                 //type_identification: recorriendoArray.idOptionAnswer,
                                 //date: recorriendoArray6.open_answer
-                                date: 'La fecha'
+                                date: 'La fecha',
+                                nameProfessional: '',
+                                lastNameProfessional: '',
+                                nameBeneficiary: '',
+                                lastNameBeneficiary: '',
+                                identification: 0,
+                                typeIdentification: ''
                               })
 
                               if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {
