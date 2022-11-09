@@ -23,6 +23,7 @@ export class AlertsService {
   public getAlertSize() {
     const path = mainUrl + 'api/alerts-size';
     const headers = this.getHeader();
+    console.log('Tabla alert' ,this.http.get(path, {headers}));
     return this.http.get(path, {headers});
   }
 
