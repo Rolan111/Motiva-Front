@@ -113,8 +113,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Etnia</mat-label>
-              <input readonly formControlName="ethnicity" maxlength="2000" matInput placeholder="Etnia"
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <input readonly formControlName="ethnicity" maxlength="2000" matInput placeholder="Etnia">
               <mat-error *ngIf="isControlHasErrorOrigin('ethnicity','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
@@ -160,7 +159,7 @@
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <mat-form-field class="inputClass" appearance="fill">
               <mat-label>Barrio/Vereda</mat-label>
-              <input formControlName="neighborhood" maxlength="2000" matInput placeholder="Barrio/Vereda">
+              <input type="text" formControlName="neighborhood" maxlength="2000" matInput placeholder="Barrio/Vereda">
               <mat-error *ngIf="isControlHasErrorOrigin('neighborhood','required')">
                 <strong>Campo Requerido</strong>
               </mat-error>
