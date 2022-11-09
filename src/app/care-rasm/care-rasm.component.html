@@ -22,16 +22,17 @@
 
     <!-- documento Column -->
     <ng-container matColumnDef="documento">
-      <th mat-header-cell *matHeaderCellDef> Documento</th>
+      <th mat-header-cell *matHeaderCellDef> Identificacion</th>
       <td mat-cell *matCellDef="let element"> {{element.identification}} </td>
     </ng-container>
+
 
     <!-- seguimiento -->
     <ng-container matColumnDef="seguimiento">
       <th mat-header-cell *matHeaderCellDef> Seguimiento</th>
       <td mat-cell *matCellDef="let element">
         <!--        <button mat-raised-button color="accent" routerLink="instrument-review">Seguimiento</button>-->
-        <button mat-raised-button color="accent" [routerLink]="['instrument-review', element?.id_poll]">Seguimiento</button>
+        <button mat-raised-button color="accent" onclick="location.href='http://localhost:4200/navbar/tracking-sheet'">Seguimiento</button>
       </td>
     </ng-container>
 
