@@ -23,16 +23,13 @@ export class AlertsService {
   public getAlertSize() {
     const path = mainUrl + 'api/alerts-size';
     const headers = this.getHeader();
-    console.log('Tabla alert' ,this.http.get(path, {headers}));
     return this.http.get(path, {headers});
   }
 
   public getAlertSize2() {
     this.getAllAlerts().subscribe(data => {
-      // console.log('Para la cantidad de datos: ',data)
       this.trayendoData.push(data);
     })
-
     return this.trayendoData;
   }
 
