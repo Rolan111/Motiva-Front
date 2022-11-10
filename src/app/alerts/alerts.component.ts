@@ -12,6 +12,7 @@ export interface AlertsModel {
   identification: number;
   typeIdentification: string;
   score: number;
+  cellphone: number;
   //type_identification: string;
 }
 
@@ -27,7 +28,7 @@ export class AlertsComponent implements OnInit {
   procesamientoDeAlertas: AlertsModel[] = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date',  'ponderado','review'];
+  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'phone', 'typeIdentification', 'identification', 'municipality', 'date',  'ponderado','review'];
   dataSource = this.arrayDeAlertasTabla;
 
   constructor(private alertsService: AlertsService) {
@@ -93,8 +94,9 @@ export class AlertsComponent implements OnInit {
                             date: 'd',
                             nameBeneficiary: recorriendoArray.nameBeneficiary + ' ' +recorriendoArray.lastNameBeneficiary,
                             identification: recorriendoArray.identification,
-                            typeIdentification: recorriendoArray.idOptionAnswer,
-                            score: recorriendoArray.score
+                            typeIdentification: recorriendoArray.typeIdentification,
+                            score: recorriendoArray.score,
+                            cellphone: recorriendoArray.cellphone
                           })
 
                           if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {

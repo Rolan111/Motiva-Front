@@ -11,9 +11,13 @@ export class AlertModel {
   lastNameBeneficiary: string;
   identification: number;
   typeIdentification: string;
+  cellphone: number;
 
 
-  constructor(idAlert: number, idPoll: string, score: number, professional: string, beneficiary: string, municipality: string, date: string, nameBeneficiary: string, lastNameBeneficiary: string, identification: number, typeIdentification: string) {
+  constructor(idAlert: number, idPoll: string,
+              score: number, professional: string,
+              beneficiary: string, municipality: string, date: string, nameBeneficiary: string,
+              lastNameBeneficiary: string, identification: number, typeIdentification: string, cellphone: number) {
     this.idAlert = idAlert;
     this.idPoll = idPoll;
     this.score = score;
@@ -25,6 +29,7 @@ export class AlertModel {
     this.lastNameBeneficiary = lastNameBeneficiary;
     this.identification = identification;
     this.typeIdentification = typeIdentification;
+    this.cellphone = cellphone;
   }
 }
 //

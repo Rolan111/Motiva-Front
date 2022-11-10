@@ -64,6 +64,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   lastNameBeneficiary!: string;
   identification: number = 0;
   typeIdentification!: string;
+  cellphone: number = 0;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -879,14 +880,13 @@ export class QuantitativeInstrumentComponent implements OnInit {
       nameBeneficiary: this.personalInfo.value.firstName,
       lastNameBeneficiary: this.personalInfo.value.firstLastName,
       identification: this.personalInfo.value.identification,
-      typeIdentification: this.personalInfo.value.typeIdentification
-
-
+      typeIdentification: this.personalInfo.value.typeIdentification,
+      cellphone: this.personalInfo.value.cellphone
     }
-    console.log('alert inst ', alert)
+    console.log('Modelo alert desde instrumento: ', alert)
 
     // console.log('El puntaje TOTAL es: ', this.score)
-    // console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)
+
 
     //llamado del SERVICIO para guardar a la tabla ANSWER
 

@@ -52,6 +52,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   lastNameBeneficiary!: string;
   identification: number = 0;
   typeIdentification!: string;
+  cellphone: number = 0;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -484,7 +485,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       nameBeneficiary: this.personalInfo.value.firstName,
       lastNameBeneficiary: this.lastNameBeneficiary,
       identification: this.identification,
-      typeIdentification: this.typeIdentification
+      typeIdentification: this.typeIdentification,
+      cellphone: this.personalInfo.value.cellphone
     }
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
