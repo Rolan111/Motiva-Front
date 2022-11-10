@@ -140,7 +140,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     this.comorbidityInfo = this.formBuilder.group({
       comorbilities: this.formBuilder.array([]),
       disorderDisease: [''],
-      physicalMental: [''],
+      physicalMentalDisability: [''],
     })
 
     this.factors = this.formBuilder.group({
@@ -245,6 +245,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     this.answerList.push(answer0,answer1, answer2, answer3, answer4, answer5, answer6, answer7, answer8);
   }
 
+  /** Factores sociodemográficos */
   saveAnswerSecundaryInfo(answerForm: FormGroup) {
     let answer9: AnswerModel = {
       idAnswer: this.idAnswer + 8,
@@ -285,6 +286,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       type: 'CHILDREN',
       score: answerForm.value.zoneResidence == 196 ? 1 : 0,
     };
+
+    console.log('La zona de residencia es: ', answerForm.value.zoneResidence)
 
     let answer13: AnswerModel = {
       idAnswer: this.idAnswer + 12,
@@ -345,6 +348,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       type: 'CHILDREN',
       score: this.scoreModeStudy(answerForm.value.studyMode),
     };
+    console.log('La modalidad de estudio es: ', answerForm.value.studyMode)
 
     let answer19: AnswerModel = {
       idAnswer: this.idAnswer + 18,
@@ -360,6 +364,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       answer18, answer19);
   }
 
+  /** Comorbilidades, trastorno y enfermedades preexistentes */
   saveAnswerComorbidity(answerForm: FormGroup) {
     let answer20: AnswerModel = {
       idAnswer: this.idAnswer + 19,
@@ -385,7 +390,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       idAnswer: this.idAnswer + 21,
       idQuestion: 12,
       idOptionAnswers: [],
-      openAnswer: answerForm.value.physicalMental,
+      openAnswer: answerForm.value.physicalMentalDisability,
       idPoll: this.idPoll,
       type: 'CHILDREN',
       score: 0,
@@ -394,6 +399,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     this.answerList.push(answer20, answer21, answer22);
   }
 
+  /** Factores contextuales asociados al covid19 */
   saveAnswerFactor(answerForm: FormGroup) {
     let answer23: AnswerModel = {
       idAnswer: this.idAnswer + 22,
@@ -447,6 +453,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.answerList.push(answer23, answer24, answer25, answer26, answer27);
   }
+
 
   sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
     answerFormList.forEach(answerForm => {
