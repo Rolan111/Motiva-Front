@@ -50,6 +50,7 @@ export class CareSheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCareSheet();
+    console.log('Id poll f ', this.formPersonalInfo.value.capturaIdPoll)
 
     this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
     this.formPersonalInfo.get('lastName')?.setValue(this.careSheetService.shareLastName)
@@ -464,7 +465,7 @@ export class CareSheetComponent implements OnInit {
   private formCareSheet(){
 
     this.formPersonalInfo = this.formBuilder.group({
-      capturaIdPoll: [this.careSheetService.shareIdPoll, Validators.required],
+      capturaIdPoll: [this.careSheetService.shareIdPoll],
       city: [this.careSheetService.shareCity],
       department: ['Cauca'],
       sex: [''],
