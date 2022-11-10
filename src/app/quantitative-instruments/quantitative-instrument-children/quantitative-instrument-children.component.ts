@@ -480,7 +480,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
           }
         })
 
-        if(this.score >= 25){
+        if(this.score >= 6){
           this.quanInstService.createAlert(alert).subscribe({
             next: () => {
               this.openSnackBar('Se guardó correctamente la alerta', 'Aceptar');

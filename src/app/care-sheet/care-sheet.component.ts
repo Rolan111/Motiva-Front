@@ -44,7 +44,6 @@ export class CareSheetComponent implements OnInit {
     public careSheetService: CareSheetService
   ) {
 
-
   }
 
 
@@ -150,13 +149,16 @@ export class CareSheetComponent implements OnInit {
 
   //Guardado de datos
   public saveForm() {
-    //Información personal
+    /**Información personal. El resto de datos faltante son recuperados */
     this.listaDeRespuestas.push({
       id_question: 101,
       id_option_answer: 0,
       open_answer: this.formPersonalInfo.value.department,
       id_poll: this.idPollRecuperado
     });
+
+    /** Procedencia: Datos recuperados: Etnia */
+
     this.listaDeRespuestas.push({
       id_question: 110,
       id_option_answer: 0,
@@ -167,6 +169,12 @@ export class CareSheetComponent implements OnInit {
       id_question: 111,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.placeBirth,
+      id_poll: this.idPollRecuperado
+    });
+    this.listaDeRespuestas.push({
+      id_question: 112,
+      id_option_answer: 0,
+      open_answer: this.formOrigin.value.origin,
       id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
@@ -193,6 +201,7 @@ export class CareSheetComponent implements OnInit {
       open_answer: this.formOrigin.value.phone,
       id_poll: this.idPollRecuperado
     });
+    /** Consulta */
     this.listaDeRespuestas.push({
       id_question: 117,
       id_option_answer: 0,
