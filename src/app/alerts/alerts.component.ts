@@ -94,7 +94,7 @@ export class AlertsComponent implements OnInit {
                             date: 'd',
                             nameBeneficiary: recorriendoArray.nameBeneficiary + ' ' +recorriendoArray.lastNameBeneficiary,
                             identification: recorriendoArray.identification,
-                            typeIdentification: recorriendoArray.typeIdentification,
+                            typeIdentification: recorriendoArray.idOptionAnswer,
                             score: recorriendoArray.score,
                             cellphone: recorriendoArray.cellphone
                           })
