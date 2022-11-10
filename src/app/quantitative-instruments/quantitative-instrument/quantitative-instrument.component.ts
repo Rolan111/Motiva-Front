@@ -53,7 +53,17 @@ export class QuantitativeInstrumentComponent implements OnInit {
   questions: Array<Question> = [];
   hadCovid: number = 0;
   deadFamilyCovid: number = 0;
+
+  //Modelo de alerta
   score: number = 0;
+  professional!: string;
+  beneficiary!: string;
+  municipality!: string;
+  date!: string;
+  nameBeneficiary!: string;
+  lastNameBeneficiary!: string;
+  identification: number = 0;
+  typeIdentification!: string;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -861,8 +871,19 @@ export class QuantitativeInstrumentComponent implements OnInit {
     let alert: AlertModel = {
       idAlert: 1,
       idPoll: this.idPoll,
-      score: this.score
+      score: this.score,
+      professional: this.professional,//Esto se gurd en lert component
+      beneficiary: this.beneficiary,
+      municipality: this.sociodemographicFactors.value.municipalityResidence,
+      date: '',
+      nameBeneficiary: this.personalInfo.value.firstName,
+      lastNameBeneficiary: this.personalInfo.value.firstLastName,
+      identification: this.personalInfo.value.identification,
+      typeIdentification: this.personalInfo.value.typeIdentification
+
+
     }
+    console.log('alert inst ', alert)
 
     // console.log('El puntaje TOTAL es: ', this.score)
     // console.log('El resultado del Formualrio Factores asociados al covid-19 es: ',this.factorsCovid19)

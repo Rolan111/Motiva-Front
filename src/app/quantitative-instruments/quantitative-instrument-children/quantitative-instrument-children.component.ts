@@ -42,6 +42,17 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   idPoll!: string;
   score: number = 0;
 
+  //Modelo de alerta
+
+  professional!: string;
+  beneficiary!: string;
+  municipality!: string;
+  date!: string;
+  nameBeneficiary!: string;
+  lastNameBeneficiary!: string;
+  identification: number = 0;
+  typeIdentification!: string;
+
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
   ethnicityQuestion: Question[] = [];
@@ -465,7 +476,15 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     let alert: AlertModel = {
       idAlert: 1,
       idPoll: this.idPoll,
-      score: this.score
+      score: this.score,
+      professional: this.professional,
+      beneficiary: this.beneficiary,
+      municipality: this.municipality,
+      date: this.date,
+      nameBeneficiary: this.personalInfo.value.firstName,
+      lastNameBeneficiary: this.lastNameBeneficiary,
+      identification: this.identification,
+      typeIdentification: this.typeIdentification
     }
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
