@@ -49,8 +49,15 @@ export class CareSheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCareSheet();
+
+    /** Gestión Id_poll */
     this.idPollRecuperado = this.careSheetService.shareIdPoll;
     console.log('El id poll recuperado es> ',this.idPollRecuperado)
+
+    if(this.idPollRecuperado==''){
+    this.toastr.warning('¡NO EXISTE enlace con instrumento Cuantitativo!. Esta ficha no se podrá guardar', 'Error, por favor informar')
+    }
+
     this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
     this.formPersonalInfo.get('lastName')?.setValue(this.careSheetService.shareLastName)
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
@@ -455,16 +462,21 @@ export class CareSheetComponent implements OnInit {
 
     //Guardado Tipo 2
 
+    if(this.idPollRecuperado==''){ /** SE EVALUA QUE ID_POLL no esté vacío */
+      this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
+      this.listaDeRespuestas = [];
+    }else{
       this.careSheetService.create2(this.listaDeRespuestas).subscribe(value => {
         // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
       }, error => {
-        this.toastr.error('¡La información no se ha podido registrar!', 'Error')
+        this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
         this.listaDeRespuestas = [];
       }, () => {
         this.toastr.success('¡La información ha sido registrada!', 'Enviado');
         this.listaDeRespuestas = [];
         this.router.navigate(['navbar/dashboard'])
       })
+    }
 
   }
 

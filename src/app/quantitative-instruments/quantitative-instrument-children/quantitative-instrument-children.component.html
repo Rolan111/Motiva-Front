@@ -265,6 +265,7 @@
     <ng-template matStepLabel>12. Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
     <mat-card class="advancedForm">
       <form [formGroup]="comorbidityInfo">
+
         <mat-grid-list cols="2" rowHeight="80px">
           <mat-grid-tile *ngFor="let comorbilities of comorbilitiesList; let i = index">
             <div class="checkboxGrid">
@@ -274,6 +275,7 @@
             </div>
           </mat-grid-tile>
         </mat-grid-list>
+
         <mat-grid-list cols="1" rowHeight="80px">
           <mat-grid-tile>
             <div style="width: 100%;">
@@ -288,7 +290,7 @@
             <div style="width: 100%;">
               <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
                 <mat-label>13. Discapacidad física o mental</mat-label>
-                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMental">
+                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMentalDisability">
               </mat-form-field>
             </div>
           </mat-grid-tile>
