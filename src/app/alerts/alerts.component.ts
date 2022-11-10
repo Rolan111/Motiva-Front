@@ -8,6 +8,13 @@ export interface AlertsModel {
   beneficiary: string;
   municipality: string;
   date: string;
+  nameProfessional: string;
+  lastNameProfessional: string;
+  nameBeneficiary: string;
+  lastNameBeneficiary: string;
+  identification: number;
+  typeIdentification: string;
+  //type_identification: string;
 }
 
 @Component({
@@ -22,7 +29,7 @@ export class AlertsComponent implements OnInit {
   procesamientoDeAlertas: AlertsModel[] = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review'];
+  displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'municipality', 'date', 'review', 'ponderado'];
   dataSource = this.arrayDeAlertasTabla;
 
   constructor(private alertsService: AlertsService) {
@@ -45,6 +52,7 @@ export class AlertsComponent implements OnInit {
 
     this.alertsService.getAllAlerts().subscribe(data => {
       this.arrayDeAlertas = data;
+      console.log(data)
       this.arrayDeAlertas.forEach((recorriendoArray: any) => {
         //Para traer el NOMBRE DEL PROFESIONAL consultamos en la tabla poll y nos traemos el id_user
         this.alertsService.getPollById(recorriendoArray.idPoll).subscribe(data2 => { //para traer los idUser que tiene poll
@@ -64,6 +72,11 @@ export class AlertsComponent implements OnInit {
                     //Traemos el MUNICIPIO consultando en la tabla ANSWER id 5 o 6 según corresponda
                     //Pero primero verificamos si el cuestionario es ADULT o CHILD ya que la pregunta corresponde a numeros diferentes
                     let preguntaTipoDeEncuesta: any;
+                    //Traer tipo de identificacion
+                    //this.alertsService.getAnswerByIdPollAndIdQuestion(recorriendoArray.idPoll, 204).subscribe(data6 => {
+                      //let extrayendoTypeBeneficiario: any = data6;
+                      //console.log('El tipo de documento es', data6)
+                   // })
                     if (recorriendoArray2.type == 'ADULT') {
                       preguntaTipoDeEncuesta = 6;
                     } else {
@@ -79,8 +92,15 @@ export class AlertsComponent implements OnInit {
                                 professional: recorriendoArray3.name,
                                 beneficiary: recorriendoArray4.openAnswer,
                                 municipality: recorriendoArray5.openAnswer,
+                                //type_identification: recorriendoArray.idOptionAnswer,
                                 //date: recorriendoArray6.open_answer
-                                date: 'La fecha'
+                                date: 'La fecha',
+                                nameProfessional: '',
+                                lastNameProfessional: '',
+                                nameBeneficiary: '',
+                                lastNameBeneficiary: '',
+                                identification: 0,
+                                typeIdentification: ''
                               })
 
                               if (this.procesamientoDeAlertas.length == this.alertSizeAux[0]) {

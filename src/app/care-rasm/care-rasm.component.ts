@@ -10,7 +10,7 @@ import {CareRasmService} from "./care-rasm.service";
 export class CareRasmComponent implements OnInit {
 
   listRASM: any = [];
-  displayedColumns: string[] = ['id_poll', 'type_rasm'];
+  displayedColumns: string[] = ['id_poll', 'type_rasm', 'nombre', 'documento', 'seguimiento'];
   dataSource!: MatTableDataSource<any>;
 
   constructor(private careRasmService: CareRasmService) {
@@ -22,8 +22,9 @@ export class CareRasmComponent implements OnInit {
 
   private loadRASM() {
     this.careRasmService.getAllRASM().subscribe(data => {
-      console.log('La data de RASM es: ',data)
+
       this.listRASM = data;
+      console.log('La data de RASM es: ', this.listRASM[1])
       this.dataSource = new MatTableDataSource(this.listRASM)
     })
   }
