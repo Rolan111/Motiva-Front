@@ -66,6 +66,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
   typeIdentification!: string;
   cellphone: number = 0;
 
+  arrayTipoIdentification!: any;
+
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
   ethnicityQuestion: Question[] = [];
@@ -142,7 +144,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       this.idPoll=nanoid(10);
       console.log('EL ID POLL ES', this.idPoll)
     })
-
+    this.setTypeIdentification();
     this.addValidatorWorkMode();
     this.addValidatorAffectationCovid();
     this.addValidatorDeadFamilyCovid();
@@ -832,9 +834,48 @@ export class QuantitativeInstrumentComponent implements OnInit {
       answer50, answer51, answer52, answer53, answer54, answer55, answer56)
   }
 
+  setTypeIdentification(){
+
+    this.typeIdentificationQuestion.forEach(() => {
+        console.log('tipo cuestion ', this.typeIdentificationQuestion)
+
+    })
+
+
+
+    /* switch (this.careSheetService.shareSex) {
+
+       case 1 :
+         this.formPersonalInfo.get('sex')?.setValue('Hombre')
+         break;
+       case 2 :
+         this.formPersonalInfo.get('sex')?.setValue('Mujer')
+         break;
+       case 3 :
+         this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
+         break;
+       case  187:
+         this.formPersonalInfo.get('sex')?.setValue('Hombre')
+         break;
+       case  188:
+         this.formPersonalInfo.get('sex')?.setValue('Mujer')
+         break;
+       case  189:
+         this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
+         break;
+       default:
+         this.formPersonalInfo.get('sex')?.setValue('Esperando...')
+         break;
+*/
+
+
+  };
+
+
   //2 Se recorre cada formulario (5 en total), se cargan las respuestas al modelo y a "answerList"
     //Posteriormente se llaman los servicios y los datos se envían a la base de datos
 
+  // @ts-ignore
   sendQuantitativeInstrument(answerFormList: Array<FormGroup>) {
 
     answerFormList.forEach(answerForm => {
@@ -865,6 +906,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
       idPoll: this.idPoll,
       type: "ADULT",
     };
+
 
     // this.answerList.forEach(x => this.score = this.score + x.score)
     //this.answerList.forEach(x => console.log('Recorriendo escores es: ',x.score))
