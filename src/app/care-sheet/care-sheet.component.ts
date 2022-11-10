@@ -14,7 +14,7 @@ import {ToastrService} from "ngx-toastr";
 export class CareSheetComponent implements OnInit {
   maxDate = new Date();
   edadCalculada: any = 0;
-
+  idPollRecuperado:string='';
 
   contadoclicks = 0;
   firstGroup = 0;
@@ -50,8 +50,8 @@ export class CareSheetComponent implements OnInit {
 
   ngOnInit(): void {
     this.formCareSheet();
-    console.log('Id poll f ', this.formPersonalInfo.value.capturaIdPoll)
-
+    this.idPollRecuperado = this.careSheetService.shareIdPoll;
+    console.log('El id poll recuperado es> ',this.idPollRecuperado)
     this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
     this.formPersonalInfo.get('lastName')?.setValue(this.careSheetService.shareLastName)
     this.formPersonalInfo.get('identificationNumber')?.setValue(this.careSheetService.shareIdentificationNumber)
@@ -154,156 +154,156 @@ export class CareSheetComponent implements OnInit {
     this.listaDeRespuestas.push({
       id_question: 101,
       id_option_answer: 0,
-      open_answer: this.formPersonalInfo.value.departament,
-      id_poll: this.formPersonalInfo.value.capturaIdPoll
+      open_answer: this.formPersonalInfo.value.department,
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 110,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.religion,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 111,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.placeBirth,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 113,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.originAddress,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 114,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.neighborhood,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 115,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.stratum,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 116,
       id_option_answer: 0,
       open_answer: this.formOrigin.value.phone,
-      id_poll: this.formOrigin.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 117,
       id_option_answer: 0,
       open_answer: this.formConsultation.value.reasonConsultation,
-      id_poll: this.formConsultation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 118,
       id_option_answer: 0,
       open_answer: this.formConsultation.value.currentIllness,
-      id_poll: this.formConsultation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 119,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Observations,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 120,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Diagnostics,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 121,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Medicine,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 122,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Dose,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 123,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_APS_Time,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 124,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Observations,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 125,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Diagnostics,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 126,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Medicine,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 127,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Dose,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 128,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AM_Time,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 129,
       id_option_answer: 0,
       open_answer: this.formAP_PsychiatricHistory.value.AP_AQ_Observations,
-      id_poll: this.formAP_PsychiatricHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 130,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_employmentSituation,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 131,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_Relationships,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 132,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_socialRelationships,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 133,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AP_AR_familyRelationships,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 134,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AF_APS_Observations,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     //REVISAR ORDEN
@@ -311,56 +311,56 @@ export class CareSheetComponent implements OnInit {
       id_question: 135,
       id_option_answer: 0,
       open_answer: this.formAP_RelationalHistory.value.AF_AM_Observations,
-      id_poll: this.formAP_RelationalHistory.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 136,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Time,
-      id_poll: this.formStateOfMind.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 137,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Place,
-      id_poll: this.formStateOfMind.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 138,
       id_option_answer: 0,
       open_answer: this.formStateOfMind.value.EM_Person,
-      id_poll: this.formStateOfMind.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 140,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_healthProblems,
-      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 141,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_healthBeliefSystem,
-      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 142,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_copingWithIllness,
-      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 143,
       id_option_answer: 0,
       open_answer: this.formPsychosocialEvaluation.value.EPIS_diagnosticImpression,
-      id_poll: this.formPsychosocialEvaluation.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
     this.listaDeRespuestas.push({
       id_question: 144,
       id_option_answer: 300,
       open_answer: this.formInterventionLevel.value.especifique_promocionSalud,
-      id_poll: this.formInterventionLevel.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
 
@@ -371,7 +371,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 301,
           open_answer: this.formInterventionLevel.value.seleccione_prevencionEnfermedad,
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
       case "Adherencia al tratamiento":
@@ -379,7 +379,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 302,
           open_answer: "",
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
       case "Afrontamiento de la enfermedad":
@@ -387,7 +387,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 303,
           open_answer: "",
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
       case "Psicooncología":
@@ -395,7 +395,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 304,
           open_answer: "",
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
       case "Manejo del dolor":
@@ -403,7 +403,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 305,
           open_answer: "",
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
       case "Intervención en enfermedades crónicas transmisibles y no transmisibles":
@@ -411,7 +411,7 @@ export class CareSheetComponent implements OnInit {
           id_question: 145,
           id_option_answer: 306,
           open_answer: "",
-          id_poll: this.formInterventionLevel.value.capturaIdPoll
+          id_poll: this.idPollRecuperado
         });
         break
 
@@ -421,14 +421,14 @@ export class CareSheetComponent implements OnInit {
       id_question: 146,
       id_option_answer: 0,
       open_answer: this.formResponsibleProfessional.value.professionalName,
-      id_poll: this.formResponsibleProfessional.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     this.listaDeRespuestas.push({
       id_question: 147,
       id_option_answer: 0,
       open_answer: this.formResponsibleProfessional.value.Profession,
-      id_poll: this.formResponsibleProfessional.value.capturaIdPoll
+      id_poll: this.idPollRecuperado
     });
 
     //PROCEDEMOS A GUARDAR
@@ -465,7 +465,6 @@ export class CareSheetComponent implements OnInit {
   private formCareSheet(){
 
     this.formPersonalInfo = this.formBuilder.group({
-      capturaIdPoll: [this.careSheetService.shareIdPoll],
       city: [this.careSheetService.shareCity],
       department: ['Cauca'],
       sex: [''],
@@ -590,7 +589,7 @@ export class CareSheetComponent implements OnInit {
   onFirstGroupChange() {
     this.contadoclicks = this.contadoclicks+1;
     if(this.contadoclicks>1){
-      /*this.formInterventionLevel.controls['']*/
+      // /*this.formInterventionLevel.controls['']*/
       this.formInterventionLevel.controls['especifique_promocionSalud'].setErrors(null);
     }
     if(this.firstGroup === 1 ) {
