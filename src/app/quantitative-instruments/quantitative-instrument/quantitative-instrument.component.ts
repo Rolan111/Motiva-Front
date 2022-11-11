@@ -57,7 +57,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   //Modelo de alerta
   score: number = 0;
   professional!: string;
-  beneficiary!: string;
+  name_beneficiary!: string;
   municipality!: string;
   date!: string;
   nameBeneficiary!: string;
@@ -126,12 +126,15 @@ export class QuantitativeInstrumentComponent implements OnInit {
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
     private _snackBar: MatSnackBar,
+    private quantitativeInstrumentService:QuantitativeInstrumentService
   ) {
   }
 
   citiesList:ListTypes[] = arrayMunicipios;
 
   ngOnInit(): void {
+
+    console.log('La data de sesión CAPTURADA es: ',this.quantitativeInstrumentService.shareDataSession)
 
     this.formQuantitative();
     this.personalInfo.get('applicationDate')?.setValue(new Date().toLocaleDateString())
@@ -911,19 +914,22 @@ export class QuantitativeInstrumentComponent implements OnInit {
     // this.answerList.forEach(x => this.score = this.score + x.score)
     //this.answerList.forEach(x => console.log('Recorriendo escores es: ',x.score))
 
+    /** Evaluamos identificación a guardar */
+
+
     let alert: AlertModel = {
       idAlert: 1,
       idPoll: this.idPoll,
-      score: this.score,
-      professional: this.professional,//Esto se gurd en lert component
-      beneficiary: this.beneficiary,
-      municipality: this.sociodemographicFactors.value.municipalityResidence,
-      date: '',
+      professional: this.quantitativeInstrumentService.shareDataSession,//Esto se gurd en lert component
       nameBeneficiary: this.personalInfo.value.firstName,
       lastNameBeneficiary: this.personalInfo.value.firstLastName,
+      typeIdentification: this.evaluandoTipoIdentificacion(this.personalInfo.value.typeIdentification),
       identification: this.personalInfo.value.identification,
-      typeIdentification: this.personalInfo.value.typeIdentification,
-      cellphone: this.personalInfo.value.cellphone
+      cellphone: this.personalInfo.value.cellphone,
+      municipality: this.sociodemographicFactors.value.municipalityResidence,
+      typeQuestionnaire: 'ADULT',
+      date: this.personalInfo.value.applicationDate,
+      score: this.score,
     }
     console.log('Modelo alert desde instrumento: ', alert)
 
@@ -953,6 +959,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
             }
           })
         }
+
+        console.log('Los datos de alert son: ',alert)
 
         this.answerList.splice(0, this.answerList.length);
         this.answerList = [];
@@ -1356,6 +1364,33 @@ export class QuantitativeInstrumentComponent implements OnInit {
       horizontalPosition: 'center',
       verticalPosition: 'top'
     });
+  }
+
+
+  private evaluandoTipoIdentificacion(typeIdentification:number): any {
+    switch (typeIdentification){
+      case 307:
+        // this.typeIdentification = 'Cédula de ciudadanía'
+        return 'Cédula de ciudadanía'
+        break;
+      case 308:
+        return 'Cédula extranjera'
+        break;
+      case 309:
+        return 'Número de identificación personal'
+        break;
+      case 310:
+        return 'Número de identificación tributaria'
+        break;
+      case 311:
+        return 'Tarjeta de identidad'
+        break;
+      case 312:
+        return 'Pasaporte'
+        break;
+      default:
+        break;
+    }
   }
 
   //Datos enviados al siguiente formulario - Ficha de atención

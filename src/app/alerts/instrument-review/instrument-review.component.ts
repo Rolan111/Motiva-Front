@@ -125,7 +125,9 @@ export class InstrumentReviewComponent implements OnInit {
   openDialogInactiveAlert(): void {
     const dialogRef = this.dialog.open(DialogInactiveAlertComponent, {
       width: '400px',
-      data: {id_poll: this.capturaIdPollUrl}
+      data: {
+        id_poll: this.capturaIdPollUrl
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {
