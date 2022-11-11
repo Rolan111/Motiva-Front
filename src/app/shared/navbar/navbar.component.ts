@@ -102,8 +102,8 @@ export class NavbarComponent {
         this.buttonMenuQuantitive = true;
         this.buttonMenuCareSheet = true;
         this.buttonMenuForum = true;
+        //this.buttonMenuAlerts = true;
         this.buttonMenuCareRoutes = true;
-        this.buttonMenuCareRasm = true;
         this.buttonMenuOva = true;
         break;
       case RolesEnum.AGENTE:
