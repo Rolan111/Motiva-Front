@@ -125,7 +125,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     });
 
     this.sociodemographicFactors = this.formBuilder.group({
-      age: new FormControl('', [Validators.required,Validators.max(13)]),
+      age: new FormControl('', [Validators.required,Validators.max(14)]),
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
       zoneResidence: ['', Validators.required],
