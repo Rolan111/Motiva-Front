@@ -7,6 +7,7 @@ import {LoginInterface} from "./login.interface";
 import {LocalStorageKeyEnum} from "../enums/enum";
 import {LocalStorage} from "../storage/local-storage";
 import {LoginModel} from "./login.model";
+import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent implements OnInit {
     private loginService: LoginService,
     private activateRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    public quantitativeInstrumentService:QuantitativeInstrumentService
   ) {
   }
 
@@ -69,8 +71,10 @@ export class LoginComponent implements OnInit {
   }
 
   private responseLogin(response: LoginInterface) {
+    // this.quantitativeInstrumentService.shareDataSession = response;
     if (response.name != null) {
       this.setLocalStorage(response);
+
       this.router.navigateByUrl('/navbar');
     }
   }
@@ -106,6 +110,7 @@ export class LoginComponent implements OnInit {
     this.oLocalStorage.setItem(LocalStorageKeyEnum.token, user.token);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.rol, user.job_profile);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.type, user.type);
+
   }
 
   private cleanLocalStorage() {

@@ -26,6 +26,7 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
+
   public getAlertSize2() {
     this.getAllAlerts().subscribe(data => {
       this.trayendoData.push(data);

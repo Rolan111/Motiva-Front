@@ -17,6 +17,8 @@ const mainUrl = environment.url;
 export class QuantitativeInstrumentService {
   oLocalStorage = new LocalStorage();
 
+  shareDataSession:any=[];
+
   constructor(private http: HttpClient) {
   }
 

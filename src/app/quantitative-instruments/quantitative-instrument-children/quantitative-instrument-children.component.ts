@@ -88,7 +88,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
     private _snackBar: MatSnackBar,
-    private careSheetService: CareSheetService
+    private careSheetService: CareSheetService,
+    private quantitativeInstrumentService:QuantitativeInstrumentService
     // private instrumentoAdultos: QuantitativeInstrumentComponent
   ) {
   }
@@ -101,7 +102,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.quanInstService.findAllQuestions('CHILDREN').subscribe(response => {
       this.questions = response.data;
-      console.log('La preguntas de CHILDREN son: ',response)
+      // console.log('La preguntas de CHILDREN son: ',response)
     })
 
     this.quanInstService.getLastSequence().subscribe(response => {
@@ -284,10 +285,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'CHILDREN',
-      score: answerForm.value.zoneResidence == 196 ? 1 : 0,
+      score: answerForm.value.zoneResidence == 196 ? 2 : 0,
     };
 
-    console.log('La zona de residencia es: ', answerForm.value.zoneResidence)
+    // console.log('La zona de residencia es: ', answerForm.value.zoneResidence)
 
     let answer13: AnswerModel = {
       idAnswer: this.idAnswer + 12,
@@ -348,7 +349,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       type: 'CHILDREN',
       score: this.scoreModeStudy(answerForm.value.studyMode),
     };
-    console.log('La modalidad de estudio es: ', answerForm.value.studyMode)
+    // console.log('La modalidad de estudio es: ', answerForm.value.studyMode)
 
     let answer19: AnswerModel = {
       idAnswer: this.idAnswer + 18,
@@ -484,16 +485,16 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     let alert: AlertModel = {
       idAlert: 1,
       idPoll: this.idPoll,
-      score: this.score,
-      professional: this.professional,
-      beneficiary: this.beneficiary,
-      municipality: this.municipality,
-      date: this.date,
+      professional: this.quantitativeInstrumentService.shareDataSession,
       nameBeneficiary: this.personalInfo.value.firstName,
-      lastNameBeneficiary: this.lastNameBeneficiary,
-      identification: this.identification,
-      typeIdentification: this.typeIdentification,
-      cellphone: this.personalInfo.value.cellphone
+      lastNameBeneficiary: this.personalInfo.value.firstLastName,
+      typeIdentification: this.personalInfo.value.typeIdentification == 315 ? 'Tarjeta de identidad' : 'Registro civil',
+      identification: this.personalInfo.value.identification,
+      cellphone: this.personalInfo.value.cellphone,
+      municipality: this.sociodemographicFactors.value.municipalityResidence,
+      typeQuestionnaire: 'CHILDREN',
+      date: this.personalInfo.value.applicationDate,
+      score: this.score
     }
 
     this.quanInstService.createAnswer(this.answerList).subscribe({
@@ -508,6 +509,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
           }
         })
 
+        console.log('El puntaje recopilado es: ', this.score)
         if(this.score >= 6){
           this.quanInstService.createAlert(alert).subscribe({
             next: () => {
@@ -515,6 +517,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
             }
           })
         }
+        console.log('La data recopilada de la ALERTA es: ',alert)
 
         this.answerList = [];
         this.sendToCareSheet();

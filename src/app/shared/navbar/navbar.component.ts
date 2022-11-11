@@ -3,6 +3,7 @@ import {LocalStorageKeyEnum, RolesEnum} from "../../enums/enum";
 import {LocalStorage} from "../../storage/local-storage";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
+import {QuantitativeInstrumentService} from "../../quantitative-instruments/quantitative-instrument.service";
 
 @Component({
   selector: 'app-navbar',
@@ -34,10 +35,12 @@ export class NavbarComponent {
   buttonMenuSettings: boolean = false;
 
   constructor(
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public quantitativeInstrumentService:QuantitativeInstrumentService
   ) {
     this.fullName = this.oLocalStorage.getItem(LocalStorageKeyEnum.name) + " " + this.oLocalStorage.getItem(LocalStorageKeyEnum.lastName);
     this.typeRole(this.oLocalStorage.getItem(LocalStorageKeyEnum.rol));
+    this.quantitativeInstrumentService.shareDataSession = this.fullName;
   }
 
   openDialog(): void {
