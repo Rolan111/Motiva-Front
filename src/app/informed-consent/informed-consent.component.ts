@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// import { AngularFireStorage } from '@angular/fire/storage';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
-import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 import {CareSheetService} from "../care-sheet/care-sheet.service";
 import {ToastrService} from "ngx-toastr";
 
