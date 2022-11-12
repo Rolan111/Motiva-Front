@@ -1,0 +1,20 @@
+<mat-card>
+  <section fxLayout="column" fxLayoutAlign="space-around center" fxFlex="100" fxLayoutGap="20px">
+    <div class="label" fxFlex="30">Cargar consentimiento Informado</div><br>
+    <p>Por favor elija un archivo:</p>
+    <div fxFlex="30"><input type="file" name="file" (change)="onFileSelect($event)" /></div>
+    <div fxFlex="30">
+      <br>
+      <div class="label2" fxFlex="30" *ngIf="completed">¡El archivo ha sido seleccionado!</div>
+      <br>
+      <button mat-flat-button color="primary" [disabled]="!completed" (click)="uploadFile()">Cargar consentimiento y finalizar caracterización</button>
+    </div>
+
+    <br>
+    <mat-progress-bar *ngIf="!completed" mode="determinate" value="uploadPercent | async"></mat-progress-bar>
+
+  </section>
+
+</mat-card>
+
+
