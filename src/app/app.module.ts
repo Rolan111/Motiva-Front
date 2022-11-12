@@ -18,6 +18,13 @@ import {AlertsModule} from "./alerts/alerts.module";
 import {CareRasmModule} from "./care-rasm/care-rasm.module";
 import {SupportModule} from "./support/support.module";
 import {ReportsModule} from "./reports/reports.module";
+import {InformedConsentModule} from "./informed-consent/informed-consent.module";
+
+import {AngularFireModule} from "@angular/fire/compat";
+import {AngularFireStorageModule} from "@angular/fire/compat/storage";
+import { environment } from '../environments/environment';
+import { MatProgressBarModule} from "@angular/material/progress-bar";
+
 
 @NgModule({
   declarations: [
@@ -40,8 +47,11 @@ import {ReportsModule} from "./reports/reports.module";
     AlertsModule,
     CareRasmModule,
     SupportModule,
-    ReportsModule
-
+    ReportsModule,
+    InformedConsentModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireStorageModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent],
