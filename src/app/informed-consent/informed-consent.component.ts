@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// import { AngularFireStorage } from '@angular/fire/storage';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
+import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
 import {CareSheetService} from "../care-sheet/care-sheet.service";
 import {ToastrService} from "ngx-toastr";
 
@@ -11,8 +15,7 @@ import {ToastrService} from "ngx-toastr";
 })
 export class InformedConsentComponent implements OnInit {
 
-  completed:boolean = false;
-  idPollWidthData:boolean = false;
+  completed!:boolean;
   file!: File;
 
   constructor(private storage: AngularFireStorage,
@@ -22,16 +25,9 @@ export class InformedConsentComponent implements OnInit {
               ) { }
 
   idPollRecuperado:string = this.careSheetService.shareIdPoll;
-  // idPollRecuperado = 'PRUEBA1111';
 
   ngOnInit(): void {
-    console.log('El idPoll recuperado es: ', this.idPollRecuperado)
-    /** Evalumaos que el id_poll no esté vacío */
-    if(this.idPollRecuperado==''){
-      this.toastr.warning('¡Este consentimiento NO TIENE enlace con instrumento Cuantitativo!. Este consentimiento no se podrá guardar', 'Error, por favor informar')
-    }else{
-      this.idPollWidthData=true;
-    }
+    console.log('El idPoll es: ', this.idPollRecuperado)
   }
 
   onFileSelect(event:any) {
@@ -39,9 +35,11 @@ export class InformedConsentComponent implements OnInit {
       this.file = event.target.files[0];
       this.completed = true;
     }
+
   }
 
   uploadFile() {
+    this.completed = false;
     const filePath = this.idPollRecuperado+'/'+'consentimiento_informado';
     // Crea una referencia de acceso
     const fileRef = this.storage.ref(filePath);
