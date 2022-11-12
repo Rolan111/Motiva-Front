@@ -465,16 +465,17 @@ export class CareSheetComponent implements OnInit {
     if(this.idPollRecuperado==''){ /** SE EVALUA QUE ID_POLL no esté vacío */
       this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
       this.listaDeRespuestas = [];
-    }else{
+    }else{ //Se procede al guardado
       this.careSheetService.create2(this.listaDeRespuestas).subscribe(value => {
         // this.toastr.success('¡La información ha sido registrada!', 'Enviado');
       }, error => {
         this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
         this.listaDeRespuestas = [];
       }, () => {
-        this.toastr.success('¡La información ha sido registrada!', 'Enviado');
+        this.toastr.success('¡La información de FICHA DE ATENCIÓN ha sido registrada!', 'Enviado');
         this.listaDeRespuestas = [];
-        this.router.navigate(['navbar/dashboard'])
+        this.router.navigate(['navbar/informed-consent'])
+        // this.router.navigate(['navbar/dashboard'])
       })
     }
 
