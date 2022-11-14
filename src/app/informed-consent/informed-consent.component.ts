@@ -11,7 +11,8 @@ import {ToastrService} from "ngx-toastr";
 })
 export class InformedConsentComponent implements OnInit {
 
-  completed!:boolean;
+  completed:boolean = false;
+  idPollWidthData:boolean = false;
   file!: File;
 
   constructor(private storage: AngularFireStorage,
@@ -21,9 +22,16 @@ export class InformedConsentComponent implements OnInit {
               ) { }
 
   idPollRecuperado:string = this.careSheetService.shareIdPoll;
+  // idPollRecuperado = 'PRUEBA1111';
 
   ngOnInit(): void {
-    console.log('El idPoll es: ', this.idPollRecuperado)
+    console.log('El idPoll recuperado es: ', this.idPollRecuperado)
+    /** Evalumaos que el id_poll no esté vacío */
+    if(this.idPollRecuperado==''){
+      this.toastr.warning('¡Este consentimiento NO TIENE enlace con instrumento Cuantitativo!. Este consentimiento no se podrá guardar', 'Error, por favor informar')
+    }else{
+      this.idPollWidthData=true;
+    }
   }
 
   onFileSelect(event:any) {
@@ -31,11 +39,9 @@ export class InformedConsentComponent implements OnInit {
       this.file = event.target.files[0];
       this.completed = true;
     }
-
   }
 
   uploadFile() {
-    this.completed = false;
     const filePath = this.idPollRecuperado+'/'+'consentimiento_informado';
     // Crea una referencia de acceso
     const fileRef = this.storage.ref(filePath);
