@@ -55,7 +55,7 @@ export class CareSheetComponent implements OnInit {
     console.log('El id poll recuperado es> ',this.idPollRecuperado)
 
     if(this.idPollRecuperado==''){
-    this.toastr.warning('¡NO EXISTE enlace con instrumento Cuantitativo!. Esta ficha no se podrá guardar', 'Error, por favor informar')
+    this.toastr.warning('¡Esta FICHA NO TIENE ENLACE con instrumento Cuantitativo!. Esta ficha no se podrá guardar', 'Error, por favor informar')
     }
 
     this.formPersonalInfo.get('name')?.setValue(this.careSheetService.shareName)
