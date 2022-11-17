@@ -24,6 +24,10 @@ interface ListTypes {
 })
 export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
+  validandoEscolaridad:number=0
+
+
+
   //Validacion ingreso fecha de caracterizacion de beneficiario
   maxDate = new Date();
   minDate = new Date('December 31, 2021 24:00:00');
@@ -134,7 +138,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       typeHome: ['', Validators.required],
       accessServicies: ['', Validators.required],
       educationLevel: ['', Validators.required],
-      studyMode: ['', Validators.required],
+      studyMode: [[]],
       socialSecurity: ['', Validators.required],
     });
 
@@ -343,7 +347,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     let answer18: AnswerModel = {
       idAnswer: this.idAnswer + 17,
       idQuestion: 10,
-      idOptionAnswers: [answerForm.value.studyMode],
+      idOptionAnswers: answerForm.value.studyMode,
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'CHILDREN',
@@ -661,7 +665,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   }
 
   metodoPrueba(){
-    console.log('El sexo es: ',this.sociodemographicFactors.value.sex,'La etnia es: ',this.sociodemographicFactors.value.ethnicity)
+    console.log('La variable asignada es: ', this.validandoEscolaridad)
   }
 
 }
