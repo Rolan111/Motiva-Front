@@ -113,6 +113,8 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       this.idAnswer = response.data.idAnswer;
       this.idPoll = nanoid(10);
     })
+
+    this.addValidatorSocFactorsStudyMode()
   }
 
   private formQuantitative() {
@@ -632,6 +634,31 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     return control.hasError(validationType) && (control.dirty || control.touched);
   }
+
+  //Validaciones adicionales en el formulario, sobre t odo para páneles ocultos
+  private addValidatorSocFactorsStudyMode() {
+
+    // @ts-ignore
+    this.sociodemographicFactors.get('studyMode').setValidators(Validators.required);
+    // @ts-ignore
+    this.sociodemographicFactors.get('educationLevel').valueChanges
+      .subscribe(value => {
+          if(value != 214) {
+            // @ts-ignore
+            this.sociodemographicFactors.get('studyMode').setValidators(Validators.required);
+          }else{
+            // @ts-ignore
+            this.sociodemographicFactors.get('studyMode').clearValidators();
+            // @ts-ignore
+            this.sociodemographicFactors.get('studyMode').updateValueAndValidity();
+          }
+        }
+      );
+
+  }
+  ///////////////
+
+
 
   onCheckboxChange(event: any) {
     const comorbilities = <FormArray>this.comorbidityInfo.get('comorbilities') as FormArray;
