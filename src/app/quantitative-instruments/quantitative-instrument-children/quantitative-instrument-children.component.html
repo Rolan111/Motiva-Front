@@ -2,6 +2,7 @@
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
 
 <!--  Información personal -->
+
   <mat-step [stepControl]="personalInfo" color="primary">
     <ng-template matStepLabel>Información Personal</ng-template>
     <mat-card class="advancedForm">
@@ -213,10 +214,10 @@
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
+            <mat-form-field appearance="standard" class="inputClass" >
               <mat-label>9. Escolaridad</mat-label>
-              <mat-select formControlName="educationLevel" (click)="selectQuestion(9)" required>
-                <mat-option *ngFor="let item of educationLevelList" [value]="item.idOptionAnswer">
+              <mat-select [(value)]="validandoEscolaridad"  formControlName="educationLevel" (click)="selectQuestion(9)" required >
+                <mat-option  *ngFor="let item of educationLevelList" [value]="item.idOptionAnswer" >
                   {{item.description}}
                 </mat-option>
                 <mat-error *ngIf="isControlHasErrorSecundary('educationLevel', 'required')">
@@ -225,15 +226,15 @@
               </mat-select>
             </mat-form-field>
           </mat-grid-tile>
-          <mat-grid-tile>
+          <mat-grid-tile *ngIf="validandoEscolaridad!=214">
             <mat-form-field appearance="standard" class="inputClass">
               <mat-label>10. Modalidad de estudio:</mat-label>
-              <mat-select formControlName="studyMode" (click)="selectQuestion(10)" required>
+              <mat-select formControlName="studyMode" (click)="selectQuestion(10)">
                 <mat-option *ngFor="let item of studyModeList" [value]="item.idOptionAnswer">
                   {{item.description}}
                 </mat-option>
               </mat-select>
-              <mat-error *ngIf="isControlHasErrorSecundary('socialSecurity', 'required')">
+              <mat-error *ngIf="isControlHasErrorSecundary('studyMode', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
             </mat-form-field>
