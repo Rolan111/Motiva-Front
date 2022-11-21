@@ -45,6 +45,11 @@ export class AlertsService {
     const headers = this.getHeader();
     return this.http.delete(path + idPoll, {headers});
   }
+  public AlertByIdPoll(idPoll: any) {
+    const path = mainUrl + 'api/alertByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get(path + idPoll, {headers});
+  }
 
   //Tabla POLL
   public getPollById(id: any) {
@@ -127,7 +132,7 @@ export class AlertsService {
   }
 
   //Tabla RASM
-  public postRASM(body: any) {
+  public createRasm(body: any) {
     const path = mainUrl + 'api/rasm-create/';
     const headers = this.getHeader();
     return this.http.post(path, body, {headers});

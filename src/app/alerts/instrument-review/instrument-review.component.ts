@@ -60,8 +60,8 @@ export class InstrumentReviewComponent implements OnInit {
           extractingAnswers.forEach((recorriendoAnswers: any)=>{
 
             if(recorriendoAnswers.idOptionAnswers == ''){ //Si está vacío significa que la respuesta es de tipo abierta
-              console.log('Las preguntas son: ', recorriendoQuestion.description)
-              console.log('Las respuestas son: ', recorriendoAnswers.openAnswer)
+         /*     console.log('Las preguntas son: ', recorriendoQuestion.description)
+              console.log('Las respuestas son: ', recorriendoAnswers.openAnswer)*/
               this.resultadoFinalInstrumentos.push({
                 pregunta: recorriendoQuestion.description,
                 respuesta: recorriendoAnswers.openAnswer
@@ -73,8 +73,8 @@ export class InstrumentReviewComponent implements OnInit {
                 this.alertsService.getOtionAnswerByIdOptionAnswer(recorriendoOptionAnswers1).subscribe(data3=>{
                   let extractingOptionAnswer:any = data3;
                   extractingOptionAnswer.forEach((recorriendoOptionAnswer:any)=>{
-                    console.log('Las preguntas son: ', recorriendoQuestion.description)
-                    console.log('Las respuestas son: ', recorriendoOptionAnswer.description)
+                    /*console.log('Las preguntas son: ', recorriendoQuestion.description)
+                    console.log('Las respuestas son: ', recorriendoOptionAnswer.description)*/
                     this.resultadoFinalInstrumentos.push({
                       pregunta: recorriendoQuestion.description,
                       respuesta: recorriendoOptionAnswer.description

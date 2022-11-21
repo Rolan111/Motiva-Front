@@ -1,20 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertsService} from "./alerts.service";
-import {of} from "rxjs";
-
-export interface AlertsModel {
-  id_poll: number;
-  professional: string;
-  municipality: string;
-  date: string;
-  nameBeneficiary: string;
-  //lastNameBeneficiary: string;
-  identification: number;
-  typeIdentification: string;
-  score: number;
-  cellphone: number;
-  //type_identification: string;
-}
 
 @Component({
   selector: 'app-alerts',
@@ -24,8 +9,6 @@ export interface AlertsModel {
 export class AlertsComponent implements OnInit {
 
   alertSizeAux: number[] = [];
-  arrayDeAlertas: any = [];
-  procesamientoDeAlertas: AlertsModel[] = [];
   arrayDeAlertasTabla: any = [];
 
   displayedColumns: string[] = ['id_poll', 'professional', 'beneficiary', 'typeIdentification', 'identification', 'cellphone', 'municipality', 'typeQuestionnaire', 'date', 'score','review'];
