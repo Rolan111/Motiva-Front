@@ -1,11 +1,16 @@
 .mat-card {
   width: 1000px;
 }
-
 table {
-  width: 100%;
+  width: 1000px;
+
 }
 
-td {
-  cursor: pointer;
+.mat-form-field {
+  font-size: 14px;
+  }
+
+td, th {
+  width: 50px;
+  margin: 50px;
 }

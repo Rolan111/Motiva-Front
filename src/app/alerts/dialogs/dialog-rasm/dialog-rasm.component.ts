@@ -12,9 +12,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class DialogRasmComponent implements OnInit {
 
-  typeRams: any = "hola";
   typeRasmi: any = [];
-  form: FormGroup;
+  formDialog: FormGroup;
 
 
   constructor(
@@ -24,17 +23,23 @@ export class DialogRasmComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder
   ) {
-    this.form = this.formBuilder.group({
+    this.formDialog = this.formBuilder.group({
       type_rasm: ['', Validators.required]
     })
   }
 
   ngOnInit(): void {
     console.log('Alerta> id_poll: ', this.data.id_poll)
+    console.log('Tipo: ', this.formDialog.value.type_rasm)
+
     this.alertsService.getAllTypeRasmi().subscribe(data => { /** Datos de tipo de ruta para mostrar en el navegador */
       console.log('La data es: ',data)
       this.typeRasmi.push(data)
     },error => error,() => console.log('Asi quedo type rasmi: ',this.typeRasmi))
+
+    this.alertsService.AlertByIdPoll(this.data.id_poll).subscribe(data =>{
+      console.log('Alert data: ', data)
+    })
 
   }
 
@@ -43,10 +48,32 @@ export class DialogRasmComponent implements OnInit {
     //Enviamos el registro a RASM
     this.alertsService.getAllAlerts()
 
-    this.alertsService.postRASM({
+    this.alertsService.AlertByIdPoll(this.data.id_poll).subscribe((info: any) => {
+      let extracDataAlert: any = info;
+      console.log(extracDataAlert)
+      extracDataAlert.forEach((dataAlert: any) => {
+
+        this.alertsService.createRasm({
+          idPoll: this.data.id_poll,
+          typeRasm: this.formDialog.value.type_rasm,
+          nameBeneficiary: dataAlert.nameBeneficiary,
+          lastNameBeneficiary: dataAlert.lastNameBeneficiary,
+          professional: dataAlert.professional,
+          cellphone: dataAlert.cellphone,
+          identification: dataAlert.identification,
+          typeIdentification: dataAlert.typeIdentification,
+          municipality: dataAlert.municipality,
+          typeQuestionnaire: dataAlert.typeQuestionnaire,
+          score: dataAlert.score,
+        }).subscribe();
+
+      })
+    })
+
+   /* this.alertsService.postRASM({
       idPoll: this.data.id_poll,
       typeRasm: this.form.value.type_rasm
-    }).subscribe();
+    }).subscribe();*/
 
     //Eliminamos el registro de ALERT
     this.alertsService.deleteAlertByIdPoll(this.data.id_poll).subscribe();
