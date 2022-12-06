@@ -5,6 +5,7 @@ export enum LocalStorageKeyEnum {
   rol = 'rolUser',
   token = 'token',
   type = 'type',
+  expirationDate = 'expirationDate',
 }
 
 export enum RolesEnum {

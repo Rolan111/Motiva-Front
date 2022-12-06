@@ -40,11 +40,6 @@ export class DialogRasmComponent implements OnInit {
 
   sendRASM() {
 
-    //Captura de la información individual de alert
-// 1 crear un servicio en el back para consultar la tabla alert por el id_poll  alertByIdPoll
-    //2 crear el método desde el front en alert.service.ts para consultar el alertByIdPoll
-
-
     //Enviamos el registro a RASM
     this.alertsService.getAllAlerts()
 

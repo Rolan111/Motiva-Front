@@ -255,7 +255,7 @@
         </mat-grid-list>
       </form>
       <mat-card-actions>
-        <button mat-button matStepperPrevious (click)="metodoPrueba()">Atrás</button>
+        <button mat-button matStepperPrevious>Atrás</button>
         <button mat-button matStepperNext (click)="selectQuestion(12)">Siguiente</button>
       </mat-card-actions>
     </mat-card>
@@ -369,7 +369,7 @@
           </mat-grid-tile>
         </mat-grid-list>
         <mat-card-actions>
-          <button mat-button matStepperPrevious>Atrás</button>
+          <button mat-button matStepperPrevious (click)="metodoPrueba()">Atrás</button>
           <button mat-button matStepperNext [disabled]="factors.invalid"
                   (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
           comorbidityInfo, factors])">Enviar

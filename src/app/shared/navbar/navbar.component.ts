@@ -4,6 +4,7 @@ import {LocalStorage} from "../../storage/local-storage";
 import {MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {Router} from "@angular/router";
 import {QuantitativeInstrumentService} from "../../quantitative-instruments/quantitative-instrument.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-navbar',
@@ -11,9 +12,17 @@ import {QuantitativeInstrumentService} from "../../quantitative-instruments/quan
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
+
   fullName: string = '';
   rol: string = '';
   oLocalStorage = new LocalStorage();
+
+  intervalSesionStatus:any;
+
+  currentDate!:Date;
+  endDate!:Date;
+  timeLeft!:number;
+  intervalTimeLeft:any;
 
   buttonMenuDashBoard: boolean = false;
   buttonMenuQuantitive: boolean = false;
@@ -36,11 +45,61 @@ export class NavbarComponent {
 
   constructor(
     public dialog: MatDialog,
-    public quantitativeInstrumentService:QuantitativeInstrumentService
+    public quantitativeInstrumentService:QuantitativeInstrumentService,
+    private router: Router,
+    private toastr: ToastrService,
   ) {
     this.fullName = this.oLocalStorage.getItem(LocalStorageKeyEnum.name) + " " + this.oLocalStorage.getItem(LocalStorageKeyEnum.lastName);
     this.typeRole(this.oLocalStorage.getItem(LocalStorageKeyEnum.rol));
     this.quantitativeInstrumentService.shareDataSession = this.fullName;
+    this.oLocalStorage.getItem(LocalStorageKeyEnum.name)
+
+    /** Se comprueba si existe sesión activa o conexión autenticada con el back */
+    this.intervalSesionStatus = setInterval(()=>{
+      this.comprobandoCambiosSesion()
+    },40000);
+
+    /** Se comprueba el tiempo restante para que la sesión finalice */
+    this.endDate = new Date(this.oLocalStorage.getItem(LocalStorageKeyEnum.expirationDate));
+    this.intervalTimeLeft = setInterval(()=>{
+      this.tiempoRestante()
+    },60000);
+
+  }
+
+  private tiempoRestante(){
+    this.currentDate = new Date();
+    this.timeLeft = ((this.endDate.getTime()-this.currentDate.getTime())/1000)/60;
+    console.log('El tiempo restante es: ',  this.timeLeft)
+    if(this.timeLeft<1){
+      this.openDialog2('0ms','0ms')
+      console.log('Su sesión expirará en 20 minutos')
+      clearInterval(this.intervalTimeLeft)
+    }
+
+  }
+
+  openDialog2(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    // @ts-ignore
+    this.dialog.open(DialogWarningSesion, {
+      width: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  comprobandoCambiosSesion(){
+    this.quantitativeInstrumentService.getVerificandoSesion().subscribe(data=>{
+      console.log('El estado de sesión es: ',data)
+
+    }, error => {
+      if (error.status==401){
+        clearInterval(this.intervalSesionStatus)
+        this.logOut()
+        this.toastr.warning('¡La sesión se ha cerrado inesperadamente!', 'Sesión Finalizada')
+        this.router.navigateByUrl('/login')
+      }
+    })
   }
 
   openDialog(): void {
@@ -74,7 +133,9 @@ export class NavbarComponent {
     this.buttonMenuAssignment = false;
     this.buttonMenuSettings = false;
     this.buttonMenuContact = false;
-
+    setInterval(()=>{
+      window.location.reload();
+    },5000)
   }
 
   private typeRole(rol: any) {
@@ -159,3 +220,13 @@ export class SelectQuantitativeInstrumentDialog {
     this.dialogRef.close();
   }
 }
+
+//Agregamos el componente del nuevo html
+@Component({
+  selector: 'dialog-warning-sesion',
+  templateUrl: 'dialog-warning-sesion.html',
+})
+export class DialogWarningSesion {
+  constructor(public dialogRef: MatDialogRef<DialogWarningSesion>) {}
+}
+

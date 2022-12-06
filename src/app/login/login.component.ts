@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     private activateRoute: ActivatedRoute,
     private _snackBar: MatSnackBar,
     private router: Router,
-    public quantitativeInstrumentService:QuantitativeInstrumentService
+    public quantitativeInstrumentService:QuantitativeInstrumentService,
+
   ) {
   }
 
@@ -59,6 +60,7 @@ export class LoginComponent implements OnInit {
     this.loginService.logIn(data.value).subscribe({
       next: (response: LoginInterface) => {
         console.log('La data de sesión es: ',response)
+
         this.responseLogin(response);
       }, error: (error) => {
         if (error.status === 401 || error.statusText === "ok") {
@@ -71,7 +73,7 @@ export class LoginComponent implements OnInit {
   }
 
   private responseLogin(response: LoginInterface) {
-    // this.quantitativeInstrumentService.shareDataSession = response;
+
     if (response.name != null) {
       this.setLocalStorage(response);
 
@@ -110,6 +112,7 @@ export class LoginComponent implements OnInit {
     this.oLocalStorage.setItem(LocalStorageKeyEnum.token, user.token);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.rol, user.job_profile);
     this.oLocalStorage.setItem(LocalStorageKeyEnum.type, user.type);
+    this.oLocalStorage.setItem(LocalStorageKeyEnum.expirationDate, user.expirationDate);
 
   }
 

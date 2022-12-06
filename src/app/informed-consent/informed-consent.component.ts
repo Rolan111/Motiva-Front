@@ -22,7 +22,6 @@ export class InformedConsentComponent implements OnInit {
               ) { }
 
   idPollRecuperado:string = this.careSheetService.shareIdPoll;
-  // idPollRecuperado = 'PRUEBA1111';
 
   ngOnInit(): void {
     console.log('El idPoll recuperado es: ', this.idPollRecuperado)

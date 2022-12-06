@@ -9,7 +9,6 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {PollModel} from "../poll.model";
 import {AlertModel} from "../alert.model";
 import {arrayMunicipios} from "../../enums/enum";
-import {QuantitativeInstrumentComponent} from "../quantitative-instrument/quantitative-instrument.component";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
 import {nanoid} from "nanoid";
 
@@ -32,7 +31,6 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   maxDate = new Date();
   minDate = new Date('December 31, 2021 24:00:00');
 
-  isntrumentoAdultos!: QuantitativeInstrumentComponent;
   //Declaración de las colecciones de formularios
   personalInfo!: FormGroup;
   sociodemographicFactors!: FormGroup;
@@ -94,7 +92,6 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     private _snackBar: MatSnackBar,
     private careSheetService: CareSheetService,
     private quantitativeInstrumentService:QuantitativeInstrumentService
-    // private instrumentoAdultos: QuantitativeInstrumentComponent
   ) {
   }
 
@@ -526,6 +523,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         console.log('La data recopilada de la ALERTA es: ',alert)
 
         this.answerList = [];
+        this.score = 0;
         this.sendToCareSheet();
 
       }, error: () => {
@@ -692,7 +690,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   }
 
   metodoPrueba(){
-    console.log('La variable asignada es: ', this.validandoEscolaridad)
+    console.log('La variable asignada es: ', this.factors)
   }
 
 }

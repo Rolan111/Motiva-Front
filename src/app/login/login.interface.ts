@@ -5,5 +5,6 @@ export interface LoginInterface{
   job_profile:string,
   token:string,
   type:string,
+  expirationDate:string
 }
 

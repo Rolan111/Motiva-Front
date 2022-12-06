@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertsService} from "./alerts.service";
-import {of} from "rxjs";
 
 export interface AlertsModel {
   id_poll: number;
@@ -8,12 +7,10 @@ export interface AlertsModel {
   municipality: string;
   date: string;
   nameBeneficiary: string;
-  //lastNameBeneficiary: string;
   identification: number;
   typeIdentification: string;
   score: number;
   cellphone: number;
-  //type_identification: string;
 }
 
 @Component({

@@ -11,7 +11,6 @@ import {AlertModel} from "../alert.model";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
 import { nanoid } from 'nanoid'
 import { arrayMunicipios } from "../../enums/enum";
-import {timeout, timer} from "rxjs";
 
 interface ListTypes {
   viewValue: string;
@@ -24,7 +23,6 @@ interface ListTypes {
 })
 export class QuantitativeInstrumentComponent implements OnInit {
 
-  //Ng-model
   occupationValue: number = 0;
 
   //Validacion ingreso fecha de caracterizacion de beneficiario
@@ -57,16 +55,11 @@ export class QuantitativeInstrumentComponent implements OnInit {
   //Modelo de alerta
   score: number = 0;
   professional!: string;
-  name_beneficiary!: string;
   municipality!: string;
   date!: string;
-  nameBeneficiary!: string;
-  lastNameBeneficiary!: string;
   identification: number = 0;
   typeIdentification!: string;
   cellphone: number = 0;
-
-  arrayTipoIdentification!: any;
 
   typeIdentificationQuestion: Question[] = [];
   sexQuestion: Question[] = [];
@@ -845,33 +838,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     })
 
 
-
-    /* switch (this.careSheetService.shareSex) {
-
-       case 1 :
-         this.formPersonalInfo.get('sex')?.setValue('Hombre')
-         break;
-       case 2 :
-         this.formPersonalInfo.get('sex')?.setValue('Mujer')
-         break;
-       case 3 :
-         this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
-         break;
-       case  187:
-         this.formPersonalInfo.get('sex')?.setValue('Hombre')
-         break;
-       case  188:
-         this.formPersonalInfo.get('sex')?.setValue('Mujer')
-         break;
-       case  189:
-         this.formPersonalInfo.get('sex')?.setValue('Indeterminado')
-         break;
-       default:
-         this.formPersonalInfo.get('sex')?.setValue('Esperando...')
-         break;
-*/
-
-
   };
 
 
@@ -900,7 +866,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
     });
 
     this.answerList.forEach(x => this.score = this.score + x.score)
-    // setTimeout(timeout, 5000)
 
     let poll: PollModel = {
       approvalDoc: "/document",
@@ -910,9 +875,6 @@ export class QuantitativeInstrumentComponent implements OnInit {
       type: "ADULT",
     };
 
-
-    // this.answerList.forEach(x => this.score = this.score + x.score)
-    //this.answerList.forEach(x => console.log('Recorriendo escores es: ',x.score))
 
     /** Evaluamos identificación a guardar */
 

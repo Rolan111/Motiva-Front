@@ -82,6 +82,12 @@ export class QuantitativeInstrumentService {
     return this.http.get<any>(path, {headers});
   }
 
+  getVerificandoSesion(): Observable<any> {
+    const path = mainUrl + 'api/verificando-sesion';
+    const headers = this.getHeader();
+    return this.http.get<any>(path, {headers});
+  }
+
 
   getHeader() {
     return new HttpHeaders({

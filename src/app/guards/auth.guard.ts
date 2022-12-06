@@ -11,6 +11,10 @@ export class AuthGuard implements CanActivate {
   oLocalStorage = new LocalStorage();
 
   constructor(private router: Router) {
+    // setInterval(()=>{
+    //   // @ts-ignore
+    //   this.canActivate()
+    // },10000)
   }
 
   canActivate(
