@@ -33,7 +33,7 @@ const routes: Routes = [
       {path: 'quantitative', component: QuantitativeInstrumentComponent, canActivate: [AuthGuard]},
       {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent, canActivate: [AuthGuard]},
       {path: 'community-agents', component: RepComAgentComponent, canActivate: [AuthGuard]},
-      {path: 'tracking-sheet', component: TrackingSheetComponent, canActivate: [AuthGuard]},
+      {path: 'tracking-sheet/:variable', component: TrackingSheetComponent, canActivate: [AuthGuard]},
       {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
       {path: 'forum/report-description/:variable', component: ReportDescriptionComponent, canActivate: [AuthGuard]},
       {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]},

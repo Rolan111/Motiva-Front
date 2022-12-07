@@ -68,8 +68,7 @@
     <ng-container matColumnDef="seguimiento">
       <th mat-header-cell *matHeaderCellDef> Seguimiento</th>
       <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="accent" [routerLink]="['../tracking-sheet', element?.idPoll]">Seguimiento</button>
-        <!--<button mat-raised-button color="accent" onclick="location.href='http://localhost:4200/navbar/tracking-sheet'">Seguimiento</button>-->
+        <button mat-raised-button color="accent" [routerLink]="['../tracking-sheet', element.idPoll]">Seguimiento</button>
       </td>
     </ng-container>
 

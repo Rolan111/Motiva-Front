@@ -55,4 +55,18 @@ export class TrackingSheetComponent {
       console.log(response.data)
     })
   }
+
+  //1 Capturar idPoll que viene en la URL
+  //Sacar los datos de esta persona por consola (para efectos de prueba)
+  //2 Pintar los datos en el formulario
+  //3 En el botón gurdar llamar el método de guardar y de eliminar a la vez
+
+  saveFormPrueba(){
+    console.log('Gurdado de prueba: se hace en follow_users')
+  }
+
+  deleteRasm(idPoll:any){
+    console.log('El idPoll a eliminar es: en   rasm ',idPoll)
+    //Aquí llamar el servicio para eliminar y pasarle el idPoll
+  }
 }
