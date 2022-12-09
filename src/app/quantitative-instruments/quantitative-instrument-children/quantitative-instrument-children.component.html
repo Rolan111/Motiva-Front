@@ -31,8 +31,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Primer Nombre</mat-label>
-              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName" required
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName" required>
               <mat-error *ngIf="isControlHasError('firstName', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -41,15 +40,13 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Segundo Nombre</mat-label>
-              <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName"
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Primer Apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required>
               <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
                 <strong>Campo requerido</strong>
               </mat-error>
@@ -58,8 +55,7 @@
           <mat-grid-tile>
             <mat-form-field class="inputClass" appearance="standard">
               <mat-label>Segundo Apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName"
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
+              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName">
             </mat-form-field>
           </mat-grid-tile>
           <mat-grid-tile>
