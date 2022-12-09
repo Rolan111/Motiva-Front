@@ -11,6 +11,7 @@ import {AlertModel} from "../alert.model";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
 import { nanoid } from 'nanoid'
 import { arrayMunicipios } from "../../enums/enum";
+import {ToastrService} from "ngx-toastr";
 
 interface ListTypes {
   viewValue: string;
@@ -114,6 +115,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
   nineteenList: Array<OptionAnswer> = [];
 
   constructor(
+    private toastr: ToastrService,
     private careSheetService: CareSheetService,
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService,
@@ -145,7 +147,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.addValidatorAffectationCovid();
     this.addValidatorDeadFamilyCovid();
     this.addValidatorWorkSituation();
-
+    // console.log('EL ID POLL ES', this.idPoll)
   }
 
     /* Captura de información de los FORMULARIOS */
@@ -899,47 +901,52 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
 
     //llamado del SERVICIO para guardar a la tabla ANSWER
+    if(this.idPoll == null){ /** Si no existe IdPoll NO GUARDE NADA */
+    this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
 
-    this.quanInstService.createAnswer(this.answerList).subscribe({
-      next: () => {
-        this.openSnackBar('Se guardó correctamente el formulario ADULT', 'Aceptar');
+    }else{
+      this.quanInstService.createAnswer(this.answerList).subscribe({
+        next: () => {
+          this.openSnackBar('Se guardó correctamente el formulario ADULT', 'Aceptar');
 
-        //Llamado del servicio para guardar en la tabla POLL
-        this.quanInstService.createPoll(poll).subscribe({
-          next: () => {
-            this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Aceptar');
-          }, error: () => {
-            this.openSnackBar('No se guardó correctamente la encuesta (Poll)', 'Aceptar');
-          }
-        })
-
-        //LLamado del servicio para guardar a la tabla Alert
-        if(this.score >= 25){
-          this.quanInstService.createAlert(alert).subscribe({
+          //Llamado del servicio para guardar en la tabla POLL
+          this.quanInstService.createPoll(poll).subscribe({
             next: () => {
-              this.openSnackBar('Se guardó correctamente la alerta', 'Aceptar');
+              this.openSnackBar('Se guardó correctamente la encuesta (Poll)', 'Aceptar');
+            }, error: () => {
+              this.openSnackBar('No se guardó correctamente la encuesta (Poll)', 'Aceptar');
             }
           })
+
+          //LLamado del servicio para guardar a la tabla Alert
+          if(this.score >= 25){
+            this.quanInstService.createAlert(alert).subscribe({
+              next: () => {
+                this.openSnackBar('Se guardó correctamente la alerta', 'Aceptar');
+              }
+            })
+          }
+
+          console.log('Los datos de alert son: ',alert)
+
+          this.answerList.splice(0, this.answerList.length);
+          this.answerList = [];
+          this.score = 0;
+          this.sendToCareSheet();
+
+        }, error: () => {
+          this.answerList.splice(0, this.answerList.length);
+          this.answerList = [];
+          this.score = 0;
+          this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
+        }, complete: ()=>{
+          this.answerList.splice(0, this.answerList.length);
+          this.answerList = [];
+          this.score = 0;
         }
+      });
+    }
 
-        console.log('Los datos de alert son: ',alert)
-
-        this.answerList.splice(0, this.answerList.length);
-        this.answerList = [];
-        this.score = 0;
-        this.sendToCareSheet();
-
-      }, error: () => {
-        this.answerList.splice(0, this.answerList.length);
-        this.answerList = [];
-        this.score = 0;
-        this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
-      }, complete: ()=>{
-        this.answerList.splice(0, this.answerList.length);
-        this.answerList = [];
-        this.score = 0;
-      }
-    });
 
   }
 

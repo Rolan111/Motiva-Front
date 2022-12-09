@@ -83,9 +83,15 @@
         OVA
       </mat-panel-title>
       <a routerLink="ova" mat-list-item *ngIf="buttonMenuOva">
-        <!-- <mat-icon fontSet="material-icons-two-tone">face</mat-icon> -->
         <img src="./assets/images/icons/icon-ova.png" width="8%">
         &nbsp;&nbsp;OVA</a>
+      <mat-divider></mat-divider>
+      <mat-panel-title>
+        Retroalimentación
+      </mat-panel-title>
+      <a routerLink="feedback" mat-list-item *ngIf="buttonMenuOva">
+        <img src="./assets/images/icons/icon-ova.png" width="8%">
+        &nbsp;&nbsp;Retroalimentación</a>
     </mat-nav-list>
   </mat-drawer>
 

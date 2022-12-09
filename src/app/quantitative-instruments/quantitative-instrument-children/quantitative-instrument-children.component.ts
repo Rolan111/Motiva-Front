@@ -521,15 +521,20 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
           })
         }
         console.log('La data recopilada de la ALERTA es: ',alert)
-
+        this.answerList.splice(0, this.answerList.length);
         this.answerList = [];
         this.score = 0;
         this.sendToCareSheet();
 
       }, error: () => {
+        this.answerList.splice(0, this.answerList.length);
         this.answerList = [];
         this.score = 0;
         this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO NIÑOS', 'Aceptar');
+      }, complete: () =>{
+        this.answerList.splice(0, this.answerList.length);
+        this.answerList = [];
+        this.score = 0;
       }
     });
 

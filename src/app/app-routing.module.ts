@@ -20,6 +20,7 @@ import {OVAComponent} from "./ova/ova.component";
 import {SupportComponent} from "./support/support.component";
 import {ReportsComponent} from "./reports/reports.component";
 import {InformedConsentComponent} from "./informed-consent/informed-consent.component";
+import {FeedbackComponent} from "./feedback/feedback.component";
 
 
 const routes: Routes = [
@@ -46,6 +47,7 @@ const routes: Routes = [
       {path: 'support', component: SupportComponent},
       {path: 'reports', component: ReportsComponent},
       {path: 'informed-consent', component: InformedConsentComponent},
+      {path: 'feedback', component: FeedbackComponent},
     ]
   },
 ];

@@ -25,6 +25,7 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { environment } from '../environments/environment';
 import { MatProgressBarModule} from "@angular/material/progress-bar";
 import {NavbarModule} from "./shared/navbar/navbar.module";
+import {FeedbackModule} from "./feedback/feedback.module";
 
 
 @NgModule({
@@ -53,7 +54,8 @@ import {NavbarModule} from "./shared/navbar/navbar.module";
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     MatProgressBarModule,
-    NavbarModule
+    NavbarModule,
+    FeedbackModule
   ],
   providers: [],
   bootstrap: [AppComponent],

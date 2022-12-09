@@ -33,6 +33,11 @@ export class QuantitativeInstrumentService {
     const headers = this.getHeader();
     return this.http.get(path + id_poll + '/' + id_question, {headers});
   }
+  public getAnswerByIdQuestionAndOpenAnswer(id_question: any, open_asnwer: any) {
+    const path = mainUrl + 'api/answerByIdQuestionAndOpenAnswer/';
+    const headers = this.getHeader();
+    return this.http.get(path + id_question + '/' + open_asnwer, {headers});
+  }
 
   getAnswersByIdQuestion(idQuestion: number): Observable<any> {
     const path = mainUrl + 'api/answerByIdQuestion/';
