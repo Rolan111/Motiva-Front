@@ -128,7 +128,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     });
 
     this.sociodemographicFactors = this.formBuilder.group({
-      age: new FormControl('', [Validators.required,Validators.max(14)]),
+      age: ['', Validators.required],
       sex: ['', Validators.required],
       ethnicity: ['', Validators.required],
       zoneResidence: ['', Validators.required],
@@ -137,7 +137,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
       typeHome: ['', Validators.required],
       accessServicies: ['', Validators.required],
       educationLevel: ['', Validators.required],
-      studyMode: [[]],
+      studyMode: [],
       socialSecurity: ['', Validators.required],
     });
 
@@ -346,7 +346,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
     let answer18: AnswerModel = {
       idAnswer: this.idAnswer + 17,
       idQuestion: 10,
-      idOptionAnswers: answerForm.value.studyMode,
+      idOptionAnswers: [answerForm.value.studyMode],
       openAnswer: '',
       idPoll: this.idPoll,
       type: 'CHILDREN',
@@ -690,7 +690,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   }
 
   metodoPrueba(){
-    console.log('La variable asignada es: ', this.factors)
+    console.log('Los datos de factores sociodemográficos son: ', this.sociodemographicFactors.value)
   }
 
 }

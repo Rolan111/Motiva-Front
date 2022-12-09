@@ -105,6 +105,12 @@ export class AlertsService {
     return this.http.get(path, {headers});
   }
 
+  public getQuestionsChildren() {
+    const path = mainUrl + 'api/questionsChildren';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
   public getQuestionByIdQuestion(id_question: any) {
     const path = mainUrl + 'api/questionByIdQuestion/';
     const headers = this.getHeader();

@@ -1,112 +1,114 @@
 <mat-grid-tile-header>Instrumento cuantitativo niños</mat-grid-tile-header>
 <mat-vertical-stepper [linear]="true" class="mat-stepper-vertical">
 
+<!-- BOTÓN DE ENVIADO:  sendQuantitativeInstrument([personalInfo, sociodemographicFactors, comorbidityInfo, factors])-->
+
 <!--  Información personal -->
 
-  <mat-step [stepControl]="personalInfo" color="primary">
-    <ng-template matStepLabel>Información Personal</ng-template>
-    <mat-card class="advancedForm">
-      <mat-card-header>
-        <mat-card-title>Beneficiario</mat-card-title>
-      </mat-card-header>
-<!--      INFORMACIÓN PERSONAL-->
-      <form [formGroup]="personalInfo">
-        <mat-grid-list cols="1" rowHeight="85px">
+<!--  <mat-step [stepControl]="personalInfo" color="primary">-->
+<!--    <ng-template matStepLabel>Información Personal</ng-template>-->
+<!--    <mat-card class="advancedForm">-->
+<!--      <mat-card-header>-->
+<!--        <mat-card-title>Beneficiario</mat-card-title>-->
+<!--      </mat-card-header>-->
+<!--&lt;!&ndash;      INFORMACIÓN PERSONAL&ndash;&gt;-->
+<!--      <form [formGroup]="personalInfo">-->
+<!--        <mat-grid-list cols="1" rowHeight="85px">-->
 
-          <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <mat-form-field class="inputClass" appearance="fill">
-              <mat-label>Fecha de evaluación</mat-label>
-              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" readonly>
-              <mat-error *ngIf="isControlHasError('applicationDate', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-              <mat-datepicker #picker1></mat-datepicker>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <mat-grid-list cols="2" rowHeight="85px">
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Primer Nombre</mat-label>
-              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName" required
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-              <mat-error *ngIf="isControlHasError('firstName', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Segundo Nombre</mat-label>
-              <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName"
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Primer Apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-              <mat-error *ngIf="isControlHasError('firstLastName', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Segundo Apellido</mat-label>
-              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName"
-                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field appearance="standard" class="inputClass">
-              <mat-label>Tipo de Documento</mat-label>
-              <mat-select formControlName="typeIdentification" (click)="selectQuestion(204)" required>
-                <mat-option *ngFor="let item of typeIdentificationList" [value]="item.idOptionAnswer">
-                  {{item.description}}
-                </mat-option>
-              </mat-select>
-              <mat-error *ngIf="isControlHasError('typeIdentification', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>No. Identificación</mat-label>
-              <input type="text" matInput maxlength="12" placeholder="Número de identificación" minlength="7"
-                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>
-              <mat-error *ngIf="isControlHasError('identification', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>Dirección</mat-label>
-              <input matInput maxlength="30" placeholder="Dirección" formControlName="address" required>
-              <mat-error *ngIf="isControlHasError('address', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <mat-form-field class="inputClass" appearance="standard">
-              <mat-label>No. telefónico</mat-label>
-              <input type="text" matInput minlength="7" [maxLength]="10" placeholder="Número telefónico"
-                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>
-              <mat-error *ngIf="isControlHasError('cellphone', 'required')">
-                <strong>Campo requerido</strong>
-              </mat-error>
-            </mat-form-field>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-      <button mat-button matStepperNext>Siguiente</button>
-    </mat-card>
-  </mat-step>
+<!--          <mat-grid-tile [colspan]="1" [rowspan]="1">-->
+<!--            <mat-form-field class="inputClass" appearance="fill">-->
+<!--              <mat-label>Fecha de evaluación</mat-label>-->
+<!--              <input formControlName="applicationDate" matInput [matDatepicker]="picker1" [min]="minDate" [max]="maxDate" readonly>-->
+<!--              <mat-error *ngIf="isControlHasError('applicationDate', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>-->
+<!--              <mat-datepicker #picker1></mat-datepicker>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--        </mat-grid-list>-->
+<!--        <mat-grid-list cols="2" rowHeight="85px">-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>Primer Nombre</mat-label>-->
+<!--              <input matInput maxlength="30" placeholder="Primer nombre" formControlName="firstName" required-->
+<!--                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">-->
+<!--              <mat-error *ngIf="isControlHasError('firstName', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>Segundo Nombre</mat-label>-->
+<!--              <input matInput maxlength="30" placeholder="Segundo nombre" formControlName="secondName"-->
+<!--                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>Primer Apellido</mat-label>-->
+<!--              <input matInput maxlength="30" placeholder="Primer apellido" formControlName="firstLastName" required-->
+<!--                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">-->
+<!--              <mat-error *ngIf="isControlHasError('firstLastName', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>Segundo Apellido</mat-label>-->
+<!--              <input matInput maxlength="30" placeholder="Segundo apellido" formControlName="secondLastName"-->
+<!--                     oninput="this.value=this.value.replace(/[^A-Za-z]/g,'')">-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field appearance="standard" class="inputClass">-->
+<!--              <mat-label>Tipo de Documento</mat-label>-->
+<!--              <mat-select formControlName="typeIdentification" (click)="selectQuestion(204)" required>-->
+<!--                <mat-option *ngFor="let item of typeIdentificationList" [value]="item.idOptionAnswer">-->
+<!--                  {{item.description}}-->
+<!--                </mat-option>-->
+<!--              </mat-select>-->
+<!--              <mat-error *ngIf="isControlHasError('typeIdentification', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>No. Identificación</mat-label>-->
+<!--              <input type="text" matInput maxlength="12" placeholder="Número de identificación" minlength="7"-->
+<!--                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="identification" required>-->
+<!--              <mat-error *ngIf="isControlHasError('identification', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>Dirección</mat-label>-->
+<!--              <input matInput maxlength="30" placeholder="Dirección" formControlName="address" required>-->
+<!--              <mat-error *ngIf="isControlHasError('address', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <mat-form-field class="inputClass" appearance="standard">-->
+<!--              <mat-label>No. telefónico</mat-label>-->
+<!--              <input type="text" matInput minlength="7" [maxLength]="10" placeholder="Número telefónico"-->
+<!--                     oninput="this.value=this.value.replace(/[^0-9]/g,'')" formControlName="cellphone" required>-->
+<!--              <mat-error *ngIf="isControlHasError('cellphone', 'required')">-->
+<!--                <strong>Campo requerido</strong>-->
+<!--              </mat-error>-->
+<!--            </mat-form-field>-->
+<!--          </mat-grid-tile>-->
+<!--        </mat-grid-list>-->
+<!--      </form>-->
+<!--      <button mat-button matStepperNext>Siguiente</button>-->
+<!--    </mat-card>-->
+<!--  </mat-step>-->
 
 <!--  FACTORES SOCIODEMOGRÁFICOS -->
   <mat-step [stepControl]="sociodemographicFactors" color="primary" >
@@ -155,8 +157,8 @@
               <label>4. Zona de residencia</label>
               <mat-radio-group class="example-radio-group" aria-label="Zona de residencia"
                                formControlName="zoneResidence">
-                <mat-radio-button class="example-radio-button" value="196">Rural</mat-radio-button>
-                <mat-radio-button class="example-radio-button" value="197">Urbano</mat-radio-button>
+                <mat-radio-button class="example-radio-button" [value]=196>Rural</mat-radio-button>
+                <mat-radio-button class="example-radio-button" [value]=197>Urbano</mat-radio-button>
               </mat-radio-group>
               <mat-error *ngIf="isControlHasErrorSecundary('zoneResidence', 'required')">
                 <strong>Campo requerido</strong>
@@ -256,126 +258,128 @@
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="selectQuestion(12)">Siguiente</button>
+<!--        <button mat-button matStepperNext (click)="selectQuestion(12)">Siguiente</button>-->
+        <button mat-button matStepperNext (click)="sendQuantitativeInstrument([sociodemographicFactors]); metodoPrueba()">Siguiente</button>
       </mat-card-actions>
     </mat-card>
   </mat-step>
 
-<!--  COMORBILIDADES, TRASTORNO Y ENFERMEDADES PREEXISTENTES -->
-  <mat-step>
-    <ng-template matStepLabel>12. Comorbilidades, trastornos y enfermedades preexitentes</ng-template>
-    <mat-card class="advancedForm">
-      <form [formGroup]="comorbidityInfo">
+<!--&lt;!&ndash;  COMORBILIDADES, TRASTORNO Y ENFERMEDADES PREEXISTENTES &ndash;&gt;-->
+<!--  <mat-step>-->
+<!--    <ng-template matStepLabel>12. Comorbilidades, trastornos y enfermedades preexitentes</ng-template>-->
+<!--    <mat-card class="advancedForm">-->
+<!--      <form [formGroup]="comorbidityInfo">-->
 
-        <mat-grid-list cols="2" rowHeight="80px">
-          <mat-grid-tile *ngFor="let comorbilities of comorbilitiesList; let i = index">
-            <div class="checkboxGrid">
-              <mat-checkbox (change)="onCheckboxChange($event)" [value]="comorbilities.idOptionAnswer.toString()">
-                {{comorbilities.description}}
-              </mat-checkbox>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
+<!--        <mat-grid-list cols="2" rowHeight="80px">-->
+<!--          <mat-grid-tile *ngFor="let comorbilities of comorbilitiesList; let i = index">-->
+<!--            <div class="checkboxGrid">-->
+<!--              <mat-checkbox (change)="onCheckboxChange($event)" [value]="comorbilities.idOptionAnswer.toString()">-->
+<!--                {{comorbilities.description}}-->
+<!--              </mat-checkbox>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--        </mat-grid-list>-->
 
-        <mat-grid-list cols="1" rowHeight="80px">
-          <mat-grid-tile>
-            <div style="width: 100%;">
-              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
-                <mat-label>12. Diagnosticado con algún trastorno o enfermedad mental</mat-label>
-                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease">
+<!--        <mat-grid-list cols="1" rowHeight="80px">-->
+<!--          <mat-grid-tile>-->
+<!--            <div style="width: 100%;">-->
+<!--              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">-->
+<!--                <mat-label>12. Diagnosticado con algún trastorno o enfermedad mental</mat-label>-->
+<!--                <input matInput maxlength="300" placeholder="Diagnosticado con algún trastorno o enfermedad mental" formControlName="disorderDisease">-->
 
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div style="width: 100%;">
-              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">
-                <mat-label>13. Discapacidad física o mental</mat-label>
-                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMentalDisability">
-              </mat-form-field>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-      </form>
-      <mat-card-actions>
-        <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-button matStepperNext (click)="selectFactors([13, 14, 15, 16, 17])">Siguiente</button>
-      </mat-card-actions>
-    </mat-card>
-  </mat-step>
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <div style="width: 100%;">-->
+<!--              <mat-form-field class="inputClass" appearance="standard" style="width: 450px">-->
+<!--                <mat-label>13. Discapacidad física o mental</mat-label>-->
+<!--                <input matInput maxlength="300" placeholder="Discapacidad física o mental" formControlName="physicalMentalDisability">-->
+<!--              </mat-form-field>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--        </mat-grid-list>-->
+<!--      </form>-->
+<!--      <mat-card-actions>-->
+<!--        <button mat-button matStepperPrevious>Atrás</button>-->
+<!--        <button mat-button matStepperNext (click)="selectFactors([13, 14, 15, 16, 17])">Siguiente</button>-->
+<!--      </mat-card-actions>-->
+<!--    </mat-card>-->
+<!--  </mat-step>-->
 
-<!--  FACTORES CONTEXTUALES ASOCIADOS AL COVID 19 -->
-  <mat-step>
-    <ng-template matStepLabel>Factores contextuales asociados al Covid-19</ng-template>
-    <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">
-      <form [formGroup]="factors">
-        <mat-card-header>
-          <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>
-        </mat-card-header>
-        <mat-grid-list cols="1" rowHeight="100px">
-          <mat-grid-tile>
-            <div class="example-radio-group" style="width: 100%">
-              <label>13. ¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del
-                virus?</label>
-              <br>
-              <mat-radio-group class="example-radio-group" formControlName="one">
-                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of oneList"
-                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="example-radio-group" style="width: 100%">
-              <label>14. ¿Cómo te sentiste estudiando en casa el tiempo que no pudiste salir a causa del virus?</label>
-              <br>
-              <mat-radio-group class="example-radio-group" formControlName="two">
-                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twoList"
-                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="example-radio-group" style="width: 100%">
-              <label>15. ¿Cómo te sentiste al no poder relacionarte con tus amigos como antes, el tiempo que estuviste en
-                casa sin poder salir a causa del virus?</label>
-              <br>
-              <mat-radio-group class="example-radio-group" formControlName="three">
-                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of threeList"
-                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="example-radio-group" style="width: 100%">
-              <label>16. ¿Cómo te sentiste al cumplir con tus deberes y tareas el tiempo que estuviste en casa sin poder
-                salir a causa del virus?</label>
-              <br>
-              <mat-radio-group class="example-radio-group" formControlName="four">
-                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fourList"
-                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-grid-tile>
-          <mat-grid-tile>
-            <div class="example-radio-group" style="width: 100%">
-              <label>17. ¿Cómo te sentiste realizando tus pasatiempos, mientras estuviste en casa sin poder salir a causa
-                del virus?</label>
-              <br>
-              <mat-radio-group class="example-radio-group" formControlName="five">
-                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fiveList"
-                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>
-              </mat-radio-group>
-            </div>
-          </mat-grid-tile>
-        </mat-grid-list>
-        <mat-card-actions>
-          <button mat-button matStepperPrevious (click)="metodoPrueba()">Atrás</button>
-          <button mat-button matStepperNext [disabled]="factors.invalid"
-                  (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,
-          comorbidityInfo, factors])">Enviar
-          </button>
-        </mat-card-actions>
-      </form>
-    </mat-card>
-  </mat-step>
+<!--&lt;!&ndash;  FACTORES CONTEXTUALES ASOCIADOS AL COVID 19 &ndash;&gt;-->
+<!--  <mat-step>-->
+<!--    <ng-template matStepLabel>Factores contextuales asociados al Covid-19</ng-template>-->
+<!--    <mat-card class="advancedForm" style="max-height: 600px; overflow-y:scroll">-->
+<!--      <form [formGroup]="factors">-->
+<!--        <mat-card-header>-->
+<!--          <mat-card-title> A raíz de la pandemia por Covid-19:</mat-card-title>-->
+<!--        </mat-card-header>-->
+<!--        <mat-grid-list cols="1" rowHeight="100px">-->
+<!--          <mat-grid-tile>-->
+<!--            <div class="example-radio-group" style="width: 100%">-->
+<!--              <label>13. ¿Cómo te sentiste con tu familia el tiempo que estuvieron en casa sin poder salir a causa del-->
+<!--                virus?</label>-->
+<!--              <br>-->
+<!--              <mat-radio-group class="example-radio-group" formControlName="one">-->
+<!--                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of oneList"-->
+<!--                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>-->
+<!--              </mat-radio-group>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <div class="example-radio-group" style="width: 100%">-->
+<!--              <label>14. ¿Cómo te sentiste estudiando en casa el tiempo que no pudiste salir a causa del virus?</label>-->
+<!--              <br>-->
+<!--              <mat-radio-group class="example-radio-group" formControlName="two">-->
+<!--                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of twoList"-->
+<!--                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>-->
+<!--              </mat-radio-group>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <div class="example-radio-group" style="width: 100%">-->
+<!--              <label>15. ¿Cómo te sentiste al no poder relacionarte con tus amigos como antes, el tiempo que estuviste en-->
+<!--                casa sin poder salir a causa del virus?</label>-->
+<!--              <br>-->
+<!--              <mat-radio-group class="example-radio-group" formControlName="three">-->
+<!--                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of threeList"-->
+<!--                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>-->
+<!--              </mat-radio-group>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <div class="example-radio-group" style="width: 100%">-->
+<!--              <label>16. ¿Cómo te sentiste al cumplir con tus deberes y tareas el tiempo que estuviste en casa sin poder-->
+<!--                salir a causa del virus?</label>-->
+<!--              <br>-->
+<!--              <mat-radio-group class="example-radio-group" formControlName="four">-->
+<!--                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fourList"-->
+<!--                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>-->
+<!--              </mat-radio-group>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--          <mat-grid-tile>-->
+<!--            <div class="example-radio-group" style="width: 100%">-->
+<!--              <label>17. ¿Cómo te sentiste realizando tus pasatiempos, mientras estuviste en casa sin poder salir a causa-->
+<!--                del virus?</label>-->
+<!--              <br>-->
+<!--              <mat-radio-group class="example-radio-group" formControlName="five">-->
+<!--                <mat-radio-button class="example-radio-button" *ngFor="let commonAnswer of fiveList"-->
+<!--                                  [value]="commonAnswer.idOptionAnswer">{{commonAnswer.description}}</mat-radio-button>-->
+<!--              </mat-radio-group>-->
+<!--            </div>-->
+<!--          </mat-grid-tile>-->
+<!--        </mat-grid-list>-->
+<!--        <mat-card-actions>-->
+<!--          <button mat-button matStepperPrevious (click)="metodoPrueba()">Atrás</button>-->
+<!--          <button mat-button matStepperNext [disabled]="factors.invalid"-->
+<!--                  (click)="sendQuantitativeInstrument([personalInfo, sociodemographicFactors,-->
+<!--          comorbidityInfo, factors])">Enviar-->
+<!--          </button>-->
+<!--        </mat-card-actions>-->
+<!--      </form>-->
+<!--    </mat-card>-->
+<!--  </mat-step>-->
+
 </mat-vertical-stepper>

@@ -64,6 +64,12 @@ export class QuantitativeInstrumentService {
     return this.http.get<any>(path, {headers});
   }
 
+  getPollByIdPoll(idPoll: string): Observable<any> {
+    const path = mainUrl + 'api/pollByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get<any>(path + idPoll, {headers});
+  }
+
   createPoll(poll: PollModel): Observable<DataResponse> {
     const path = mainUrl + 'api/poll';
     const headers = this.getHeader();
