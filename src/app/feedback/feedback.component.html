@@ -1,0 +1,36 @@
+<mat-card>
+  Seleccione de qué módulo necesita realizar retroalimentación:
+  <br>
+
+  <form [formGroup]="formFeedBack">
+
+    <mat-form-field appearance="fill">
+      <mat-label>Select an option</mat-label>
+      <mat-select [(value)]="selected">
+        <mat-option value="ficha_atencion">Ficha de atención y consentimiento informado</mat-option>
+        <mat-option value="consentimiento_informado">Solo Consentimiento informado</mat-option>
+      </mat-select>
+    </mat-form-field>
+  <BR>
+    Digite la cédula de ciudadanía o tarjeta de identidad del beneficiario <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Cédula de ciudadanía o tarjeta de identidad</mat-label>
+      <input formControlName="identification" matInput placeholder="C.C o T.I">
+    </mat-form-field>
+    <BR>
+
+    <button mat-raised-button color="primary" (click)="probandoSeleccion()" [disabled]="!formFeedBack.valid">Consultar</button>
+
+    <div *ngIf="idPollCapturado!=null">
+      <br>
+      <p>Se encontró una encuesta con los siguientes datos:</p> <br>
+      <p>IdPoll: {{idPollCapturado}}</p>
+      <p>Nombre: {{nombreCapturado}}</p>
+      <button mat-raised-button color="primary" (click)="realizarRetroalimentacion()">Realizar Retroalimentación</button>
+    </div>
+
+  </form>
+  <br>
+
+
+</mat-card>
