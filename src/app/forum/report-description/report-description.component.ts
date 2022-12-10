@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ForumService} from "../forum.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import moment from "moment/moment";
 
 @Component({
   selector: 'app-report-description',
@@ -14,12 +15,7 @@ export class ReportDescriptionComponent implements OnInit {
   public respuesta: any;
   public comments: any = [];
   public capturaUrl: any;
-
-  longText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
-
+  date: any;
 
   constructor(
     private forumServicee: ForumService,
@@ -33,6 +29,8 @@ export class ReportDescriptionComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.date = moment(this.respuesta?.date).format('DD-MM-YYYY');
+
     this.route.paramMap.subscribe((paramMap: any) => {
       const {params} = paramMap
       this.cargarReportes(params.variable)

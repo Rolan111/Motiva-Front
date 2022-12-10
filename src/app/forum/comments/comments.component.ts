@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import moment from 'moment';
 
 @Component({
   selector: 'app-comments',
@@ -6,11 +7,14 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
-
   @Input() recibiendoComments: any;
+  date: any;
+
+
 
   ngOnInit(): void {
-    console.log('La data recibida de report-description es: ', this.recibiendoComments)
+    this.date = moment(this.recibiendoComments.createdAt).format('DD-MM-YYYY');
+    //console.log('Comentarios: ', this.recibiendoComments)
   }
 
 }

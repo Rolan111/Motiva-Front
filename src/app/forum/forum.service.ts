@@ -23,7 +23,7 @@ export class ForumService {
   }
 
   public get(id: any) {
-    const path = mainUrl + 'api/rep-com-agent';
+    const path = mainUrl + 'api/rep-com-agent/';
     const headers = this.getHeader();
     return this.http.get(path + id, {headers});
   }
