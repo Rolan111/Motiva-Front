@@ -11,6 +11,7 @@ import {AlertModel} from "../alert.model";
 import {arrayMunicipios} from "../../enums/enum";
 import {CareSheetService} from "../../care-sheet/care-sheet.service";
 import {nanoid} from "nanoid";
+import {ToastrService} from "ngx-toastr";
 
 interface ListTypes {
   viewValue: string;
@@ -86,6 +87,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   citiesList: ListTypes[] = arrayMunicipios;
 
   constructor(
+    private toastr: ToastrService,
     private formBuilder: FormBuilder,
     private quanInstService: QuantitativeInstrumentService,
     private router: Router,
@@ -96,6 +98,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    this.idPoll=nanoid(10);
+    console.log('EL ID POLL ES', this.idPoll)
+
     this.formQuantitative();
 
     this.personalInfo.get('applicationDate')?.setValue(new Date().toLocaleDateString())
@@ -108,10 +114,13 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
-      this.idPoll = nanoid(10);
+      // this.idPoll = nanoid(10);
     })
 
     this.addValidatorSocFactorsStudyMode()
+    if(this.idPoll==null){
+      this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
+    }
   }
 
   private formQuantitative() {

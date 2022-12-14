@@ -16,6 +16,7 @@ export class FeedbackComponent implements OnInit {
   identification!:string;
   idPollCapturado!:string;
   nombreCapturado!:string;
+  errorMessage:string = 'mensaje de error';
   constructor(
     private router: Router,
     private quantitativeInstrumentService:QuantitativeInstrumentService,
@@ -35,16 +36,25 @@ export class FeedbackComponent implements OnInit {
     console.log('La opción seleccionada es: ',this.selected)
     console.log('La identificación es: ', this.formFeedBack.value.identification)
     this.identification = this.formFeedBack.value.identification
-    // console.log('El dato seleccionado es: ',this.selected)
     this.quantitativeInstrumentService.getAnswerByIdQuestionAndOpenAnswer(205, this.identification).subscribe((data:any)=>{
-      console.log('El idPoll es: ',data[0].idPoll)
-      this.idPollCapturado = data[0].idPoll
-        this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(data[0].idPoll,200).subscribe((data:any)=>{
-        console.log('El nombre de la persona es: ',data[0].openAnswer)
+      console.log('La data es: ',data[0])
+      if(data[0]=undefined){
+        console.log('No encontrado el ID')
+        this.errorMessage='El número de cédula NO se ha encontrado'
+      }else{
+        console.log('El idPoll es: ',data[0].idPoll)
+        this.idPollCapturado = data[0].idPoll
+        this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(this.idPollCapturado,200).subscribe((data:any)=>{
+          console.log('El nombre de la persona es: ',data[0].openAnswer)
           this.nombreCapturado = data[0].openAnswer
+        })
+      }
+
+    }, error => {this.errorMessage='El número de cédula NO se ha encontrado'
+      console.log('NO HAY DATOS')},
+      () => {
 
       })
-    })
   }
 
   realizarRetroalimentacion(){

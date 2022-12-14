@@ -129,6 +129,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.idPoll=nanoid(10);
+    console.log('EL ID POLL ES', this.idPoll)
     console.log('La data de sesión CAPTURADA es: ',this.quantitativeInstrumentService.shareDataSession)
 
     this.formQuantitative();
@@ -139,15 +141,16 @@ export class QuantitativeInstrumentComponent implements OnInit {
     this.quanInstService.getLastSequence().subscribe(response => {
       this.idAnswer = response.data.idAnswer;
       // this.idPoll = response.data.idPoll;
-      this.idPoll=nanoid(10);
-      console.log('EL ID POLL ES', this.idPoll)
     })
     this.setTypeIdentification();
     this.addValidatorWorkMode();
     this.addValidatorAffectationCovid();
     this.addValidatorDeadFamilyCovid();
     this.addValidatorWorkSituation();
-    // console.log('EL ID POLL ES', this.idPoll)
+
+    if(this.idPoll==null){
+      this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
+    }
   }
 
     /* Captura de información de los FORMULARIOS */
@@ -902,8 +905,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
     //llamado del SERVICIO para guardar a la tabla ANSWER
     if(this.idPoll == null){ /** Si no existe IdPoll NO GUARDE NADA */
-    this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
-
+      this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
     }else{
       this.quanInstService.createAnswer(this.answerList).subscribe({
         next: () => {
