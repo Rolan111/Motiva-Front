@@ -1,4 +1,5 @@
 export class TrackingSheetModel {
+  idPoll: string;
   names: string;
   lastnames: string;
   identificationType: string;
@@ -8,7 +9,8 @@ export class TrackingSheetModel {
   attentionStatus: string;
   recommendations: string;
 
-  constructor(names: string, lastnames: string, identificationType: string, identification: string, typeRoute: string, referredEntity: string, attentionStatus: string, recommendations: string) {
+  constructor(idPoll: string, names: string, lastnames: string, identificationType: string, identification: string, typeRoute: string, referredEntity: string, attentionStatus: string, recommendations: string) {
+    this.idPoll = idPoll;
     this.names = names;
     this.lastnames = lastnames;
     this.identificationType = identificationType;

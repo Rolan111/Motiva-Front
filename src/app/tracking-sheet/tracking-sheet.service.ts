@@ -30,6 +30,18 @@ export class TrackingSheetService {
     return this.http.post<DataResponse>(path, trackingSheet, {headers});
   }
 
+  deleteRasmByIdPoll(idPoll: string): Observable<any> {
+    const path = mainUrl + 'api/rasm-delete/';
+    const headers = this.getHeader();
+    return this.http.delete<any>(path + idPoll, {headers});
+  }
+
+  getRasmByIdPoll(idPoll: string): Observable<any> {
+    const path = mainUrl + 'api/rasmByIdPoll/';
+    const headers = this.getHeader();
+    return this.http.get<any>(path + idPoll, {headers});
+  }
+
   getHeader() {
     return new HttpHeaders({
       'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),

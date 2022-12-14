@@ -1,16 +1,29 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {TrackingSheetService} from "./tracking-sheet.service";
 import {TrackingSheetModel} from "./tracking-sheet.model";
+import moment from "moment/moment";
+import {log} from "util";
+import {collectionSnapshots} from "@angular/fire/firestore";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-tracking-sheet',
   templateUrl: './tracking-sheet.component.html',
   styleUrls: ['./tracking-sheet.component.scss']
 })
-export class TrackingSheetComponent {
+export class TrackingSheetComponent implements OnInit {
+
+  capturaIdPollUrl!:string;
   form: FormGroup;
+
+  //Variables para capturar
+  capturandoNombre!:string;
+  capturandoApelido!:string;
+  capturandoTipoIdentificacion!:string;
+  capturandoNumeroIdentificacion!:string;
+  capturandoTypeRasm!:string;
 
   identificationType: any[] = [
     {value: 'CC', viewValue: 'Cedula Ciudadanía'},
@@ -22,6 +35,8 @@ export class TrackingSheetComponent {
   ];
 
   constructor(
+    private router: Router,
+    private toastr: ToastrService,
     private route: ActivatedRoute,
     private trackingSheetService: TrackingSheetService,
     private formBuilder: FormBuilder)
@@ -39,8 +54,35 @@ export class TrackingSheetComponent {
     })
   }
 
+  ngOnInit(): void {
+
+    this.route.paramMap.subscribe((paramMap: any) => {
+      const {params} = paramMap
+      this.capturaIdPollUrl = params.variable
+      console.log('El idPoll es: ',this.capturaIdPollUrl)
+      /** Consultar info con idPoll */
+      this.trackingSheetService.getRasmByIdPoll(this.capturaIdPollUrl).subscribe(data=>{
+        console.log('La data traida de rasm es: ',data)
+        this.capturandoNombre = data[0].nameBeneficiary
+        this.capturandoApelido = data[0].lastNameBeneficiary
+        this.capturandoTipoIdentificacion = data[0].typeIdentification
+        this.capturandoNumeroIdentificacion = data[0].identification
+        this.capturandoTypeRasm = data[0].typeRasm
+        console.log('El nombre es: ',this.capturandoNombre)
+        this.form.get('names')?.setValue(this.capturandoNombre)
+        this.form.get('lastnames')?.setValue(this.capturandoApelido)
+        this.form.get('identificationType')?.setValue(this.capturandoTipoIdentificacion)
+        this.form.get('identification')?.setValue(this.capturandoNumeroIdentificacion)
+        this.form.get('typeRoute')?.setValue(this.capturandoTypeRasm)
+
+      })
+    })
+
+  }
+
   public saveForm(form: FormGroup) {
     let trackingSheetModel: TrackingSheetModel = {
+      idPoll: this.capturaIdPollUrl,
       names: form.value.names,
       lastnames: form.value.lastnames,
       identificationType: form.value.identificationType,
@@ -53,20 +95,23 @@ export class TrackingSheetComponent {
 
     this.trackingSheetService.create(trackingSheetModel).subscribe(response => {
       console.log(response.data)
+    },error => {
+      console.log('El error es', error)
+      this.toastr.error('¡ NO se ha enviado la ficha de seguimiento!', 'Fallo al enviar')
+    },() => {
+      this.toastr.success('¡Se ha enviado la ficha de seguimiento!', 'Enviado')
+      this.deleteRasm()
+    })
+
+  }
+
+  deleteRasm(){
+    console.log('El idPoll a eliminar en rasm es: ',this.capturaIdPollUrl)
+    this.trackingSheetService.deleteRasmByIdPoll(this.capturaIdPollUrl).subscribe(data=>{
+      console.log('Registro de RASM eliminado')
+    },error => {},() => {
+      this.router.navigate(['navbar/dashboard'])
     })
   }
 
-  //1 Capturar idPoll que viene en la URL
-  //Sacar los datos de esta persona por consola (para efectos de prueba)
-  //2 Pintar los datos en el formulario
-  //3 En el botón gurdar llamar el método de guardar y de eliminar a la vez
-
-  saveFormPrueba(){
-    console.log('Gurdado de prueba: se hace en follow_users')
-  }
-
-  deleteRasm(idPoll:any){
-    console.log('El idPoll a eliminar es: en   rasm ',idPoll)
-    //Aquí llamar el servicio para eliminar y pasarle el idPoll
-  }
 }
