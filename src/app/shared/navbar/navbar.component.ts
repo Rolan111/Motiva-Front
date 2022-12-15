@@ -163,6 +163,7 @@ export class NavbarComponent {
         this.buttonMenuQuantitive = true;
         this.buttonMenuCareSheet = true;
         this.buttonMenuForum = true;
+        this.buttonMenuCareRasm = true;
         //this.buttonMenuAlerts = true;
         //this.buttonMenuCareRoutes = true;
         this.buttonMenuOva = true;
