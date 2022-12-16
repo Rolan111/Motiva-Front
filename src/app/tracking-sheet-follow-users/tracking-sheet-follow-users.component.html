@@ -1,0 +1,54 @@
+<mat-card>
+
+  <mat-card-title>Usuarios en seguimiento</mat-card-title>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <!-- names -->
+    <ng-container matColumnDef="names">
+      <th mat-header-cell *matHeaderCellDef> Nombres</th>
+      <td mat-cell *matCellDef="let element"> {{element.names}} </td>
+    </ng-container>
+
+    <!-- lastnames -->
+    <ng-container matColumnDef="lastnames">
+      <th mat-header-cell *matHeaderCellDef> Apellidos</th>
+      <td mat-cell *matCellDef="let element"> {{element.lastnames}} </td>
+    </ng-container>
+
+    <!-- BidentificationType -->
+    <ng-container matColumnDef="identificationType">
+      <th mat-header-cell *matHeaderCellDef> Tipo de Identificacion</th>
+      <td mat-cell *matCellDef="let element"> {{element.identificationType}} </td>
+    </ng-container>
+
+    <!-- Identidicacion -->
+    <ng-container matColumnDef="identification">
+      <th mat-header-cell *matHeaderCellDef> Identificacion</th>
+      <td mat-cell *matCellDef="let element"> {{element.identification}} </td>
+    </ng-container>
+
+    <!-- typeRoute -->
+    <ng-container matColumnDef="typeRoute">
+      <th mat-header-cell *matHeaderCellDef> Tipo de Ruta</th>
+      <td mat-cell *matCellDef="let element"> {{element.typeRoute}} </td>
+    </ng-container>
+
+    <!-- referredEntity -->
+    <ng-container matColumnDef="referredEntity">
+      <th mat-header-cell *matHeaderCellDef> Entidad Referida</th>
+      <td mat-cell *matCellDef="let element"> {{element.referredEntity}} </td>
+    </ng-container>
+
+    <!-- attentionStatus -->
+    <ng-container matColumnDef="attentionStatus">
+      <th mat-header-cell *matHeaderCellDef> Estado de atención</th>
+      <td mat-cell *matCellDef="let element"> {{element.attentionStatus}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+</mat-card>
