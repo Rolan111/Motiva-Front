@@ -21,6 +21,7 @@ import {SupportComponent} from "./support/support.component";
 import {ReportsComponent} from "./reports/reports.component";
 import {InformedConsentComponent} from "./informed-consent/informed-consent.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
+import {TrackingSheetFollowUsersComponent} from "./tracking-sheet-follow-users/tracking-sheet-follow-users.component";
 
 
 const routes: Routes = [
@@ -35,6 +36,7 @@ const routes: Routes = [
       {path: 'quantitative-children', component: QuantitativeInstrumentChildrenComponent, canActivate: [AuthGuard]},
       {path: 'community-agents', component: RepComAgentComponent, canActivate: [AuthGuard]},
       {path: 'tracking-sheet/:variable', component: TrackingSheetComponent, canActivate: [AuthGuard]},
+      {path: 'tracking-sheet-follow-users', component: TrackingSheetFollowUsersComponent, canActivate: [AuthGuard]},
       {path: 'forum', component: ForumComponent, canActivate: [AuthGuard]},
       {path: 'forum/report-description/:variable', component: ReportDescriptionComponent, canActivate: [AuthGuard]},
       {path: 'care-routes', component: CareRoutesComponent, canActivate: [AuthGuard]},

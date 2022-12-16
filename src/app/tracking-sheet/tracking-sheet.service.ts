@@ -18,11 +18,7 @@ export class TrackingSheetService {
   constructor(private http: HttpClient) {
   }
 
-  findAll(): Observable<any> {
-    const path = mainUrl + 'api/tracking-sheets';
-    const headers = this.getHeader();
-    return this.http.get<any>(path, {headers});
-  }
+
 
   create(trackingSheet: TrackingSheetModel): Observable<DataResponse> {
     const path = mainUrl + 'api/tracking-sheet-create';

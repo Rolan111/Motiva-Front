@@ -68,7 +68,6 @@ export class TrackingSheetComponent implements OnInit {
         this.capturandoTipoIdentificacion = data[0].typeIdentification
         this.capturandoNumeroIdentificacion = data[0].identification
         this.capturandoTypeRasm = data[0].typeRasm
-        console.log('El nombre es: ',this.capturandoNombre)
         this.form.get('names')?.setValue(this.capturandoNombre)
         this.form.get('lastnames')?.setValue(this.capturandoApelido)
         this.form.get('identificationType')?.setValue(this.capturandoTipoIdentificacion)
@@ -107,11 +106,27 @@ export class TrackingSheetComponent implements OnInit {
 
   deleteRasm(){
     console.log('El idPoll a eliminar en rasm es: ',this.capturaIdPollUrl)
-    this.trackingSheetService.deleteRasmByIdPoll(this.capturaIdPollUrl).subscribe(data=>{
-      console.log('Registro de RASM eliminado')
+    this.trackingSheetService.deleteRasmByIdPoll(this.capturaIdPollUrl).subscribe(response => {
+      console.log(response.data)
+    },error => {
+      console.log('El error es', error)
+      this.toastr.error('¡ NO se ha eliminado RASM!', 'Fallo al eliminar')
+    },() => {
+      this.toastr.success('¡Registro de RASM eliminado!', 'Eliminado')
+      this.router.navigate(['navbar/dashboard'])
+    })
+  }
+
+/*
+
+  deleteRasm(){
+    console.log('El idPoll a eliminar en rasm es: ',this.capturaIdPollUrl)
+    this.trackingSheetService.deleteRasmByIdPoll(this.capturaIdPollUrl).subscribe(response=>{
+      console.log(response.data, '- Registro de RASM eliminado')
     },error => {},() => {
       this.router.navigate(['navbar/dashboard'])
     })
   }
+*/
 
 }

@@ -28,6 +28,7 @@ export class NavbarComponent {
   buttonMenuQuantitive: boolean = false;
   // buttonMenuQuantitiveChildren: boolean = false;
   buttonMenuTrackingSheet: boolean = false;
+  buttonMenuTrackingSheetFollowUsers: boolean = false;
   buttonMenuCommunityAgents: boolean = false;
   buttonMenuForum: boolean = false;
   buttonMenuCareRoutes: boolean = false;
@@ -120,6 +121,7 @@ export class NavbarComponent {
     // this.buttonMenuQuantitiveChildren = false;
     this.buttonMenuTrackingSheet = false;
     this.buttonMenuCommunityAgents = false;
+    this.buttonMenuTrackingSheetFollowUsers = false;
     this.buttonMenuForum = false;
     this.buttonMenuCareRoutes = false;
     this.buttonMenuCareRasm = false;
@@ -151,6 +153,7 @@ export class NavbarComponent {
         this.buttonMenuCareRoutes = true;
         this.buttonMenuCareRasm = true;
         this.buttonMenuTrackingSheet = true;
+        this.buttonMenuTrackingSheetFollowUsers = true;
         this.buttonMenuAlerts = true;
         this.buttonMenuInactiveAlerts = true;
         this.buttonMenuSupport = true;

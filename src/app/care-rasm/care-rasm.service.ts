@@ -10,12 +10,6 @@ const mainUrl = environment.url;
   providedIn: 'root'
 })
 export class CareRasmService {
-  id_poll: string = 'a';
-  nameBeneficiary: string = 'b';
-  lastNameBeneficiary: string = 'c';
-  identification: number = 0;
-  typeRasm: string = 'd';
-  type_identification: string = 'f';
 
   oLocalStorage = new LocalStorage();
 

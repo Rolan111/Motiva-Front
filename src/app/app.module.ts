@@ -10,6 +10,7 @@ import {SharedModule} from "./shared/shared.module";
 import {DashboardModule} from "./dashboard/dashboard.module";
 import {RepComAgentModule} from "./rep-com-agent/rep-com-agent.module";
 import {TrackingSheetModule} from "./tracking-sheet/tracking-sheet.module";
+import {TrackingSheetFollowUsersModule} from "./tracking-sheet-follow-users/tracking-sheet-follow-users.module";
 import {ForumModule} from "./forum/forum.module";
 import {CareRoutesModule} from "./care-routes/care-routes.module";
 import {QuantitativeInstrumentsModule} from "./quantitative-instruments/quantitative-instruments.module";
@@ -19,7 +20,6 @@ import {CareRasmModule} from "./care-rasm/care-rasm.module";
 import {SupportModule} from "./support/support.module";
 import {ReportsModule} from "./reports/reports.module";
 import {InformedConsentModule} from "./informed-consent/informed-consent.module";
-
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import { environment } from '../environments/environment';
@@ -43,6 +43,7 @@ import {FeedbackModule} from "./feedback/feedback.module";
     QuantitativeInstrumentsModule,
     RepComAgentModule,
     TrackingSheetModule,
+    TrackingSheetFollowUsersModule,
     ForumModule,
     CareRoutesModule,
     CareSheetModule,
