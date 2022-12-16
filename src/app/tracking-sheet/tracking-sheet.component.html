@@ -5,26 +5,26 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Nombres</mat-label>
-          <input formControlName="names" matInput placeholder="Nombres">
+          <input readonly formControlName="names" matInput placeholder="Nombres">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Apellidos</mat-label>
-          <input formControlName="lastnames" type="text" matInput placeholder="Apellidos">
+          <input readonly formControlName="lastnames" type="text" matInput placeholder="Apellidos">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Tipo de identificación</mat-label>
-          <input formControlName="identificationType" type="text" matInput placeholder="Tipo de identificación">
+          <input readonly formControlName="identificationType" type="text" matInput placeholder="Tipo de identificación">
         </mat-form-field>
       </mat-grid-tile>
 
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>No. Identificación</mat-label>
-          <input formControlName="identification" type="number" matInput placeholder="No. Identificación">
+          <input readonly formControlName="identification" type="number" matInput placeholder="No. Identificación">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="2" [rowspan]="1">
@@ -33,7 +33,7 @@
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Tipo de ruta que activó:</mat-label>
-          <input formControlName="typeRoute" matInput placeholder="Tipo de ruta que activó: ">
+          <input readonly formControlName="typeRoute" matInput placeholder="Tipo de ruta que activó: ">
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -56,12 +56,12 @@
                  placeholder="Recomendaciones, sugerencias y cierre de proceso">
         </mat-form-field>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <button type="submit" mat-raised-button color="primary" (click)="saveForm(form)" >GUARDAR</button>
+
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <button  type="submit" mat-raised-button  [disabled]="form.invalid" color="primary" (click)="saveForm(form)" >GUARDAR</button>
       </mat-grid-tile>
-      <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <button mat-button>CANCELAR</button>
-      </mat-grid-tile>
+
     </mat-grid-list>
+
   </form>
 </mat-card>

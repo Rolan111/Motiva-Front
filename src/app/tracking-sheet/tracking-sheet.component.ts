@@ -8,6 +8,7 @@ import {log} from "util";
 import {collectionSnapshots} from "@angular/fire/firestore";
 import {ToastrService} from "ngx-toastr";
 
+
 @Component({
   selector: 'app-tracking-sheet',
   templateUrl: './tracking-sheet.component.html',
@@ -17,6 +18,7 @@ export class TrackingSheetComponent implements OnInit {
 
   capturaIdPollUrl!:string;
   form: FormGroup;
+
 
   //Variables para capturar
   capturandoNombre!:string;
@@ -115,6 +117,13 @@ export class TrackingSheetComponent implements OnInit {
       this.toastr.success('¡Registro de RASM eliminado!', 'Eliminado')
       this.router.navigate(['navbar/dashboard'])
     })
+  }
+
+  isControlHasError(controlName: string, validationType: string): boolean {
+    const control = this.form.controls[controlName];
+    if (!control)
+      return false;
+    return control.hasError(validationType) && (control.dirty || control.touched);
   }
 
 /*
