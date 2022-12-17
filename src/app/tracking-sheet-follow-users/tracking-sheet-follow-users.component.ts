@@ -16,7 +16,7 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
   displayedColumns: string[] = ['names', 'lastnames', 'identificationType', 'identification', 'typeRoute', 'referredEntity', 'attentionStatus'];
   dataSource!: MatTableDataSource<any>;
 
-  constructor(private trackingSheetFollowUsers: TrankingSheetFollowUsersService) { }
+  constructor(private trackingSheetFollowUsersService: TrankingSheetFollowUsersService) { }
 
   ngOnInit(): void {
 
@@ -27,7 +27,7 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
 
   private loadTrackinSheetFollowUsers() {
 
-    this.trackingSheetFollowUsers.getAllTrankingSheet().subscribe(data => {
+    this.trackingSheetFollowUsersService.getAllTrankingSheet().subscribe(data => {
 
       this.arrayDetrackingSheetFollowUsersTabla = data;
       console.log('La data de seguimiento de usuarios es: ', this.arrayDetrackingSheetFollowUsersTabla)
