@@ -165,6 +165,7 @@ export class NavbarComponent {
         this.buttonMenuDashBoard = true;
         this.buttonMenuQuantitive = true;
         this.buttonMenuCareSheet = true;
+        this.buttonMenuTrackingSheetFollowUsers = true;
         this.buttonMenuForum = true;
         this.buttonMenuCareRasm = true;
         //this.buttonMenuAlerts = true;
