@@ -122,8 +122,8 @@ export var arrayZona:any=[
 ]
 export var arrayRutas:any=[
   {value: 'no_aplicar', viewValue: 'No aplicar este filtro'},
-  {value: 'si', viewValue: 'SI '},
   {value: 'no', viewValue: 'NO'},
+  {value: 'si', viewValue: 'SI '},
   {value: 'todas', viewValue: 'TODAS'},
 ]
 

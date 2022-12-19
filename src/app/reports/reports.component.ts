@@ -43,9 +43,11 @@ export class ReportsComponent implements OnInit {
 
   datosAExportar2:Array<reporte2>=[];
   datosAExportar1:Array<any>=[];
+  datosAExportarPruebas:Array<any>=[];
 
   consultSelected:any;
   contandoCantidadEncuestas = 1;
+  contandoCantidadEncuestasCondicion1=0;
   contandoCantidadFiltro2 = 1;
 
 
@@ -88,10 +90,6 @@ export class ReportsComponent implements OnInit {
   //procesamiento de las fechas
 
   procesamientoFechas(){
-    // let dt:any = new Date();
-    // let month:any = dt.getMonth()-4;
-    // let year:any = dt.getFullYear();
-    // let daysInMonth = new Date(year, month, 0).getDate(); //calcula los días que tiene el mes
     let mesSeleccionado = this.form.value.monthSelected;
     let daysInMonth = new Date(2022, mesSeleccionado, 0).getDate(); //calcula los días que tiene el mes
     let fechaInicio:string = '2022-'+mesSeleccionado+'-01';
@@ -130,24 +128,24 @@ export class ReportsComponent implements OnInit {
 
 
 
-    this.quantitativeInstrumentService.getAnswersByIdQuestion(102).subscribe(data=>{ //Consultamos la tabla answer donde todos los id_question sean 102 y a open_answer para FECHA DE EVALUACION
-
+    this.quantitativeInstrumentService.getAnswersByIdQuestion(102).subscribe(data=>{ //1 Consultamos la tabla answer donde todos los id_question sean 102 y al campo open_answer para FECHA DE EVALUACION
+      // console.log('La data de la primera consulta es: ',data)
       if(data.length == 0){
         this.openSnackBar('NO HAY REGISTROS - EVALUAR LOS FILTROS SELECCIONADOS', 'ACEPTAR');
       }else{
         let capturandoDataAnswer:any = data;
         capturandoDataAnswer.forEach((data1:any)=>{ //De aquí sacamos id_poll, fecha, type (Adult, children)
+          console.log('El contador de encuestas 1 está en: ',this.contandoCantidadEncuestas)
           let dateInstrument:any = data1.openAnswer;
 
-          if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){
-            console.log('La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
-
-            // if(typeConsultSelected=="municipio"){ // Para el caso de consultar MUNICIPIO
-
+          if(dateInstrument>=selectedDateStart && dateInstrument<=selectedDateEnd){ //Condición FECHAS (dentro de rango)
+            console.log('PRIMER CONSULTA: La fecha de id_poll: ',data1.idPoll, ', ESTÁ dentro del rango')
+            this.contandoCantidadEncuestasCondicion1++
+            console.log('La cantidad que CUMPLEN CONDICION FECHA son: ',this.contandoCantidadEncuestasCondicion1)
             // Realizamos una sola consulta con múltiples resultados en donde nos trae: todos los campos faltantes que se pueden consultar en ANSWER excepto las rutas activas
             //Ahora consultamos la tabla answer para sacar sexo 2,  Municipio 6, edad 1, zona 5
             this.quantitativeInstrumentService.getAnswersMultipleByIdPoll(data1.idPoll).subscribe(data=>{
-              console.log('Los datos MULTIPLES consultados son>: ',data)
+              console.log('SEGUNDA CONSULTA: Los datos MULTIPLES consultados son: ',data)
               let capturandoMultiplesDatos:any = data;
               capturandoMultiplesDatos.forEach((data2:any)=>{
                 switch (data2.idQuestion){
@@ -246,10 +244,23 @@ export class ReportsComponent implements OnInit {
                     break;
                 }
 
-              })
-              //Hacemo limpieza de los datos que clasifican para el siguiente filtro
+              }) //FIN SEGUNDA CONSULTA
+
+              //Hacemos limpieza de los datos que clasifican para el siguiente filtro
               if(this.municipioMostrar=='no_clasifica' || this.zonaMostrar=='no_clasifica'){
                 //NO HAGA NADA CON ESTOS DATOS, es decir se perderán si no clasifican
+                // /** El siguiente es un espacio de PRUEBAS - se debe volver a comentar **/
+                // this.datosAExportarPruebas.push({
+                //   "id_poll":data1.idPoll,
+                //   "Fecha":data1.openAnswer,
+                //   "Subregión":this.form.value.subRegionSelected,
+                //   "Tipo":data1.type,
+                //   "Sexo":this.sexoMostar,
+                //   "Municipio":this.municipioMostrar,
+                //   "Edad":this.edadMostrar,
+                //   "Zona":this.zonaMostrar
+                // })
+                // console.log('Todos lo datos procesados del PRIMER FILTRO sin procesar SON: ', this.datosAExportarPruebas)
               }else{
                 this.datosAExportar1.push({
                   "id_poll":data1.idPoll,
@@ -263,11 +274,13 @@ export class ReportsComponent implements OnInit {
                 })
               }
 
-            },error => {},() => {
-
-
-              if(this.contandoCantidadEncuestas==capturandoDataAnswer.length){ //Se han procesado todos los datos del primer filtro
-
+            },error => {console.log('Tenemos un registro de ERROR')},() => {
+              // console.log('La cantidad que CUMPLEN CONDICION FECHA son: ',this.contandoCantidadEncuestasCondicion1)
+              console.log('Se completó el primer filtro')
+              console.log('El tamaño de la data de question fue: ',capturandoDataAnswer.length)
+              console.log('El contador de encuestas está en: ', this.contandoCantidadEncuestas)
+              if(this.contandoCantidadEncuestas==this.contandoCantidadEncuestasCondicion1){ //Se han procesado todos los datos del primer filtro
+                console.log('Todos lo datos procesados del PRIMER FILTRO son: ', this.datosAExportar1)
                 this.procesandoFiltro2()
 
               }else{
@@ -276,8 +289,8 @@ export class ReportsComponent implements OnInit {
             })
 
           }else {
-            this.openSnackBar('NO HAY REGISTROS - EVALUAR LOS FILTROS SELECCIONADOS', 'Aceptar');
-            //console.log(' NO HAY REGISTROS dentro de este rango -- Evaluar condición')
+            //No colocar evaluación aquí ya muchas fechas pasarán por este filtro a pesar de que la siguiente si clasifique
+            // this.openSnackBar('NO HAY FECHAS QUE COINCIDAN - EVALUAR LOS FILTROS SELECCIONADOS', 'Aceptar');
           }
         })
 
@@ -287,7 +300,7 @@ export class ReportsComponent implements OnInit {
       this.openSnackBar('NO HAY REGISTROS -- EVALUAR LOS FILTROS SELECCIONADOS', 'Aceptar');
 
     },() => {
-
+      /** Este completo se realiza primero que todos */
     })
   }
 
@@ -300,7 +313,7 @@ export class ReportsComponent implements OnInit {
       window.location.reload();
     }
 
-    if(this.form.value.typeRouteSelected=='si'){ //SI
+    if(this.form.value.typeRouteSelected=='si'){ //SI rasm activa
 
       this.datosAExportar1.forEach((dataArray:any)=>{
 
@@ -339,7 +352,7 @@ export class ReportsComponent implements OnInit {
 
     }
 
-    if(this.form.value.typeRouteSelected=='no'){ //NO
+    if(this.form.value.typeRouteSelected=='no'){ //NO rasm activa
 
       this.datosAExportar1.forEach((dataArray:any)=>{
 
@@ -442,7 +455,6 @@ export class ReportsComponent implements OnInit {
     // @ts-ignore
     this.form.get('typeConsultSelected').valueChanges
       .subscribe((value: any) => {
-        console.log('La consulta es: ', value)
 
         if(value == 'municipio') {
           // @ts-ignore

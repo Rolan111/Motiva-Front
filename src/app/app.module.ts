@@ -26,6 +26,7 @@ import { environment } from '../environments/environment';
 import { MatProgressBarModule} from "@angular/material/progress-bar";
 import {NavbarModule} from "./shared/navbar/navbar.module";
 import {FeedbackModule} from "./feedback/feedback.module";
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import {FeedbackModule} from "./feedback/feedback.module";
     AngularFireStorageModule,
     MatProgressBarModule,
     NavbarModule,
-    FeedbackModule
+    FeedbackModule,
+    MatPaginatorModule
   ],
   providers: [],
   bootstrap: [AppComponent],
