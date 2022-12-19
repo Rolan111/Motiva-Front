@@ -95,7 +95,6 @@ export class TrackingSheetComponent implements OnInit {
     }
 
     this.trackingSheetService.create(trackingSheetModel).subscribe(response => {
-      console.log(response.data)
     },error => {
       console.log('El error es', error)
       this.toastr.error('¡ NO se ha enviado la ficha de seguimiento!', 'Fallo al enviar')
@@ -109,7 +108,6 @@ export class TrackingSheetComponent implements OnInit {
   deleteRasm(){
     console.log('El idPoll a eliminar en rasm es: ',this.capturaIdPollUrl)
     this.trackingSheetService.deleteRasmByIdPoll(this.capturaIdPollUrl).subscribe(response => {
-      console.log(response.data)
     },error => {
       console.log('El error es', error)
       this.toastr.error('¡ NO se ha eliminado RASM!', 'Fallo al eliminar')
