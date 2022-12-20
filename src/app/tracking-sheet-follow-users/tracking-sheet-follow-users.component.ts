@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {TrankingSheetFollowUsersService} from "./tracking-sheet-follow-users.service";
 import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {RasmElement} from "../care-rasm/care-rasm.component";
 
 
 @Component({
@@ -14,9 +16,17 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
 
 
   displayedColumns: string[] = ['names', 'lastnames', 'identificationType', 'identification', 'typeRoute', 'referredEntity', 'attentionStatus'];
-  dataSource!: MatTableDataSource<any>;
+  dataSource = new MatTableDataSource<FollowElement>(ELEMENT_DATA);
 
-  constructor(private trackingSheetFollowUsersService: TrankingSheetFollowUsersService) { }
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  constructor(private trackingSheetFollowUsersService: TrankingSheetFollowUsersService) {
+
+  }
 
   ngOnInit(): void {
 
@@ -28,16 +38,27 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
   private loadTrackinSheetFollowUsers() {
 
     this.trackingSheetFollowUsersService.getAllTrankingSheet().subscribe(data => {
-
       this.arrayDetrackingSheetFollowUsersTabla = data;
       console.log('La data de seguimiento de usuarios es: ', this.arrayDetrackingSheetFollowUsersTabla)
-      this.dataSource = new MatTableDataSource(this.arrayDetrackingSheetFollowUsersTabla)
-      console.log('La data es: ', data)
-
-
-      }
-    )
+      this.dataSource = new MatTableDataSource<FollowElement>(this.arrayDetrackingSheetFollowUsersTabla);
+      this.ngAfterViewInit()
+      })
 
   }
 
 }
+
+export interface FollowElement {
+  names:string;
+  lastnames:string;
+  identificationType:string;
+  identification:string;
+  typeRoute:string;
+  referredEntity:string;
+  attentionStatus:string;
+
+}
+
+const ELEMENT_DATA: FollowElement[] = [
+  {names: 'Cargando...', lastnames: 'Cargando...', identificationType: 'Cargando...', identification: 'Cargando...', typeRoute: 'Cargando...', referredEntity: 'Cargando...', attentionStatus: 'Cargando..'},
+];

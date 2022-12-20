@@ -12,9 +12,8 @@ import {MatPaginator} from "@angular/material/paginator";
 export class AlertsComponent implements OnInit, AfterViewInit {
 
   alertSizeAux: number[] = [];
-  arrayDeAlertas: any = [];
+  //arrayDeAlertas: any = [];
   arrayDeAlertasTabla: any = [];
-  arrayDeAlertasTabla2:AlertElement[] = [];
 
   displayedColumns: string[] = ['idPoll', 'professional', 'beneficiary', 'typeIdentification', 'identification', 'cellphone', 'municipality', 'typeQuestionnaire', 'date', 'score', 'review'];
   dataSource = new MatTableDataSource<AlertElement>(ELEMENT_DATA);
@@ -27,7 +26,6 @@ export class AlertsComponent implements OnInit, AfterViewInit {
 
   constructor(private alertsService: AlertsService) {
   }
-
 
   ngOnInit(): void {
     //Consultamos la cantidad de registros
@@ -65,5 +63,5 @@ export interface AlertElement {
 }
 
 const ELEMENT_DATA: AlertElement[] = [
-  {idPoll: 'hola', professional: '1.0079', beneficiary: 'H', typeIdentification: 'H', identification: 1, cellphone: 1, municipality: 'H', typeQuestionnaire: 'H', date: 'H', score: 1},
+  {idPoll: 'Cargando...', professional: 'Cargando...', beneficiary: 'Cargando...', typeIdentification: 'Cargando...', identification: 0, cellphone: 0, municipality: 'Cargando...', typeQuestionnaire: 'Cargando...', date: 'Cargando...', score: 0},
 ];
