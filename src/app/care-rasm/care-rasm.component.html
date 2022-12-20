@@ -1,7 +1,10 @@
 <mat-card>
   <tr></tr>
   <mat-card-title>Rutas de atención activas</mat-card-title>
-
+  <mat-form-field appearance="standard">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: David" #input>
+  </mat-form-field>
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
     <!-- type_rasm Column -->
