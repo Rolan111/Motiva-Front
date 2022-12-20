@@ -37,8 +37,8 @@ export class FeedbackComponent implements OnInit {
     console.log('La identificación es: ', this.formFeedBack.value.identification)
     this.identification = this.formFeedBack.value.identification
     this.quantitativeInstrumentService.getAnswerByIdQuestionAndOpenAnswer(205, this.identification).subscribe((data:any)=>{
-      console.log('La data es: ',data[0])
-      if(data[0]=undefined){
+      console.log('La data es: ',data)//1058550690
+      if(data[0]==null){
         console.log('No encontrado el ID')
         this.errorMessage='El número de cédula NO se ha encontrado'
       }else{
