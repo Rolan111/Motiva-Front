@@ -2,6 +2,10 @@
 
 
   <mat-card-title>Alertas Activadas</mat-card-title>
+  <mat-form-field appearance="standard">
+    <mat-label>Filtrar</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="Ejemplo: David" #input>
+  </mat-form-field>
 <!--  <table mat-table [dataSource]="arrayDeAlertasTabla" class="mat-elevation-z8">-->
   <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

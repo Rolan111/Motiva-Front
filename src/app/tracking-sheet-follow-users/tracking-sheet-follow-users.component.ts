@@ -28,6 +28,7 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
 
 
@@ -43,6 +44,12 @@ export class TrackingSheetFollowUsersComponent implements OnInit {
       this.dataSource = new MatTableDataSource<FollowElement>(this.arrayDetrackingSheetFollowUsersTabla);
       this.ngAfterViewInit()
       })
+
+  }
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
 
   }
 
