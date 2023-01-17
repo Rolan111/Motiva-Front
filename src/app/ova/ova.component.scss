@@ -2,3 +2,14 @@ iframe {
   width: 1400px;
   height: 750px;
 }
+
+button{
+  width: 100%;
+  height: 50px;
+}
+
+a:link, a:visited, a:active {
+  text-decoration:none;
+  font-size: 30px;
+  color: white;
+}
