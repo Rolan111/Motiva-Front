@@ -15,8 +15,10 @@ export class FeedbackComponent implements OnInit {
   selected = 'ficha_atencion';
   identification!:string;
   idPollCapturado!:string;
+  registroEncontrado:boolean = false;
   nombreCapturado!:string;
-  errorMessage:string = 'mensaje de error';
+  // errorMessage:string = 'mensaje de error';
+
   constructor(
     private router: Router,
     private quantitativeInstrumentService:QuantitativeInstrumentService,
@@ -40,9 +42,12 @@ export class FeedbackComponent implements OnInit {
       console.log('La data es: ',data)//1058550690
       if(data[0]==null){
         console.log('No encontrado el ID')
-        this.errorMessage='El número de cédula NO se ha encontrado'
+        window.alert('NO ENCONTRADO. El número de cédula no se ha encontrado')
+        !this.registroEncontrado;
+        // this.errorMessage='El número de cédula NO se ha encontrado'
       }else{
         console.log('El idPoll es: ',data[0].idPoll)
+        this.registroEncontrado=true;
         this.idPollCapturado = data[0].idPoll
         this.quantitativeInstrumentService.getAnswerByIdPollAndIdQuestion(this.idPollCapturado,200).subscribe((data:any)=>{
           console.log('El nombre de la persona es: ',data[0].openAnswer)
@@ -50,8 +55,10 @@ export class FeedbackComponent implements OnInit {
         })
       }
 
-    }, error => {this.errorMessage='El número de cédula NO se ha encontrado'
-      console.log('NO HAY DATOS')},
+    }, error => {
+      // this.errorMessage='El número de cédula NO se ha encontrado'
+      console.log('NO HAY DATOS')
+      },
       () => {
 
       })

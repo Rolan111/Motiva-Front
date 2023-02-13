@@ -19,9 +19,10 @@
     </mat-form-field>
     <BR>
 
-    <button mat-raised-button color="primary" (click)="probandoSeleccion()" [disabled]="!formFeedBack.valid">Consultar</button>
+    <button mat-raised-button color="primary" (click)="probandoSeleccion();registroEncontrado=false" [disabled]="!formFeedBack.valid">Consultar</button>
 
-    <div *ngIf="idPollCapturado!=null">
+<!--    <div *ngIf="idPollCapturado!=null">-->
+    <div *ngIf="registroEncontrado==true">
       <br>
       <p>Se encontró una encuesta con los siguientes datos:</p> <br>
       <p>IdPoll: {{idPollCapturado}}</p>

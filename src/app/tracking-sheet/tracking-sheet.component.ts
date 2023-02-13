@@ -3,9 +3,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TrackingSheetService} from "./tracking-sheet.service";
 import {TrackingSheetModel} from "./tracking-sheet.model";
-import moment from "moment/moment";
-import {log} from "util";
-import {collectionSnapshots} from "@angular/fire/firestore";
 import {ToastrService} from "ngx-toastr";
 
 
@@ -45,6 +42,7 @@ export class TrackingSheetComponent implements OnInit {
 
   {
     this.form = this.formBuilder.group({
+      dateTracking: ['', Validators.required],
       names: ['', Validators.required],
       lastnames: ['', Validators.required],
       identificationType: ['', Validators.required],
@@ -84,6 +82,7 @@ export class TrackingSheetComponent implements OnInit {
   public saveForm(form: FormGroup) {
     let trackingSheetModel: TrackingSheetModel = {
       idPoll: this.capturaIdPollUrl,
+      dateTracking: form.value.dateTracking,
       names: form.value.names,
       lastnames: form.value.lastnames,
       identificationType: form.value.identificationType,

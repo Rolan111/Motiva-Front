@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {QuantitativeInstrumentService} from "../quantitative-instrument.service";
 import {AnswerModel} from "../answer.model";
@@ -23,6 +23,13 @@ interface ListTypes {
   styleUrls: ['./quantitative-instrument.component.scss']
 })
 export class QuantitativeInstrumentComponent implements OnInit {
+
+  /** Código para evitar recargar o salir de la pestaña del navegador. No es posible en este método modificar el mensaje */
+  @HostListener("window:beforeunload", ["$event"])
+  unloadHandler(event:any) {
+    event.preventDefault();
+    return event.returnValue = "ROLAN Are you sure you want to exit?";
+  }
 
   occupationValue: number = 0;
 

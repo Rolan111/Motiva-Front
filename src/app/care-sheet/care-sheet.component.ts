@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Form, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CareSheetService} from "./care-sheet.service";
@@ -11,7 +11,17 @@ import {ToastrService} from "ngx-toastr";
   templateUrl: './care-sheet.component.html',
   styleUrls: ['./care-sheet.component.scss']
 })
+
+
 export class CareSheetComponent implements OnInit {
+
+  /** Código para evitar recargar o salir de la pestaña del navegador. No es posible en este método modificar el mensaje */
+  @HostListener("window:beforeunload", ["$event"])
+  unloadHandler(event:any) {
+    event.preventDefault();
+    return event.returnValue = "ROLAN Are you sure you want to exit?";
+  }
+
   maxDate = new Date();
   edadCalculada: any = 0;
   idPollRecuperado:string='';
@@ -21,7 +31,6 @@ export class CareSheetComponent implements OnInit {
   bvariable = 0;
 
   listaDeRespuestas: AnswerPsychosocialModel [] = [];
-  // listaDeRespuestas: Array<AnswerPsychosocialModel> = [];
 
   nivelIntervencionModeloBiopsicosocial: string[] = ['Prevención de la enfermedad', 'Adherencia al tratamiento', 'Afrontamiento de la enfermedad', 'Psicooncología', 'Manejo del dolor', 'Intervención en enfermedades crónicas transmisibles y no transmisibles','Ninguno'];
 
@@ -48,6 +57,16 @@ export class CareSheetComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    //SIRVE
+    // window.addEventListener("beforeunload", function (e) {
+    //   var confirmationMessage = "ROLAN ROLAN";
+    //   console.log("cond");
+    //   e.returnValue = confirmationMessage;     // Gecko, Trident, Chrome 34+
+    //   return confirmationMessage;              // Gecko, WebKit, Chrome <34
+    // });
+
+
     this.formCareSheet();
 
     /** Gestión Id_poll */

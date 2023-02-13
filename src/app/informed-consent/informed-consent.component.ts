@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {Router} from "@angular/router";
 import {CareSheetService} from "../care-sheet/care-sheet.service";
@@ -10,6 +10,13 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./informed-consent.component.scss']
 })
 export class InformedConsentComponent implements OnInit {
+
+  /** Código para evitar recargar o salir de la pestaña del navegador. No es posible en este método modificar el mensaje */
+  @HostListener("window:beforeunload", ["$event"])
+  unloadHandler(event:any) {
+    event.preventDefault();
+    return event.returnValue = "ROLAN Are you sure you want to exit?";
+  }
 
   completed:boolean = false;
   idPollWidthData:boolean = false;

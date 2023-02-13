@@ -1,7 +1,21 @@
 <mat-card>
   <mat-card-title>Ficha de seguimiento</mat-card-title>
+
   <form [formGroup]="form">
     <mat-grid-list cols="2" rowHeight="70px">
+
+      <mat-grid-tile [colspan]="2" [rowspan]="1">
+        <mat-form-field class="inputClass" appearance="fill">
+          <mat-label>Fecha de evaluación</mat-label>
+          <input formControlName="dateTracking" matInput [matDatepicker]="picker1" readonly>
+          <mat-error *ngIf="isControlHasError('dateTracking', 'required')">
+            <strong>Campo requerido</strong>
+          </mat-error>
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+
       <mat-grid-tile [colspan]="1" [rowspan]="1">
         <mat-form-field class="inputClass" appearance="fill">
           <mat-label>Nombres</mat-label>
