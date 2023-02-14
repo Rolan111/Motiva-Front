@@ -138,7 +138,7 @@ export class AlertsService {
   }
 
   public postInactiveAlert(body: any) {
-    const path = mainUrl + 'api/inactive-alert-create/';
+    const path = mainUrl + 'api/inactive-alert-create';
     const headers = this.getHeader();
     return this.http.post(path, body, {headers});
   }
