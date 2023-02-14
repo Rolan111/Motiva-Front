@@ -1,5 +1,15 @@
 <h1 mat-dialog-title>¡Desactivar Alerta!</h1>
-<div mat-dialog-content>¿Está seguro que desea desactivar esta alerta?</div>
+<!--<div mat-dialog-content>¿Está seguro que desea desactivar esta alerta?</div>-->
+
+<form [formGroup]="formInactiveDialog">
+
+  <mat-form-field class="inputClass" appearance="standard" >
+    <mat-label>¿Por qué desactiva esta alerta? </mat-label>
+    <input matInput maxlength="300" placeholder="Describa la razón por la cual desactivará la alerta."
+           formControlName="reason">
+  </mat-form-field>
+</form>
+
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancelar</button>
   <button mat-raised-button color="primary" (click)="sendInactiveAlert()">Desactivar Alerta</button>

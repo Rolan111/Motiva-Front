@@ -112,7 +112,7 @@ function createNewUser(id: number): UserData {
     id: id.toString(),
     name: MUNICIPIOS[id],
     atenciones: num_atenciones.toString(),
-    progress: Math.round((num_atenciones*100)/1429).toString()
+    //progress: Math.round((num_atenciones*100)/1429).toString()
 
   };
 }

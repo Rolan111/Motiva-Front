@@ -124,8 +124,14 @@ export class AlertsService {
     return this.http.get(path + id_option_answer, {headers});
   }
 
-  //Tabla INACTIVE_ALERT
-  public getAllInactiveAlerts() {
+  /**Tabla INACTIVE_ALERT**/
+  public getInactiveAlertSize() {
+    const path = mainUrl + 'api/inactive-alerts-size';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+    public getAllInactiveAlerts() {
     const path = mainUrl + 'api/inactive-alerts';
     const headers = this.getHeader();
     return this.http.get(path, {headers});

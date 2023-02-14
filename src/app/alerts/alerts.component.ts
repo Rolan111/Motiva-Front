@@ -15,7 +15,8 @@ export class AlertsComponent implements OnInit, AfterViewInit {
   //arrayDeAlertas: any = [];
   arrayDeAlertasTabla: any = [];
 
-  displayedColumns: string[] = ['idPoll', 'professional', 'beneficiary', 'typeIdentification', 'identification', 'cellphone', 'municipality', 'typeQuestionnaire', 'date', 'score', 'review'];
+  displayedColumns: string[] = ['idPoll', 'professional', 'beneficiary', 'typeIdentification', 'identification',
+    'cellphone', 'municipality', 'typeQuestionnaire', 'date', 'score', 'review'];
   dataSource = new MatTableDataSource<AlertElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -69,5 +70,13 @@ export interface AlertElement {
 }
 
 const ELEMENT_DATA: AlertElement[] = [
-  {idPoll: 'Cargando...', professional: 'Cargando...', beneficiary: 'Cargando...', typeIdentification: 'Cargando...', identification: 0, cellphone: 0, municipality: 'Cargando...', typeQuestionnaire: 'Cargando...', date: 'Cargando...', score: 0},
+  {idPoll: 'Cargando...',
+    professional: 'Cargando...',
+    beneficiary: 'Cargando...',
+    typeIdentification: 'Cargando...',
+    identification: 0,
+    cellphone: 0,
+    municipality: 'Cargando...',
+    typeQuestionnaire: 'Cargando...',
+    date: 'Cargando...', score: 0},
 ];

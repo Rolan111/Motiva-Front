@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ForumService} from "../forum.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import moment from "moment/moment";
+import moment from "moment";
 
 @Component({
   selector: 'app-report-description',
