@@ -31,6 +31,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
     return event.returnValue = "ROLAN Are you sure you want to exit?";
   }
 
+  deshabilitarBotonVar=false;
+
   occupationValue: number = 0;
 
   //Validacion ingreso fecha de caracterizacion de beneficiario
@@ -241,6 +243,8 @@ export class QuantitativeInstrumentComponent implements OnInit {
       nineteen: ['', Validators.required],
     });
   }
+
+
 
   //*** Empieza el proceso de GUARDADO ***
 
@@ -948,6 +952,7 @@ export class QuantitativeInstrumentComponent implements OnInit {
           this.answerList = [];
           this.score = 0;
           this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO ADULTOS', 'Aceptar');
+          this.deshabilitarBotonVar=false;
         }, complete: ()=>{
           this.answerList.splice(0, this.answerList.length);
           this.answerList = [];
@@ -1386,6 +1391,10 @@ export class QuantitativeInstrumentComponent implements OnInit {
 
   pruebasFormularios(){
     console.log('Los datos del formulario Factores contextuales asociados al covid 19 son: ', this.factorsCovid19)
+  }
+
+  deshabilitarBoton(){
+    this.deshabilitarBotonVar=true;
   }
 
 }

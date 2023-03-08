@@ -26,7 +26,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   validandoEscolaridad:number=0
 
-
+  deshabilitarBotonVar=false;
 
   //Validacion ingreso fecha de caracterizacion de beneficiario
   maxDate = new Date();
@@ -540,6 +540,7 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
         this.answerList = [];
         this.score = 0;
         this.openSnackBar('No se guardó correctamente el formulario del INSTRUMENTO NIÑOS', 'Aceptar');
+        this.deshabilitarBotonVar=false;
       }, complete: () =>{
         this.answerList.splice(0, this.answerList.length);
         this.answerList = [];
@@ -705,6 +706,10 @@ export class QuantitativeInstrumentChildrenComponent implements OnInit {
 
   metodoPrueba(){
     console.log('Los datos de factores sociodemográficos son: ', this.sociodemographicFactors.value)
+  }
+
+  deshabilitarBoton(){
+    this.deshabilitarBotonVar=true;
   }
 
 }

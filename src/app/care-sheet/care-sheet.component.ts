@@ -22,6 +22,8 @@ export class CareSheetComponent implements OnInit {
     return event.returnValue = "ROLAN Are you sure you want to exit?";
   }
 
+  deshabilitarBotonVar=false;
+
   maxDate = new Date();
   edadCalculada: any = 0;
   idPollRecuperado:string='';
@@ -482,7 +484,7 @@ export class CareSheetComponent implements OnInit {
     //Guardado Tipo 2
 
     if(this.idPollRecuperado==''){ /** SE EVALUA QUE ID_POLL no esté vacío */
-      this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
+    this.toastr.warning('¡Este cuestionario no tiene identificador por lo tanto NO SE GUARDARÁ!', 'Por favor RECARGAR')
       this.listaDeRespuestas = [];
     }else{ //Se procede al guardado
       this.careSheetService.create2(this.listaDeRespuestas).subscribe(value => {
@@ -490,6 +492,7 @@ export class CareSheetComponent implements OnInit {
       }, error => {
         this.toastr.error('¡La información NO se ha podido registrar!', 'Error')
         this.listaDeRespuestas = [];
+        this.deshabilitarBotonVar=false;
       }, () => {
         this.toastr.success('¡La información de FICHA DE ATENCIÓN ha sido registrada!', 'Enviado');
         this.listaDeRespuestas = [];
@@ -638,6 +641,10 @@ export class CareSheetComponent implements OnInit {
     } else {
       this.bvariable = 0;
     }
+  }
+
+  deshabilitarBoton(){
+    this.deshabilitarBotonVar=true;
   }
 
 

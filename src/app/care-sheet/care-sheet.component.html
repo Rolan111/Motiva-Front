@@ -634,7 +634,9 @@
       </form>
       <mat-card-actions>
         <button mat-button matStepperPrevious>Atrás</button>
-        <button mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid" (click)="saveForm()">Enviar</button>
+        <button *ngIf="deshabilitarBotonVar==false" mat-raised-button color="primary" [disabled]="formInterventionLevel.invalid" (click)="saveForm();deshabilitarBoton()">
+          Enviar
+        </button>
       </mat-card-actions>
 
 
