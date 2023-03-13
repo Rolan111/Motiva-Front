@@ -27,6 +27,8 @@ import { MatProgressBarModule} from "@angular/material/progress-bar";
 import {NavbarModule} from "./shared/navbar/navbar.module";
 import {FeedbackModule} from "./feedback/feedback.module";
 import {MatPaginatorModule} from '@angular/material/paginator';
+import { ConsultasTemporalComponent } from './consultas-temporal/consultas-temporal.component';
+import {ConsultasTemporalModule} from "./consultas-temporal/consultas-temporal.module";
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     MatProgressBarModule,
     NavbarModule,
     FeedbackModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    ConsultasTemporalModule
   ],
   providers: [],
   bootstrap: [AppComponent],

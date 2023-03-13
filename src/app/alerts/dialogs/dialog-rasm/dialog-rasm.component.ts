@@ -46,7 +46,7 @@ export class DialogRasmComponent implements OnInit {
   sendRASM() {
 
     //Enviamos el registro a RASM
-    this.alertsService.getAllAlerts()
+    // this.alertsService.getAllAlerts()
 
     this.alertsService.AlertByIdPoll(this.data.id_poll).subscribe((info: any) => {
       let extracDataAlert: any = info;

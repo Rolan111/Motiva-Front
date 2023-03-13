@@ -1,21 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FeedbackComponent} from "./feedback.component";
 import {AngularMaterialModule} from "../angular-material.module";
+import {ConsultasTemporalComponent} from "./consultas-temporal.component";
 
 
 
 @NgModule({
   declarations: [
-    FeedbackComponent
+    ConsultasTemporalComponent
   ],
   exports: [
-    FeedbackComponent
+    ConsultasTemporalComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule
   ]
-
 })
-export class FeedbackModule { }
+export class ConsultasTemporalModule { }

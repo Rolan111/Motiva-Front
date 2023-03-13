@@ -44,6 +44,26 @@ export class ReportsService {
     return this.http.get(path, {headers});
   }
 
+  public getAllUsers() {
+    const path = mainUrl + 'api/users/';
+    const headers = this.getHeader();
+    return this.http.get(path, {headers});
+  }
+
+  public getSurveysByMunicipality(municipality:string) {
+    const path = mainUrl + 'api/surveysByMunicipality/';
+    const headers = this.getHeader();
+    return this.http.get(path + municipality, {headers});
+  }
+
+  public getSurveysByProfessional(idProfessional:number) {
+    const path = mainUrl + 'api/surveysByProfessional/';
+    const headers = this.getHeader();
+    return this.http.get(path + idProfessional, {headers});
+  }
+
+
+
   getHeader() {
     return new HttpHeaders({
       'Authorization': 'Bearer ' + this.oLocalStorage.getItem(LocalStorageKeyEnum.token),
