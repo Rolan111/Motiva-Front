@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {signOut} from "@angular/fire/auth";
-import {arrayMunicipios} from "../enums/enum";
-import {ReportsService} from "../reports/reports.service";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {arrayMunicipios} from "../../enums/enum";
+import {ReportsService} from "../reports.service";
 
 interface ListTypes {
   viewValue: string;
 }
 
 @Component({
-  selector: 'app-consultas-temporal',
-  templateUrl: './consultas-temporal.component.html',
-  styleUrls: ['./consultas-temporal.component.scss']
+  selector: 'app-generales',
+  templateUrl: './generales.component.html',
+  styleUrls: ['./generales.component.scss']
 })
-export class ConsultasTemporalComponent implements OnInit {
+export class GeneralesComponent implements OnInit {
 
   formConsultas!:FormGroup;
   selected = 'cantidad_municipios';

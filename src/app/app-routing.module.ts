@@ -22,7 +22,6 @@ import {ReportsComponent} from "./reports/reports.component";
 import {InformedConsentComponent} from "./informed-consent/informed-consent.component";
 import {FeedbackComponent} from "./feedback/feedback.component";
 import {TrackingSheetFollowUsersComponent} from "./tracking-sheet-follow-users/tracking-sheet-follow-users.component";
-import {ConsultasTemporalComponent} from "./consultas-temporal/consultas-temporal.component";
 
 
 const routes: Routes = [
@@ -51,7 +50,6 @@ const routes: Routes = [
       {path: 'reports', component: ReportsComponent},
       {path: 'informed-consent', component: InformedConsentComponent},
       {path: 'feedback', component: FeedbackComponent},
-      {path: 'consulta-temporal', component: ConsultasTemporalComponent},
     ]
   },
 ];

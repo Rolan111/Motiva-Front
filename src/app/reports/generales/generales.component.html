@@ -1,0 +1,61 @@
+<h1>Reportes generales </h1>
+Seleccione la opción que desea consultar:
+<br>
+
+<form [formGroup]="formConsultas">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Select an option</mat-label>
+    <mat-select  [(value)]="selected" (openedChange)="resultadosListos=false;vistaResultadosMunicipio=false;vistaResultadosProfessional=false">
+      <mat-option value="cantidad_municipio">Cantidad de encuestas por MUNICIPIO</mat-option>
+      <mat-option (onSelectionChange)="procesarProfesionales()" value="cantidadEn_profesional">Cantidad de encuestas por PROFESIONAL</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!--    SE MUESTRAN SEGUN LA SELECCION -->
+  <BR>
+  <div *ngIf="selected=='cantidad_municipio'">
+    Seleccione el MUNICIPIO a consultar <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Cédula de ciudadanía o tarjeta de identidad</mat-label>
+
+      <mat-select (openedChange)="vistaResultadosMunicipio=false;resultadoPorMunicipio=0" formControlName="SelectedMunicipality">  <!-- required -->
+        <mat-option *ngFor="let city of citiesList" [value]="city.viewValue">
+          {{city.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div *ngIf="selected=='cantidadEn_profesional'">
+    Seleccione el PROFESIONAL a consultar <br>
+    <mat-form-field class="example-full-width">
+      <mat-select formControlName="IdProfessional" (openedChange)="vistaResultadosProfessional=false;resultadoPorProfessional=0">
+        <mat-option *ngFor="let listaProfesionaless of listaProfesionales[0]; let i = index" [value]="listaProfesionaless.idUser"  (click)="capturaIndex(i)">
+          {{listaProfesionaless.name + ' ' +listaProfesionaless.lastName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <BR>
+
+  <button mat-raised-button color="primary" (click)="enviarConsulta()" [disabled]="!formConsultas.valid">Consultar</button>
+
+  <br>
+  <br>
+  <!--    RESULTADOS DE LA CONSULTAS -->
+
+  <div *ngIf="resultadosListos">
+    <p><b>Resultados:</b></p>
+    <div *ngIf="vistaResultadosMunicipio">
+      La cantidad de encuestas para el municipio de {{this.formConsultas.value.SelectedMunicipality}} es: {{resultadoPorMunicipio}}
+    </div>
+    <div *ngIf="vistaResultadosProfessional">
+      La cantidad de encuestas para el profesional {{nombreProfesionalSeleccionado}} es: {{resultadoPorProfessional}}
+    </div>
+  </div>
+
+
+</form>
+<br>

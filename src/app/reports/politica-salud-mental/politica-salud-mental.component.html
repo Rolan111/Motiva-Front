@@ -1,0 +1,91 @@
+<h1>REPORTES - en base a Política pública en salud mental: </h1>
+<form [formGroup]="form">
+  <mat-grid-list cols="3" rowHeight="85px">
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione el mes</mat-label>
+        <mat-select formControlName="monthSelected" required>
+          <mat-option *ngFor="let month of monthList" [value]="month.value">
+            {{month.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Tipo de consulta</mat-label>
+        <mat-select  formControlName="typeConsultSelected"
+                     [(value)]="consultSelected"  required>
+          <mat-option value="municipio">Municipio</mat-option>
+          <mat-option value="sub-region">Sub-región</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+    <mat-grid-tile *ngIf="consultSelected == 'municipio'">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione el municipio</mat-label>
+        <mat-select formControlName="municipalitySelected" >
+          <mat-option *ngFor="let mun of municipiosList" [value]="mun.viewValue">
+            {{mun.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile *ngIf="consultSelected == 'sub-region'">
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione la Sub-región</mat-label>
+        <mat-select formControlName="subRegionSelected" >
+          <mat-option *ngFor="let subregion of subRegionList" [value]="subregion.value">
+            {{subregion.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill">
+        <mat-label>Seleccione Zona</mat-label>
+        <mat-select formControlName="zoneSelected" required>
+          <mat-option *ngFor="let zona of zonaList" [value]="zona.value">
+            {{zona.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+    <mat-grid-tile>
+      <mat-form-field appearance="fill"
+                      matTooltip=" 'SI', para visualizar las personas que tienen asignada una ruta de
+                           atención. 'NO', para no visualizar las personas que tienen asignada una ruta de
+                           atención. 'TODAS', para vizualizar TODA la información">
+        <mat-label>Activación rutas de atención</mat-label>
+        <mat-select formControlName="typeRouteSelected" required>
+          <mat-option *ngFor="let ruta of rutasList" [value]="ruta.value">
+            {{ruta.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-grid-tile>
+
+
+  </mat-grid-list>
+
+  <mat-grid-list cols="4" rowHeight="4:1">
+
+    <mat-grid-tile [colspan]="2">
+      <button mat-raised-button color="primary"  [disabled]="form.invalid"
+              (click)="procesamientoFechas()">Procesar y Descargar reporte</button>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+  <!--    <h3>Export as XLSX</h3>-->
+  <!--    <div>-->
+  <!--      <button mat-raised-button color="primary" (click)="exportAsXLSX()">Descargar xlxs</button>-->
+  <!--    </div>-->
+</form>

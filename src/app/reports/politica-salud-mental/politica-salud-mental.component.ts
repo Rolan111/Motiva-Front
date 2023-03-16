@@ -1,16 +1,4 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ReportsService} from "./reports.service";
-import {QuantitativeInstrumentService} from "../quantitative-instruments/quantitative-instrument.service";
-import {CareRasmService} from "../care-rasm/care-rasm.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
-
-//
+import { Component, OnInit } from '@angular/core';
 
 import {
   arrayMeses,
@@ -20,7 +8,15 @@ import {
   arrayMunicipios,
   arrayZonaCentro,
   arrayZonaMacizo, arrayZonaNorte, arrayZonaOriente, arrayZonaPacifico, arrayZonaPiedemonteAmazonico, arrayZonaSur
-} from "../enums/enum";
+} from "../../enums/enum";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {CareRasmService} from "../../care-rasm/care-rasm.service";
+import {ReportsService} from "../reports.service";
+import {QuantitativeInstrumentService} from "../../quantitative-instruments/quantitative-instrument.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import firebase from "firebase/compat";
+import Timestamp = firebase.firestore.Timestamp;
+import {formatDate} from "@angular/common";
 
 interface ListTypes{
   value: string;
@@ -40,21 +36,11 @@ export interface reporte2{
 }
 
 @Component({
-  selector: 'app-reports',
-  templateUrl: './reports.component.html',
-  styleUrls: ['./reports.component.scss']
+  selector: 'app-politica-salud-mental',
+  templateUrl: './politica-salud-mental.component.html',
+  styleUrls: ['./politica-salud-mental.component.scss']
 })
-export class ReportsComponent implements OnInit {
-
-  selectedValue!: string;
-
-  foods: Food[] = [
-    {value: '1', viewValue: 'Reportes en base a la política pública en salud mental'},
-    {value: '2', viewValue: 'Reportes generales'},
-  ];
-
-  //BORRA ESTE Código
-
+export class PoliticaSaludMentalComponent implements OnInit {
   datosAExportar2:Array<reporte2>=[];
   datosAExportar1:Array<any>=[];
   datosAExportarPruebas:Array<any>=[];
@@ -133,6 +119,14 @@ export class ReportsComponent implements OnInit {
     let zoneSelected: string = this.form.value.zoneSelected;
     let typeRouteSelected: string = this.form.value.typeRouteSelected;
 
+    /** Si se va a trabajar con fechas directamente desde angular no es necesario formatear, pero para este caso
+     * se va a trabajar con Backend por lo que para hacer coincidir con el formato que acepta Firebase, es necesario
+     * Formatear de la siguiente manera yyy-mm-ddThh:mm:ss*/
+    let formateadaFechaInicio = formatDate(DateStart,'yyyy-MM-ddT00:00:00', 'en-US'); //MM mayusculas para este caso. Este es el formato con el que trabaja firebase
+    let formateadaFechaFin = formatDate(DateEnd,'yyyy-MM-ddT00:00:00', 'en-US');
+    console.log('La fecha inicio formateada es: ',formateadaFechaInicio)
+    console.log('La fecha fin formateada es: ',formateadaFechaFin)
+
     console.log('La fecha inicial capturada es: ', DateStart)
     console.log('La fecha final capturada es: ', DateEnd)
     console.log('Municipio ', municipalitySelected)
@@ -140,6 +134,7 @@ export class ReportsComponent implements OnInit {
     console.log('Zona: ', zoneSelected)
     console.log('Ruta : ', typeRouteSelected)
 
+    this.reportsService.getidPollsBasedData(formateadaFechaInicio, formateadaFechaFin).subscribe()
 
 
     this.quantitativeInstrumentService.getAnswersByIdQuestion(102).subscribe(data=>{ //1 Consultamos la tabla answer donde todos los id_question sean 102 y al campo open_answer para FECHA DE EVALUACION
@@ -373,17 +368,17 @@ export class ReportsComponent implements OnInit {
         this.careRasmService.getRASMByIdPoll(dataArray.id_poll).subscribe(data=>{
           if(data==false){
 
-              this.datosAExportar2.push({
-                id_poll:dataArray.id_poll,
-                Fecha:dataArray.Fecha,
-                Subregión:this.form.value.subRegionSelected,
-                Tipo:dataArray.Tipo,
-                Sexo:dataArray.Sexo,
-                Municipio:dataArray.Municipio,
-                Edad:dataArray.Edad,
-                Zona:dataArray.Zona,
-                Tipo_Ruta_Activada:"NO"
-              })
+            this.datosAExportar2.push({
+              id_poll:dataArray.id_poll,
+              Fecha:dataArray.Fecha,
+              Subregión:this.form.value.subRegionSelected,
+              Tipo:dataArray.Tipo,
+              Sexo:dataArray.Sexo,
+              Municipio:dataArray.Municipio,
+              Edad:dataArray.Edad,
+              Zona:dataArray.Zona,
+              Tipo_Ruta_Activada:"NO"
+            })
           }else{
             //Los id coinciden entoces esta informacion SE PIERDE
           }
@@ -470,23 +465,23 @@ export class ReportsComponent implements OnInit {
     this.form.get('typeConsultSelected').valueChanges
       .subscribe((value: any) => {
 
-        if(value == 'municipio') {
-          // @ts-ignore
-          this.form.get('municipalitySelected').setValidators(Validators.required)
+          if(value == 'municipio') {
+            // @ts-ignore
+            this.form.get('municipalitySelected').setValidators(Validators.required)
           }else  if(value == 'sub-region') {
-          // @ts-ignore
-          this.form.get('subRegionSelected').setValidators(Validators.required)
-        }else{
-          // @ts-ignore
-          this.form.get('municipalitySelected').clearValidators();
-          // @ts-ignore
-          this.form.get('municipalitySelected').updateValueAndValidity();
-          // @ts-ignore
-          this.form.get('subRegionSelected').clearValidators();
-          // @ts-ignore
-          this.form.get('subRegionSelected').updateValueAndValidity();
+            // @ts-ignore
+            this.form.get('subRegionSelected').setValidators(Validators.required)
+          }else{
+            // @ts-ignore
+            this.form.get('municipalitySelected').clearValidators();
+            // @ts-ignore
+            this.form.get('municipalitySelected').updateValueAndValidity();
+            // @ts-ignore
+            this.form.get('subRegionSelected').clearValidators();
+            // @ts-ignore
+            this.form.get('subRegionSelected').updateValueAndValidity();
 
-        }
+          }
         }
       );
   }
@@ -497,5 +492,4 @@ export class ReportsComponent implements OnInit {
       verticalPosition: 'top'
     });
   }
-
 }

@@ -62,6 +62,12 @@ export class ReportsService {
     return this.http.get(path + idProfessional, {headers});
   }
 
+  public getidPollsBasedData(fechaInicio:string, fechaFin:string) {
+    const path = mainUrl + 'api/idPollsBasedData/';
+    const headers = this.getHeader();
+    return this.http.get(path + fechaInicio +'/'+fechaFin, {headers});
+  }
+
 
 
   getHeader() {
